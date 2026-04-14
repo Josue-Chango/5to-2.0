@@ -1,0 +1,11 @@
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\HolaMundo\HolaMundo\bin\Debug\HolaMundo.exe.config
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\HolaMundo\HolaMundo\bin\Debug\HolaMundo.exe
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\HolaMundo\HolaMundo\bin\Debug\HolaMundo.pdb
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\HolaMundo\HolaMundo\obj\Debug\HolaMundo.csproj.AssemblyReference.cache
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\HolaMundo\HolaMundo\obj\Debug\HolaMundo.Form1.resources
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\HolaMundo\HolaMundo\obj\Debug\HolaMundo.Properties.Resources.resources
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\HolaMundo\HolaMundo\obj\Debug\HolaMundo.csproj.GenerateResource.cache
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\HolaMundo\HolaMundo\obj\Debug\HolaMundo.csproj.CoreCompileInputs.cache
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\HolaMundo\HolaMundo\obj\Debug\HolaMundo.exe
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\HolaMundo\HolaMundo\obj\Debug\HolaMundo.pdb
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\HolaMundo\HolaMundo\obj\Debug\HolaMundo.FrmOperaciones.resources
