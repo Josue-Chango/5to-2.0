@@ -28,16 +28,27 @@ namespace HolaMundo
 
         }
 
+        public bool EsNumero(string texto)
+        {
+            int numero;
+            return int.TryParse(texto, out numero);
+        }
+
         private void btnsumar_Click(object sender, EventArgs e)
         {
             if (numero1.Text == "" || numero2.Text == ""){
-                warning.Text = "WARNING: Alguna casilla esta vacioa, por favor llene todas las casillas";
+                warning.Text = "WARNING: Por favor llene todas las casillas";
+            }
+            else if (!EsNumero(numero1.Text) || !EsNumero(numero2.Text))
+            {
+                warning.Text = "WARNING: Solo se permiten números";
             }
             else
             {
                 int num1 = int.Parse(numero1.Text), num2 = int.Parse(numero2.Text);
                 int respuesta = num1 + num2;
                 Respuesta.Text = "Resultado: " + respuesta.ToString();
+                warning.Text = "";
             }
         }
 
@@ -45,13 +56,18 @@ namespace HolaMundo
         {
             if (numero1.Text == "" || numero2.Text == "")
             {
-                warning.Text = "WARNING: Alguna casilla esta vacioa, por favor llene todas las casillas";
+                warning.Text = "WARNING: Por favor llene todas las casillas";
+            }
+            else if (!EsNumero(numero1.Text) || !EsNumero(numero2.Text))
+            {
+                warning.Text = "WARNING: Solo se permiten números";
             }
             else
             {
                 int num1 = int.Parse(numero1.Text), num2 = int.Parse(numero2.Text);
                 int respuesta = num1 - num2;
                 Respuesta.Text = "Resultado: " + respuesta.ToString();
+                warning.Text = "";
             }
         }
 
@@ -59,13 +75,18 @@ namespace HolaMundo
         {
             if (numero1.Text == "" || numero2.Text == "")
             {
-                warning.Text = "WARNING: Alguna casilla esta vacioa, por favor llene todas las casillas";
+                warning.Text = "WARNING: Por favor llene todas las casillas";
+            }
+            else if (!EsNumero(numero1.Text) || !EsNumero(numero2.Text))
+            {
+                warning.Text = "WARNING: Solo se permiten números";
             }
             else
             {
                 int num1 = int.Parse(numero1.Text), num2 = int.Parse(numero2.Text);
                 int respuesta = num1 * num2;
                 Respuesta.Text = "Resultado: " + respuesta.ToString();
+                warning.Text = "";
             }
         }
 
@@ -73,13 +94,18 @@ namespace HolaMundo
         {
             if (numero1.Text == "" || numero2.Text == "")
             {
-                warning.Text = "WARNING: Alguna casilla esta vacioa, por favor llene todas las casillas";
+                warning.Text = "WARNING: Por favor llene todas las casillas";
+            }
+            else if (!EsNumero(numero1.Text) || !EsNumero(numero2.Text))
+            {
+                warning.Text = "WARNING: Solo se permiten números";
             }
             else if ( int.Parse(numero1.Text) != 0)
             {
                 int num1 = int.Parse(numero1.Text), num2 = int.Parse(numero2.Text);
                 int respuesta = num1 / num2;
                 Respuesta.Text = "Resultado: " + respuesta.ToString();
+                warning.Text = "";
             }
             else
             {
