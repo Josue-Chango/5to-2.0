@@ -12,8 +12,9 @@ namespace shappes_2d
 {
     public partial class FrmRectangulo : Form
     {
-        int weight = 0;
-        int height = 0;
+        float weight = 0;
+        float height = 0;
+        bool dibujar = false;
         public FrmRectangulo()
         {
             InitializeComponent();
@@ -22,11 +23,6 @@ namespace shappes_2d
         private void label1_Click(object sender, EventArgs e)
         {
 
-        }
-        public bool EsNumero(string texto)
-        {
-            int numero;
-            return int.TryParse(texto, out numero);
         }
 
         private void txtAncho_TextChanged(object sender, EventArgs e)
@@ -46,47 +42,34 @@ namespace shappes_2d
 
         private void FrmRectangulo_Paint(object sender, PaintEventArgs e)
         {
+            if (!dibujar) return;
             Graphics g = e.Graphics;
-            Pen pen = new Pen(Color.Blue, 2);
-            g.DrawRectangle(Pens.Red, 300, 100, weight, height);
+            /*Pen pen = new Pen(Color.Blue, 2);
+            g.DrawRectangle(Pens.Red, 300, 100, weight, height);*/
+            Figuras figuras = new Figuras();
+            figuras.DibujarRectangulo(g, weight, height);
         }
 
         private void btnDibujar_Click(object sender, EventArgs e)
         {
-            if (txtAncho.Text == "" && txtLargo.Text == "")
+            if (Validador.Validar<int>(txtAncho.Text) && Validador.Validar<int>(txtLargo.Text))
             {
-                warning.Text = "WARNING: Por favor llene todas las casillas";
-            }
-            else if (!EsNumero(txtAncho.Text) || !EsNumero(txtLargo.Text))
-            {
-                warning.Text = "WARNING: Solo se permiten números";
-            }
-            else if (int.Parse(txtAncho.Text) < 0 || int.Parse(txtLargo.Text) < 0)
-            {
-                warning.Text = "WARNING: Solo se permiten números mayores a 0";
+                Calculos calculos = new Calculos();
+                
+                weight = float.Parse(txtAncho.Text);
+                height = float.Parse(txtLargo.Text);
+                lblArea.Text = "Area: " + calculos.CalcularArea(weight, height);
+                lblPerimetro.Text = "Perimetro: " + calculos.CalcularPerimetro(weight, height);
+                dibujar = true;
+                warning.Text = "";
+
+                this.Invalidate();
             }
             else
             {
-                if (int.Parse(txtAncho.Text) < 6 || int.Parse(txtLargo.Text) < 6)
-                {
-
-                    weight = int.Parse(txtAncho.Text) * 10;
-                    height = int.Parse(txtLargo.Text) * 10;
-                    warning.Text = "";
-                    lblArea.Text = "Area: " + ((weight / 10) * (height / 10));
-                    lblPerimetro.Text = "Perimetro: " + ((2 * weight / 10) + (2 * height / 10));
-                    this.Invalidate();
-                }
-                else
-                {
-                    weight = int.Parse(txtAncho.Text);
-                    height = int.Parse(txtLargo.Text);
-                    lblArea.Text = "Area: " + (weight * height);
-                    lblPerimetro.Text = "Perimetro: " + ((2 * weight) + (2 * height));
-                    warning.Text = "";
-                    this.Invalidate();
-                }
+                warning.Text = "Dato inválido, ingresa números mayores a 0 y sin espacios";
             }
+            
         }
 
         private void btnResetear_Click(object sender, EventArgs e)
@@ -99,6 +82,7 @@ namespace shappes_2d
             txtLargo.Text = "";
             txtAncho.Text = "";
             this.Invalidate();
+
         }
     }
 }

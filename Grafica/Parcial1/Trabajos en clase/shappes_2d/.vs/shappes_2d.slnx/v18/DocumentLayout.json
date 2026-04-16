@@ -1,29 +1,41 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\",
+  "WorkspaceRootPath": "E:\\GIT\\5to 2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|c:\\users\\josue\\documents\\github\\5to-2.0\\grafica\\parcial1\\trabajos en clase\\shappes_2d\\shappes_2d\\frmrectangulo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|solutionrelative:shappes_2d\\frmrectangulo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|e:\\git\\5to 2.0\\grafica\\parcial1\\trabajos en clase\\shappes_2d\\shappes_2d\\figuras.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|solutionrelative:shappes_2d\\figuras.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|c:\\users\\josue\\documents\\github\\5to-2.0\\grafica\\parcial1\\trabajos en clase\\shappes_2d\\shappes_2d\\frmrectangulo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|E:\\GIT\\5to 2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\frmrectangulo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|solutionrelative:shappes_2d\\frmrectangulo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|c:\\users\\josue\\documents\\github\\5to-2.0\\grafica\\parcial1\\trabajos en clase\\shappes_2d\\shappes_2d\\frmexample.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|solutionrelative:shappes_2d\\frmexample.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|e:\\git\\5to 2.0\\grafica\\parcial1\\trabajos en clase\\shappes_2d\\shappes_2d\\frmrectangulo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|solutionrelative:shappes_2d\\frmrectangulo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|c:\\users\\josue\\documents\\github\\5to-2.0\\grafica\\parcial1\\trabajos en clase\\shappes_2d\\shappes_2d\\frmexample.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|e:\\git\\5to 2.0\\grafica\\parcial1\\trabajos en clase\\shappes_2d\\shappes_2d\\calculos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|solutionrelative:shappes_2d\\calculos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|e:\\git\\5to 2.0\\grafica\\parcial1\\trabajos en clase\\shappes_2d\\shappes_2d\\validador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|solutionrelative:shappes_2d\\validador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|E:\\GIT\\5to 2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\frmexample.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|solutionrelative:shappes_2d\\frmexample.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|c:\\users\\josue\\documents\\github\\5to-2.0\\grafica\\parcial1\\trabajos en clase\\shappes_2d\\shappes_2d\\frmhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|E:\\GIT\\5to 2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\frmexample.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|solutionrelative:shappes_2d\\frmexample.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|E:\\GIT\\5to 2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\frmhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|solutionrelative:shappes_2d\\frmhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|c:\\users\\josue\\documents\\github\\5to-2.0\\grafica\\parcial1\\trabajos en clase\\shappes_2d\\shappes_2d\\frmhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|E:\\GIT\\5to 2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\frmhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|solutionrelative:shappes_2d\\frmhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -34,28 +46,67 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Validador.cs",
+              "DocumentMoniker": "E:\\GIT\\5to 2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\Validador.cs",
+              "RelativeDocumentMoniker": "shappes_2d\\Validador.cs",
+              "ToolTip": "E:\\GIT\\5to 2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\Validador.cs",
+              "RelativeToolTip": "shappes_2d\\Validador.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T21:04:59.837Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Calculos.cs",
+              "DocumentMoniker": "E:\\GIT\\5to 2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\Calculos.cs",
+              "RelativeDocumentMoniker": "shappes_2d\\Calculos.cs",
+              "ToolTip": "E:\\GIT\\5to 2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\Calculos.cs",
+              "RelativeToolTip": "shappes_2d\\Calculos.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABQAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T22:00:57.454Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Figuras.cs",
+              "DocumentMoniker": "E:\\GIT\\5to 2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\Figuras.cs",
+              "RelativeDocumentMoniker": "shappes_2d\\Figuras.cs",
+              "ToolTip": "E:\\GIT\\5to 2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\Figuras.cs",
+              "RelativeToolTip": "shappes_2d\\Figuras.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAowCIAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T21:46:10.232Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "FrmRectangulo.cs",
-              "DocumentMoniker": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\FrmRectangulo.cs",
+              "DocumentMoniker": "E:\\GIT\\5to 2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\FrmRectangulo.cs",
               "RelativeDocumentMoniker": "shappes_2d\\FrmRectangulo.cs",
-              "ToolTip": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\FrmRectangulo.cs",
+              "ToolTip": "E:\\GIT\\5to 2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\FrmRectangulo.cs",
               "RelativeToolTip": "shappes_2d\\FrmRectangulo.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAmwD0AAABfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-16T15:07:04.035Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "FrmRectangulo.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\FrmRectangulo.cs",
+              "DocumentMoniker": "E:\\GIT\\5to 2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\FrmRectangulo.cs",
               "RelativeDocumentMoniker": "shappes_2d\\FrmRectangulo.cs",
-              "ToolTip": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\FrmRectangulo.cs [Dise\u00F1o]",
+              "ToolTip": "E:\\GIT\\5to 2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\FrmRectangulo.cs [Dise\u00F1o]",
               "RelativeToolTip": "shappes_2d\\FrmRectangulo.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-16T15:04:20.782Z",
@@ -63,11 +114,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "FrmExample.cs",
-              "DocumentMoniker": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\FrmExample.cs",
+              "DocumentMoniker": "E:\\GIT\\5to 2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\FrmExample.cs",
               "RelativeDocumentMoniker": "shappes_2d\\FrmExample.cs",
-              "ToolTip": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\FrmExample.cs",
+              "ToolTip": "E:\\GIT\\5to 2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\FrmExample.cs",
               "RelativeToolTip": "shappes_2d\\FrmExample.cs",
               "ViewState": "AgIAABAAAAAAAAAAAAAtwB4AAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -76,11 +127,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "FrmExample.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\FrmExample.cs",
+              "DocumentMoniker": "E:\\GIT\\5to 2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\FrmExample.cs",
               "RelativeDocumentMoniker": "shappes_2d\\FrmExample.cs",
-              "ToolTip": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\FrmExample.cs [Dise\u00F1o]",
+              "ToolTip": "E:\\GIT\\5to 2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\FrmExample.cs [Dise\u00F1o]",
               "RelativeToolTip": "shappes_2d\\FrmExample.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-16T15:01:25.439Z",
@@ -88,28 +139,25 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "FrmHome.cs",
-              "DocumentMoniker": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\FrmHome.cs",
+              "DocumentMoniker": "E:\\GIT\\5to 2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\FrmHome.cs",
               "RelativeDocumentMoniker": "shappes_2d\\FrmHome.cs",
-              "ToolTip": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\FrmHome.cs",
+              "ToolTip": "E:\\GIT\\5to 2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\FrmHome.cs",
               "RelativeToolTip": "shappes_2d\\FrmHome.cs",
               "ViewState": "AgIAABEAAAAAAAAAAAD4vyMAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T14:27:54.572Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-16T14:27:54.572Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "FrmHome.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\FrmHome.cs",
+              "DocumentMoniker": "E:\\GIT\\5to 2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\FrmHome.cs",
               "RelativeDocumentMoniker": "shappes_2d\\FrmHome.cs",
               "ToolTip": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\FrmHome.cs [Dise\u00F1o]",
-              "RelativeToolTip": "shappes_2d\\FrmHome.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T14:18:06.322Z",
-              "EditorCaption": " [Dise\u00F1o]"
+              "WhenOpened": "2026-04-16T14:18:06.322Z"
             }
           ]
         }
