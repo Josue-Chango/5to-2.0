@@ -58,8 +58,8 @@ namespace shappes_2d
                 
                 weight = float.Parse(txtAncho.Text);
                 height = float.Parse(txtLargo.Text);
-                lblArea.Text = "Area: " + calculos.CalcularArea(weight, height);
-                lblPerimetro.Text = "Perimetro: " + calculos.CalcularPerimetro(weight, height);
+                lblArea.Text = "Area: " + calculos.CalcularAreaRectangulo(weight, height);
+                lblPerimetro.Text = "Perimetro: " + calculos.CalcularPerimetroRectangulo(weight, height);
                 dibujar = true;
                 warning.Text = "";
 
@@ -83,6 +83,11 @@ namespace shappes_2d
             txtAncho.Text = "";
             this.Invalidate();
 
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -35,5 +35,12 @@ namespace shappes_2d
             frmRectangulo.MdiParent = this;
             frmRectangulo.Show();
         }
+
+        private void miTrianguloToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmTriangulo frmTriangulo = new FrmTriangulo();
+            frmTriangulo.MdiParent = this;
+            frmTriangulo.Show();
+        }
     }
 }

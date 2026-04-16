@@ -17,7 +17,6 @@ namespace shappes_2d
             if (string.IsNullOrWhiteSpace(texto))
                 return false;
 
-            // validar que no tenga espacios internos
             if (texto.Contains(" "))
                 return false;
 
@@ -49,6 +48,13 @@ namespace shappes_2d
                 return false;
             }
 
+            return true;
+        }
+
+        public static bool ValidarTriangulo(float ladoA, float ladoB, float ladoC)
+        {
+            if (ladoA + ladoB <= ladoC || ladoA + ladoC <= ladoB || ladoB + ladoC <= ladoA)
+                return false;
             return true;
         }
     }
