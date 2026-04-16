@@ -1,0 +1,12 @@
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\shappes_2d\shappes_2d\bin\Debug\shappes_2d.exe.config
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\shappes_2d\shappes_2d\bin\Debug\shappes_2d.exe
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\shappes_2d\shappes_2d\bin\Debug\shappes_2d.pdb
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\shappes_2d\shappes_2d\obj\Debug\shappes_2d.csproj.AssemblyReference.cache
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\shappes_2d\shappes_2d\obj\Debug\shappes_2d.FrmHome.resources
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\shappes_2d\shappes_2d\obj\Debug\shappes_2d.Properties.Resources.resources
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\shappes_2d\shappes_2d\obj\Debug\shappes_2d.csproj.GenerateResource.cache
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\shappes_2d\shappes_2d\obj\Debug\shappes_2d.csproj.CoreCompileInputs.cache
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\shappes_2d\shappes_2d\obj\Debug\shappes_2d.exe
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\shappes_2d\shappes_2d\obj\Debug\shappes_2d.pdb
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\shappes_2d\shappes_2d\obj\Debug\shappes_2d.FrmExample.resources
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\shappes_2d\shappes_2d\obj\Debug\shappes_2d.FrmRectangulo.resources
