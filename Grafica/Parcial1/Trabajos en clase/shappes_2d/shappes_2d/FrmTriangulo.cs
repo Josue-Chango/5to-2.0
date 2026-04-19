@@ -33,9 +33,10 @@ namespace shappes_2d
         {
             if (Validador.Validar<int>(txtLadoA.Text) && Validador.Validar<int>(txtLadoB.Text) && Validador.Validar<int>(txtLadoC.Text))
             {
-                if (!Validador.ValidarTriangulo(ladoA, ladoB, ladoC))
+                if (Validador.ValidarTriangulo(ladoA, ladoB, ladoC))
                 {
                     warning.Text = "Los lados no forman un triángulo válido";
+                    this.Invalidate();
                 }
                 else
                 {
