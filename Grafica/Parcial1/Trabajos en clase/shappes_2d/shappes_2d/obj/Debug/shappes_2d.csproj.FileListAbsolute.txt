@@ -24,3 +24,4 @@ E:\GIT\5to 2.0\Grafica\Parcial1\Trabajos en clase\shappes_2d\shappes_2d\obj\Debu
 E:\GIT\5to 2.0\Grafica\Parcial1\Trabajos en clase\shappes_2d\shappes_2d\obj\Debug\shappes_2d.pdb
 E:\GIT\5to 2.0\Grafica\Parcial1\Trabajos en clase\shappes_2d\shappes_2d\obj\Debug\shappes_2d.FrmTriangulo.resources
 C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\shappes_2d\shappes_2d\obj\Debug\shappes_2d.FrmTriangulo.resources
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\shappes_2d\shappes_2d\obj\Debug\shappes_2d.FrmHexagono.resources

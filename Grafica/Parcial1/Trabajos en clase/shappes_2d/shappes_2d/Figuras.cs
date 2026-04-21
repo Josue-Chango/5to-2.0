@@ -27,8 +27,8 @@ namespace shappes_2d
         {
             if (weight < 6 && height < 6)
             {
-                float redim_weight = weight * 10;
-                float redim_height = height * 10;
+                float redim_weight = weight * 4;
+                float redim_height = height * 4;
                 Pen pen = new Pen(Color.Blue, 2);
                 g.DrawRectangle(Pens.Red, 350, 100, redim_weight, redim_height);
             }
@@ -56,7 +56,8 @@ namespace shappes_2d
                 float cy = (float)Math.Sqrt(Math.Max(0, b * b - cx * cx));
                 PointF punto3 = new PointF(350 + cx, 100 - cy);
                 PointF[] points = { punto1, punto2, punto3 };
-                g.DrawPolygon(Pens.Red, points);
+                //g.DrawPolygon(Pens.Red, points);
+                g.FillPolygon(Brushes.LightBlue, points);
             }
             else
             {
@@ -69,7 +70,86 @@ namespace shappes_2d
                 float cy = (float)Math.Sqrt(Math.Max(0, b * b - cx * cx));
                 PointF punto3 = new PointF(350 + cx, 100 - cy);
                 PointF[] puntos = { punto1, punto2, punto3 };
-                g.DrawPolygon(Pens.Red, puntos);
+                //g.DrawPolygon(Pens.Red, puntos);
+                g.FillPolygon(Brushes.LightBlue, puntos);
+            }
+        }
+
+        public void DibujarHexagono(Graphics g, float lado)
+        {
+            float a = lado;
+            if (lado < 10)
+            {
+                float escala = 4;
+                a = lado * escala;
+                PointF centro = new PointF(350, 100);
+                PointF[] puntos = new PointF[6];
+                for (int i = 0; i < 6; i++)
+                {
+                    float angle = (float)(i * Math.PI / 3);
+                    puntos[i] = new PointF(
+                        centro.X + a * (float)Math.Cos(angle),
+                        centro.Y + a * (float)Math.Sin(angle)
+                    );
+                }
+                //g.DrawPolygon(Pens.Red, puntos);
+                //g.FillPolygon(Brushes.LightBlue, puntos);
+                Brush[] brushes = new Brush[]
+                {
+                    Brushes.Red,
+                    Brushes.Green,
+                    Brushes.Blue,
+                    Brushes.Yellow,
+                    Brushes.Orange,
+                    Brushes.Purple
+                };
+
+                for (int i = 0; i < 6; i++)
+                {
+                    PointF[] triangulo = new PointF[3];
+                    triangulo[0] = centro; 
+                    triangulo[1] = puntos[i];
+                    triangulo[2] = puntos[(i + 1) % 6];
+
+                    g.FillPolygon(brushes[i % brushes.Length], triangulo);
+                }
+            }
+            else
+            {
+                PointF centro = new PointF(350, 100);
+                PointF[] puntos = new PointF[6];
+                for (int i = 0; i < 6; i++)
+                {
+                    float angle = (float)(i * Math.PI / 3);
+                    puntos[i] = new PointF(
+                        centro.X + a * (float)Math.Cos(angle),
+                        centro.Y + a * (float)Math.Sin(angle)
+                    );
+                }
+                //g.DrawPolygon(Pens.Red, puntos);
+                //g.FillPolygon(Brushes.LightBlue, puntos);
+
+                Brush[] brushes = new Brush[]
+                {
+                    Brushes.Red,
+                    Brushes.Green,
+                    Brushes.Blue,
+                    Brushes.Yellow,
+                    Brushes.Orange,
+                    Brushes.Purple
+                };
+
+                for (int i = 0; i < 6; i++)
+                {
+                    PointF[] triangulo = new PointF[3];
+                    triangulo[0] = centro;
+                    triangulo[1] = puntos[i];
+                    triangulo[2] = puntos[(i + 1) % 6];
+
+                    g.FillPolygon(brushes[i % brushes.Length], triangulo);
+                }
+
+
             }
         }
     }

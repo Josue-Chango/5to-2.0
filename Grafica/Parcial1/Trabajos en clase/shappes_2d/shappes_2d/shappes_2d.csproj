@@ -54,6 +54,12 @@
     <Compile Include="FrmExample.Designer.cs">
       <DependentUpon>FrmExample.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmHexagono.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmHexagono.Designer.cs">
+      <DependentUpon>FrmHexagono.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmHome.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +83,9 @@
     <Compile Include="Validador.cs" />
     <EmbeddedResource Include="FrmExample.resx">
       <DependentUpon>FrmExample.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmHexagono.resx">
+      <DependentUpon>FrmHexagono.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmHome.resx">
       <DependentUpon>FrmHome.cs</DependentUpon>

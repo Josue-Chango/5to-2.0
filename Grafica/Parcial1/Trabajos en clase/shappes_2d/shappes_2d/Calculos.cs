@@ -32,5 +32,15 @@ namespace shappes_2d
             float suma = ladoA + ladoB + ladoC;
             return (float)(Math.Sqrt(suma * (suma - ladoA) * (suma - ladoB) * (suma - ladoC)));
         }
+
+        public float CalcularAreaHexagono(float radio)
+        {
+            return (float)((3 * Math.Sqrt(3) * Math.Pow(radio, 2)) / 2);
+        }
+
+        public float CalcularPerimetroHexagono(float radio)
+        {
+            return 6 * radio;
+        }
     }
 }
