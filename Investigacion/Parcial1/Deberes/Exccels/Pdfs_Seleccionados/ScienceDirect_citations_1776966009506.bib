@@ -1,0 +1,160 @@
+@article{NGUYEN2025107566,
+title = {Graph-based explainable vulnerability prediction},
+journal = {Information and Software Technology},
+volume = {177},
+pages = {107566},
+year = {2025},
+issn = {0950-5849},
+doi = {https://doi.org/10.1016/j.infsof.2024.107566},
+url = {https://www.sciencedirect.com/science/article/pii/S095058492400171X},
+author = {Hong Quy Nguyen and Thong Hoang and Hoa Khanh Dam and Aditya Ghose},
+keywords = {Graph neural network, Explanation, Vulnerability},
+abstract = {Significant increases in cyberattacks worldwide have threatened the security of organizations, businesses, and individuals. Cyberattacks exploit vulnerabilities in software systems. Recent work has leveraged powerful and complex models, such as deep neural networks, to improve the predictive performance of vulnerability detection models. However, these models are often regarded as “black box” models, making it challenging for software practitioners to understand and interpret their predictions. This lack of explainability has resulted in a reluctance to adopt or deploy these vulnerability prediction models in industry applications. This paper proposes a novel approach, Genetic Algorithm-based Vulnerability Prediction Explainer, (herein GAVulExplainer), which generates explanations for vulnerability prediction models based on graph neural networks. GAVulExplainer leverages genetic algorithms to construct a subgraph explanation that represents the crucial factor contributing to the vulnerability. Experimental results show that our proposed approach outperforms baselines in providing concrete reasons for a vulnerability prediction.}
+}
+@article{CEN2024103849,
+title = {Zero-Ran Sniff: A zero-day ransomware early detection method based on zero-shot learning},
+journal = {Computers & Security},
+volume = {142},
+pages = {103849},
+year = {2024},
+issn = {0167-4048},
+doi = {https://doi.org/10.1016/j.cose.2024.103849},
+url = {https://www.sciencedirect.com/science/article/pii/S0167404824001500},
+author = {Mingcan Cen and Xizhen Deng and Frank Jiang and Robin Doss},
+keywords = {Ransomware, Ransomware early detection, Cybersecurity, Malware, Encrypted attacks},
+abstract = {Ransomware attacks, which blackmail victims into paying a ransom by locking their devices or encrypting their files, have become one of the major threats to network security. Conventional anti-ransomware tools often fail to detect zero-day ransomware attacks due to the inability to obtain zero-day ransomware signatures in advance to train detection models. In addition, zero-day ransomware attacks often use sophisticated encryption techniques to launch attacks on new vulnerabilities, and these encryption attacks cause irreversible damage to victims' digital files even if they choose to pay a ransom. Hence, it is imperative and urgent to detect unknown ransomware attacks at the earliest possible stage, ideally before the encryption phase. To this end, this paper proposes Zero-Ran Sniff (ZRS), an early zero-day ransomware detection method based on zero-shot learning, which can detect zero-day ransomware attacks in the early stage. ZRS leverages the portable executable header (PE header) feature from executable files to identify ransomware. It comprises two stages: an auto-encoding network-based core attribute learning (AE-CAL) stage and a self-attentive mechanism-based convolutional neural network inference Stage (SA-CNN-IS). During the AE-CAL stage, the core features of known and unknown classes of ransomware are extracted using self-encoding networks, and the SA-CNN-IS phase identifies ransomware. To the best of our knowledge, we are the first to explore the use of zero-shot learning for zero-day ransomware early detection. Experimental results demonstrate that the proposed ZRS outperforms traditional machine learning methods. Compared to previous zero-day detection work, ZRS achieves a recall of 98.47% and an accuracy of 96.31%}
+}
+@article{DESIANO2025107785,
+title = {Translating code with Large Language Models and human-in-the-loop feedback},
+journal = {Information and Software Technology},
+volume = {186},
+pages = {107785},
+year = {2025},
+issn = {0950-5849},
+doi = {https://doi.org/10.1016/j.infsof.2025.107785},
+url = {https://www.sciencedirect.com/science/article/pii/S0950584925001247},
+author = {Gabriele Dario {De Siano} and Anna Rita Fasolino and Giancarlo Sperlí and Andrea Vignali},
+keywords = {Large Language Model, Human-centered AI, Code translation, Software engineering},
+abstract = {Context:
+In recent years, the code translation task has arisen as one of the major software issues in maintaining software quality during migration over complex infrastructure. This task involves human subjects with different background knowledge and could introduce errors due to the semantic gap between the programming languages and the complexity of the task. Generative Artificial Intelligence (AI) showed good capabilities in code generation, albeit this is highly dependent on the human factor.
+Objective:
+This paper investigates, from the human perspective, the use of three Generative AI tools (ChatGPT, Google Bard, and GitHub Copilot) in the context of translation tasks from code written in query languages to code written in framework-specific code languages, specifically focused on SQL dialects and PySpark. This translation is especially crucial during the migration from centralized architectures to cloud-based architectures.
+Methods:
+We evaluate the usefulness of these tools, the quality of the generated code, and their impact on performance. The models are tested with queries of various type in three different SQL dialects considering three usage scenarios of increasing complexity. It involves 15 participants with diverse programming backgrounds, who aim to solve tasks by interacting multiple times with the tools and manually changing the code.
+Results:
+The findings show a positive performance, demonstrating their reliability in generating coherent translations, achieving 100% precision in most tasks with a slight decrease in more complex scenarios, and producing well-documented code, with a response time of under 2 min, with Google Bard responding 50% faster than the others.
+Conclusion:
+In conclusion, this paper establishes a methodology and both quantitative and qualitative metrics for evaluating how generative AI tools streamline code translation, shifting the emphasis from production to refinement. It underscores the importance of continuously improving these tools to integrate them into developers’ workflows and to provide guidelines for intelligent use.}
+}
+@article{BHANDARI2025107786,
+title = {Generating vulnerability security fixes with Code Language Models},
+journal = {Information and Software Technology},
+volume = {185},
+pages = {107786},
+year = {2025},
+issn = {0950-5849},
+doi = {https://doi.org/10.1016/j.infsof.2025.107786},
+url = {https://www.sciencedirect.com/science/article/pii/S0950584925001259},
+author = {Guru Bhandari and Nikola Gavric and Andrii Shalaginov},
+keywords = {Large language models, Automated program repair, Code Language Models, Patch generation, Security vulnerability, Source code},
+abstract = {Existing Code Language Models (CLM) have demonstrated significant potential in several coding tasks, including automated code generation in software engineering. Similarly, Automated Program Repair (APR) has shown considerable progress in addressing general software vulnerabilities, yet its application utilizing the recently developed CLM remains unexplored. In this paper, we introduce Patch Language Model (PatchLM), a novel CLM fine-tuned to fix security vulnerabilities in code blocks retrieved from commit hunks associated with Common Vulnerabilities and Exposures (CVE) records. Our proposed model leverages CLM to understand secure coding practices and generate accurate patches. The study aims to address the diverse nature of security flaws across multiple programming languages. Our experimental evaluation demonstrated that PatchLM significantly outperforms the baseline CodeT5 and CodeLlama models in generating effective security patches, as reflected in the performance metrics. Specifically, PatchLM achieves improvements of up to 48.35% in CodeBLEU and 28.9% in ROUGE scores compared to the baseline models. Our study demonstrates the practicality and significance of PatchLM in generating vulnerability repairs, providing valuable support for under-resourced security analysts, and paving the way for future research in automated vulnerability fixing with CLM.}
+}
+@article{ADHIKARI2025100061,
+title = {Survey of techniques to detect common weaknesses in program binaries},
+journal = {Cyber Security and Applications},
+volume = {3},
+pages = {100061},
+year = {2025},
+issn = {2772-9184},
+doi = {https://doi.org/10.1016/j.csa.2024.100061},
+url = {https://www.sciencedirect.com/science/article/pii/S2772918424000274},
+author = {Ashish Adhikari and Prasad Kulkarni},
+keywords = {CWE detection, Static analysis, Software binaries},
+abstract = {Software vulnerabilities resulting from coding weaknesses and poor development practices are common. Attackers can exploit these vulnerabilities and impact the security and privacy of end-users. Most end-user software is distributed as program binaries. Therefore, to increase trust in third-party software, researchers have built techniques and tools to detect and resolve different classes of coding weaknesses in binary software. Our work is motivated by the need to survey the state-of-the-art and understand the capabilities and challenges faced by binary-level techniques that were built to detect the most important coding weaknesses in software binaries. Therefore, in this paper, we first show the most critical coding weaknesses for compiled programming languages. We then survey, explore, and compare the static techniques that were developed to detect each such coding weakness in software binaries. Our other goal in this work is to discover and report the state of published open-source implementations of static binary-level security techniques. For the open-source frameworks that work as documented, we independently evaluate their effectiveness in detecting code vulnerabilities on a suite of program binaries. To our knowledge, this is the first work that surveys and independently evaluates the performance of state-of-the-art binary-level techniques to detect weaknesses in binary software.}
+}
+@article{BAMOHABBATCHAFJIRI2024103903,
+title = {Vulnerability detection through machine learning-based fuzzing: A systematic review},
+journal = {Computers & Security},
+volume = {143},
+pages = {103903},
+year = {2024},
+issn = {0167-4048},
+doi = {https://doi.org/10.1016/j.cose.2024.103903},
+url = {https://www.sciencedirect.com/science/article/pii/S0167404824002050},
+author = {Sadegh {Bamohabbat Chafjiri} and Phil Legg and Jun Hong and Michail-Antisthenis Tsompanas},
+keywords = {ML fuzzing, TML fuzzing, DNN fuzzing, RL fuzzing, DRL fuzzing},
+abstract = {Modern software and networks underpin our digital society, yet the rapid growth of vulnerabilities that are uncovered within these threaten our cyber security posture. Addressing these issues at scale requires automated proactive approaches that can identify and mitigate these vulnerabilities in a suitable time frame. Fuzzing techniques have emerged as crucial methods to preemptively tackle these risks. However, traditional fuzzing methods encounter various challenges, such as a lack of strategy for deep bug identification, time-intensive bug analysis, quality of inputs, seed scheduling and others. To overcome these challenges, diverse Machine Learning (ML) models and optimisation techniques have been employed, including advanced feature engineering, optimised seed selection, refined predictive/fitness models, and Gradient-based optimisation. Furthermore, the use of ML architectures such as Long Short-Term Memory (LSTM), Generative Adversarial Network (GAN), Sequence-to-Sequence (Seq2Seq), and Generative Randomised Unit (GRU), have demonstrated greater effectiveness within ML-based fuzzing. In this paper, we delve into this paradigm shift, aiming to address fundamental challenges across different ML categories. We survey popular ML categories such as Traditional Machine Learning (TML), Deep Learning (DL), Reinforcement Learning (RL), and Deep Reinforcement Learning (DRL), to investigate their potential for enhancing traditional fuzzing approaches. We explore the respective advantages in each category of ML-based fuzzing, while also analysing the challenges unique to each category. Our work provides a comprehensive survey across the fuzzing domain and how machine learning techniques have been utilised, that we believe will be of use to future researchers in this domain.}
+}
+@article{SHARMA2024111934,
+title = {A survey on machine learning techniques applied to source code},
+journal = {Journal of Systems and Software},
+volume = {209},
+pages = {111934},
+year = {2024},
+issn = {0164-1212},
+doi = {https://doi.org/10.1016/j.jss.2023.111934},
+url = {https://www.sciencedirect.com/science/article/pii/S0164121223003291},
+author = {Tushar Sharma and Maria Kechagia and Stefanos Georgiou and Rohit Tiwari and Indira Vats and Hadi Moazen and Federica Sarro},
+keywords = {Machine learning for software engineering, Source code analysis, Deep learning, Datasets, Tools},
+abstract = {The advancements in machine learning techniques have encouraged researchers to apply these techniques to a myriad of software engineering tasks that use source code analysis, such as testing and vulnerability detection. Such a large number of studies hinders the community from understanding the current research landscape. This paper aims to summarize the current knowledge in applied machine learning for source code analysis. We review studies belonging to twelve categories of software engineering tasks and corresponding machine learning techniques, tools, and datasets that have been applied to solve them. To do so, we conducted an extensive literature search and identified 494 studies. We summarize our observations and findings with the help of the identified studies. Our findings suggest that the use of machine learning techniques for source code analysis tasks is consistently increasing. We synthesize commonly used steps and the overall workflow for each task and summarize machine learning techniques employed. We identify a comprehensive list of available datasets and tools useable in this context. Finally, the paper discusses perceived challenges in this area, including the availability of standard datasets, reproducibility and replicability, and hardware resources. Editor’s note: Open Science material was validated by the Journal of Systems and Software Open Science Board.}
+}
+@article{WANG2026100476,
+title = {Enhancing Smart Contract Vulnerability Detection via Dual-Source Feature Extraction and Fusion},
+journal = {Blockchain: Research and Applications},
+pages = {100476},
+year = {2026},
+issn = {2096-7209},
+doi = {https://doi.org/10.1016/j.bcra.2026.100476},
+url = {https://www.sciencedirect.com/science/article/pii/S2096720926000382},
+author = {Xiao Wang and Yanxiang Tong and Hai Dong and Ben Wang and Yan Xiao and Pengcheng Zhang},
+keywords = {Smart Contract, Vulnerability Detection, Feature Extraction, Source Code, Bytecode},
+abstract = {The pervasive adoption of smart contracts in blockchain has raised concerns about their vulnerabilities, which have led to serious economic losses. To address the efficiency and performance drawbacks of traditional methods, researchers have turned to deep learning techniques, designing various vulnerability detection methods using specific code information sources. However, these learning-based methods face limitations in feature modeling. Most emphasize feature extraction from either source code or bytecode, resulting in limited feature coverage and compromised vulnerability representation. While some attempt to utilize both code sources, they typically treat one as auxiliary, failing to perform effective joint alignment. To this end, we propose DualSVD, a dual-source feature modeling framework for smart contract vulnerability detection. DualSVD encodes vulnerability-relevant source code functions into semantic vectors using word embeddings, and extracts bytecode features using a channel architecture fused via channel-wise attention. Both feature representations are then projected into a shared latent space and concatenated for classification. We evaluate the proposed approach on widely-used datasets covering eight smart contract vulnerability types. Experimental results demonstrate that DualSVD achieves an average F1-score of 92.70%, outperforming traditional and deep learning-based baselines by 37.81% and 4.94%, respectively. These results indicate that DualSVD provides a more comprehensive and effective representation of smart contract vulnerabilities, offering improved detection performance and stronger generalization ability.}
+}
+@article{COTRONEO2025107572,
+title = {DeVAIC: A tool for security assessment of AI-generated code},
+journal = {Information and Software Technology},
+volume = {177},
+pages = {107572},
+year = {2025},
+issn = {0950-5849},
+doi = {https://doi.org/10.1016/j.infsof.2024.107572},
+url = {https://www.sciencedirect.com/science/article/pii/S0950584924001770},
+author = {Domenico Cotroneo and Roberta {De Luca} and Pietro Liguori},
+keywords = {Static code analysis, Vulnerability detection, AI-code generators, Python},
+abstract = {Context:
+AI code generators are revolutionizing code writing and software development, but their training on large datasets, including potentially untrusted source code, raises security concerns. Furthermore, these generators can produce incomplete code snippets that are challenging to evaluate using current solutions.
+Objective:
+This research work introduces DeVAIC (Detection of Vulnerabilities in AI-generated Code), a tool to evaluate the security of AI-generated Python code, which overcomes the challenge of examining incomplete code.
+Methods:
+We followed a methodological approach that involved gathering vulnerable samples, extracting implementation patterns, and creating regular expressions to develop the proposed tool. The implementation of DeVAIC includes a set of detection rules based on regular expressions that cover 35 Common Weakness Enumerations (CWEs) falling under the OWASP Top 10 vulnerability categories.
+Results:
+We utilized four popular AI models to generate Python code, which we then used as a foundation to evaluate the effectiveness of our tool. DeVAIC demonstrated a statistically significant difference in its ability to detect security vulnerabilities compared to the state-of-the-art solutions, showing an F1 Score and Accuracy of 94% while maintaining a low computational cost of 0.14 s per code snippet, on average.
+Conclusions:
+The proposed tool provides a lightweight and efficient solution for vulnerability detection even on incomplete code.}
+}
+@article{PARK2021102115,
+title = {Mind control attack: Undermining deep learning with GPU memory exploitation},
+journal = {Computers & Security},
+volume = {102},
+pages = {102115},
+year = {2021},
+issn = {0167-4048},
+doi = {https://doi.org/10.1016/j.cose.2020.102115},
+url = {https://www.sciencedirect.com/science/article/pii/S0167404820303886},
+author = {Sang-Ok Park and Ohmin Kwon and Yonggon Kim and Sang Kil Cha and Hyunsoo Yoon},
+keywords = {Graphics process unit security, GPU memory exploit, Deep learning security, Reverse engineering, Compute unified device architecture},
+abstract = {Modern deep learning frameworks rely heavily on GPUs to accelerate the computation. However, the security implication of GPU device memory exploitation on deep learning frameworks has been largely neglected. In this paper, we argue that GPU device memory manipulation is a novel attack vector against deep learning systems. We present a novel attack method leveraging the attack vector, which makes deep learning predictions no longer different from random guessing by degrading the accuracy of the predictions. To the best of our knowledge, we are the first to show a practical attack that directly exploits deep learning frameworks through GPU memory manipulation. We confirmed that our attack works on three popular deep learning frameworks, TensorFlow, CNTK, and Caffe, running on CUDA. Finally, we propose potential defense mechanisms against our attack, and discuss concerns of GPU memory safety.}
+}
+@article{LIANG2025104098,
+title = {Survey of source code vulnerability analysis based on deep learning},
+journal = {Computers & Security},
+volume = {148},
+pages = {104098},
+year = {2025},
+issn = {0167-4048},
+doi = {https://doi.org/10.1016/j.cose.2024.104098},
+url = {https://www.sciencedirect.com/science/article/pii/S0167404824004036},
+author = {Chen Liang and Qiang Wei and Jiang Du and Yisen Wang and Zirui Jiang},
+keywords = {Vulnerability detection, Deep Learning, Similarity analysis, Code representation, Cyber security},
+abstract = {Amidst the rapid development of the software industry and the burgeoning open-source culture, vulnerability detection within the software security domain has emerged as an ever-expanding area of focus. In recent years, the rapid advancement of artificial intelligence, particularly the notable progress in deep learning for pattern recognition and natural language processing, has catalyzed a surge in research endeavors exploring the integration of deep learning for the enhancement of vulnerability detection techniques. In this paper, we investigate contemporary deep learning-based source code analysis methods, with a concentrated emphasis on those pertaining to static code vulnerability detection. We categorize these methods based on various representations of source code employed during the preprocessing stage, including token-based and graph-based representations of source code, and further subdivided based on the types of deep learning algorithms or graph representations employed. We summarize the basic processes of model training and vulnerability detection under these different representation formats. Furthermore, we explore the limitations inherent in current approaches and provide insights into future trends and challenges for research in this field.}
+}
