@@ -1,0 +1,1514 @@
+ 
+VOLUME XX, 2017  1 
+Date of publication xxxx 00, 0000, date of current version xxxx 00, 0000.  
+Digital Object Identifier 10.1109/ ACCESS. 2022.Doi  Number  
+On the Impact of Refactorings on Software 
+Attack Surface   
+Estomii  Edward1 (Student),  Ally S. Nyamawe1, Member, IEEE,  and Noe Elisa1 
+1Department of Computer Science and Engineering , The University  of Dodoma , Dodoma , Tanzania   
+Corresponding author: Estomii  Edward  (e-mail: eestomii@gmail.com ). 
+ 
+This work was carried out with the aid of a grant in the UNESCO -TWAS programme, "Seed Grant  
+for African Principal Investigators" financed by the German Federal Ministry of Education and  
+Research (BMBF). The views expressed herein do not necessarily represent those of UNESCO -TWAS  
+or BMBF.  
+ABSTRACT  Refactoring  is one of the techniques mostly employed by software developers to improve the 
+quality attributes of their systems. However, little has been done to investigate how refactoring operations 
+specifically aimed at improving the internal structure of software can impact its security. Refactoring usually 
+entails different code change operations including the decomposition of classes, methods, and the reallocation 
+of code elements. While this refinement aims to improve the internal design of a system,  it might inadvertently 
+disperse security -critical code elements throughout the codebase. Consequently, such dispersion could affect  
+the software attack surface. To this end, this paper presents an empirical study of 30 open -source software 
+systems developed in Python, C, and Java script . The study scrutinized two subsequent versions of each 
+subject application to uncover the refactoring operations applied and the trend of  the software attack surface . 
+Specifically, the study focused on the injection or remov al of bugs, code smells and other vulnerabilities 
+aiming to discern the impact of refactorings on the software attack surface. Data was collected using well -
+known tools, namely SonarQube, RefDiff, and PyReff. The findings suggest that refactorings can have  
+multiple impacts  (i.e., positive, negative, or neutral) on bugs, code smells, and vulnerabilities. The findings 
+further confirm that developers must be aware of the combination or sequence of refactoring operations that 
+can improve software quality withou t compromising its security.  
+INDEX TERMS  Attack Surface, Bugs, Code Smells, Refactoring, Vulnerabilities  
+ 
+I. INTRODUCTION  
+Refactoring is defined as “the process of changing the 
+internal working or structure of a software system without 
+causing any change to the external behaviour of the system” 
+[1]. According to  Fowler and Beck [2], software refactoring 
+has been  widely used by software developers to improve 
+software quality by changing the internal structure while 
+leaving the external structure unchanged. Rochimah et al. [3] 
+supported this observation by listing the benefits of software 
+refactoring which include : eliminating code smells, helping 
+to find bugs, making developer s program faster, improving 
+the quality of software design, improving code readability, 
+improving software maintenance and extensibility, and 
+reducing software evolution time.  Refactoring techniques are 
+commonly used in software maintenance as they are highly 
+recommended strategies employed by developers to improve 
+software security by addressing vulnerabilities that attackers  can exploit  [4],[5]. Because an attacker could exploit an 
+attack surface to prevent the system from working properly. 
+However, the impact s of refactoring on the software attack 
+surface are not well -documented and are still uncertain, 
+despite the popularity  of refactoring  in software maintenance 
+[6]. Previous scholars such as  [7] and [8] found that there is 
+a positive and significant relationship between refactoring 
+and software security while [9] found that despite security 
+improvement  refactoring  also increases the attack surface 
+due to the created abstractions.  
+Most of the research in software refactoring has 
+mainly focused on improving the design of existing code [2], 
+securing information flows [10], fixing bugs [11], improv ing 
+software quality [12],[13],[14], and code smell s removal 
+[15].  However, these studies did not specifically investigate  
+the effects of refactorings on software attack surface. 
+Therefore, conducting an in -depth empirical evaluation of E. Edward et al.: On the Impact of Refactorings on Software Attack Surface                                                                                           
+the impacts of refactorings on software attack surface is 
+crucial . 
+Abid et al. [16] proposed a security -aware 
+refactoring approach that utilizes  the Apriori algorithm to 
+establish the associations between implemented refactorings 
+and the fitness function employed to improve  software 
+security. The methodology was evaluated by conducting 
+empirical studies and experiments on open -source projects. 
+The findings show that certain refactorings when performed 
+with security awareness, can have a positive impact by 
+reducing security v ulnerabilities and improving overall 
+system security. Abid et al.  [9] proposed a security -aware 
+refactoring approach that considers the impact of refactoring 
+on software security. The author proposed a systematic 
+process for identifying potential security vulnerabilities 
+during the refactoring process and developing security -
+aware refactoring patterns to address identified 
+vulnerabilities. The finding s indicate that security 
+vulnerabilities can effectively be addressed in software 
+systems by identifying and considering trade -offs between 
+security and other qualities during r efactoring. Siavvas  et al.  
+[17] proposed a static analysis technique to enhance software 
+security by applying  refactoring. The study explored several 
+methodologies, including data flow analysis, control flow 
+analysis, and symbolic execution, highlighting how these 
+techniques can be utilized to identify security vulnerabilities 
+and guide code refactoring efforts to improve the security of 
+the software. The study findings were evaluated using case 
+studies and was revealed that the static analysis approach 
+enhances security by promoting effective refactoring 
+practices. However, limited information is available 
+regard ing the impact s of refactorings on the software attack 
+surface .  
+To this end, this paper presents an empirical study that 
+involved 30 open -source software systems, developed in 
+Python, C, and Java script  to discern the impact of 
+refactorings on software attack surface. We analyzed  the 
+effect of frequently applied refactorings on bugs, code 
+smells, and vulnerabilities. Our investigation focuses on two 
+main aspects: firstly, we aim to determine the most  common 
+applied refactorings and the most prevalent elements of the 
+software attack surface . Secondly, we seek to evaluate the 
+effectiveness of refactoring in addressing bugs, code smells, 
+and vulnerabilities in open -source software projects. Using 
+the state -of-the-art tools namely SonarQube, RefDiff, and 
+PyReff , we extracted a total of 3,523 applied refactorings, 
+18,303 instances of code smells, 2,975 instances of bugs, and 
+43 instances of vulnerabilities  that formulated the basis of 
+our analysis in this study .  
+The contributions of this paper are as follows:  
+1) This paper presents an empirical study that assesses 
+the impact of refactorings on software attack 
+surface.  
+2) This paper provides a methodological contribution 
+to how experiments can be used to uncover the 
+common software attack surface and evaluate how 
+they are impacted by refactoring. In addition, this study serves as a foundation for ongoing research 
+on security -focused refactoring to improve software 
+quality.  
+3) The findings and recommendations presented in 
+this paper can be a reference for other researchers 
+interested in undertaking additional research in this 
+field. 
+ 
+The subsequent sections of this paper  are structured in 
+the following manner: Section II summarizes previous 
+studies in refactorings and attack surface to set an 
+understanding of these key aspects and what has been done 
+so far. Section III describes the methodology used in this 
+study, whereas Section IV presents our experimental results. 
+Section V presents a discussion of the findings. Finally, 
+Section VI concludes the paper and highlights  areas for 
+further research.  
+ 
+II.  RELATED WORK  
+This section presents previous studies and concepts relevant to 
+this study.  
+A. REFACTORING  
+Refactoring is a systematic technique for modifying the 
+internal structure of an existing codebase without affecting 
+its external behavior . Originally [2] define d refactoring as 
+“A change made to the internal structure of software to make 
+it easier to understand and cheaper to modify without 
+changing its observable behavior. It is a disciplined way to 
+clean up code that minimizes the chances of introducing 
+bugs.” Opdyke [18] defined refactoring as the process of 
+making program modifications that enable design, evolution, 
+and reuse while maintaining the functionality of the software 
+application. Despite being an old definition, it is still valid to 
+date. Refactoring is the proc ess of altering a software system 
+to make it simpler to understand and less expensive to 
+modify, without changing the external behavior [19]. Alves 
+et al.  [1] have further defined refactoring as “the process of 
+changing the internal working or structure of a software 
+system, without causing any change to the external behavior  
+of the system”.  The goal is to improve its comprehensibility, 
+adaptability, and maintainability while minimizing  the 
+likelihood of introducing bugs and code smells.  
+Refactoring  entails source code modifications that take 
+place at various points throughout the development, evolution, 
+and maintenance of a program [20]. Murphy -hill [21] 
+uncovered two tactics for implementing refactorings such as 
+floss and root canal refactoring. The use of floss refactoring is 
+for implementing new features or resolving bugs. However, in 
+root canal refactoring the developer's primary objective is to 
+apply refactorings to enhance the code's quality. Murphy -Hill 
+et al.  [22] have demonstrated that floss refactoring is a widely 
+adopted practice.  Refactorings are detectable through the 
+utilization  of both automated and manual tools. In software 
+maintenance projects, automated refactoring detection tools 
+outperform their manual counterparts [23],[24],[25],[26]. 
+  E. Edward  et al.: On the Impact of Refactorings on Software Attack Surface  
+2 VOLUME XX, 20 24 
+B. ATTACK SURFACE OF SOFTWARE SYSTEMS  
+The attack surface of the software system encompasses the 
+entry, and exit points of a system, the data that is transmitted 
+through these points, and the code that safeguards both the 
+paths and the data [27]. The attack surface of software refers 
+to the total number of potential entry points through which 
+unauthorized  users can attempt to input or extract data from 
+a system or environment to compromise a system, 
+application, device, or network [28],[29]. For example, 
+Kurmus et al.  [30] highlighted that the presence of 
+vulnerabilities in the Kernel can lead to security weaknesses 
+and defects in various operating systems. By addressing 
+these vulnerabilities, the software attack surface can be 
+minimized , thereby enhancing the software's resistance to 
+attacks.  Theisen et al.  [31] confirmed that software bugs and 
+vulnerabilities can be regarded as the attack surface of any 
+software because they provide potential entry points and 
+opportunities for attackers to gain unauthorized access to the 
+software and hence compromise its security. Similar findings 
+were confirmed by  Szefer et al . [32] that software 
+vulnerabilities and bugs serve as prominent examples of the 
+software attack surface. Furthermore, Alraddadi et al. [33] 
+has observed a correlation between code smells and software 
+vulnerabilities and established that code smells can give rise 
+to security vulnerabilities.  
+C. EFFECTS OF REFACTORINGS ON BUGS  
+Bug refers to a n error, defect , or flaw in a computer program 
+or system that leads to the generation of an inaccurate or 
+unforeseen outcome, or causes the program to behave in 
+unintended manners [34]. Software bugs also refer to 
+imperfections, flaws, errors, faults, inconsistencies, or 
+deviations in computer programs or systems [35]. The study 
+conducted in  [36] highlighted that there are sets of bugs that 
+manifest in the codebase as a result of certain refactorings, 
+and on the other hand, there are also sets of bugs that trigger 
+developers to apply refactoring . The study conducted by  
+Almogahed et al.  [37] provided a comprehensive analysis of 
+the impact of refactorings on software quality. A total of 30 
+empirical studies were analyzed  to investigate the effects of 
+refactorings on bug reduction in software. The findings of 
+these studies revealed that refactorings can have both 
+positive and negative impacts on bug reduction.  Da Costa  et 
+al. [38] proposed a framework for assessing the effectiveness 
+of the Sliwerski, Zimmermann, and Zeller (SZZ) algorithm 
+in detecting software bugs. The findings of the study indicate 
+that the process of refactoring in software maintenance can 
+potentially result in adverse effects, specifically the 
+introduction of bugs in the software.  
+ Gigante et al.  [39] conducted an empirical 
+investigation on software projects to evaluate  the efficacy of 
+refactorings in removing software bugs. The results 
+indicated that certain refactorings have the potential to 
+introduce additional bugs into the software . These findings 
+are consistent with the study conducted by  Shafiq et al. [36], 
+which suggests that the application of refactorings can 
+potentially introduce bugs in software even after successful implementation. Moreover, [40] conducted a longitudinal 
+study that analysed  20,689 refactorings and 1,033 bug 
+reports from 5 Java open -source projects. The findings 
+indicated that bugs are introduced into the refactored code 
+when refactorings are applied to the code. In addition, code 
+elements that are affected by refactorings performed 
+alongside other changes are more likely to have bugs 
+compared to those affected by pure refactorings.  
+D. IMPACT  OF REFACTORINGS ON CODE SMELLS  
+Code smells refer to implementation issues that arise due to 
+inadequate design and/or coding choices  [41]. These are 
+perceived as problematic issues that can complicate the 
+maintenance and evolution of software [2],[42]. Code smells 
+can be introduced by software developers either  during the 
+system's early stages of development or as the system 
+progresses over time  [41] and have been associated  with the 
+increase in risk of vulnerabilities and bugs according to 
+Palomba  et al.[43]. Numerous studies have been conducted 
+to examine the effects of refactorings on code smells. 
+Bibiano et al.  [44] investigated the use of composite 
+refactoring to eliminate code smells. The results showed that 
+combining the  Extract Method, and Move Method  removes 
+both Long Method and Feature Envy code smells. However, 
+in the same study, composites formed by Extract Methods  
+not only remove Long Method code smells but also introduce 
+Feature Envy and Intensive Couplings code smells into the 
+software.  Hamdi et al.  [41] revealed that Extract Method, 
+Move Method, Extract and Move Method, Rename Method, 
+and Push Down Method  refactorings were applied to remove 
+complex class and long method code smells. This finding 
+aligns with the  catalogue  proposed in [2]  stating that the 
+mentioned refactorings could be applied to fix  complex class 
+and long method code smells. The Extract Method  
+refactoring is frequently applied to address the following 
+code smell types : Lazy Class, Complex Class, Long Method, 
+and Feature Envy. However, thi s finding  also implies that 
+refactorings are context -dependent and that there is no single 
+refactoring that can be used to address  a specific code smell 
+[41].  
+Further, Cedrim et al.  [45] analyzed  various types of 
+refactoring and found that the application of these 
+refactorings did not reduce code smells. Instead, the 
+introduction of new code smells was observed. The study 
+examined 23 software projects and conducted analyses on 13 
+different types o f code smells. The findings revealed that 
+57% of the refactorings performed did not effectively 
+remove code smells. Additionally, 9.7% of the refactorings 
+successfully eliminated code smells, while 33.3% of the 
+refactorings introduced new code sme lls into the software.  
+Moreover,  the study conducted by Yoshida et al.  [46], 
+investigated the correlation between code smells and 
+refactorings in desktop applications. The analysis indicated 
+that the refactorings successfully eliminated code smells by 
+a mere 2.24%, while simultaneously introducing new code 
+smells at a rate of 2.6 6%. E. Edward et al.: On the Impact of Refactorings on Software Attack Surface                                                                                           
+ Halepmollas and Tosun  [47] performed research to 
+determine how refactoring affects code smells. The study 
+explored 33 Java projects and detected 57,528 refactorings, 
+37,553 smells, 27,340 faults, and 134,812 commits. The 
+findings indicate that certain types of refactoring are utilized  
+more frequently by programmers. The study also showed 
+that code smells are typically eliminated or remain 
+unaffected by refactorings . Counsell  et al.  [48] conducted an 
+empirical study on the removal of code smells by analyzing  
+a set of five open -source Java projects followed by 
+proprietary software developed in C# and finally a 
+theoretical study on why smell -related  refactorings were not 
+addressed. The study's key findings indicate no evidence of 
+a widespread elimination of smells. However, it was 
+observed that smells that could be resolved through simple 
+refactoring  operations  were eliminated in favor  of smells that 
+required more complex refactoring.  
+ 
+E. EFFECTS OF REFACTORINGS ON 
+VULNERABILITIES  
+Vulnerabilities are defined as unintended characteristics of a 
+computer component or system configuration s that increase 
+the risk of an adverse event or loss occurring through 
+inadvertent exposure, malicious attack, or accidental exposure [7]. Vulnerability in computer software refers to a 
+specific weakness present in the code that allows an attacker 
+to bypass the implemented security measures [49]. 
+Therefore, vulnerabilities that are associated with bypassing 
+a restriction refer to situations where an unauthenticated 
+party can gain access to services or read and manipulate files 
+[50]. The study conducted by  Ikegami et al.  [28] examined 
+the application of refactoring techniques in addressing 
+security vulnerabilities.  The results  revealed that the 
+identified vulnerabilities within the 143 analyzed  Maven 
+libraries were successfully addressed through the 
+implementation of refactoring techniques. According to the 
+white paper by  New Relic  [51], the goal of refactoring is to 
+reduce the occurrence of security vulnerabilities in the 
+software system.  
+ 
+III. METHODOLOGY  
+This section presents a summary of the stages required to 
+address our research questions. The proposed approach  
+consists of three steps as represented in Figure 1. The steps 
+are:  selecting subject systems, detecting refactoring s, and 
+identifying attack surfaces . These steps were adopted from  
+the study by  Hamdi et al.  [41] and modified accordingly to 
+fit the current study . 
+ 
+ 
+ 
+ 
+ 
+FIGURE 1.  Overview of the Proposed Approach.  
+A. SELECTION OF SUBJECT SYSTEMS  
+The first phase of our approach  involves selecting open -
+source software projects from the GitHub repository to serve 
+as subject systems for the study. The reason for selecting 
+open -source software systems is simply because they are 
+publicly available on software repositories and their source 
+code and change histories can be easily accessed  [52]. 
+However, they are constantly exposed to unavoidable 
+security threats such as bugs, code smells, and vulnerabilities. According to National Vulnerability 
+Database (NVD) statistics, in 2022 there are more than 
+25,102 known exploited vulnerabilities related to open -
+source software worldwide. We selected 30 software 
+projects  developed in Python, C , and Javascript . Each 
+considered project had a history of being refactored, had 
+multiple versions, and varied in terms of project size.  The 
+projects that have been selected for analysis are outlined in 
+Table 1.   
+ 
+ 
+ 
+Selection of 
+subject 
+systems  
+30 Open -
+source 
+software  
+Attack 
+surface 
+detection  
+Refactorings 
+detection  
+List of Attack 
+Surface  
+List of applied 
+refactorings  
+Refactorings 
+impacts on attack 
+surface   E. Edward  et al.: On the Impact of Refactorings on Software Attack Surface  
+2 VOLUME XX, 20 24 
+Table 1: Overview of the Subject Systems  
+Name  Lines of Code  Name  Lines of Code  Name  Lines of Code  
+Angular.js  4,090  jquery  2,826  netdata  51,957  
+Atom  16,614  jq 437 libuv  189 
+React  6,549  reveal.js  11,299  keras  200,614  
+Redis  8,285  emscripten  97,111  scrapy  47,267  
+Axios  575 Semantic -UI 77,603  huey  5,950  
+Dit 16,480  swoole -src 16,973  Beets  39,688  
+texar  29,380  vue 1,996  DeepSpeed  62,597  
+celery  58,838  webpack  2,069  sanic  33,527  
+ffmpeg  4,135  wrk 6,167  PyMySQL  6,549  
+git 4,738  material -ui 698 Ansible  180,434  
+TOTAL.:  Projects: 30, Lines of Code: 995,635  
+ 
+B. PREVIOUS REFACTORINGS DETECTION  
+We collected all the refactoring s applied to the selected 
+open -source software projects. We used PyReff  [23] and 
+RefDiff  [53] to facilitate the identification of applied 
+refactorings. PyReff is a tool that was developed specifically 
+for mining refactoring operations in Python projects.  It has 
+been reported that PyReff attains a recall of 95% and 
+precision of 79% [23]. PyReff provides the capability to 
+identify a range of prevalent refactoring types, as proposed 
+by Fowler and Beck  [2]. Similarly, RefDiff is a tool that was developed for 
+mining refactoring operations in C and JavaScript projects.  
+It has been documented that RefDiff attains a recall of 88% 
+and a precision of 100% [53].  RefDiff provides the 
+capability to detect thirteen (13) different types of 
+refactoring operations . The detection of refactorings between 
+two revisions of a system is accomplished through the 
+utilization  of a combination of heuristics based on static 
+analysis and code similarity [25]. We extracted eight (8) 
+common refactoring types from the supported refactorings, 
+as presented in Table 2.
+Table 2: The List of Considered  Refactoring s 
+SN Refactoring Type  Description  
+1.  Move Method  Moves a method from a class to another class  
+2.  Extract Method  Creating a new method from an existing code block.  
+3.  Rename Method  Renames Method  
+4.  Rename Class  Renames a class  
+5.  Inline Method  Reduce the number of unneeded methods while simplifying the code  
+6.  Add Parameter  Add a default parameter to the method in all implementors  
+7.  Remove Parameter  Removes an unused parameter from all implementors of the method  
+8.  Pull Up Method  Move the method to the superclass.  
+ E. Edward et al.: On the Impact of Refactorings on Software Attack Surface                                                                                           
+ 
+C. DETECTION OF SOFTWARE ATTACK SURFACE  
+In this step we identified bugs, code smells and 
+vulnerabilities instances in the source code of the selected 
+subject applications. For each project, we conducted a 
+comprehensive source code analysis to determine any 
+occurrences of  bugs, code smells , and vulnerabilities. 
+SonarQube was used to detect such elements of the attack 
+surface. SonarQube is a tool for ensuring the quality of code 
+by gathering and analyzing  source code and generating 
+reports on the code quality of the project  [54]. It brings 
+together static and dynamic analysis and allows for the 
+constant measurement of quality over time. The tool  offers 
+various code analyses, such as static code analysis, code 
+coverage, and code duplication analysis. Notably, the 
+SonarQube tool utilizes  rule-based static code analysis, 
+complexity metrics, and security rule sets to identify bugs, 
+code smells, and vulnerabilities in the code base.  
+ 
+D. ANALYZING THE IMPACT OF REFACTORINGS  
+Refactorings can have either a positive, negative, or neutral 
+impact on the presence of bugs, code smells, and 
+vulnerabilities [45][55][14]. This section outlines how each 
+instance of refactoring  type is categorized by quantifying the 
+number of bugs, code smells, and vulnerabilities that are 
+either not affected, introduced , or eliminated because of the 
+refactoring s applied.   
+Let 𝑃={𝑝1,…,𝑝𝑛} be a set of analyzed  open -source 
+software projects. Each project 𝑝 has a set of versions 
+𝑉(𝑠)={𝑣1,…,𝑣𝑛} for our case , we considered three 
+subsequent versions.  
+Let 𝑅 be the refactoring detection function whereby  
+𝑅(𝑣𝑖,𝑣𝑖+1)={𝑟1(𝑟𝑡1;𝑒1),….𝑟𝑘(𝑟𝑡𝑘;𝑒𝑘)} provides 
+refactoring type denoted as (𝑟𝑡𝑖) and refactored code 
+elements denoted as (𝑒𝑖). 
+The refactoring function allows us to classify 
+refactorings based on their impact on existing bugs, code 
+smells, and vulnerabilities. Based on bugs, suppose 𝑒𝑖 
+denotes code elements, 𝑟 denotes a particular refactoring  
+type, and 𝐵𝑏  denotes bugs before refactoring and 𝐵𝑎 denotes 
+bugs after refactoring. Therefore, before refactoring, 
+|𝐵𝑏[𝑟](𝑒𝑖)|=𝑥  , whereas, after 𝑟 refactoring was applied, 
+|𝐵𝑎[𝑟](𝑒𝑖)|=𝑦. Whereby,  𝑥  and 𝑦 are instances of bugs 
+before and after refactoring respectively. Then ,  𝑟 can be 
+classified based on the values of 𝑥  and 𝑦. If 𝑥>𝑦,𝑟 reduced 
+the instances of bugs on 𝑒𝑖, consequently, 𝑟 is considered a 
+positive refactoring. On the other hand, if 𝑥<𝑦,𝑟 increased 
+the instances of bugs , hence, 𝑟 is considered a negative 
+refactoring. Furthermore, if 𝑥=𝑦,𝑟 is considered a neutral 
+refactoring. This was also applied to code smells and 
+vulnerabilities. This classification is further summarized in  
+Table 3. 
+ 
+ 
+ Table 3: Example Bugs -Based Refactoring Classification  
+Condition  Refactoring Class  
+|𝐵𝑏[𝑟](𝑒)|>|𝐵𝑎[𝑟](𝑒)| Positive  
+|𝐵𝑏[𝑟](𝑒)|<|𝐵𝑎[𝑟](𝑒)| Negative  
+|𝐵𝑏[𝑟](𝑒)|=|𝐵𝑎[𝑟](𝑒)| Neutral  
+IV. EXPERIMENT AND RESULTS  
+In this section, we present the research questions that this 
+study intends to address and highlight  the findings of our 
+empirical study followed by the results discussion in  
+response to each of the research questions.  
+A. RESEARCH QUESTIONS  
+Our study aims to answer the following research questions.  
+• RQ1:  How about the software attack surface of open -
+source software systems? This initial research question 
+seeks to empirically identify the software attack 
+surface of open -source software systems . 
+• RQ2:  What are the commonly applied refactorings 
+on the studied subject systems? This research 
+question intends to identify refactorings applied to 
+open -source software systems through a 
+comprehensive code analysis and understand which 
+refactorings were commonly applied to the same.  
+• RQ3 : What is the impact  of refactorings  on the 
+software  attack  surface  of the analyzed  open -source  
+software  systems ? The goal of this research question 
+is to investigate the impact  of refactorings on the 
+software attack surface. This question enables a deeper 
+understanding of the connection between refactorings 
+and the attack surface, specifically in terms of bugs, 
+code smells, and vulnerabilities  
+ 
+To address RQ1, we utilized  the bugs, code smells, and 
+vulnerabilities  information  that have been gathered for each 
+subject application as outlined in section III ( C). The 
+experiment was carried out by performing the static code 
+analysis of the selected 30 open -source projects to scan for 
+vulnerabilities, bugs, and code smell s. The selection of these 
+three elements of the attack surface  is in line with [39] who 
+performed a comparative study of the two source code 
+analysis tools namely SonarQube and Fortify Static Code 
+Analyzer. As mentioned earlier, we use d SonarQube 
+Community Edition version 9.6.1 , a software application that 
+executes rules given by Gigante  et al. [39] to identify the 
+instances of bugs, code smells , and vulnerabilities . 
+On the other hand, RQ2  is answered using the 
+refactoring instances data collected by PyReff and RefDiff  
+from the 30 subject systems . This process enabled us to 
+identify the common refactorings applied in open -source 
+software projects. As for the refactorings, the study selected 
+purposely eight (8) types that belong to the catalogue defined 
+by Fowler and Beck  [2] and are also reported to be the 
+commonly performed refactorings from other studies [15].  E. Edward  et al.: On the Impact of Refactorings on Software Attack Surface  
+2 VOLUME XX, 20 24 
+Furthermore, the choice of these eight refactorings is also 
+inspired  by Murphy -Hill et al.  [22]. 
+To address RQ3, we examine the relationship between 
+refactoring operations and the occurrence of bugs, code 
+smells, and vulnerabilities. First, we identified the code 
+elements containing bugs, code smells, or vulnerabilities in 
+a given version of the system. Next, we tracked the 
+refactorings applied to these code elements in the subsequent 
+version. Finally, we analyzed  to determine the extent to 
+which the previously identified bugs, code smells, and 
+vulnerabilities were impacted by these refactorings. This 
+approach enables us to determine whether these elements of 
+the attack surface have been reduced or remain unchanged. 
+Additionally, further analysis was conducted on the 
+refactored code elements to identify any newly introduced 
+bugs, code smells, and vulner abilities. The RQ3 is therefore 
+aiming at discerning whether a particular applied refactoring 
+operation had a positive, neutral, or negative impact.  
+ 
+B. HOW ABOUT THE SOFTWARE ATTACK SURFACE 
+OF OPEN -SOURCE SOFTWARE SYSTEMS? (RQ1)  
+ The information revealed by SonarQube helped to 
+establish the common attack surface elements available in 
+software projects that have an impact on software security, 
+on the one hand, and help the developer to understand the 
+most occurring elements of attack  surface  on the other hand.  
+The distribution of bugs, code smells and vulnerabilities are 
+presented in Table 4. 
+Table 4: The Distribution of Attack Surface  
+S/N Attack Surface  Instances  Percentage  
+1.  Code Smells  18,303  85.8 
+2.  Bugs  2,975  14 
+3.  Vulnerabilities  43 0.2 
+ Totals  21,321  100 
+ 
+As presented in Table 4, code smells contribute significantly 
+to the total number of attack surface elements. Code smells 
+have a total of 18,303 (85.8%) instances. This implie s that 
+code smells are the most common type of attack surface on 
+the analyzed  project . The second most common attack 
+surface of the studied open -source software projects was 
+bugs which contributed to a total of 2,975 (14%) instances of 
+attack surfaces. Vulnerabilities are the least common type of 
+attack surface  elements  which contributed to 0.2% (43 out of 
+21,321) of all instances of the attacks in the analysed 
+projects. This implies that vulnerabilities in the analyzed  
+software accounted for a smaller  fraction of the attack 
+surface than others.  However, i t is important to note that the 
+vulnerabilities studied here are not exhaustive. Other several 
+vulnerabilities were  not considered in this initial attempt of 
+our study.  The following subsections highlight each of the 
+attack surface elements in detail . 
+ 1) CODE SMELLS  
+The SonarQube tool uncovered a total of 10 distinct code 
+smell types in the analyzed  projects, as presented in Table 5.  
+Table 5: Distribution of Code Smells in the Studied 
+Projects  
+S/N Code Smell  Instances  Percentage  
+1 Duplicated code  6322  34.5 
+2 Speculative generality  3210  17.5 
+3 Long parameter list  2579  14.1 
+4 Temporary field  2416  13.2 
+5 Comments   2323  12.6 
+6 Long Method  1112  6.1 
+7 Switch statements  218 1.2 
+8 Large class  76 0.4 
+9 Data Clumps  25 0.1 
+10 Feature Envy  22 0.1 
+  Totals  18303  100 
+ 
+As shown in the table, t he two most common code smell 
+types were Duplicated code and Speculative generality . 
+These code smell types accounted for 34.5% and 17.5% 
+respectively of all instances. In general, these code smell 
+types, which occur with a high frequency, make up a 
+significant 50% of the total code smell count. These findings 
+were in line with  the  study by Menshawy et al.  [56] which 
+indicated that Duplicated code and Speculative generality  
+are the most popular code smells among all.  We also 
+observed that code smells such as Long Parameter List, 
+Temporary  Field, and Comments  are moderately prevalent in 
+the analyzed  projects. These code smell types accounted for 
+14.1%, 13.2% , and 12.6% of all instances, respectively. In 
+general, these three code smell types, which occur with a 
+moderate frequency, make up a significant 39.9% of the total 
+code smell count. These  findings are suppor ted by   Sotto -
+Mayor et al.  [57] who found out that code smells such as  
+Long Parameter List, Temporary  field, and Comments  are 
+commonly found in software projects.  
+Furthermore, we observed that code smells such as 
+Long Method , Switch Statement, Data Clumps, Large class, 
+and Feature Envy  were slightly prevalent in the analyzed  
+projects. These code smell types accounted for 6.1%, 1.2%, 
+0.4%, 0.1% and 0.1% of all instances, respectively. In 
+general, these five code smell types  accounted for only 7.9% 
+of the total code smell instances.  Overall, it has been noticed 
+that the highly, moderately, and slightly prevalent code 
+smells in the analysis are consistent with the previously 
+reported results [56],[43]. In their study, Alraddadi et al.  [33] 
+observed a correlation between code smells and software 
+vulnerabilities. It has been established that code smells can 
+give rise to security vulnerabilities, thereby compromising 
+the security of the software and making it susceptible to 
+attacks.  
+ E. Edward et al.: On the Impact of Refactorings on Software Attack Surface                                                                                           
+2) BUGS  
+The SonarQube tool identified a total of 7 distinct bugs in the 
+selected projects, as presented in Table 6. 
+Table 6: The Common Types of Bugs Identified  
+SN Bugs  Instances  Percentage  
+1 Code Complexity  1783  59.9 
+2 Inconsistent Naming 
+Convention  546 18.4 
+3 Incorrect Data Validation  526 17.7 
+4 Insecure Code  60 2 
+5 Unused Code  39 1.3 
+6 Unhandled Exception  16 0.5 
+7 Memory Leak  5 0.2 
+Totals  2975  100 
+ 
+As shown in the table , the three most recurring bug types 
+were Code Complexity, Inconsistent Naming Convention, 
+and Incorrect Data Validation . These three bug types 
+accounted for 59.9%, 18.4%, and 17.7%  of total bug 
+instances  respectively . In general, these three bugs, which 
+occur with a high frequency make up 96% of the total bugs 
+count. However, it has been observed that certain bugs are 
+moderately common, including Insecure Code, Unused 
+Code, Memory Leak, and Unhandled Exceptions compared 
+to other types of bugs which accounted for only 4% of total 
+bug instances. These bugs have a lower prevalence and make 
+up a smaller fraction of the total bugs encountered. As 
+expected, the highe r the frequency of a bug, the greater its 
+prevalence. Based on the analysis, it was found that the bugs 
+that are highly and moderately prevalent in the analyzed  
+projects are consistent with those found by Theisen et al.  
+[31]. 
+ 
+3) VULNERABILITIES  
+A total of 4 distinct vulnerabilities in the selected projects  
+were identified  as presented in Table 7. We matched 
+vulnerabilities with the corresponding Common Weakness 
+Enumeration (CWE) vulnerabilities as reported  in [58].  
+Table 7: Distribution of Vulnerabilities in the Studied 
+Projects  
+S/N Vulnerability Type  Instances  Percentage  
+1.  A3 – Injection  29 67.4 
+2.  A9 - Security 
+Logging and 
+Monitoring Failures  9 20.9 
+3.  A6 - Vulnerable and 
+Outdated 
+Components  3 7 
+4.  A2 - Cryptographic 
+Failures  2 4.7 
+Totals  43 100 
+ As indicated  in Table 7, we found that A3- Injection  
+vulnerabilities  have the highest frequency, making  up a 
+significant 67.4%  (29 out of 43)  of the total vulnerability 
+instances in the analyzed  projects. According to these 
+findings, A3- Injection  is one of the most common 
+vulnerability types as compared to others. This finding is 
+consistent with  that suggested in  [59]. Moreover, we 
+observed some moderately prevalent vulnerabilities like the 
+A9 - Security Logging  and Monitoring Failures  and some 
+slightly prevalent vulnerabilities such as A2 - Cryptographic 
+Failures  and A6 - Vulnerable and Outdated Components . 
+The A9 - Security Logging and Monitoring Failures  
+vulnerability accounts for 20.9% while the remaining two 
+vulnerabilities  (A6 and A2) accounted for 11.7% of total 
+vulnerability instances. These findings were in line with the 
+study proposed in [60] which suggested that vulnerabilities 
+are the attack surface elements of the software system and 
+often manifest in either high, moderate , or slight frequency . 
+C. WHAT ARE THE MOST FREQUENTLY APPLIED 
+REFACTORINGS ( RQ2)  
+A total number of 3,523 instances of the applied refactorings 
+were detected by  PyReff and RefDiff  from  the 30 analyzed  
+projects.  Table 8 presents the most prevalent refactoring 
+types applied in the studied project.  
+Table 8: The Common Refactoring Types Applied in the 
+Studied Projects  
+SN Refactoring Type  Instances  Percentage  
+1.  Move Method  1,174  33.3 
+2.  Extract Method  693 19.7 
+3.  Rename Method  551 15.6 
+4.  Rename Class  521 14.8 
+5.  Inline Method  310 8.8 
+6.  Add Parameter  212 6.0 
+7.  Remove Parameter  49 1.4 
+8.  Pull Up Method  13 0.4 
+ Totals  3,523  100 
+ 
+We observed that Move Method , Extract Method , Rename 
+Method, and Rename Class  are the most applied refactorings 
+accounting for  33.3%, 19.7%, 15.6%, and 14.8% of all 
+instances respectively. It is important to acknowledge that 
+the relatively large number of Extract Method  refactorings 
+may lead to a correspondingly high number of Rename 
+Method  refactorings. Notably , when a method undergoes an 
+Extract Method  refactoring, it may also require a Rename 
+Method refactoring to accurately represent its new purpose. 
+In general, we found that the most applied refactorings in the 
+analyzed  projects align with the findings of  Hamdi et al.  [41]. 
+We also observe d that there are  several moderately 
+common ly applied refactorings such as the Inline Method  
+with an occurrence of 310 (8.8%) instances and Add 
+Parameter  with 212 (6.0%)  instances . On the other hand,  E. Edward  et al.: On the Impact of Refactorings on Software Attack Surface  
+2 VOLUME XX, 20 24 
+Remove Parameter  and Pull Up Method  are the least 
+performed refactoring types with 49  instances  (1.4%) and 13  
+instances  (0.4%) respectively.  
+ 
+D. WHAT IS THE IMPACT OF REFACTORINGS ON 
+THE SOFTWARE ATTACK SURFACE? (RQ3)  This section presents a synopsis  of the findings on the impact 
+of refactorings on bugs, code smells, and vulnerabilities.  
+ 
+1) EFFECTS OF REFACTORINGS ON BUGS  
+The refactorings in Table 9 are listed in descending order 
+based on the number of instances found in the analyzed  
+projects  in relation to bugs .
+ 
+Table 9: Effect of Refactorings on Bugs  
+Refactoring Type  Instances  Neutral  Negative  Positive  
+Move Method  1168  1046(89.6%)  113(9.7%)  9(0.8%)  
+Extract Method  686 545(79.4%)  99(14.4%)  42(6.2%)  
+Rename Method  550 477(86.7%)  28(5.1%)  45(8.2%)  
+Rename Class  500 195(39%)  51(10.2%)  254(50.8%)  
+Inline Method  310 154(49.7%)  147(47.4%)  9(2.9%)  
+Add Parameter  212 167(78.8%)  0(0%)  45(21.2%)  
+Remove Parameter  49 46(93.8%)  0(0%)  3(6.2%)  
+Pull Up Method  13 13(100%)  0(0%)  0(0%)  
+Totals  3488  2643(75.8%)  438(12.6%)  407(11.7%)  
+We observed that the neutral impact of refactorings on bugs 
+was the most common outcome . Out of all refactoring types 
+analyzed , the total number of 2,643  refactoring instances  
+(i.e., 75.8%  of all instances ) did not result in any changes to 
+the existing bugs in the projects. We noted that Move 
+Method , Extract Method , Rename Method, Inline Method, 
+Add Parameter, Remove Parameter , and Pull Up Method  are 
+the most frequently implemented refactorings and at least 
+50% of their instances had no impact on bugs.  In contrast to 
+Rename Class  refactoring only 39% of its instances had a 
+neutral impact on bugs. Moreover, a s shown in Table 9, 
+overall, 12.6%  (438 out of 3,488 instances) of  the refactoring  
+instances  were found to add bugs to the refactored code 
+elements.  
+Furthermore, w e observed that only Move Method , 
+Extract Method , Rename Method, Rename Class, and Inline 
+Method refactorings demonstrated a negative impact . In 
+contrast to Inline Method  refactoring which had a significant 
+percentage of instances (47.4%) with a negative  impact, the 
+rest of the refactorings had a slight negative impact on bugs.  
+However, the other three refactorings (i.e., Add Parameter, 
+Remove Parameter, and Pull Up Method ) had no negative 
+impact on bugs.   In the case of positive impact, surprisingly, 
+Rename Class  refactoring had a significant number of 
+instances (50.8%) that recorded positive impact, followed by 
+Add Parameter  refactoring with only 21.2%.  Other 
+refactorings had very few instances with positive impact on 
+bugs, whereas, the Pull Up Method  had no positive impact at 
+all.     In summary, most of the instances of applied 
+refactorings had neutral impacts on the bugs (i.e., 75.8%) and 
+almost comparable negative (12.6%) and positive (11.7%)  
+impacts. These results further indicate that the effectiveness 
+of refactoring strategies is contingent upon the specific 
+context in which they are implemented. It would be 
+interesting in the future to make further analyses to establish 
+how these refactorings lead to positive and negative impacts 
+on bugs.  
+The results  presented in Table 9 were  produced based 
+on bug -detection strategies similar to the one used by Bavota 
+et al. [55]. Figure 2 displays the distribution of the impact of 
+refactorings on bugs, categorized  as neutral, positive, and 
+negative. This analysis was conducted using two 
+classification methods: Tight and Bavota thresholds.  The 
+thresholds for bug detection were defined in [55]. Macia et 
+al. [61] validated the first set of bug detection rules , called 
+tight. This strategy is tight because it uses high thresholds to 
+detect only critical bug types across projects. The second 
+approach, referred to as Bavota, employs relaxed thresholds 
+intending to identify  as many bugs as possible as proposed 
+by Bavota et al.  [55]. An analysis in Figure 2 demonstrates 
+that the proportion of neutral, positive, and negative 
+refactorings is the same irrespective of the threshold used for 
+bug detection.  
+ 
+ E. Edward et al.: On the Impact of Refactorings on Software Attack Surface                                                                                           
+ 
+FIGURE 2.  The Impact of Refactorings on Bugs.  
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+2) EFFECTS OF REFACTORINGS ON CODE SMELLS  
+ 
+Table 10: Effects of Refactorings on Code Smells  
+Refactoring Type  Instances  Neutral  Negative  Positive  
+Move Method  1174  965(82.2%)  164(14%)  45(3.8%)  
+Extract Method  693 485(70%)  94(13.6%)  114(16.4%)  
+Rename Method  551 302(54.8%)  141(25.6%)  108(19.6%)  
+Rename Class  521 214(41.1%)  295(56.6%)  12(2.3%)  
+Inline Method  310 47(15.2%)  191(61.6%)  72(23.2%)  
+Add Parameter  212 0(0%)  178(80.1%)  34(19.9%)  
+Remove Parameter  49 0(0%)  46(93.8%)  3(6.2%)  
+Pull Up Method  13 0(0%)  13(100%)  0(0%)  
+Totals  3523  2013(57.1%)  1122(31.8%)  388(11.1%)  
+ 
+ 
+As shown in Table 10, Move Method  has been identified as 
+the most frequently performed refactoring. This result is 
+consistent with the findings reported in [63] that Move 
+Method  refactorings are frequently carried out by 
+developers. This is because they can be easily executed either 
+manually or by utilizing  the features provided by existing 
+IDEs. As shown in Table 10, the analysis revealed that the 
+neutral impact of refactorings on code smells was the most 
+frequent accounting for 2013  (57.1%)  instances in the 
+projects. Specifically, we observed that Move Method , 
+Extract Method , Rename Method,  and Rename Class  are the 
+most applied refactorings with neutral impact on code smells  
+accounting  for 98% of all instances with neutral impact. It is 
+worth noting that, the rename refactoring has no specific 
+smell to address here and smells corresponding to Move 
+Method  and Extract Method , that is, Feature Envy  and Long 
+Method  have significantly fewer instances as shown in Table 
+5. Therefore, such refactoring s might have been performed 
+for other motivations rather than code smell removal.  It is 
+also important to acknowledge that the relatively large 
+number of Extract Method  refactorings may lead to a 
+correspondingly high number of Rename Method  refactorings. This observation was justified in the sense that 
+Rename Method  and Rename Class  are respectively the third 
+and fourth most common refactoring activities performed in 
+the analyzed  open -source software projects.  Moreover, the 
+negative and positive impact of refactoring contributed to 
+31.8% and 11.1% of all instances respectively. Analysis of 
+code elements revealed that some refactorings when applied 
+led to the introduction  of new smells  that were not 
+subsequently removed . As mentioned earlier, the reason for 
+the lower percentage of positive refactorings may include the 
+fact that no specific refactorings were applied for their 
+corresponding code smells. In line with these results was the 
+study conducted by Cedrim et al.  [45], which reported that 
+out of the observed refactorings performed  in their study , 
+only 9.7% successfully removed code smells.  
+The results presented in Table 10 were generated using 
+code smell detection methods that adhered to a tight 
+threshold set which was comparable to the approach taken 
+by Cedrim et al.  [45]. The thresholds for code smell detection 
+were defined in [61][62]. Macia et al.  [61] validated the first 
+set of code smell detection rules, called tight thresholds. This 
+strategy is tight because it uses high thresholds to identify 
+only crucial  code smells across projects. The second 
+2989
+530 4932643
+438 407
+0500100015002000250030003500
+Neutral Negative Positive
+Bavota Tight E. Edward  et al.: On the Impact of Refactorings on Software Attack Surface  
+8 VOLUME XX, 20 24 
+approach, referred to as relaxed, employs relaxed thresholds 
+to identify as many code smells as possible. Moreover, we 
+have also classified the refactorings using Bavota thresholds 
+[55]. Figure 3 displays the distribution of the impact of 
+refactorings on code smells, categorized as neutral, positive, 
+and negative. The data is classified using three methods: 
+Tight, Relaxed, and Bavota threshold.  An analysis in Figure 
+3 demonstrates that th e proportion of neutral, positive, and 
+negative refactorings is the same irrespective of the threshold 
+used for code smell  detection.  
+ 
+ 
+FIGURE 3.  The Impact of Refactorings on Code Smells.  
+ 
+3) EFFECTS OF REFACTORINGS ON 
+VULNERABILITIES  
+The neutral impact of refactorings on vulnerabilities was the 
+most frequent as depicted in Table 1 1. The analysis revealed 
+that the neutral impact of refactorings on vulnerabilities was 
+the most frequent accounting for 890 (89.2%) instances in 
+the projects. We observed that Move Method , Extract 
+Method , Rename Method,  Rename Class, Inline Method, Add 
+Parameter , and Remove Parameter are the most applied 
+refactorings with neutral impact accounting for  171 (90.5%), 
+173 (96.6%), 144 (94.1%), 308 (82.8%), 57 (100 %), 34 
+(75.6%), and 3 (100%) respectively. Nevertheless, it is 
+important to highlight that 10.8% (108 out of 998 instances) 
+of refactorings instances recorded negative effects on 
+vulnerabilities, suggesting that certain refactorings might 
+have introduced vulnerabilities into the source code of the 
+examined projects. In line with these findings was the study 
+by Iannone  et al.  [64] which found that refactorings can have 
+negative and neutral effects on vulnerabilities. Similar 
+findings were observed by Sultana et al. [65] that 
+refactorings can have incidents that have negative and 
+neutral effects on vulnerabilities.  The analysis presented in 
+Table 1 1 was produced based on vulnerability detection 
+strategies similar to the one used by Bavota et al. [55]. The 
+findings of this study revealed that refactorings can have 
+both neutral and negative effects on vulnerabilities.  
+Surprisingly, no refactorings recorded the positive 
+effects on vulnerabilities based on the analyzed  projects. 
+This observation suggests that the specific refactorings 
+employed in the analyzed  projects were not related to the 
+reduction of the identified vulnerabilities.  For instance, the study by Nafees et al.  [66] revealed that Extract Method  
+refactoring can address Cross -Site Scripting (XSS) 
+vulnerabilities , however, this vulnerability was not among 
+the identified vulnerabilities in the current study.  
+Table 1 1: Effect of Refactoring s on Vulnerabilities  
+Refactoring Type  Instances  Neutral  Negative  Positive  
+Move Method  189 171(90.5%)  18(9.5%)  0(0%)  
+Extract Method  179 173(96.6%)  6(3.4%)  0(0%)  
+Rename Method  153 144(94.1%)  9(5.9%)  0(0%)  
+Rename Class  372 308(82.8%)  64(17.2%)  0(0%)  
+Inline Method  57 57(100%)  0(0%)  0(0%)  
+Add Parameter  45 34(75.6%)  11(24.4%)  0(0%)  
+Remove Parameter  3 3(100%)  0(0%)  0(0%)  
+Pull Up Method  0 0(0%)  0(0%)  0(0%)  
+Totals  998 890(89.2%)  108(10.8%)  0(0%)  
+V. DISCUSSION  
+This section contains a discussion of the implications our 
+findings have on  (1) the identification of the software attack 
+surface, (2) the identification of refactorings  applied , and (3) 
+the impact of refactorings on the software attack surface of 
+open -source software systems.  
+A. IMPLICATIONS FOR ATTACK SURFACE 
+IDENTIFICATION (RQ1)  
+It has been revealed that the most occurring attack surface  
+element  in the analyzed open -source software projects was 
+code smells with a total of 18,303 (85.8%) instances 
+followed by bugs which contributed to a total of 2,975 (14%) 
+instances and last was vulnerabilities which contributed to 43 
+(0.2%) of all instances . Moreover, t he prevalence and 
+severity of attack surface  elements  in the selected projects 
+vary, and it is important to recognize  this distinction. For 
+example, code smells and bugs  are both prevalent software 
+attack surface  elements  in the studied projects accounting for 
+99.8% of all the attack surface  elements . Notably,  bugs, code 
+smells and vulnerabilities contribute to software attack 
+surface by providing potential entry points and opportunities 
+for attackers to exploit flaws and cause harm to the software 
+[67]. 
+B. THE COMMON  APPLIED REFACTORINGS (RQ2)  
+The results for RQ2 showed that  Extract Method, Inline 
+Method, Move Method, Pull Up Method, Add Parameter, 
+Remove Parameter, Rename Class, and Rename Method  are 
+the most applied refactorings on the studied s oftware 
+projects. These refactoring types are the most common and 
+frequently studied by other researchers  as well [68][15][37]. 
+As presented in Section IV (C), the Move Method  has been 
+identified as the most frequently performed refactoring  
+operation  with an occurrence of 1,174 ( 33.3%)  instances.  In 
+line with these findings is  the study proposed by Kurbatova 
+et al.  [69] which emphasized  that Move Method  refactoring 
+2212
+1232
+4312112
+1176
+4112013
+1122
+388
+05001000150020002500
+Neutral Negative Positive
+Relaxed Bavota TightE. Edward et al.: On the Impact of Refactorings on Software Attack Surface                                                                                           
+is frequently employed due to its perceived effectiveness in 
+addressing Feature Envy  code smell. The Extract Method  
+was the second most common refactoring operation 
+performed with 693 (19.7%) instances. This finding is 
+similarly reported in  [55]. It is important to acknowledge 
+that the relatively large number of Extract Method  
+refactorings may lead to a correspondingly high number of 
+Rename Method  refactorings. This observation was justified 
+in the sense that Rename Method  and Rename Class  are the 
+third  and fourth  most common refactoring activities 
+performed with occurrences of 551(15.6%) and 521 (14.8%) 
+respectively. Th ese results were also reported  by previous 
+studies [22][47]. These refactorings were applied to make 
+method and class  names  more meaningful to reflect their 
+latest functions.  
+C. THE IMPACT  OF REFACTORINGS ON SOFTWARE 
+ATTACK SURFACE (RQ3)  
+1) IMPACT OF REFACTORINGS ON BUGS  
+The findings of this study suggest that refactorings can have 
+multiple effects on bugs as they can be positive, negative, or 
+neutral. It is worth noting that,  bugs had  two scenarios 
+including the growing trend and the unchanging trend. The 
+growing trend was observed for  Code complexity, incorrect 
+data validation, and unused code  bugs . Whereas, the  
+unchanging pattern  include d Memory leak and Unhandled 
+exception  bugs . This signifies that th ese types  of bugs are 
+difficult to fix by simple refactorings that were performed on 
+the analyzed  projects. Yin et al.  [70] support these findings 
+by stressing that among  the most difficult bugs to fix are 
+Memory leak and Unhandled exception . Xuan  et al.  [71] 
+noted that Memory leak and Unhandled exception  are the 
+problematic bugs to be addressed by developers using 
+refactorings.  
+2) IMPACT OF REFACTORINGS ON CODE SMELLS  
+The findings revealed that refactorings demonstrated 
+positive, negative, and neutral effects on code smells.  These 
+findings are consistent with the stud ies conducted in [55] and 
+[72] which suggests that some refactorings decrease the 
+number of code smell  instances, on the other hand , some 
+refactorings may have no effects on code smells and some 
+are likely  to introduce code smells . The findings of this study 
+further confirm that in the course of the evolution of a 
+software system, particular code smells may increase, 
+decrease , or remain unchanged between subsequent 
+version s. The first scenario that  showcased the growing trend 
+of code smell  types  includes Comments, Duplicated Code, 
+and Temporary Field . These findings were in line with the 
+study by Counsell et al.  [48] which explored the eradication 
+of code smells and the results revealed that Duplicated Code, 
+Comments , and Temporary Field  code smells were not 
+eradicated by any refactoring. According to the study , these 
+smell types were categorized  as complex code smells and 
+they are difficult to remove  through simple refactorings like 
+the ones detected by the tools in this study. Wangberg [73] 
+also supported these findings, documenting that Duplicated 
+Code, Comments , and Temporary Field  smells are difficult to eliminate through simple refactorings and the same 
+require complex refactorings , or in other words , composite 
+refactorings.  
+Other categories  of code smell s that showed  the 
+unchanging trend include Long Method, Large class, and 
+Feature Envy . This finding suggests  that the refactoring s that 
+were  applied likely aimed to address other issues rather than 
+just code smells . Noting that refactorings may be applied for 
+different purposes including preparing the codebase when 
+implementing new requirements [12]. Counsell et al.  [48] 
+documented that Long Method, Large class, and Feature 
+Envy  code smells require more instances of refactorings to 
+be removed. The unchanging instances of this code  smell  
+type imply  that some refactorings should be applied in a 
+certain sequence  to be effective , for instance, according to 
+Cedrim et al.   [45], Extract Method  should be followed by 
+Move Method  to eliminate  the Long Method, and Feature 
+Envy  code smells.  
+3) IMPACT OF REFACTORINGS ON VULNERABILITIES  
+The findings revealed that refactorings demonstrated only 
+negative and neutral effects on the identified vulnerabilities. 
+In line with these findings was the study by [64] which found 
+that refactorings can have negative and neutral effects on 
+vulnerabilities. According to the analysis in this study, there 
+were no refactorings that positively impacted vulnerabilities.  
+The premise could be the performed refactorings did not 
+suffice to remove the identified vulnerabilities. However, we 
+note that refactoring may have a positive impact on 
+vulnerabilities as  the study by Nafees  et al.  [66] revealed that 
+Extract Method  refactorings can address Cross -Site 
+Scripting (XSS) vulnerabilities . Another similar observation 
+by Shaw et al.  [74] documented that Extract Method and 
+Move Method  refactorings can address overflow 
+vulnerabilit ies. These vulnerabilities  were not included in  
+this study . 
+In conclusion, i t is important to note that the analysis in 
+this study focused on the quantity of attack surface elements 
+rather than examining how specific elements (e.g., a 
+particular code smell) were affected by specific refactoring 
+operations. Future research could provide deeper insights by 
+analyzing , for example, how a specific refactoring type, such 
+as Move Method , impacts its corresponding smell, like 
+Feature Envy , and other types of smells. This detailed 
+analysis would offer a better  understanding beyond just the 
+quantity of instances. Notably, each refactoring operat ion 
+typically addresses certain types of code smells and may 
+have a neutral impact on others. This analysis could also be 
+applied to bugs and vulnerabilities.  
+VI. THREATS TO VALIDITY  
+One of the major limitations of the study is the identification 
+of software attack surface  elements . Detecting attack surface 
+elements with only one tool limits the generalizability of our 
+findings. To reduce the threat the software attack surface was 
+identified using a widely recognized state -of-the-art tool 
+namely SonarQube Community Edition . As a result, the 
+scope of the study is restricted to the analysis of attack  E. Edward  et al.: On the Impact of Refactorings on Software Attack Surface  
+8 VOLUME XX, 20 24 
+surfaces identified by only one tool which  may pose a threat 
+to the validity of the study, as any attack surface elements 
+not identified by the tool were not part of the analysis .  
+Moreover, the dataset utilized in this study comprises 
+refactorings identified by PyRef and RefDiff. Consequently, 
+any types of refactorings that were missed by these tools 
+were not considered in the analysis . The second threat could 
+stem from the fact that we quantitatively presented our 
+findings by using the data produced by our classification 
+strategies.  It is worth no ting that, different thresholds can 
+produce entirely different outcomes. Hence, the selection of 
+thresholds may present a challenge to the validity of this 
+research. Hence, three different sets of thresholds were used  
+to minimize this threat: tight, relaxed, and Bavota  thresholds  
+[55]. These three strategies for attack surface detection  
+enable us to establish classifications for refactoring based on 
+three distinct sets of bugs, code smell, and vulnerability 
+instances.  
+VII. CONCLUSION  AND FUTURE WORK  
+This paper presents an empirical study conducted on a 
+dataset that includes 3,523 instances of refactorings, 18,303 
+occurrences of code smells, 2,975 instances of bugs, and 43 
+vulnerabilities found in 30 open -source projects written in 
+Python, C, and JavaScript . These projects are part of a widely 
+recognized  ecosystem, the GitHub repository. We initiated 
+our research by conducting a preliminary analysis on the 
+identification of the software attack surface and the 
+previously applied refactorings in open -source software 
+systems. Finally, we investigated the impact of refactorings 
+on the software attack surface of the studied systems.  Several 
+important conclusions are drawn from our study. Firstly, 
+results indicated that  the most common attack surfaces on the 
+studied open -source software projects are bugs, code smells , 
+and vulnerabilities.  The study also found  that the common 
+bugs were Code Complexity, Inconsistent Naming 
+Convention, Insecure Code, Unused Code, Memory Leak 
+and Unhandled Exception . Secondly , Extract Method, Inline 
+Method, Move Method, Pull Up Method, Add Parameter, 
+Remove Parameter, Rename Class, and Rename Method  are 
+the most refactorings applied to the analyzed  open -source 
+software projects . Thirdly,  we observed that refactorings can 
+have multiple effects  (i.e., positive, negative, or neutral)  on 
+bugs , vulnerabilities , and code smells .  
+Potential avenues for further research include  
+extending our study to a large sample of open -source 
+software projects written in other programming languages 
+such as Java, Ruby, Rust, and C# , and including  other 
+elements of software attack surface  to better generalize our 
+results. In addition , this study focused on the quantity of 
+attack surface elements rather than how specific elements, 
+like particular code smells, were impacted by specific 
+refactoring operations. Future research could provide deeper 
+insig hts by analyzing  how specific refactorings  affect their 
+corresponding smells and other types of smells. This detailed 
+approach could also be applied to studying the impact of 
+refactorings on  bugs and vulnerabilities.  REFERENCES  
+[1] E. L. G. Alves, M. Song, T. Massoni, P. D. L. MacHado, and M. 
+Kim, “Refactoring Inspection Support for Manual Refactoring 
+Edits,” IEEE Trans. Softw. Eng. , vol. 44, no. 4, pp. 365 –383, 
+2018, doi: 10.1109/TSE.2017.2679742.  
+[2] M. Fowler and K. Beck, Refactoring Improving the Design of 
+Existing Code Second Edition , Second Edi. New York: Pearson 
+Education Limited, 2019.  
+[3] S. Rochimah, S. Arifiani, and V. F. Insanittaqwa, “Non -source 
+code refactoring: A systematic literature review,” Int. J. Softw. 
+Eng. its Appl. , vol. 9, no. 6, pp. 197 –214, 2015, doi: 
+10.14257/ijseia.2015.9.6.19.  
+[4] H. Mumtaz, M. Alshayeb, S. Mahmood, and M. Niazi, “An 
+empirical study to improve software security through the 
+application of code refactoring,” Inf. Softw. Technol. , vol. 96, pp. 
+112–125, 2018, doi: 10.1016/j.infsof.2017.11.010.  
+[5] S. Ruland, G. Kulcsár, E. Leblebici, S. Peldszus, and M. Lochau, 
+Controlling the Attack Surface of Object -Oriented Refactorings 
+Controlling the Attack Surface of Object -Oriented Refactorings , 
+no. January. Springer International Publishing, 2018.  
+[6] B. Alshammari, C. Fidge, and D. Corney, “Assessing the impact 
+of refactoring on security -critical object -oriented designs,” Proc. 
+- Asia-Pacific Softw. Eng. Conf. APSEC , pp. 186 –195, 2010, doi: 
+10.1109/APSEC.2010.30.  
+[7] S. H. Kannangara and W. M. J. I. Wijayanayake, “An emprical 
+ecvaluation of impact of refactoring on internal and extenal 
+measures of code quality,” vol. 6, no. 1, pp. 51 –67, 2015.  
+[8] A. Jonsson, “The Impact of Refactoring Legacy Systems on Code 
+Quality Metrics,” 2017, [Online]. Available: 
+http://urn.kb.se/resolve?urn=urn:nbn:se:uu:diva -
+325433%0Ahttp://www.diva -
+portal.se/smash/get/diva2:1114582/FULLTEXT01.pdf.  
+[9] C. Abid, M. Kessentini, V. Alizadeh, M. Dhaouadi, and R. 
+Kazman, “How Does Refactoring Impact Security When 
+Improving Quality? A Security -Aware Refactoring Approach,” 
+IEEE Trans. Softw. Eng. , vol. 48, no. 3, pp. 864 –878, 2018, doi: 
+10.1109/TSE.2020.3005995.  
+[10] S. F. Smith and M. Thober, “Refactoring programs to secure 
+information flows,” PLAS 2006 - Proc. 2006 Program. Lang. 
+Anal. Secur. Work. , vol. 2006, pp. 75 –84, 2006, doi: 
+10.1145/1134744.1134758.  
+[11] G. Soares, B. Catão, C. Varjão, S. Aguiar, R. Gheyi, and T. 
+Massoni, “Analyzing refactorings on software repositories,” 
+Proc. - 25th Brazilian Symp. Softw. Eng. SBES 2011 , no. 
+September, pp. 164 –173, 2011, doi: 10.1109/SBES.2011.21.  
+[12] A. S. Nyamawe, H. Liu, N. Niu, Q. Umer, and Z. Niu, “Automated 
+recommendation of software refactorings based on feature 
+requests,” Proc. IEEE Int. Conf. Requir. Eng. , vol. 2019 -Septe, 
+pp. 187 –198, 2019, doi: 10.1109/RE.2019.00029.  
+[13] E. A. Alomar, M. W. Mkaouer, A. Ouni, and M. Kessentini, “On 
+the Impact of Refactoring on the Relationship between Quality 
+Attributes and Design Metrics,” Int. Symp. Empir. Softw. Eng. 
+Meas. , vol. 2019 -Septe, pp. 1 –11, 2019, doi: 
+10.1109/ESEM.2019.8870177.  
+[14] A. Almogahed, M. Omar, N. H. Zakaria, G. Muhammad, and S. 
+A. AlQahtani, “Revisiting Scenarios of Using Refactoring 
+Techniques to Improve Software Systems Quality,” IEEE Access , 
+vol. PP, p. 1, 2022, doi: 10.1109/ACCESS.2022.3218007.  
+[15] A. S. Nyamawe, “Requirements?Driven Recommendation of 
+Software Refactoring,” Beijing Institute ofTechnology, 2020.  
+[16] C. Abid, D. E. Rzig, T. Ferreira, M. Kessentini, and T. Sharma, 
+“Explainable Search -Based Refactoring,” vol. 14, no. 8, pp. 1 –18, 
+2020, [Online]. Available: https://pandas.pydata.org/pandas -
+docs/stable/reference/index.html.  
+[17] M. Siavvas, E. Gelenbe, and D. Kehagias, Static Analysis -Based 
+Approaches , vol. 2. Springer International Publishing, 2018.  
+[18] W. F. Opdyke, “Refactoring: A program restructuring aid in 
+designing object -oriented application frameworks,” Univ. Illinois 
+Urbana -Champaign , p. 206, 1992.  
+[19] A. Kaur and M. Kaur, “Analysis of Code Refactoring Impact on 
+Software Quality,” MATEC Web Conf. , vol. 57, 2016, doi: 
+10.1051/matecconf/20165702012.  E. Edward et al.: On the Impact of Refactorings on Software Attack Surface                                                                                           
+[20] S. Thompson and H. Li, “Refactoring tools for functional 
+languages,” J. Funct. Program. , vol. 23, no. 3, pp. 293 –350, 2013, 
+doi: 10.1017/S0956796813000117.  
+[21] E. Murphy -hill and A. P. Black, “Refactoring Tools: Fitness for 
+Purpose,” vol. 5, no. 25, pp. 38 –44, 2008.  
+[22] E. Murphy -Hill, C. Parnin, and A. P. Black, “How we refactor, 
+and how we know it,” IEEE Trans. Softw. Eng. , vol. 38, no. 1, pp. 
+5–18, 2012, doi: 10.1109/TSE.2011.41.  
+[23] H. Atwi, “PyRef: A Refactoring Detection Tool For Python 
+Projects,” no. June, 2021.  
+[24] I. H. Moghadam, M. O. Cinneide, F. Zarepour, and M. A. 
+Jahanmir, “RefDetect: A Multi -Language Refactoring Detection 
+Tool Based on String Alignment,” IEEE Access , vol. 9, pp. 
+86698 –86727, 2021, doi: 10.1109/ACCESS.2021.3086689.  
+[25] L. Tan and C. Bockisch, “A Survey of Refactoring Detection 
+Tools,” CEUR Workshop Proc. , vol. 2308, pp. 100 –105, 2019.  
+[26] N. Tsantalis, M. Mansouri, L. M. Eshkevari, D. Mazinanian, and 
+D. Dig, “Accurate and Efficient Refactoring Detection in Commit 
+History,” Proc. - Int. Conf. Softw. Eng. , vol. 2018 -Janua, pp. 483 –
+494, 2018, doi: 10.1145/3180155.3180206.  
+[27] Open Web Application Security Project, “Attack Surface 
+Analysis Cheat Sheet,” 2013. 
+https://web.archive.org/web/20161223133056/https://www.owas
+p.org/index.php?title=Attack_Surface_Analysis_Cheat_Sheet&o
+ldid=156006 (accessed Jan. 27, 2023).  
+[28] A. Ikegami et al. , On the Use of Refactoring in Security 
+Vulnerability Fixes: An Exploratory Study on Maven Libraries , 
+vol. 1, no. 1. Association for Computing Machinery, 2022.  
+[29] HackerOne, “The Attack Surface and How to Analyze , Manage , 
+and Reduce It What is an Attack Surface ? Attack Vectors and 
+Their Relation to Attack Surfaces What is Attack Surface 
+Analysis and Monitoring ?,” 2023. 
+https://www.hackerone.com/knowledge -center/attack -surface -
+and-how-analyze -manage -and-reduce -it (accessed Mar. 23, 
+2023).  
+[30] A. Kurmus, A. Sorniotti, and R. Kapitza, “Attack surface 
+reduction for commodity OS kernels,” pp. 1 –6, 2011, doi: 
+10.1145/1972551.1972557.  
+[31] C. Theisen, K. Herzig, P. Morrison, B. Murphy, and L. Williams, 
+“Approximating Attack Surfaces with Stack Traces,” Proc. - Int. 
+Conf. Softw. Eng. , vol. 2, pp. 199 –208, 2015, doi: 
+10.1109/ICSE.2015.148.  
+[32] J. Szefer, E. Keller, R. B. Lee, and J. Rexford, “Eliminating the 
+Hypervisor Attack Surface.pdf,” 2011.  
+[33] S. Alraddadi, “Detecting Security Bad Smells of Software by 
+using Data Mining,” pp. 0 –27, 2023.  
+[34] A. S. Balaaji, J. Gowtham, B. Amirtharaj, and B. A. B, 
+“IDENTIFING SOFTWARE BUGS OR NOT USING SMLT 
+MODEL,” no. 06, pp. 868 –878, 2022.  
+[35] G. Rodríguez -Pérez, G. Robles, A. Serebrenik, A. Zaidman, D. 
+M. Germán, and J. M. Gonzalez -Barahona, “How bugs are born: 
+a model to identify how bugs are introduced in software 
+components,” Empir. Softw. Eng. , vol. 25, no. 2, pp. 1294 –1340, 
+2020, doi: 10.1007/s10664 -019-09781 -y. 
+[36] S. Shafiq, W. Assuncao, A. Mashkoor, C. Mayr -Dorn, and A. 
+Egyed, “Towards Recommending Refactoring Operations Based 
+on Bugs,” vol. 15, no. 2, pp. 14 –21, 2020.  
+[37] A. Almogahed, M. Omar, and N. H. Zakaria, “Refactoring Codes 
+to Improve Software Security Requirements,” Procedia Comput. 
+Sci., vol. 204, no. September, pp. 108 –115, 2022, doi: 
+10.1016/j.procs.2022.08.013.  
+[38] D. A. Da Costa, S. McIntosh, W. Shang, U. Kulesza, R. Coelho, 
+and A. E. Hassan, “A Framework for Evaluating the Results of 
+the SZZ Approach for Identifying Bug -Introducing Changes,” 
+IEEE Trans. Softw. Eng. , vol. 43, no. 7, pp. 641 –657, 2017, doi: 
+10.1109/TSE.2016.2616306.  
+[39] D. Gigante, F. Pecorelli, V. S. Barletta, A. Janes, and V. 
+Lenarduzzi, “Resolving Security Issues via Quality -Oriented 
+Refactoring : A User Study,” no. February, 2023.  
+[40] I. Ferreira et al. , “Poster: The buggy side of code refactoring: 
+Understanding the relationship between refactorings and bugs,” 
+Proc. - Int. Conf. Softw. Eng. , no. June, pp. 406 –407, 2018, doi: 10.1145/3183440.3195030.  
+[41] O. Hamdi, A. Ouni, E. A. Alomar, M. O Cinneide, and M. W. 
+Mkaouer, “A longitudinal study of the impact of refactoring in 
+android applications,” Proc. - 2021 IEEE/ACM 8th Int. Conf. 
+Mob. Softw. Eng. Syst. MobileSoft 2021 , vol. 140, no. June, pp. 
+28–39, 2021, doi: 10.1109/MobileSoft52590.2021.00010.  
+[42] W. J. Brown, R. C. Malveau, T. J. Mowbray, and J. Wiley, 
+AntiPatterns: Refactoring Software , Architectures, and Projects 
+in Crisis , vol. 3, no. 4. New York: John Wiley & Sons, Inc, 1998.  
+[43] F. Palomba, G. Bavota, M. Di Penta, F. Fasano, R. Oliveto, and 
+A. De Lucia, “On the diffuseness and the impact on 
+maintainability of code smells: a large scale empirical 
+investigation,” Empir. Softw. Eng. , vol. 23, no. 3, pp. 1188 –1221, 
+2018, doi: 10.1007/s10664 -017-9535 -z. 
+[44] A. C. Bibiano et al. , “Look Ahead! Revealing Complete 
+Composite Refactorings and their Smelliness Effects,” Proc. - 
+2021 IEEE Int. Conf. Softw. Maint. Evol. ICSME 2021 , no. June, 
+pp. 298 –308, 2021, doi: 10.1109/ICSME52107.2021.00033.  
+[45] D. Cedrim et al. , “Understanding the impact of refactoring on 
+smells: A longitudinal study of 23 software projects,” Proc. ACM 
+SIGSOFT Symp. Found. Softw. Eng. , vol. Part F1301, no. August, 
+pp. 465 –475, 2017, doi: 10.1145/3106237.3106259.  
+[46] N. Yoshida, T. Saika, E. Choi, A. Ouni, and K. Inoue, “Revisiting 
+the relationship between code smells and refactoring,” IEEE Int. 
+Conf. Progr. Compr. , vol. 2016 -July, pp. 1 –4, 2016, doi: 
+10.1109/ICPC.2016.7503738.  
+[47] R. Halepmollas and A. Tosun, “Exploring the Relationship 
+Between Refactoring and Code Debt Indicators,” no. May, 2022, 
+doi: 10.1002/smr.2447.  
+[48] S. Counsell, R. M. Hierons, H. Hamza, S. Black, and M. Durrand, 
+“Exploring the Eradication of Code Smells: An Empirical and 
+Theoretical Perspective,” Adv. Softw. Eng. , vol. 2010, pp. 1 –12, 
+2010, doi: 10.1155/2010/820103.  
+[49] M. Shahzad, M. Z. Shafiq, and A. X. Liu, “A large scale 
+exploratory analysis of software vulnerability life cycles,” Proc. - 
+Int. Conf. Softw. Eng. , pp. 771 –781, 2012, doi: 
+10.1109/ICSE.2012.6227141.  
+[50] A. O. Bang, U. P. Rao, A. Visconti, A. Brighente, and M. Conti, 
+“An IoT Inventory Before Deployment: A Survey on IoT 
+Protocols, Communication Technologies, Vulnerabilities, 
+Attacks, and Future Research Directions,” Comput. Secur. , vol. 
+123, p. 102914, 2022, doi: 10.1016/j.cose.2022.102914.  
+[51] New Relic, “Modernizing with AWS : Getting Started with,” no. 
+White paper, p. 12, 2020, [Online]. Available: 
+https://newrelic.com/sites/default/files/2021 -08/modernizing -
+with-aws-refactoring.pdf.  
+[52] Y. Zhao, R. Liang, X. Chen, and J. Zou, “Evaluation indicators 
+for open -source software: a review,” Cybersecurity , vol. 4, no. 1, 
+2021, doi: 10.1186/s42400 -021-00084 -8. 
+[53] D. Silva and M. T. Valente, “RefDiff: Detecting Refactorings in 
+Version Histories,” IEEE Int. Work. Conf. Min. Softw. Repos. , pp. 
+269–279, 2017, doi: 10.1109/MSR.2017.14.  
+[54] SonarQube, “No Title,” Documentation , 2023. 
+https://pmpl.cs.ui.ac.id/sonarqube/documentation/user -
+guide/security -hotspots/ (accessed Jul. 04, 2023).  
+[55] G. Bavota, B. De Carluccio, A. De Lucia, M. Di Penta, R. Oliveto, 
+and O. Strollo, “When does a refactoring induce bugs? An 
+empirical study,” Proc. - 2012 IEEE 12th Int. Work. Conf. Source 
+Code Anal. Manip. SCAM 2012 , pp. 104 –113, 2012, doi: 
+10.1109/SCAM.2012.20.  
+[56] R. S. Menshawy, A. H. Yousef, and A. Salem, “Code Smells and 
+Detection Techniques: A Survey,” 2021 Int. Mobile, Intelligent, 
+Ubiquitous Comput. Conf. MIUCC 2021 , pp. 78 –83, 2021, doi: 
+10.1109/MIUCC52538.2021.9447669.  
+[57] B. Sotto -Mayor, A. Elmishali, M. Kalech, and R. Abreu, 
+“Exploring Design smells for smell -based defect prediction,” 
+Engineering Applications of Artificial Intelligence , vol. 115. 
+2022, doi: 10.1016/j.engappai.2022.105240.  
+[58] MITRE, “CWE VIEW: Weaknesses in OWASP Top Ten (2021),” 
+Common Weakness Enumeration , 2021. 
+https://cwe.mitre.org/data/definitions/1344.html (accessed Sep. 
+09, 2023).   E. Edward  et al.: On the Impact of Refactorings on Software Attack Surface  
+8 VOLUME XX, 20 24 
+[59] C. Sharma and S. C. Jain, “Analysis and classification of SQL 
+injection vulnerabilities and attacks on web applications,” 2014 
+Int. Conf. Adv. Eng. Technol. Res. ICAETR 2014 , 2014, doi: 
+10.1109/ICAETR.2014.7012815.  
+[60] P. Ladisa, H. Plate, M. Martinez, and O. Barais, “Taxonomy of 
+Attacks on Open -Source Software Supply Chains,” pp. 1 –18, 
+2022, [Online]. Available: http://arxiv.org/abs/2204.04008.  
+[61] I. Macia, R. Arcoverde, A. Garcia, C. Chavez, and A. Von Staa, 
+“On the relevance of code anomalies for identifying architecture 
+degradation symptoms,” Proc. Eur. Conf. Softw. Maint. 
+Reengineering, CSMR , pp. 277 –286, 2012, doi: 
+10.1109/CSMR.2012.35.  
+[62] I. Macia, A. Garcia, C. Chavez, and A. Von Staa, “Enhancing the 
+detection of code anomalies with architecture -sensitive 
+strategies,” Proc. Eur. Conf. Softw. Maint. Reengineering, CSMR , 
+pp. 177 –186, 2013, doi: 10.1109/CSMR.2013.27.  
+[63] C. Vassallo, G. Grano, F. Palomba, H. C. Gall, and A. Bacchelli, 
+“A large -scale empirical exploration on refactoring activities in 
+open source software projects,” Sci. Comput. Program. , vol. 180, 
+no. 1, pp. 1 –15, 2019, doi: 10.1016/j.scico.2019.05.002.  
+[64] E. Iannone, Z. Codabux, V. Lenarduzzi, and F. Palomba, 
+“Rubbing Salt in The Wound ? A Large -Scale Investigation into 
+The Effects of Refactoring on Security into The Effects of 
+Refactoring on Security,” no. January, 2020.  
+[65] K. Z. Sultana, Z. Codabux, and B. Williams, “Examining the 
+relationship of code and architectural smells with software 
+vulnerabilities,” Proc. - Asia-Pacific Softw. Eng. Conf. APSEC , 
+vol. 2020 -Decem, pp. 31 –40, 2020, doi: 
+10.1109/APSEC51365.2020.00011.  
+[66] T. Nafees, N. Coull, I. Ferguson, and A. Sampson, “Vulnerability 
+Anti-Patterns: A Timeless Way to Capture Poor Software 
+Practices (Vulnerabilities),” Proc. 24th Conf. Pattern Lang. 
+Programs , pp. 1 –16, 2017.  
+[67] P. Gadient, M. Ghafari, P. Frischknecht, and O. Nierstrasz, 
+Security code smells in Android ICC , vol. 24, no. 5. Empirical 
+Software Engineering, 2019.  
+[68] B. Alshammari, C. Fidge, and D. Corney, “Security assessment of 
+code refactoring rules,” WIAR 2012 - Natl. Work. Inf. Assur. Res. 
+Proc. , pp. 65 –74, 2012.  
+[69] Z. Kurbatova, I. Veselov, Y. Golubev, and T. Bryksin, 
+“Recommendation of Move Method Refactoring Using Path -
+Based Representation of Code,” Proc. - 2020 IEEE/ACM 42nd 
+Int. Conf. Softw. Eng. Work. ICSEW 2020 , pp. 315 –322, 2020, 
+doi: 10.1145/3387940.3392191.  
+[70] Z. Yin, D. Yuan, Y. Zhou, S. Pasupathy, and L. Bairavasundaram, 
+“How do fixes become bugs?,” pp. 26 –36, 2011, doi: 
+10.1145/2025113.2025121.  
+[71] X. Xuan, X. Zhao, Y. Wang, and S. Li, “An empirical study of 
+bugs in industrial financial systems,” IEICE Trans. Inf. Syst. , vol. 
+E98D, no. 12, pp. 2322 –2327, 2015, doi: 
+10.1587/transinf.2015EDL8084.  
+[72] G. Bavota, A. De Lucia, M. Di Penta, R. Oliveto, and F. Palomba, 
+“An experimental investigation on the innate relationship between 
+quality and refactoring,” J. Syst. Softw. , vol. 107, no. January 
+2018, pp. 1 –14, 2015, doi: 10.1016/j.jss.2015.05.024.  
+[73] R. D. Wangberg, “A Literature Review on Code Smells and 
+Refactoring,” University of Oslo, 2010.  
+[74] A. Shaw, D. Doggett, and M. Hafiz, “Automatically fixing C 
+buffer overflows using program transformations,” Proc. Int. Conf. 
+Dependable Syst. Networks , pp. 124 –135, 2014, doi: 
+10.1109/DSN.2014.25.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  ESTOMII EDWARD  received his Advanced 
+Diploma in Computer Science from the Institute 
+of Finance Management, Tanzania, in 2009. He is 
+currently pursuing a Master’s degree with the 
+College of Informatics and Virtual Education, The 
+University of Dodoma, Tanzania. He is currently 
+working at the Tanzania Commission for 
+Universities, Tanzania , as a Quality Assurance 
+Officer. His research interests include software 
+refactoring, requirements engineering, software evolution, and software 
+quality.  
+ 
+ALLY S. NYAMAWE , is a Senior Lecturer of 
+Computer Science at the University of 
+Dodoma, Tanzania. He obtained a BSc in 
+Computer Science from the University of Dar 
+es Salaam in 2008, an MSc in Computer 
+Science from the University of Dodoma in 
+2011, and a Ph.D degree in Com puter Science 
+and Technology from the Beijing Institute of 
+Technology, China in 2020. Nyamawe has 
+significant research experience in applying  Artificial Intelligence in  
+Software Engineering. His research interests include Software 
+Refacto ring, Machine Learning, and Requirements Engineering . He has 
+served on the program committees for prestigious conferences 
+including the 37th IEEE/ACM International Conference on Automated 
+Software Engineering and the 11th International Workshop on Software 
+and Systems Traceability.  His recent recognition includes a 2022 
+recipient of the Seed Grant for New African Principal Investigators 
+awarded by The World Academy of Sciences under UNESCO funding.  
+ 
+NOE ELISA  currently serves as the acting 
+Director of ICT at the University of Dodoma. He 
+is an experienced cybersecurity, Artificial 
+Intelligence (AI), and data science 
+researcher/engineer, boasting over eleven (11) 
+years of experience in telecommunication, 
+network ing, software, and web applications 
+security. He specializes in the design and 
+implementation of AI models, particularly for 
+detecting anomalies in computer networks. Additionally, he has expertise in 
+using blockchain technology to develop secure and privacy -preserving 
+decentralized systems. His PhD research at Northumbria University, UK, 
+focused on exploiting blockchain technology and Artificial Immune 
+Systems (AIS) to create a decentralized, secure, and privacy -preserving e -
+Government system for enforcing data protection and trust. During his 
+master's degree studies in India in 2014, he received professional training in 
+ethical hacking, Linux server administration, Android mobile application 
+development, CCNA, and web application programming in JA VA. One of 
+his notable contributions to AI and academic research is the development of 
+a new general -purpose multi -class classifier based on the Dendritic Cell 
+Algorithm (McDCA), which is currently under review by the IEEE 
+Transactions on Neural Networks a nd Learning Systems journal. His current 
+research and practical endeavors focus on leveraging African -origin datasets 
+to develop AI -powered solutions that address privacy concerns related to 
+data breaches and unlawful access to personal information.   
+ 
+ 

@@ -1,0 +1,19 @@
+{
+  "servers": {
+    "mendeley": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "E:/GIT/5to 2.0/Investigacion/MCP/mcp-mendeley/mcp-mendeley/mendeley-mcp/dist/index.js"
+      ],
+      "env": {
+        "MENDELEY_CLIENT_ID": "23025",
+        "MENDELEY_CLIENT_SECRET": "ifkWerxrOi9Iqbxg",
+        "MENDELEY_REDIRECT_URI": "http://localhost:3333/callback",
+        "MENDELEY_ACCESS_TOKEN": "MSwxNzc4MTIwMjM1NDMzLDY2OTcyOTcxMSwyMzAyNSxhbGwsLCw1MjdiNjQxZjQ3YWQwMDRkMjE0YTRkYTNiYTBmMjk0OTllZWJneHJxYSxmNWZkNWUyNy01ODYwLTNiYWYtODA2Ni1jMmY3YjVkZmYwOTIsZ3VXc0Vsd0FqbDYxT3JsblNSTE10RFdvTnFF",
+        "MENDELEY_REFRESH_TOKEN": "MSw2Njk3Mjk3MTEsMjMwMjUsYWxsLCwsLGY1ZmQ1ZTI3LTU4NjAtM2JhZi04MDY2LWMyZjdiNWRmZjA5Mixub3QtdXNlZCxub3QtdXNlZCw1MjdiNjQxZjQ3YWQwMDRkMjE0YTRkYTNiYTBmMjk0OTllZWJneHJxYSwxNzc4MDMxNzU2MzAyLEstQzN3aEJ4akVjWENZcmFzMVM4MWUyZFhodw"
+      }
+    }
+  },
+  "inputs": []
+}
