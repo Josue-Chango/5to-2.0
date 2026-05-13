@@ -34,6 +34,7 @@
             this.miRectanguloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miTrianguloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miHexagonoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.miLineasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,7 +56,8 @@
             this.miExampleToolStripMenuItem,
             this.miRectanguloToolStripMenuItem,
             this.miTrianguloToolStripMenuItem,
-            this.miHexagonoToolStripMenuItem});
+            this.miHexagonoToolStripMenuItem,
+            this.miLineasToolStripMenuItem});
             this.miGraphicsToolStripMenuItem.Name = "miGraphicsToolStripMenuItem";
             this.miGraphicsToolStripMenuItem.Size = new System.Drawing.Size(80, 24);
             this.miGraphicsToolStripMenuItem.Text = "Graphics";
@@ -88,6 +90,13 @@
             this.miHexagonoToolStripMenuItem.Text = "Hexagono";
             this.miHexagonoToolStripMenuItem.Click += new System.EventHandler(this.miHexagonoToolStripMenuItem_Click);
             // 
+            // miLineasToolStripMenuItem
+            // 
+            this.miLineasToolStripMenuItem.Name = "miLineasToolStripMenuItem";
+            this.miLineasToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.miLineasToolStripMenuItem.Text = "Lineas";
+            this.miLineasToolStripMenuItem.Click += new System.EventHandler(this.miLineasToolStripMenuItem_Click);
+            // 
             // FrmHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -115,5 +124,6 @@
         private System.Windows.Forms.ToolStripMenuItem miRectanguloToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem miTrianguloToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem miHexagonoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem miLineasToolStripMenuItem;
     }
 }

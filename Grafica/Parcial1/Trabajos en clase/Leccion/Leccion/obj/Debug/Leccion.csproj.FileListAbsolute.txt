@@ -1,0 +1,11 @@
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\Leccion\Leccion\bin\Debug\Leccion.exe.config
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\Leccion\Leccion\bin\Debug\Leccion.exe
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\Leccion\Leccion\bin\Debug\Leccion.pdb
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\Leccion\Leccion\obj\Debug\Leccion.csproj.AssemblyReference.cache
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\Leccion\Leccion\obj\Debug\Leccion.Principal.resources
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\Leccion\Leccion\obj\Debug\Leccion.Properties.Resources.resources
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\Leccion\Leccion\obj\Debug\Leccion.csproj.GenerateResource.cache
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\Leccion\Leccion\obj\Debug\Leccion.csproj.CoreCompileInputs.cache
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\Leccion\Leccion\obj\Debug\Leccion.exe
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\Leccion\Leccion\obj\Debug\Leccion.pdb
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\Leccion\Leccion\obj\Debug\Leccion.Plano.resources

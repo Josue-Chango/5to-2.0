@@ -1,0 +1,6 @@
+Rotacion
+x' = xcos0 - ysin0,    y' = ysin0 + xcos0
+
+escala
+x' = x * Sx 
+y' = y * Sy

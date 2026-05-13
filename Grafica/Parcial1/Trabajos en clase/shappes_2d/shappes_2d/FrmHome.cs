@@ -49,5 +49,12 @@ namespace shappes_2d
             frmHexagono.MdiParent = this;
             frmHexagono.Show();
         }
+
+        private void miLineasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLines frmLineas = new frmLines();
+            frmLineas.MdiParent = this;
+            frmLineas.Show();
+        }
     }
 }

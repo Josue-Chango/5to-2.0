@@ -1,0 +1,103 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\Leccion\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{679089D4-667E-410D-87E1-2CF9722904FA}|Leccion\\Leccion.csproj|c:\\users\\josue\\documents\\github\\5to-2.0\\grafica\\parcial1\\trabajos en clase\\leccion\\leccion\\plano_cartesiano.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{679089D4-667E-410D-87E1-2CF9722904FA}|Leccion\\Leccion.csproj|solutionrelative:leccion\\plano_cartesiano.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{679089D4-667E-410D-87E1-2CF9722904FA}|Leccion\\Leccion.csproj|C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\Leccion\\leccion\\plano.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{679089D4-667E-410D-87E1-2CF9722904FA}|Leccion\\Leccion.csproj|solutionrelative:leccion\\plano.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{679089D4-667E-410D-87E1-2CF9722904FA}|Leccion\\Leccion.csproj|C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\Leccion\\leccion\\plano.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{679089D4-667E-410D-87E1-2CF9722904FA}|Leccion\\Leccion.csproj|solutionrelative:leccion\\plano.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{679089D4-667E-410D-87E1-2CF9722904FA}|Leccion\\Leccion.csproj|C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\Leccion\\leccion\\punto2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{679089D4-667E-410D-87E1-2CF9722904FA}|Leccion\\Leccion.csproj|solutionrelative:leccion\\punto2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{679089D4-667E-410D-87E1-2CF9722904FA}|Leccion\\Leccion.csproj|C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\Leccion\\leccion\\frmprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{679089D4-667E-410D-87E1-2CF9722904FA}|Leccion\\Leccion.csproj|solutionrelative:leccion\\frmprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "FrmPrincipal.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\Leccion\\Leccion\\FrmPrincipal.cs",
+              "RelativeDocumentMoniker": "Leccion\\FrmPrincipal.cs",
+              "ToolTip": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\Leccion\\Leccion\\FrmPrincipal.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Leccion\\FrmPrincipal.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T17:15:11.946Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Plano_Cartesiano.cs",
+              "DocumentMoniker": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\Leccion\\Leccion\\Plano_Cartesiano.cs",
+              "RelativeDocumentMoniker": "Leccion\\Plano_Cartesiano.cs",
+              "ToolTip": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\Leccion\\Leccion\\Plano_Cartesiano.cs*",
+              "RelativeToolTip": "Leccion\\Plano_Cartesiano.cs*",
+              "ViewState": "AgIAACMAAAAAAAAAAAAAACgAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T16:32:58.783Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Plano.cs",
+              "DocumentMoniker": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\Leccion\\Leccion\\Plano.cs",
+              "RelativeDocumentMoniker": "Leccion\\Plano.cs",
+              "ToolTip": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\Leccion\\Leccion\\Plano.cs",
+              "RelativeToolTip": "Leccion\\Plano.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAYwC0AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T16:27:19.189Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Plano.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\Leccion\\Leccion\\Plano.cs",
+              "RelativeDocumentMoniker": "Leccion\\Plano.cs",
+              "ToolTip": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\Leccion\\Leccion\\Plano.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Leccion\\Plano.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T16:27:16.767Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Punto2D.cs",
+              "DocumentMoniker": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\Leccion\\Leccion\\Punto2D.cs",
+              "RelativeDocumentMoniker": "Leccion\\Punto2D.cs",
+              "ToolTip": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\Leccion\\Leccion\\Punto2D.cs",
+              "RelativeToolTip": "Leccion\\Punto2D.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-07T16:22:59.387Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
