@@ -1,0 +1,12 @@
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\ExamenChangoJosue\ExamenChangoJosue\obj\Debug\ExamenChangoJosue.csproj.AssemblyReference.cache
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\ExamenChangoJosue\ExamenChangoJosue\obj\Debug\ExamenChangoJosue.FrmPrincipal.resources
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\ExamenChangoJosue\ExamenChangoJosue\obj\Debug\ExamenChangoJosue.FrmSegundaFigura.resources
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\ExamenChangoJosue\ExamenChangoJosue\obj\Debug\ExamenChangoJosue.Properties.Resources.resources
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\ExamenChangoJosue\ExamenChangoJosue\obj\Debug\ExamenChangoJosue.csproj.GenerateResource.cache
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\ExamenChangoJosue\ExamenChangoJosue\obj\Debug\ExamenChangoJosue.csproj.CoreCompileInputs.cache
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\ExamenChangoJosue\ExamenChangoJosue\bin\Debug\ExamenChangoJosue.exe.config
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\ExamenChangoJosue\ExamenChangoJosue\bin\Debug\ExamenChangoJosue.exe
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\ExamenChangoJosue\ExamenChangoJosue\bin\Debug\ExamenChangoJosue.pdb
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\ExamenChangoJosue\ExamenChangoJosue\obj\Debug\ExamenChangoJosue.exe
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\ExamenChangoJosue\ExamenChangoJosue\obj\Debug\ExamenChangoJosue.pdb
+C:\Users\Josue\Documents\GitHub\5to-2.0\Grafica\Parcial1\Trabajos en clase\ExamenChangoJosue\ExamenChangoJosue\obj\Debug\ExamenChangoJosue.FrmPrimeraFigura.resources

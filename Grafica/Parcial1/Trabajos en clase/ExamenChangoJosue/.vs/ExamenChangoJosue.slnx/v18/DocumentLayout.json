@@ -1,0 +1,162 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{774B41FF-9CAB-462C-AD58-DAADFEFDEB92}|ExamenChangoJosue\\ExamenChangoJosue.csproj|c:\\users\\josue\\documents\\github\\5to-2.0\\grafica\\parcial1\\trabajos en clase\\examenchangojosue\\examenchangojosue\\decagono.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{774B41FF-9CAB-462C-AD58-DAADFEFDEB92}|ExamenChangoJosue\\ExamenChangoJosue.csproj|solutionrelative:examenchangojosue\\decagono.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{774B41FF-9CAB-462C-AD58-DAADFEFDEB92}|ExamenChangoJosue\\ExamenChangoJosue.csproj|C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\examenchangojosue\\frmsegundafigura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{774B41FF-9CAB-462C-AD58-DAADFEFDEB92}|ExamenChangoJosue\\ExamenChangoJosue.csproj|solutionrelative:examenchangojosue\\frmsegundafigura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{774B41FF-9CAB-462C-AD58-DAADFEFDEB92}|ExamenChangoJosue\\ExamenChangoJosue.csproj|C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\examenchangojosue\\flormargarita.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{774B41FF-9CAB-462C-AD58-DAADFEFDEB92}|ExamenChangoJosue\\ExamenChangoJosue.csproj|solutionrelative:examenchangojosue\\flormargarita.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{774B41FF-9CAB-462C-AD58-DAADFEFDEB92}|ExamenChangoJosue\\ExamenChangoJosue.csproj|C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\examenchangojosue\\frmprimerafigura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{774B41FF-9CAB-462C-AD58-DAADFEFDEB92}|ExamenChangoJosue\\ExamenChangoJosue.csproj|solutionrelative:examenchangojosue\\frmprimerafigura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{774B41FF-9CAB-462C-AD58-DAADFEFDEB92}|ExamenChangoJosue\\ExamenChangoJosue.csproj|C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\examenchangojosue\\frmsegundafigura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{774B41FF-9CAB-462C-AD58-DAADFEFDEB92}|ExamenChangoJosue\\ExamenChangoJosue.csproj|solutionrelative:examenchangojosue\\frmsegundafigura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{774B41FF-9CAB-462C-AD58-DAADFEFDEB92}|ExamenChangoJosue\\ExamenChangoJosue.csproj|C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\examenchangojosue\\frmprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{774B41FF-9CAB-462C-AD58-DAADFEFDEB92}|ExamenChangoJosue\\ExamenChangoJosue.csproj|solutionrelative:examenchangojosue\\frmprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{774B41FF-9CAB-462C-AD58-DAADFEFDEB92}|ExamenChangoJosue\\ExamenChangoJosue.csproj|C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\examenchangojosue\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{774B41FF-9CAB-462C-AD58-DAADFEFDEB92}|ExamenChangoJosue\\ExamenChangoJosue.csproj|solutionrelative:examenchangojosue\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{774B41FF-9CAB-462C-AD58-DAADFEFDEB92}|ExamenChangoJosue\\ExamenChangoJosue.csproj|C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\examenchangojosue\\frmprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{774B41FF-9CAB-462C-AD58-DAADFEFDEB92}|ExamenChangoJosue\\ExamenChangoJosue.csproj|solutionrelative:examenchangojosue\\frmprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{774B41FF-9CAB-462C-AD58-DAADFEFDEB92}|ExamenChangoJosue\\ExamenChangoJosue.csproj|C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\examenchangojosue\\frmprimerafigura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{774B41FF-9CAB-462C-AD58-DAADFEFDEB92}|ExamenChangoJosue\\ExamenChangoJosue.csproj|solutionrelative:examenchangojosue\\frmprimerafigura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FrmPrimeraFigura.cs",
+              "DocumentMoniker": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\ExamenChangoJosue\\FrmPrimeraFigura.cs",
+              "RelativeDocumentMoniker": "ExamenChangoJosue\\FrmPrimeraFigura.cs",
+              "ToolTip": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\ExamenChangoJosue\\FrmPrimeraFigura.cs",
+              "RelativeToolTip": "ExamenChangoJosue\\FrmPrimeraFigura.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAwCAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T16:38:20.547Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FlorMargarita.cs",
+              "DocumentMoniker": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\ExamenChangoJosue\\FlorMargarita.cs",
+              "RelativeDocumentMoniker": "ExamenChangoJosue\\FlorMargarita.cs",
+              "ToolTip": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\ExamenChangoJosue\\FlorMargarita.cs",
+              "RelativeToolTip": "ExamenChangoJosue\\FlorMargarita.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEYAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T16:36:49.594Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "FrmPrimeraFigura.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\ExamenChangoJosue\\FrmPrimeraFigura.cs",
+              "RelativeDocumentMoniker": "ExamenChangoJosue\\FrmPrimeraFigura.cs",
+              "ToolTip": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\ExamenChangoJosue\\FrmPrimeraFigura.cs [Dise\u00F1o]",
+              "RelativeToolTip": "ExamenChangoJosue\\FrmPrimeraFigura.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T16:36:15.601Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FrmPrincipal.cs",
+              "DocumentMoniker": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\ExamenChangoJosue\\FrmPrincipal.cs",
+              "RelativeDocumentMoniker": "ExamenChangoJosue\\FrmPrincipal.cs",
+              "ToolTip": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\ExamenChangoJosue\\FrmPrincipal.cs",
+              "RelativeToolTip": "ExamenChangoJosue\\FrmPrincipal.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAtwB8AAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T16:31:56.626Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\ExamenChangoJosue\\Program.cs",
+              "RelativeDocumentMoniker": "ExamenChangoJosue\\Program.cs",
+              "ToolTip": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\ExamenChangoJosue\\Program.cs",
+              "RelativeToolTip": "ExamenChangoJosue\\Program.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAtwBIAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T16:31:44.885Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "FrmSegundaFigura.cs",
+              "DocumentMoniker": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\ExamenChangoJosue\\FrmSegundaFigura.cs",
+              "RelativeDocumentMoniker": "ExamenChangoJosue\\FrmSegundaFigura.cs",
+              "ToolTip": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\ExamenChangoJosue\\FrmSegundaFigura.cs",
+              "RelativeToolTip": "ExamenChangoJosue\\FrmSegundaFigura.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAA0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T16:25:59.749Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FrmSegundaFigura.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\ExamenChangoJosue\\FrmSegundaFigura.cs",
+              "RelativeDocumentMoniker": "ExamenChangoJosue\\FrmSegundaFigura.cs",
+              "ToolTip": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\ExamenChangoJosue\\FrmSegundaFigura.cs [Dise\u00F1o]",
+              "RelativeToolTip": "ExamenChangoJosue\\FrmSegundaFigura.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T16:24:41.648Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Decagono.cs",
+              "DocumentMoniker": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\ExamenChangoJosue\\Decagono.cs",
+              "RelativeDocumentMoniker": "ExamenChangoJosue\\Decagono.cs",
+              "ToolTip": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\ExamenChangoJosue\\Decagono.cs",
+              "RelativeToolTip": "ExamenChangoJosue\\Decagono.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD8AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T16:14:54.716Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "FrmPrincipal.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\ExamenChangoJosue\\FrmPrincipal.cs",
+              "RelativeDocumentMoniker": "ExamenChangoJosue\\FrmPrincipal.cs",
+              "ToolTip": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\ExamenChangoJosue\\ExamenChangoJosue\\FrmPrincipal.cs [Dise\u00F1o]",
+              "RelativeToolTip": "ExamenChangoJosue\\FrmPrincipal.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T16:10:42.776Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
