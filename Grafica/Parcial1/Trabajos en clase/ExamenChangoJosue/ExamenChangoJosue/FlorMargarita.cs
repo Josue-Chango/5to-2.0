@@ -17,15 +17,7 @@ namespace ExamenChangoJosue
             this.petalos = petalos;
         }
 
-        public void GraficarPentagono(
-            Graphics g,
-            int x,
-            int y,
-            float radio,
-            int aux,
-            Color color,
-            bool rotado,
-            int nivel)
+        public void GraficarPentagono(Graphics g, int x,int y, float radio, int aux, Color color, bool rotado, int nivel)
         {
             if (nivel <= 0 || radio < 5)
                 return;
