@@ -1,0 +1,50 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace OperacionDDA
+{
+    public partial class FrmPrincipal : Form
+    {
+        
+        int x1 = 20;
+        int x2 = 70;
+        int y1 = 30;
+        int y2 = 120;
+        string puntos = string.Empty;
+        public FrmPrincipal()
+        {
+            InitializeComponent();
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            x1= int.Parse(txtX1.Text);
+            y1 = int.Parse(txtY1.Text);
+            x2 = int.Parse(txtX2.Text);
+            y2 = int.Parse(txtY2.Text);
+            int cx = pictureBox1.Width / 2;
+            int cy = pictureBox1.Height / 2;
+            OperacionDDA operacionDDA = new OperacionDDA();
+            operacionDDA.DDA(e.Graphics, x1 + cx, y1 + cy, x2 + cx, y2 + cy);
+        }
+
+        private void lstPuntos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            OperacionDDA operacionDDA = new OperacionDDA();
+            
+            
+        }
+
+        private void lblPuntos_Click(object sender, EventArgs e)
+        {
+            lblPuntos.Text = puntos;
+        }
+    }
+}

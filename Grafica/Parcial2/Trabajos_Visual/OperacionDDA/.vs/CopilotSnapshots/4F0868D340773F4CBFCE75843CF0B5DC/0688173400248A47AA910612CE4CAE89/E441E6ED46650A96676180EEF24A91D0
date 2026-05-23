@@ -1,0 +1,49 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Drawing;
+
+namespace OperacionDDA
+{
+    internal class OperacionDDA
+    {
+
+        public OperacionDDA() { }
+        int x1, y1, x2, y2;
+        public string[] puntos= new string[1];
+
+
+        public int calcularX(int x1, int x2)
+        {
+            return x2 - x1;
+        }
+        public int calcularY(int y1, int y2)
+        {
+            return y2 - y1;
+        }
+
+        public void DDA(Graphics g, int x1, int y1, int x2, int y2)
+        {
+            puntos = "";
+            int dx = calcularX(x1, x2);
+            int dy = calcularY(y1, y2);
+            int pasos = Math.Max(Math.Abs(dx), Math.Abs(dy));
+            float xIncrement = (float)dx / pasos;
+            float yIncrement = (float)dy / pasos;
+            float x = x1;
+            float y = y1;
+            for (int i = 0; i <= pasos; i++)
+            {
+                puntos += $"({(int)Math.Round(x)}, {(int)Math.Round(y)});\n";
+                g.FillRectangle(Brushes.Black, (int)Math.Round(x), (int)Math.Round(y), 1, 1);
+                x += xIncrement;
+                y += yIncrement;
+                
+            }
+        }
+
+        
+    }
+}

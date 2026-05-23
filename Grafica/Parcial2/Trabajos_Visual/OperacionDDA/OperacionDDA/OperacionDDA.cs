@@ -1,9 +1,11 @@
-﻿using System;
+﻿using shappes_2d;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
+using System.Windows.Forms;
 
 namespace OperacionDDA
 {
@@ -12,7 +14,12 @@ namespace OperacionDDA
 
         public OperacionDDA() { }
         int x1, y1, x2, y2;
-        //public string puntos= "";
+        public System.Collections.Generic.List<string> puntosLista = new System.Collections.Generic.List<string>();
+
+        public void ClearPuntosLista()
+        {
+            puntosLista.Clear();
+        }
 
 
         public int calcularX(int x1, int x2)
@@ -24,26 +31,50 @@ namespace OperacionDDA
             return y2 - y1;
         }
 
-        public void DDA(Graphics g, int x1, int y1, int x2, int y2, string puntos)
+        public void DDA(Graphics g, int x1, int y1, int x2, int y2, Color color)
         {
-            puntos = "";
+            ClearPuntosLista();
             int dx = calcularX(x1, x2);
             int dy = calcularY(y1, y2);
             int pasos = Math.Max(Math.Abs(dx), Math.Abs(dy));
-            float xIncrement = (float)dx / pasos;
-            float yIncrement = (float)dy / pasos;
-            float x = x1;
-            float y = y1;
-            for (int i = 0; i <= pasos; i++)
+            using (Brush brush = new SolidBrush(color))
             {
-                puntos += $"({(int)Math.Round(x)}, {(int)Math.Round(y)});\n";
-                g.FillRectangle(Brushes.Black, (int)Math.Round(x), (int)Math.Round(y), 1, 1);
-                x += xIncrement;
-                y += yIncrement;
-                
+                if (pasos == 0)
+                {
+                    puntosLista.Add($"({x1}, {y1})");
+                    g.FillRectangle(brush, x1, y1, 1, 1);
+                    return;
+                }
+
+                float xIncrement = (float)dx / pasos;
+                float yIncrement = (float)dy / pasos;
+                float x = x1;
+                float y = y1;
+                for (int i = 0; i <= pasos; i++)
+                {
+                    int xr = (int)Math.Round(x);
+                    int yr = (int)Math.Round(y);
+                    puntosLista.Add($"({xr}, {yr})");
+                    g.FillRectangle(brush, xr, yr, 1, 1);
+                    x += xIncrement;
+                    y += yIncrement;
+                }
             }
         }
 
-        
+        public int Validar(string coordenada)
+        {
+            if (Validador.Validar<int>(coordenada))
+            {
+                return int.Parse(coordenada);
+            }
+            else
+            {
+                MessageBox.Show("Ingresa un número válido para la coordenada.");
+            }
+            return 0;
+        }
+
+
     }
 }

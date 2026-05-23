@@ -17,7 +17,9 @@ namespace OperacionDDA
         int x2 = 70;
         int y1 = 30;
         int y2 = 120;
-        string puntos = string.Empty;
+        private Color lineaColor = Color.Black;
+        OperacionDDA operacionDDA = new OperacionDDA();
+        bool dibujar = false;
         public FrmPrincipal()
         {
             InitializeComponent();
@@ -25,26 +27,42 @@ namespace OperacionDDA
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            x1= int.Parse(txtX1.Text);
-            y1 = int.Parse(txtY1.Text);
-            x2 = int.Parse(txtX2.Text);
-            y2 = int.Parse(txtY2.Text);
             int cx = pictureBox1.Width / 2;
             int cy = pictureBox1.Height / 2;
-            OperacionDDA operacionDDA = new OperacionDDA();
-            operacionDDA.DDA(e.Graphics, x1 + cx, y1 + cy, x2 + cx, y2 + cy, puntos);
+            if (dibujar)
+            {
+                operacionDDA.DDA(e.Graphics, x1, y1, x2, y2, lineaColor);
+
+                lstPuntos.Items.Clear();
+                foreach (var linea in operacionDDA.puntosLista)
+                {
+                    lstPuntos.Items.Add(linea);
+                }
+            }
+
         }
 
         private void lstPuntos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            OperacionDDA operacionDDA = new OperacionDDA();
             
             
         }
 
         private void lblPuntos_Click(object sender, EventArgs e)
         {
-            lblPuntos.Text = puntos;
+        }
+
+        private void btnDibujar_Click(object sender, EventArgs e)
+        {
+            lstPuntos.Items.Clear();
+            x1 = operacionDDA.Validar(txtX1.Text);
+            y1 = operacionDDA.Validar(txtY1.Text);
+            x2 = operacionDDA.Validar(txtX2.Text);
+            y2 = operacionDDA.Validar(txtY2.Text);
+            
+            dibujar = true;
+            pictureBox1.Invalidate();
+            
         }
     }
 }

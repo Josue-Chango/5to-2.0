@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|c:\\users\\josue\\documents\\github\\5to-2.0\\grafica\\parcial1\\trabajos en clase\\shappes_2d\\shappes_2d\\frmlines.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|solutionrelative:shappes_2d\\frmlines.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|c:\\users\\josue\\documents\\github\\5to-2.0\\grafica\\parcial1\\trabajos en clase\\shappes_2d\\shappes_2d\\cline.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|solutionrelative:shappes_2d\\cline.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|c:\\users\\josue\\documents\\github\\5to-2.0\\grafica\\parcial1\\trabajos en clase\\shappes_2d\\shappes_2d\\frmlines.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|solutionrelative:shappes_2d\\frmlines.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8C49EBB7-3764-45FD-B408-4B97FD51367E}|shappes_2d\\shappes_2d.csproj|c:\\users\\josue\\documents\\github\\5to-2.0\\grafica\\parcial1\\trabajos en clase\\shappes_2d\\shappes_2d\\frmlines.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -50,30 +50,30 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "CLine.cs",
               "DocumentMoniker": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\CLine.cs",
               "RelativeDocumentMoniker": "shappes_2d\\CLine.cs",
-              "ToolTip": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\CLine.cs*",
-              "RelativeToolTip": "shappes_2d\\CLine.cs*",
-              "ViewState": "AgIAAAYAAAAAAAAAAADwvx4AAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\CLine.cs",
+              "RelativeToolTip": "shappes_2d\\CLine.cs",
+              "ViewState": "AgIAADoAAAAAAAAAAAAkwDoAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-28T14:40:20.812Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "frmLines.cs",
               "DocumentMoniker": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\frmLines.cs",
               "RelativeDocumentMoniker": "shappes_2d\\frmLines.cs",
               "ToolTip": "C:\\Users\\Josue\\Documents\\GitHub\\5to-2.0\\Grafica\\Parcial1\\Trabajos en clase\\shappes_2d\\shappes_2d\\frmLines.cs",
               "RelativeToolTip": "shappes_2d\\frmLines.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAADwvy8AAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAIAywCcAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-28T14:34:56.829Z",
               "EditorCaption": ""

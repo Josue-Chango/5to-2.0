@@ -1,0 +1,83 @@
+﻿using shappes_2d;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace OperacionDDA
+{
+    internal class OperacionDDA
+    {
+
+        public OperacionDDA() { }
+        int x1, y1, x2, y2;
+        public System.Collections.Generic.List<string> puntosLista = new System.Collections.Generic.List<string>();
+
+        public void ClearPuntosLista()
+        {
+            puntosLista.Clear();
+        }
+
+
+        public int calcularX(int x1, int x2)
+        {
+            return x2 - x1;
+        }
+        public int calcularY(int y1, int y2)
+        {
+            return y2 - y1;
+        }
+
+        public void DDA(Graphics g, int x1, int y1, int x2, int y2, Color color)
+        {
+
+            ClearPuntosLista();
+
+            int dx = calcularX(x1, x2);
+            int dy = calcularY(y1, y2);
+            int pasos = Math.Max(Math.Abs(dx), Math.Abs(dy));
+
+            using (Brush brush = new SolidBrush(color))
+            {
+                if (pasos == 0)
+                {
+                    puntosLista.Add($"({x1}, {y1})");
+                    g.FillRectangle(brush, x1, y1, 1, 1);
+                    return;
+                }
+
+                float xIncrement = (float)dx / pasos;
+                float yIncrement = (float)dy / pasos;
+                float x = x1;
+                float y = y1;
+                for (int i = 0; i <= pasos; i++)
+                {
+                    int rx = (int)Math.Round(x);
+                    int ry = (int)Math.Round(y);
+                    puntosLista.Add($"({rx}, {ry})");
+                    g.FillRectangle(brush, rx, ry, 1, 1);
+                    x += xIncrement;
+                    y += yIncrement;
+                }
+            }
+        }
+
+        public int Validar(string coordenada)
+        {
+            if (Validador.Validar<int>(coordenada))
+            {
+                return int.Parse(coordenada);
+            }
+            else
+            {
+                MessageBox.Show("Ingresa un número válido para el tamaño.");
+            }
+            return 0;
+        }
+
+
+    }
+}

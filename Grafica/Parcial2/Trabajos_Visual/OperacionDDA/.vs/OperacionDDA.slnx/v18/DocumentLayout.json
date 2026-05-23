@@ -11,12 +11,8 @@
       "RelativeMoniker": "D:0:0:{33DF345A-C107-42B7-9251-C34DC56969AF}|OperacionDDA\\OperacionDDA.csproj|solutionrelative:operaciondda\\frmprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33DF345A-C107-42B7-9251-C34DC56969AF}|OperacionDDA\\OperacionDDA.csproj|c:\\users\\josue\\onedrive\\documentos\\github\\5to-2.0\\grafica\\parcial2\\trabajos_visual\\operaciondda\\operaciondda\\operaciondda.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{33DF345A-C107-42B7-9251-C34DC56969AF}|OperacionDDA\\OperacionDDA.csproj|C:\\Users\\Josue\\OneDrive\\Documentos\\GitHub\\5to-2.0\\Grafica\\Parcial2\\Trabajos_Visual\\OperacionDDA\\operaciondda\\operaciondda.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{33DF345A-C107-42B7-9251-C34DC56969AF}|OperacionDDA\\OperacionDDA.csproj|solutionrelative:operaciondda\\operaciondda.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{33DF345A-C107-42B7-9251-C34DC56969AF}|OperacionDDA\\OperacionDDA.csproj|c:\\users\\josue\\onedrive\\documentos\\github\\5to-2.0\\grafica\\parcial2\\trabajos_visual\\operaciondda\\operaciondda\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{33DF345A-C107-42B7-9251-C34DC56969AF}|OperacionDDA\\OperacionDDA.csproj|solutionrelative:operaciondda\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,21 +22,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Josue\\OneDrive\\Documentos\\GitHub\\5to-2.0\\Grafica\\Parcial2\\Trabajos_Visual\\OperacionDDA\\OperacionDDA\\Program.cs",
-              "RelativeDocumentMoniker": "OperacionDDA\\Program.cs",
-              "ToolTip": "C:\\Users\\Josue\\OneDrive\\Documentos\\GitHub\\5to-2.0\\Grafica\\Parcial2\\Trabajos_Visual\\OperacionDDA\\OperacionDDA\\Program.cs",
-              "RelativeToolTip": "OperacionDDA\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T14:55:20.591Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -49,22 +32,9 @@
               "RelativeDocumentMoniker": "OperacionDDA\\FrmPrincipal.cs",
               "ToolTip": "C:\\Users\\Josue\\OneDrive\\Documentos\\GitHub\\5to-2.0\\Grafica\\Parcial2\\Trabajos_Visual\\OperacionDDA\\OperacionDDA\\FrmPrincipal.cs",
               "RelativeToolTip": "OperacionDDA\\FrmPrincipal.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAgwB4AAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAAAAwCQAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T14:51:38.209Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "OperacionDDA.cs",
-              "DocumentMoniker": "C:\\Users\\Josue\\OneDrive\\Documentos\\GitHub\\5to-2.0\\Grafica\\Parcial2\\Trabajos_Visual\\OperacionDDA\\OperacionDDA\\OperacionDDA.cs",
-              "RelativeDocumentMoniker": "OperacionDDA\\OperacionDDA.cs",
-              "ToolTip": "C:\\Users\\Josue\\OneDrive\\Documentos\\GitHub\\5to-2.0\\Grafica\\Parcial2\\Trabajos_Visual\\OperacionDDA\\OperacionDDA\\OperacionDDA.cs",
-              "RelativeToolTip": "OperacionDDA\\OperacionDDA.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAkwA4AAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T14:43:43.682Z",
+              "WhenOpened": "2026-05-23T23:35:03.078Z",
               "EditorCaption": ""
             },
             {
@@ -76,8 +46,21 @@
               "ToolTip": "C:\\Users\\Josue\\OneDrive\\Documentos\\GitHub\\5to-2.0\\Grafica\\Parcial2\\Trabajos_Visual\\OperacionDDA\\OperacionDDA\\FrmPrincipal.cs [Dise\u00F1o]",
               "RelativeToolTip": "OperacionDDA\\FrmPrincipal.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T14:43:17.743Z",
+              "WhenOpened": "2026-05-23T23:34:32.64Z",
               "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "OperacionDDA.cs",
+              "DocumentMoniker": "C:\\Users\\Josue\\OneDrive\\Documentos\\GitHub\\5to-2.0\\Grafica\\Parcial2\\Trabajos_Visual\\OperacionDDA\\OperacionDDA\\OperacionDDA.cs",
+              "RelativeDocumentMoniker": "OperacionDDA\\OperacionDDA.cs",
+              "ToolTip": "C:\\Users\\Josue\\OneDrive\\Documentos\\GitHub\\5to-2.0\\Grafica\\Parcial2\\Trabajos_Visual\\OperacionDDA\\OperacionDDA\\OperacionDDA.cs",
+              "RelativeToolTip": "OperacionDDA\\OperacionDDA.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAUwDkAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-21T14:43:43.682Z",
+              "EditorCaption": ""
             }
           ]
         }
