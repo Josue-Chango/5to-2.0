@@ -24,19 +24,19 @@ namespace shappes_2d
             if (typeof(T) == typeof(int))
             {
                 int num;
-                if (!int.TryParse(texto, out num) || num < 0)
+                if (!int.TryParse(texto, out num) || num <= 0)
                     return false;
             }
             else if (typeof(T) == typeof(float))
             {
                 float num;
-                if (!float.TryParse(texto, out num) || num < 0)
+                if (!float.TryParse(texto, out num) || num <= 0)
                     return false;
             }
             else if (typeof(T) == typeof(double))
             {
                 double num;
-                if (!double.TryParse(texto, out num) || num < 0)
+                if (!double.TryParse(texto, out num) || num <= 0)
                     return false;
             }
             else if (typeof(T) == typeof(string))

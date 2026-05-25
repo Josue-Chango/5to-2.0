@@ -29,10 +29,13 @@ namespace OperacionDDA
         {
             int cx = pictureBox1.Width / 2;
             int cy = pictureBox1.Height / 2;
+            
+            operacionDDA.DibujarPlano(e.Graphics, pictureBox1.Width, pictureBox1.Height, cx, cy);
+
             if (dibujar)
             {
-                operacionDDA.DDA(e.Graphics, x1, y1, x2, y2, lineaColor);
-
+                //operacionDDA.DDA(e.Graphics, x1, y1, x2, y2, lineaColor);
+                operacionDDA.DDACentrado(e.Graphics, x1, y1, x2, y2, lineaColor, cx, cy);
                 lstPuntos.Items.Clear();
                 foreach (var linea in operacionDDA.puntosLista)
                 {

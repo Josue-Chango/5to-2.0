@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\Josue\\OneDrive\\Documentos\\GitHub\\5to-2.0\\Grafica\\Parcial2\\Trabajos_Visual\\OperacionDDA\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{33DF345A-C107-42B7-9251-C34DC56969AF}|OperacionDDA\\OperacionDDA.csproj|C:\\Users\\Josue\\OneDrive\\Documentos\\GitHub\\5to-2.0\\Grafica\\Parcial2\\Trabajos_Visual\\OperacionDDA\\operaciondda\\operaciondda.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33DF345A-C107-42B7-9251-C34DC56969AF}|OperacionDDA\\OperacionDDA.csproj|solutionrelative:operaciondda\\operaciondda.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33DF345A-C107-42B7-9251-C34DC56969AF}|OperacionDDA\\OperacionDDA.csproj|C:\\Users\\Josue\\OneDrive\\Documentos\\GitHub\\5to-2.0\\Grafica\\Parcial2\\Trabajos_Visual\\OperacionDDA\\operaciondda\\frmprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{33DF345A-C107-42B7-9251-C34DC56969AF}|OperacionDDA\\OperacionDDA.csproj|solutionrelative:operaciondda\\frmprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{33DF345A-C107-42B7-9251-C34DC56969AF}|OperacionDDA\\OperacionDDA.csproj|c:\\users\\josue\\onedrive\\documentos\\github\\5to-2.0\\grafica\\parcial2\\trabajos_visual\\operaciondda\\operaciondda\\frmprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{33DF345A-C107-42B7-9251-C34DC56969AF}|OperacionDDA\\OperacionDDA.csproj|solutionrelative:operaciondda\\frmprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33DF345A-C107-42B7-9251-C34DC56969AF}|OperacionDDA\\OperacionDDA.csproj|c:\\users\\josue\\onedrive\\documentos\\github\\5to-2.0\\grafica\\parcial2\\trabajos_visual\\operaciondda\\operaciondda\\frmprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{33DF345A-C107-42B7-9251-C34DC56969AF}|OperacionDDA\\OperacionDDA.csproj|solutionrelative:operaciondda\\frmprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{33DF345A-C107-42B7-9251-C34DC56969AF}|OperacionDDA\\OperacionDDA.csproj|C:\\Users\\Josue\\OneDrive\\Documentos\\GitHub\\5to-2.0\\Grafica\\Parcial2\\Trabajos_Visual\\OperacionDDA\\operaciondda\\operaciondda.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{33DF345A-C107-42B7-9251-C34DC56969AF}|OperacionDDA\\OperacionDDA.csproj|solutionrelative:operaciondda\\operaciondda.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{33DF345A-C107-42B7-9251-C34DC56969AF}|OperacionDDA\\OperacionDDA.csproj|c:\\users\\josue\\onedrive\\documentos\\github\\5to-2.0\\grafica\\parcial2\\trabajos_visual\\operaciondda\\operaciondda\\validador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33DF345A-C107-42B7-9251-C34DC56969AF}|OperacionDDA\\OperacionDDA.csproj|solutionrelative:operaciondda\\validador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,17 +26,30 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
+              "Title": "Validador.cs",
+              "DocumentMoniker": "C:\\Users\\Josue\\OneDrive\\Documentos\\GitHub\\5to-2.0\\Grafica\\Parcial2\\Trabajos_Visual\\OperacionDDA\\OperacionDDA\\Validador.cs",
+              "RelativeDocumentMoniker": "OperacionDDA\\Validador.cs",
+              "ToolTip": "C:\\Users\\Josue\\OneDrive\\Documentos\\GitHub\\5to-2.0\\Grafica\\Parcial2\\Trabajos_Visual\\OperacionDDA\\OperacionDDA\\Validador.cs",
+              "RelativeToolTip": "OperacionDDA\\Validador.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAQwCYAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-25T16:01:48.772Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "FrmPrincipal.cs",
               "DocumentMoniker": "C:\\Users\\Josue\\OneDrive\\Documentos\\GitHub\\5to-2.0\\Grafica\\Parcial2\\Trabajos_Visual\\OperacionDDA\\OperacionDDA\\FrmPrincipal.cs",
               "RelativeDocumentMoniker": "OperacionDDA\\FrmPrincipal.cs",
               "ToolTip": "C:\\Users\\Josue\\OneDrive\\Documentos\\GitHub\\5to-2.0\\Grafica\\Parcial2\\Trabajos_Visual\\OperacionDDA\\OperacionDDA\\FrmPrincipal.cs",
               "RelativeToolTip": "OperacionDDA\\FrmPrincipal.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAAwCQAAAA+AAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAAAAwCUAAABXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-23T23:35:03.078Z",
               "EditorCaption": ""
@@ -51,13 +68,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "OperacionDDA.cs",
               "DocumentMoniker": "C:\\Users\\Josue\\OneDrive\\Documentos\\GitHub\\5to-2.0\\Grafica\\Parcial2\\Trabajos_Visual\\OperacionDDA\\OperacionDDA\\OperacionDDA.cs",
               "RelativeDocumentMoniker": "OperacionDDA\\OperacionDDA.cs",
               "ToolTip": "C:\\Users\\Josue\\OneDrive\\Documentos\\GitHub\\5to-2.0\\Grafica\\Parcial2\\Trabajos_Visual\\OperacionDDA\\OperacionDDA\\OperacionDDA.cs",
               "RelativeToolTip": "OperacionDDA\\OperacionDDA.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAUwDkAAAA5AAAAAAAAAA==",
+              "ViewState": "AgIAAH0AAAAAAAAAAADwvy4AAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-21T14:43:43.682Z",
               "EditorCaption": ""

@@ -68,7 +68,7 @@
             this.txtX1.Name = "txtX1";
             this.txtX1.Size = new System.Drawing.Size(100, 22);
             this.txtX1.TabIndex = 7;
-            this.txtX1.Text = "20";
+            this.txtX1.Text = "0";
             // 
             // txtY1
             // 
@@ -76,7 +76,7 @@
             this.txtY1.Name = "txtY1";
             this.txtY1.Size = new System.Drawing.Size(100, 22);
             this.txtY1.TabIndex = 8;
-            this.txtY1.Text = "30";
+            this.txtY1.Text = "0";
             // 
             // txtX2
             // 
@@ -84,7 +84,7 @@
             this.txtX2.Name = "txtX2";
             this.txtX2.Size = new System.Drawing.Size(100, 22);
             this.txtX2.TabIndex = 9;
-            this.txtX2.Text = "70";
+            this.txtX2.Text = "0";
             // 
             // txtY2
             // 
@@ -92,7 +92,7 @@
             this.txtY2.Name = "txtY2";
             this.txtY2.Size = new System.Drawing.Size(100, 22);
             this.txtY2.TabIndex = 10;
-            this.txtY2.Text = "120";
+            this.txtY2.Text = "0";
             // 
             // btnDibujar
             // 
