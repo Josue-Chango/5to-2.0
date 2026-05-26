@@ -8,3 +8,5 @@ C:\Users\Josue\OneDrive\Documentos\GitHub\5to-2.0\Grafica\Parcial2\Trabajos_Visu
 C:\Users\Josue\OneDrive\Documentos\GitHub\5to-2.0\Grafica\Parcial2\Trabajos_Visual\OperacionDDA\OperacionDDA\bin\Debug\OperacionDDA.pdb
 C:\Users\Josue\OneDrive\Documentos\GitHub\5to-2.0\Grafica\Parcial2\Trabajos_Visual\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.exe
 C:\Users\Josue\OneDrive\Documentos\GitHub\5to-2.0\Grafica\Parcial2\Trabajos_Visual\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.pdb
+C:\Users\Josue\OneDrive\Documentos\GitHub\5to-2.0\Grafica\Parcial2\Trabajos_Visual\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.FrmCircunferencia.resources
+C:\Users\Josue\OneDrive\Documentos\GitHub\5to-2.0\Grafica\Parcial2\Trabajos_Visual\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.FrmMenu.resources
