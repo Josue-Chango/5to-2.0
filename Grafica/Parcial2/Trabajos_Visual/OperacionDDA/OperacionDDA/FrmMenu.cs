@@ -30,5 +30,12 @@ namespace OperacionDDA
             frmPrincipal.MdiParent = this;
             frmPrincipal.Show();
         }
+
+        private void rellenoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmRelleno frmrelleno = new FrmRelleno();
+            frmrelleno.MdiParent = this; 
+            frmrelleno.Show();
+        }
     }
 }

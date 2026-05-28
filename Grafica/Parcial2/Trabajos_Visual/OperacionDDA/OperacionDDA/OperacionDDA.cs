@@ -13,7 +13,7 @@ namespace OperacionDDA
     {
 
         public OperacionDDA() { }
-        int x1, y1, x2, y2;
+        int x1, y1, x2, y2, pasos;
         public System.Collections.Generic.List<string> puntosLista = new System.Collections.Generic.List<string>();
 
         public void ClearPuntosLista()
@@ -114,7 +114,7 @@ namespace OperacionDDA
             ClearPuntosLista();
             int dx = calcularX(x1, x2);
             int dy = calcularY(y1, y2);
-            int pasos = Math.Max(Math.Abs(dx), Math.Abs(dy));
+            pasos = Math.Max(Math.Abs(dx), Math.Abs(dy));
             using (Brush brush = new SolidBrush(color))
             {
                 if (pasos == 0)
@@ -142,5 +142,12 @@ namespace OperacionDDA
 
             }
         }
+
+        public int getPasos()
+        {
+            return pasos;
+        }
+
+
     }
 }

@@ -37,6 +37,7 @@ namespace OperacionDDA
                 //operacionDDA.DDA(e.Graphics, x1, y1, x2, y2, lineaColor);
                 operacionDDA.DDACentrado(e.Graphics, x1, y1, x2, y2, lineaColor, cx, cy);
                 lstPuntos.Items.Clear();
+                lblPasos.Text = $"Pasos: {operacionDDA.getPasos()}";
                 foreach (var linea in operacionDDA.puntosLista)
                 {
                     lstPuntos.Items.Add(linea);
@@ -67,5 +68,7 @@ namespace OperacionDDA
             pictureBox1.Invalidate();
             
         }
+
+
     }
 }

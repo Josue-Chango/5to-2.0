@@ -14,7 +14,8 @@ namespace OperacionDDA
 
         public Circunferencia() { }
         public System.Collections.Generic.List<string> puntosLista = new System.Collections.Generic.List<string>();
-
+        public int puntos = 1;
+        public int pipxeles = 0;
         public void CircleMidPoint(int xc, int yc, int r) 
         {
             int x, y, p;
@@ -25,6 +26,7 @@ namespace OperacionDDA
             while (x < y)
             {
                 x++;
+                puntos ++;
                 if (p < 0)
                 {
                     p = p + 2 * x + 1;
@@ -35,11 +37,13 @@ namespace OperacionDDA
                     p = p + 2 * (x - y) + 1;
                 }
                 PlotPoint(xc, yc, x, y);
+
             }
         }
 
         public void PlotPoint(int xc, int yc, int x, int y)
         {
+            pipxeles += 8;
             puntosLista.Add($"({xc + x}, {yc + y})");
             puntosLista.Add($"({xc - x}, {yc + y})");
             puntosLista.Add($"({xc + x}, {yc - y})");
@@ -53,6 +57,8 @@ namespace OperacionDDA
         public void ClearPuntosLista()
         {
             puntosLista.Clear();
+            puntos = 1;
+            pipxeles = 0;
         }
 
         public int Validar(string radio)
@@ -83,5 +89,18 @@ namespace OperacionDDA
                 }
             }
         }
+
+        public int getPuntos()
+        {
+            return puntos;
+        }
+
+        public int getPixeles()
+        {
+            return pipxeles;
+        }
+
+
     }
 }
+

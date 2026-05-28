@@ -36,6 +36,8 @@ namespace OperacionDDA
             {
                 circunferencia.DibujarCircunferencia(e.Graphics, cx, cy, radio, Color.Blue);
                 lstPuntos.Items.Clear();
+                lblPuntos.Text = $"Puntos: {circunferencia.getPuntos()}";
+                lblPixeles.Text = $"Pixeles: {circunferencia.getPixeles()}";
                 foreach (var linea in circunferencia.puntosLista)
                 {
                     lstPuntos.Items.Add(linea);
