@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using shappes_2d;
 
 namespace OperacionDDA
 {
@@ -20,9 +21,28 @@ namespace OperacionDDA
         private Color lineaColor = Color.Black;
         OperacionDDA operacionDDA = new OperacionDDA();
         bool dibujar = false;
+        string algoritmoActual = "";
+        private Timer timerAnimacion = new Timer();
+        private int pixelesMostrados = 0;
         public FrmPrincipal()
         {
             InitializeComponent();
+            timerAnimacion.Interval = 1;
+
+            timerAnimacion.Tick += TimerAnimacion_Tick;
+        }
+
+        private void TimerAnimacion_Tick(object sender, EventArgs e)
+        {
+            pixelesMostrados += 5;
+
+            if (pixelesMostrados >= operacionDDA.puntosLista.Count)
+            {
+                pixelesMostrados = operacionDDA.puntosLista.Count;
+                timerAnimacion.Stop();
+            }
+
+            pictureBox1.Invalidate();
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -34,8 +54,22 @@ namespace OperacionDDA
 
             if (dibujar)
             {
-                //operacionDDA.DDA(e.Graphics, x1, y1, x2, y2, lineaColor);
-                operacionDDA.DDACentrado(e.Graphics, x1, y1, x2, y2, lineaColor, cx, cy);
+                if (algoritmoActual == "DDA")
+                {
+                    operacionDDA.DibujarAnimado( e.Graphics, Color.Blue, pixelesMostrados, cx, cy);
+                    MostrarFormula();
+                }
+                else if (algoritmoActual == "Bresenham")
+                {
+                    operacionDDA.DibujarAnimado(e.Graphics, Color.Blue, pixelesMostrados, cx, cy);
+                    MostrarFormula();
+                }
+                else if (algoritmoActual == "PuntoMedio")
+                {
+                    operacionDDA.DibujarAnimado(e.Graphics, Color.Blue, pixelesMostrados, cx, cy);
+                    MostrarFormula();
+                }
+
                 lstPuntos.Items.Clear();
                 lblPasos.Text = $"Pasos: {operacionDDA.getPasos()}";
                 foreach (var linea in operacionDDA.puntosLista)
@@ -58,17 +92,172 @@ namespace OperacionDDA
 
         private void btnDibujar_Click(object sender, EventArgs e)
         {
-            lstPuntos.Items.Clear();
-            x1 = operacionDDA.Validar(txtX1.Text);
-            y1 = operacionDDA.Validar(txtY1.Text);
-            x2 = operacionDDA.Validar(txtX2.Text);
-            y2 = operacionDDA.Validar(txtY2.Text);
-            
-            dibujar = true;
-            pictureBox1.Invalidate();
-            
+            if (ValidarEntradas())
+            {
+                /*lstPuntos.Items.Clear();
+                algoritmoActual = "DDA";
+                dibujar = true;
+                pictureBox1.Invalidate();*/
+                lstPuntos.Items.Clear();
+
+                operacionDDA.GenerarDDA(x1, y1, x2, y2);
+
+                algoritmoActual = "DDA";
+                dibujar = true;
+
+                pixelesMostrados = 0;
+
+                timerAnimacion.Start();
+
+                pictureBox1.Invalidate();
+            }
         }
 
+        private void btnBresenham_Click(object sender, EventArgs e)
+        {
+            if (ValidarEntradas())
+            {
+                /*lstPuntos.Items.Clear();
+                algoritmoActual = "Bresenham";
+                dibujar = true;
+                pictureBox1.Invalidate();*/
+                operacionDDA.GenerarBresenham(x1, y1, x2, y2);
 
+                algoritmoActual = "Bresenham";
+                dibujar = true;
+
+                pixelesMostrados = 0;
+
+                timerAnimacion.Start();
+
+                pictureBox1.Invalidate();
+            }
+        }
+
+        private void btnPuntoMedio_Click(object sender, EventArgs e)
+        {
+            if (ValidarEntradas())
+            {
+                /*lstPuntos.Items.Clear();
+                algoritmoActual = "PuntoMedio";
+                dibujar = true;
+                pictureBox1.Invalidate();*/
+                operacionDDA.GenerarPuntoMedio(x1, y1, x2, y2);
+
+                algoritmoActual = "PuntoMedio";
+                dibujar = true;
+
+                pixelesMostrados = 0;
+
+                timerAnimacion.Start();
+
+                pictureBox1.Invalidate();
+            }
+        }
+
+        private bool ValidarEntradas()
+        {
+            if (Validador.Validar<int>(txtX1.Text) &&
+                Validador.Validar<int>(txtY1.Text) &&
+                Validador.Validar<int>(txtX2.Text) &&
+                Validador.Validar<int>(txtY2.Text))
+            {
+                x1 = int.Parse(txtX1.Text);
+                y1 = int.Parse(txtY1.Text);
+                x2 = int.Parse(txtX2.Text);
+                y2 = int.Parse(txtY2.Text);
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Ingresa números enteros válidos para las coordenadas.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            lstPuntos.Items.Clear();
+            txtX1.Text = "";
+            txtY1.Text = "";
+            txtX2.Text = "";
+            txtY2.Text = "";
+            lblPasos.Text = "Pasos";
+            
+            algoritmoActual = "";
+            dibujar = false;
+            rtbFormula.Clear();
+            pictureBox1.Invalidate();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtX2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FrmPrincipal_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MostrarFormula()
+        {
+            switch (algoritmoActual)
+            {
+                case "DDA":
+                    rtbFormula.Text =
+        @"ALGORITMO DDA
+
+dx = x2 - x1
+dy = y2 - y1
+
+pasos = max(|dx|,|dy|)
+
+Xinc = dx / pasos
+Yinc = dy / pasos
+
+x = x + Xinc
+y = y + Yinc";
+                    break;
+
+                case "Bresenham":
+                    rtbFormula.Text =
+        @"ALGORITMO BRESENHAM
+
+dx = |x2 - x1|
+dy = |y2 - y1|
+
+error = dx - dy
+
+e2 = 2 * error
+
+Si e2 > -dy
+    error = error - dy
+
+Si e2 < dx
+    error = error + dx";
+                    break;
+
+                case "PuntoMedio":
+                    rtbFormula.Text =
+        @"ALGORITMO PUNTO MEDIO
+
+p = 2dy - dx
+
+Si p < 0
+
+    p = p + 2dy
+
+Si p >= 0
+
+    p = p + 2(dy-dx)";
+                    break;
+            }
+        }
     }
 }

@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BoundaryFillStepper.cs" />
     <Compile Include="Circunferencia.cs" />
     <Compile Include="FrmCircunferencia.cs">
       <SubType>Form</SubType>
@@ -74,7 +75,8 @@
     <Compile Include="OperacionDDA.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Relleno.cs" />
+    <Compile Include="FloodFillStepper.cs" />
+    <Compile Include="ScanlineFloodFillStepper.cs" />
     <Compile Include="Validador.cs" />
     <EmbeddedResource Include="FrmCircunferencia.resx">
       <DependentUpon>FrmCircunferencia.cs</DependentUpon>

@@ -62,19 +62,6 @@ namespace OperacionDDA
             }
         }
 
-        public int Validar(string coordenada)
-        {
-            if (Validador.Validar<int>(coordenada))
-            {
-                return int.Parse(coordenada);
-            }
-            else
-            {
-                MessageBox.Show("Ingresa un número válido para la coordenada.");
-            }
-            return 0;
-        }
-
         public void DibujarPlano(Graphics g, int Ancho, int Alto, int CentroX, int CentroY)
         {
             int paso = 10;
@@ -120,7 +107,7 @@ namespace OperacionDDA
                 if (pasos == 0)
                 {
                     puntosLista.Add($"({x1}, {y1})");
-                    g.FillRectangle(brush, x1 + CentroX, y1 + CentroY, 1, 1);
+                    g.FillRectangle(brush, x1 + CentroX, CentroY - y1, 1, 1);
                     return;
                 }
 
@@ -133,13 +120,118 @@ namespace OperacionDDA
                     int xr = (int)Math.Round(x);
                     int yr = (int)Math.Round(y);
                     puntosLista.Add($"({xr}, {yr})");
-                    g.FillRectangle(brush, xr + CentroX, yr + CentroY, 1, 1);
+                    g.FillRectangle(brush, xr + CentroX, CentroY - yr, 1, 1);
                     x += xIncrement;
                     y += yIncrement;
                 }
+            }
+        }
 
+        public void Bresenham(Graphics g, int x1, int y1, int x2, int y2, Color color, int CentroX, int CentroY)
+        {
+            ClearPuntosLista();
+            int dx = Math.Abs(calcularX(x1, x2));
+            int dy = Math.Abs(calcularY(y1, y2));
+            int sx = x1 < x2 ? 1 : -1;
+            int sy = y1 < y2 ? 1 : -1;
+            int err = dx - dy;
 
+            using (Brush brush = new SolidBrush(color))
+            {
+                pasos = 0;
+                while (true)
+                {
+                    puntosLista.Add($"({x1}, {y1})");
+                    g.FillRectangle(brush, x1 + CentroX, CentroY - y1, 1, 1);
+                    pasos++;
 
+                    if (x1 == x2 && y1 == y2) break;
+
+                    int e2 = 2 * err;
+                    if (e2 > -dy)
+                    {
+                        err -= dy;
+                        x1 += sx;
+                    }
+                    if (e2 < dx)
+                    {
+                        err += dx;
+                        y1 += sy;
+                    }
+                }
+            }
+        }
+
+        public void PuntoMedio(Graphics g, int x1, int y1, int x2, int y2, Color color, int CentroX, int CentroY)
+        {
+            ClearPuntosLista();
+            int dx = calcularX(x1, x2);
+            int dy = calcularY(y1, y2);
+            
+            int incX = dx > 0 ? 1 : -1;
+            int incY = dy > 0 ? 1 : -1;
+            
+            dx = Math.Abs(dx);
+            dy = Math.Abs(dy);
+
+            using (Brush brush = new SolidBrush(color))
+            {
+                pasos = 0;
+                int x = x1;
+                int y = y1;
+
+                puntosLista.Add($"({x}, {y})");
+                g.FillRectangle(brush, x + CentroX, CentroY - y, 1, 1);
+                pasos++;
+
+                if (dx > dy)
+                {
+                    int p = 2 * dy - dx;
+                    int incE = 2 * dy;
+                    int incNE = 2 * (dy - dx);
+
+                    for (int i = 0; i < dx; i++)
+                    {
+                        if (p < 0)
+                        {
+                            p += incE;
+                            x += incX;
+                        }
+                        else
+                        {
+                            p += incNE;
+                            x += incX;
+                            y += incY;
+                        }
+                        puntosLista.Add($"({x}, {y})");
+                        g.FillRectangle(brush, x + CentroX, CentroY - y, 1, 1);
+                        pasos++;
+                    }
+                }
+                else
+                {
+                    int p = 2 * dx - dy;
+                    int incN = 2 * dx;
+                    int incNE = 2 * (dx - dy);
+
+                    for (int i = 0; i < dy; i++)
+                    {
+                        if (p < 0)
+                        {
+                            p += incN;
+                            y += incY;
+                        }
+                        else
+                        {
+                            p += incNE;
+                            x += incX;
+                            y += incY;
+                        }
+                        puntosLista.Add($"({x}, {y})");
+                        g.FillRectangle(brush, x + CentroX, CentroY - y, 1, 1);
+                        pasos++;
+                    }
+                }
             }
         }
 
@@ -148,6 +240,168 @@ namespace OperacionDDA
             return pasos;
         }
 
+
+        public void DibujarAnimado(Graphics g, Color color, int cantidad, int CentroX, int CentroY)
+            {
+                using (Brush brush = new SolidBrush(color))
+                {
+                    for (int i = 0; i < cantidad && i < puntosLista.Count; i++)
+                    {
+                        string[] coords = puntosLista[i]
+                            .Trim('(', ')')
+                            .Split(',');
+
+                        int x = int.Parse(coords[0]);
+                        int y = int.Parse(coords[1]);
+
+                        g.FillRectangle(
+                            brush,
+                            x + CentroX,
+                            CentroY - y,
+                            1,
+                            1);
+                    }
+                }
+            }
+
+        public void GenerarDDA(int x1, int y1, int x2, int y2)
+        {
+            ClearPuntosLista();
+
+            int dx = calcularX(x1, x2);
+            int dy = calcularY(y1, y2);
+
+            pasos = Math.Max(Math.Abs(dx), Math.Abs(dy));
+
+            if (pasos == 0)
+            {
+                puntosLista.Add($"({x1}, {y1})");
+                return;
+            }
+
+            float xIncrement = (float)dx / pasos;
+            float yIncrement = (float)dy / pasos;
+
+            float x = x1;
+            float y = y1;
+
+            for (int i = 0; i <= pasos; i++)
+            {
+                puntosLista.Add($"({Math.Round(x)}, {Math.Round(y)})");
+
+                x += xIncrement;
+                y += yIncrement;
+            }
+        }
+
+        public void GenerarBresenham(int x1, int y1, int x2, int y2)
+        {
+            ClearPuntosLista();
+
+            int dx = Math.Abs(calcularX(x1, x2));
+            int dy = Math.Abs(calcularY(y1, y2));
+
+            int sx = x1 < x2 ? 1 : -1;
+            int sy = y1 < y2 ? 1 : -1;
+
+            int err = dx - dy;
+
+            pasos = 0;
+
+            while (true)
+            {
+                puntosLista.Add($"({x1}, {y1})");
+                pasos++;
+
+                if (x1 == x2 && y1 == y2)
+                    break;
+
+                int e2 = 2 * err;
+
+                if (e2 > -dy)
+                {
+                    err -= dy;
+                    x1 += sx;
+                }
+
+                if (e2 < dx)
+                {
+                    err += dx;
+                    y1 += sy;
+                }
+            }
+        }
+
+        public void GenerarPuntoMedio(int x1, int y1, int x2, int y2)
+        {
+            ClearPuntosLista();
+
+            int dx = calcularX(x1, x2);
+            int dy = calcularY(y1, y2);
+
+            int incX = dx > 0 ? 1 : -1;
+            int incY = dy > 0 ? 1 : -1;
+
+            dx = Math.Abs(dx);
+            dy = Math.Abs(dy);
+
+            pasos = 0;
+
+            int x = x1;
+            int y = y1;
+
+            puntosLista.Add($"({x}, {y})");
+            pasos++;
+
+            if (dx > dy)
+            {
+                int p = 2 * dy - dx;
+                int incE = 2 * dy;
+                int incNE = 2 * (dy - dx);
+
+                for (int i = 0; i < dx; i++)
+                {
+                    if (p < 0)
+                    {
+                        p += incE;
+                        x += incX;
+                    }
+                    else
+                    {
+                        p += incNE;
+                        x += incX;
+                        y += incY;
+                    }
+
+                    puntosLista.Add($"({x}, {y})");
+                    pasos++;
+                }
+            }
+            else
+            {
+                int p = 2 * dx - dy;
+                int incN = 2 * dx;
+                int incNE = 2 * (dx - dy);
+
+                for (int i = 0; i < dy; i++)
+                {
+                    if (p < 0)
+                    {
+                        p += incN;
+                        y += incY;
+                    }
+                    else
+                    {
+                        p += incNE;
+                        x += incX;
+                        y += incY;
+                    }
+
+                    puntosLista.Add($"({x}, {y})");
+                    pasos++;
+                }
+            }
+        }
 
     }
 }

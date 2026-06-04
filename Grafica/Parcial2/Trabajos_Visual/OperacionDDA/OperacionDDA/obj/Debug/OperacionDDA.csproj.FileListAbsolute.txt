@@ -35,3 +35,31 @@ C:\Users\Josue\Documents\GitHub\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\Ope
 C:\Users\Josue\Documents\GitHub\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.exe
 C:\Users\Josue\Documents\GitHub\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.pdb
 C:\Users\Josue\OneDrive\Documentos\GitHub\5to-2.0\Grafica\Parcial2\Trabajos_Visual\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.FrmRelleno.resources
+E:\GIT\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.FrmRelleno.resources
+C:\Users\MATEO\Documents\AY\Grafica\2doParcial\Parcial2\OperacionDDA\OperacionDDA\bin\Debug\OperacionDDA.exe.config
+C:\Users\MATEO\Documents\AY\Grafica\2doParcial\Parcial2\OperacionDDA\OperacionDDA\bin\Debug\OperacionDDA.exe
+C:\Users\MATEO\Documents\AY\Grafica\2doParcial\Parcial2\OperacionDDA\OperacionDDA\bin\Debug\OperacionDDA.pdb
+C:\Users\MATEO\Documents\AY\Grafica\2doParcial\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.csproj.AssemblyReference.cache
+C:\Users\MATEO\Documents\AY\Grafica\2doParcial\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.FrmCircunferencia.resources
+C:\Users\MATEO\Documents\AY\Grafica\2doParcial\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.FrmMenu.resources
+C:\Users\MATEO\Documents\AY\Grafica\2doParcial\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.FrmPrincipal.resources
+C:\Users\MATEO\Documents\AY\Grafica\2doParcial\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.FrmRelleno.resources
+C:\Users\MATEO\Documents\AY\Grafica\2doParcial\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.Properties.Resources.resources
+C:\Users\MATEO\Documents\AY\Grafica\2doParcial\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.csproj.GenerateResource.cache
+C:\Users\MATEO\Documents\AY\Grafica\2doParcial\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.csproj.CoreCompileInputs.cache
+C:\Users\MATEO\Documents\AY\Grafica\2doParcial\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.exe
+C:\Users\MATEO\Documents\AY\Grafica\2doParcial\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.pdb
+C:\Users\micha\OneDrive\Escritorio\Computacion Grafica\2 Parcial\Clase 3\Parcial2\OperacionDDA\OperacionDDA\bin\Debug\OperacionDDA.exe.config
+C:\Users\micha\OneDrive\Escritorio\Computacion Grafica\2 Parcial\Clase 3\Parcial2\OperacionDDA\OperacionDDA\bin\Debug\OperacionDDA.exe
+C:\Users\micha\OneDrive\Escritorio\Computacion Grafica\2 Parcial\Clase 3\Parcial2\OperacionDDA\OperacionDDA\bin\Debug\OperacionDDA.pdb
+C:\Users\micha\OneDrive\Escritorio\Computacion Grafica\2 Parcial\Clase 3\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.csproj.AssemblyReference.cache
+C:\Users\micha\OneDrive\Escritorio\Computacion Grafica\2 Parcial\Clase 3\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.FrmCircunferencia.resources
+C:\Users\micha\OneDrive\Escritorio\Computacion Grafica\2 Parcial\Clase 3\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.FrmMenu.resources
+C:\Users\micha\OneDrive\Escritorio\Computacion Grafica\2 Parcial\Clase 3\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.FrmPrincipal.resources
+C:\Users\micha\OneDrive\Escritorio\Computacion Grafica\2 Parcial\Clase 3\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.FrmRelleno.resources
+C:\Users\micha\OneDrive\Escritorio\Computacion Grafica\2 Parcial\Clase 3\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.Properties.Resources.resources
+C:\Users\micha\OneDrive\Escritorio\Computacion Grafica\2 Parcial\Clase 3\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.csproj.GenerateResource.cache
+C:\Users\micha\OneDrive\Escritorio\Computacion Grafica\2 Parcial\Clase 3\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.csproj.CoreCompileInputs.cache
+C:\Users\micha\OneDrive\Escritorio\Computacion Grafica\2 Parcial\Clase 3\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.exe
+C:\Users\micha\OneDrive\Escritorio\Computacion Grafica\2 Parcial\Clase 3\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.pdb
+C:\Users\Josue\Documents\GitHub\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.FrmRelleno.resources

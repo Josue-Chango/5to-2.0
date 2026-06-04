@@ -21,6 +21,7 @@ namespace OperacionDDA
         {
             FrmCircunferencia frmcirculo = new FrmCircunferencia();
             frmcirculo.MdiParent = this;
+            //frmcirculo.WindowState = FormWindowState.Maximized;
             frmcirculo.Show();
         }
 
@@ -28,6 +29,7 @@ namespace OperacionDDA
         {
             FrmPrincipal frmPrincipal = new FrmPrincipal();
             frmPrincipal.MdiParent = this;
+            //frmPrincipal.WindowState = FormWindowState.Maximized;
             frmPrincipal.Show();
         }
 
@@ -35,6 +37,7 @@ namespace OperacionDDA
         {
             FrmRelleno frmrelleno = new FrmRelleno();
             frmrelleno.MdiParent = this; 
+            
             frmrelleno.Show();
         }
     }
