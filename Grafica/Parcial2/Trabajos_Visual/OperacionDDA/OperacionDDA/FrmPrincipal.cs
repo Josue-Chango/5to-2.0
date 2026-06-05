@@ -27,7 +27,7 @@ namespace OperacionDDA
         public FrmPrincipal()
         {
             InitializeComponent();
-            timerAnimacion.Interval = 1;
+            timerAnimacion.Interval = 100;
 
             timerAnimacion.Tick += TimerAnimacion_Tick;
         }

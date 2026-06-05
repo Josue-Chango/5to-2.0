@@ -63,3 +63,5 @@ C:\Users\micha\OneDrive\Escritorio\Computacion Grafica\2 Parcial\Clase 3\Parcial
 C:\Users\micha\OneDrive\Escritorio\Computacion Grafica\2 Parcial\Clase 3\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.exe
 C:\Users\micha\OneDrive\Escritorio\Computacion Grafica\2 Parcial\Clase 3\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.pdb
 C:\Users\Josue\Documents\GitHub\Parcial2\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.FrmRelleno.resources
+C:\Users\Josue\OneDrive\Documentos\GitHub\5to-2.0\Grafica\Parcial2\Trabajos_Visual\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.FrmRecorte.resources
+C:\Users\Josue\OneDrive\Documentos\GitHub\5to-2.0\Grafica\Parcial2\Trabajos_Visual\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.FrmRecorteFigura.resources

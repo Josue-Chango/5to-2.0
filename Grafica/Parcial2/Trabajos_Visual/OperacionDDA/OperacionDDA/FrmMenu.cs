@@ -40,5 +40,26 @@ namespace OperacionDDA
             
             frmrelleno.Show();
         }
+
+        private void recorteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void recorteLineaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmRecorte frmrecorte = new FrmRecorte();
+            frmrecorte.MdiParent = this;
+
+            frmrecorte.Show();
+        }
+
+        private void recorteFiguraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmRecorteFigura frmrecortefigura = new FrmRecorteFigura();
+            frmrecortefigura.MdiParent = this;
+
+            frmrecortefigura.Show();
+        }
     }
 }
