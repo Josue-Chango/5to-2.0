@@ -158,5 +158,93 @@ namespace OperacionDDA
             return accept;
         }
 
+
+        public bool LiangBarskyClip( ref double x1, ref double y1, ref double x2, ref double y2, double xmin, double ymin, double xmax, double ymax)
+        {
+            double dx = x2 - x1;
+            double dy = y2 - y1;
+
+            double[] p = { -dx, dx, -dy, dy };
+
+            double[] q = { x1 - xmin, xmax - x1, y1 - ymin, ymax - y1 };
+
+            double u1 = 0.0;
+            double u2 = 1.0;
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (p[i] == 0)
+                {
+                    if (q[i] < 0)
+                        return false;
+                }
+                else
+                {
+                    double r = q[i] / p[i];
+
+                    if (p[i] < 0)
+                        u1 = Math.Max(u1, r);
+                    else
+                        u2 = Math.Min(u2, r);
+                }
+            }
+
+            if (u1 > u2)
+                return false;
+
+            double nx1 = x1 + u1 * dx;
+            double ny1 = y1 + u1 * dy;
+
+            double nx2 = x1 + u2 * dx;
+            double ny2 = y1 + u2 * dy;
+
+            x1 = nx1;
+            y1 = ny1;
+
+            x2 = nx2;
+            y2 = ny2;
+
+            return true;
+        }
+
+        public bool ParametricClip( ref double x1, ref double y1, ref double x2, ref double y2, double xmin, double ymin, double xmax, double ymax)
+        {
+            double dx = x2 - x1;
+            double dy = y2 - y1;
+
+            double tMin = 0;
+            double tMax = 1;
+
+            if (dx != 0)
+            {
+                double tx1 = (xmin - x1) / dx;
+                double tx2 = (xmax - x1) / dx;
+
+                tMin = Math.Max(tMin, Math.Min(tx1, tx2));
+                tMax = Math.Min(tMax, Math.Max(tx1, tx2));
+            }
+
+            if (dy != 0)
+            {
+                double ty1 = (ymin - y1) / dy;
+                double ty2 = (ymax - y1) / dy;
+
+                tMin = Math.Max(tMin, Math.Min(ty1, ty2));
+                tMax = Math.Min(tMax, Math.Max(ty1, ty2));
+            }
+
+            if (tMin > tMax)
+                return false;
+
+            x2 = x1 + tMax * dx;
+            y2 = y1 + tMax * dy;
+
+            x1 = x1 + tMin * dx;
+            y1 = y1 + tMin * dy;
+
+            return true;
+        }
+
+
     }
 }

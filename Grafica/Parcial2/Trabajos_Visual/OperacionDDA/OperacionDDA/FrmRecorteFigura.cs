@@ -18,6 +18,7 @@ namespace OperacionDDA
         private List<PointF> poligonoOriginal;
         private List<PointF> poligonoRecortado;
         private bool dibujar = false;
+        private string algoritmoActual = "SUTHERLAND";
         public FrmRecorteFigura()
         {
             InitializeComponent();
@@ -69,16 +70,9 @@ namespace OperacionDDA
 
         private void btnRecortra_Click(object sender, EventArgs e)
         {
-            if (!ValidarPuntos())
-                return;
+            algoritmoActual = "SUTHERLAND";
 
-            LeerPuntos();
-
-            poligonoRecortado = recorte.SutherlandHodgman( poligonoOriginal, -100, -100, 100, 100);
-
-            dibujar = true;
-            MostrarFormula();
-            pictureBox1.Invalidate();
+            EjecutarRecorte();
         }
 
         private bool LeerPuntos()
@@ -168,6 +162,127 @@ x = x1 + (x2-x1)(yclip-y1)/(y2-y1)
 Proceso:
 Izquierda -> Derecha ->
 Inferior -> Superior";
+        }
+
+        private void btnVertex_Click(object sender, EventArgs e)
+        {
+            algoritmoActual = "VERTEX";
+
+            EjecutarRecorte();
+        }
+
+        private void btnBounding_Click(object sender, EventArgs e)
+        {
+            algoritmoActual = "BOUNDING";
+
+            EjecutarRecorte();
+        }
+
+        private void EjecutarRecorte()
+        {
+            if (!ValidarPuntos())
+                return;
+
+            if (!LeerPuntos())
+                return;
+
+            switch (algoritmoActual)
+            {
+                case "SUTHERLAND":
+
+                    poligonoRecortado = recorte.SutherlandHodgman( poligonoOriginal, -100, -100, 100, 100);
+
+                    MostrarFormula();
+
+                    break;
+
+                case "VERTEX":
+
+                    poligonoRecortado = recorte.VertexClipping( poligonoOriginal, -100, -100, 100, 100);
+
+                    MostrarFormulaVertex();
+
+                    break;
+
+                case "BOUNDING":
+
+                    poligonoRecortado = recorte.BoundingBoxClip( poligonoOriginal, -100, -100, 100, 100);
+
+                    MostrarFormulaBounding();
+
+                    break;
+            }
+
+            dibujar = true;
+
+            pictureBox1.Invalidate();
+        }
+
+        private void MostrarFormulaVertex()
+        {
+            rtbFormula.Text =
+        @"VERTEX CLIPPING
+
+Se analiza cada vértice.
+
+Condición:
+
+xmin <= x <= xmax
+
+y
+
+ymin <= y <= ymax
+
+Si cumple:
+
+Se conserva.
+
+Si no cumple:
+
+Se elimina.
+
+Resultado:
+
+Solo permanecen
+los vértices que
+están dentro de
+la ventana.";
+        }
+
+        private void MostrarFormulaBounding()
+        {
+            rtbFormula.Text =
+        @"BOUNDING BOX CLIPPING
+
+Si:
+
+x < xmin
+
+x = xmin
+
+Si:
+
+x > xmax
+
+x = xmax
+
+Si:
+
+y < ymin
+
+y = ymin
+
+Si:
+
+y > ymax
+
+y = ymax
+
+Cada vértice es
+ajustado para
+permanecer dentro
+de la ventana de
+recorte.";
         }
     }
 }

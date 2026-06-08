@@ -75,6 +75,45 @@ namespace OperacionDDA
         }
 
         const int ymax = 100;
+
+        private void btnLiang_Click(object sender, EventArgs e)
+        {
+            if (!ValidarEntradas())
+                return;
+
+            x1Original = x1;
+            y1Original = y1;
+            x2Original = x2;
+            y2Original = y2;
+
+            lineaVisible = recorte.LiangBarskyClip( ref x1, ref y1, ref x2, ref y2, xmin, ymin, xmax, ymax);
+
+            dibujar = true;
+
+            MostrarFormulaLiang();
+
+            pctGrafico.Invalidate();
+        }
+
+        private void btnParametrico_Click(object sender, EventArgs e)
+        {
+            if (!ValidarEntradas())
+                return;
+
+            x1Original = x1;
+            y1Original = y1;
+            x2Original = x2;
+            y2Original = y2;
+
+            lineaVisible = recorte.ParametricClip( ref x1, ref y1, ref x2, ref y2, xmin, ymin, xmax, ymax);
+
+            dibujar = true;
+
+            MostrarFormulaParametrico();
+
+            pctGrafico.Invalidate();
+        }
+
         public FrmRecorte()
         {
             InitializeComponent();
@@ -138,6 +177,77 @@ Intersección izquierda:
 y = y1 + (y2-y1)
     * (xmin-x1)
     / (x2-x1)";
+        }
+        private void MostrarFormulaLiang()
+        {
+            rtbFormula.Text =
+        @"ALGORITMO LIANG-BARSKY
+
+dx = x2 - x1
+dy = y2 - y1
+
+p1 = -dx
+p2 =  dx
+p3 = -dy
+p4 =  dy
+
+q1 = x1 - xmin
+q2 = xmax - x1
+q3 = y1 - ymin
+q4 = ymax - y1
+
+u1 = máximo entrada
+u2 = mínimo salida
+
+Si u1 > u2:
+La línea se rechaza
+
+Punto inicial:
+
+x = x1 + u1*dx
+y = y1 + u1*dy
+
+Punto final:
+
+x = x1 + u2*dx
+y = y1 + u2*dy";
+        }
+
+        private void MostrarFormulaParametrico()
+        {
+            rtbFormula.Text =
+        @"RECORTE PARAMÉTRICO
+
+x = x1 + t(x2-x1)
+
+y = y1 + t(y2-y1)
+
+0 <= t <= 1
+
+Se calculan:
+
+txmin
+txmax
+tymin
+tymax
+
+tMin = máximo
+
+tMax = mínimo
+
+Si:
+
+tMin > tMax
+
+La línea se rechaza.
+
+Punto Inicial:
+
+P(tMin)
+
+Punto Final:
+
+P(tMax)";
         }
     }
 }

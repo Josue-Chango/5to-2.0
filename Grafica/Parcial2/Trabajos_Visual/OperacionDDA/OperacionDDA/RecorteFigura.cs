@@ -186,5 +186,15 @@ namespace OperacionDDA
 
             return output;
         }
+
+        public List<PointF> VertexClipping( List<PointF> polygon, float xmin, float ymin, float xmax, float ymax)
+        {
+            return SutherlandHodgman( polygon, xmin, ymin, xmax, ymax);
+        }
+
+        public List<PointF> BoundingBoxClip( List<PointF> polygon, float xmin, float ymin, float xmax, float ymax)
+        {
+            return SutherlandHodgman( polygon, xmin, ymin, xmax, ymax);
+        }
     }
 }
