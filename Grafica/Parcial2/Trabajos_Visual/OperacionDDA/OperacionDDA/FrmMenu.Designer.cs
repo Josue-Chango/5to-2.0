@@ -36,6 +36,8 @@
             this.recorteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.recorteLineaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.recorteFiguraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.curvasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bezierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,7 +46,8 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.algoritmosToolStripMenuItem,
-            this.recorteToolStripMenuItem});
+            this.recorteToolStripMenuItem,
+            this.curvasToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 3, 0, 3);
@@ -66,21 +69,21 @@
             // dDAToolStripMenuItem
             // 
             this.dDAToolStripMenuItem.Name = "dDAToolStripMenuItem";
-            this.dDAToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.dDAToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
             this.dDAToolStripMenuItem.Text = "DDA";
             this.dDAToolStripMenuItem.Click += new System.EventHandler(this.dDAToolStripMenuItem_Click);
             // 
             // circunferenciaToolStripMenuItem
             // 
             this.circunferenciaToolStripMenuItem.Name = "circunferenciaToolStripMenuItem";
-            this.circunferenciaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.circunferenciaToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
             this.circunferenciaToolStripMenuItem.Text = "Circunferencia";
             this.circunferenciaToolStripMenuItem.Click += new System.EventHandler(this.circunferenciaToolStripMenuItem_Click);
             // 
             // rellenoToolStripMenuItem
             // 
             this.rellenoToolStripMenuItem.Name = "rellenoToolStripMenuItem";
-            this.rellenoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.rellenoToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
             this.rellenoToolStripMenuItem.Text = "Relleno";
             this.rellenoToolStripMenuItem.Click += new System.EventHandler(this.rellenoToolStripMenuItem_Click);
             // 
@@ -97,16 +100,31 @@
             // recorteLineaToolStripMenuItem
             // 
             this.recorteLineaToolStripMenuItem.Name = "recorteLineaToolStripMenuItem";
-            this.recorteLineaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.recorteLineaToolStripMenuItem.Size = new System.Drawing.Size(188, 26);
             this.recorteLineaToolStripMenuItem.Text = "Recorte linea";
             this.recorteLineaToolStripMenuItem.Click += new System.EventHandler(this.recorteLineaToolStripMenuItem_Click);
             // 
             // recorteFiguraToolStripMenuItem
             // 
             this.recorteFiguraToolStripMenuItem.Name = "recorteFiguraToolStripMenuItem";
-            this.recorteFiguraToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.recorteFiguraToolStripMenuItem.Size = new System.Drawing.Size(188, 26);
             this.recorteFiguraToolStripMenuItem.Text = "Recorte Figura";
             this.recorteFiguraToolStripMenuItem.Click += new System.EventHandler(this.recorteFiguraToolStripMenuItem_Click);
+            // 
+            // curvasToolStripMenuItem
+            // 
+            this.curvasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bezierToolStripMenuItem});
+            this.curvasToolStripMenuItem.Name = "curvasToolStripMenuItem";
+            this.curvasToolStripMenuItem.Size = new System.Drawing.Size(66, 24);
+            this.curvasToolStripMenuItem.Text = "Curvas";
+            // 
+            // bezierToolStripMenuItem
+            // 
+            this.bezierToolStripMenuItem.Name = "bezierToolStripMenuItem";
+            this.bezierToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.bezierToolStripMenuItem.Text = "Bezier";
+            this.bezierToolStripMenuItem.Click += new System.EventHandler(this.bezierToolStripMenuItem_Click);
             // 
             // FrmMenu
             // 
@@ -138,5 +156,7 @@
         private System.Windows.Forms.ToolStripMenuItem recorteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem recorteLineaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem recorteFiguraToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem curvasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bezierToolStripMenuItem;
     }
 }

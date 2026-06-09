@@ -48,11 +48,24 @@
   <ItemGroup>
     <Compile Include="BoundaryFillStepper.cs" />
     <Compile Include="Circunferencia.cs" />
+    <Compile Include="CurvaBezier.cs" />
     <Compile Include="FrmCircunferencia.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmCircunferencia.Designer.cs">
       <DependentUpon>FrmCircunferencia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCurva2P.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCurva2P.Designer.cs">
+      <DependentUpon>FrmCurva2P.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCurva3P.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCurva3P.Designer.cs">
+      <DependentUpon>FrmCurva3P.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmMenu.cs">
       <SubType>Form</SubType>
@@ -94,6 +107,12 @@
     <Compile Include="Validador.cs" />
     <EmbeddedResource Include="FrmCircunferencia.resx">
       <DependentUpon>FrmCircunferencia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCurva2P.resx">
+      <DependentUpon>FrmCurva2P.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCurva3P.resx">
+      <DependentUpon>FrmCurva3P.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMenu.resx">
       <DependentUpon>FrmMenu.cs</DependentUpon>

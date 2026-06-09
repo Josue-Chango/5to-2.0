@@ -61,5 +61,10 @@ namespace OperacionDDA
 
             frmrecortefigura.Show();
         }
+
+        private void bezierToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
