@@ -38,6 +38,7 @@
             this.recorteFiguraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.curvasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bezierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bezier3PToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -114,7 +115,8 @@
             // curvasToolStripMenuItem
             // 
             this.curvasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bezierToolStripMenuItem});
+            this.bezierToolStripMenuItem,
+            this.bezier3PToolStripMenuItem});
             this.curvasToolStripMenuItem.Name = "curvasToolStripMenuItem";
             this.curvasToolStripMenuItem.Size = new System.Drawing.Size(66, 24);
             this.curvasToolStripMenuItem.Text = "Curvas";
@@ -123,8 +125,15 @@
             // 
             this.bezierToolStripMenuItem.Name = "bezierToolStripMenuItem";
             this.bezierToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.bezierToolStripMenuItem.Text = "Bezier";
+            this.bezierToolStripMenuItem.Text = "Bezier2P";
             this.bezierToolStripMenuItem.Click += new System.EventHandler(this.bezierToolStripMenuItem_Click);
+            // 
+            // bezier3PToolStripMenuItem
+            // 
+            this.bezier3PToolStripMenuItem.Name = "bezier3PToolStripMenuItem";
+            this.bezier3PToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.bezier3PToolStripMenuItem.Text = "Bezier3P";
+            this.bezier3PToolStripMenuItem.Click += new System.EventHandler(this.bezier3PToolStripMenuItem_Click);
             // 
             // FrmMenu
             // 
@@ -158,5 +167,6 @@
         private System.Windows.Forms.ToolStripMenuItem recorteFiguraToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem curvasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bezierToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bezier3PToolStripMenuItem;
     }
 }

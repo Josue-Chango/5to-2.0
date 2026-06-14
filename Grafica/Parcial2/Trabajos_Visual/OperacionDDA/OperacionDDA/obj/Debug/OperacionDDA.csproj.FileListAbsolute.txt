@@ -80,3 +80,5 @@ E:\GIT\5to 2.0\Grafica\Parcial2\Trabajos_Visual\OperacionDDA\OperacionDDA\obj\De
 E:\GIT\5to 2.0\Grafica\Parcial2\Trabajos_Visual\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.csproj.CoreCompileInputs.cache
 E:\GIT\5to 2.0\Grafica\Parcial2\Trabajos_Visual\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.exe
 E:\GIT\5to 2.0\Grafica\Parcial2\Trabajos_Visual\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.pdb
+C:\Users\Josue\OneDrive\Documentos\GitHub\5to-2.0\Grafica\Parcial2\Trabajos_Visual\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.FrmCurva2P.resources
+C:\Users\Josue\OneDrive\Documentos\GitHub\5to-2.0\Grafica\Parcial2\Trabajos_Visual\OperacionDDA\OperacionDDA\obj\Debug\OperacionDDA.FrmCurva3P.resources

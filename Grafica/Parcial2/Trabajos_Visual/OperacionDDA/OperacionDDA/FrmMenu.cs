@@ -64,7 +64,18 @@ namespace OperacionDDA
 
         private void bezierToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            FrmCurva2P frmcurva2p = new FrmCurva2P();
+            frmcurva2p.MdiParent = this;
 
+            frmcurva2p.Show();
+        }
+
+        private void bezier3PToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCurva3P frmcurva3p = new FrmCurva3P();
+            frmcurva3p.MdiParent = this;
+
+            frmcurva3p.Show();
         }
     }
 }
