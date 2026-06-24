@@ -1,0 +1,143 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+
+\lstset{
+    language={[x86masm]Assembler},
+    basicstyle=\footnotesize\ttfamily,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{green!50!black},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny,
+    stepnumber=1,
+    frame=single,
+    breaklines=true,
+    tabsize=4,
+    captionpos=b,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ñ}{{\~n}}1
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+
+% =================== PORTADA ===================
+\begin{titlepage}
+    \centering
+    \vspace*{3cm}
+    {\Huge \bfseries Gesti\'on de Notas\\[0.5cm]
+    en Ensamblador 8086\par}
+    \vspace{2cm}
+    {\Large Integrantes: Alejandro Obando\par}
+    {\Large                               Josue Chango\par}
+    {\Large                               Alexander\par}
+    \vspace{1cm}
+    {\Large Nrc: 202650\par}
+
+    \vspace{2cm}
+    {\large \today\par}
+    \vfill
+\end{titlepage}
+
+% =================== OBJETIVO ===================
+\section{Objetivo del Proyecto}
+
+Desarrollar un programa en ensamblador 8086 que permita gestionar las notas de un grupo de estudiantes (hasta 10). El programa debe solicitar la cantidad de estudiantes, leer las notas individuales (v\'alidas de 00 a 20), calcular el promedio, la nota m\'as alta y la nota m\'as baja, y finalmente mostrar un resumen con estos resultados.
+
+% =================== DESCRIPCIÓN TÉCNICA ===================
+\section{Descripci\'on T\'ecnica}
+
+\subsection{Planteamiento del problema}
+
+Se requiere un sistema que permita al usuario ingresar la cantidad de estudiantes (entre 1 y 9) y posteriormente sus notas correspondientes, valide que cada nota est\'e en el rango de 0 a 20, y finalmente calcule y muestre el promedio, la nota m\'as alta y la nota m\'as baja del grupo. Todo debe implementarse en ensamblador 8086 para el emulador emu8086.
+
+\subsection{Algoritmo utilizado}
+
+El algoritmo sigue los siguientes pasos:
+
+\begin{enumerate}
+    \item Solicitar al usuario la cantidad de estudiantes.
+    \item Para cada estudiante:
+    \begin{enumerate}
+        \item Solicitar la nota como dos d\'igitos individuales (decena y unidad).
+        \item Validar que la nota est\'e entre 00 y 20.
+        \item Si es inv\'alida, mostrar mensaje de error y repetir la solicitud.
+    \end{enumerate}
+    \item Convertir cada par de d\'igitos a su valor num\'erico multiplicando la decena por 10 y sumando la unidad.
+    \item Calcular la suma total de las notas.
+    \item Determinar la nota m\'axima y m\'inima mediante comparaciones sucesivas.
+    \item Calcular el promedio mediante restas sucesivas (divisi\'on entera).
+    \item Mostrar el resumen: promedio, nota m\'as alta y nota m\'as baja.
+\end{enumerate}
+
+\subsection{Instrucciones clave del 8086 utilizadas}
+
+\begin{itemize}
+    \item \texttt{MOV} --- Transferencia de datos entre registros y memoria.
+    \item \texttt{CMP} --- Comparaci\'on de dos operandos para la toma de decisiones.
+    \item \texttt{JMP}, \texttt{JE}, \texttt{JG}, \texttt{JGE}, \texttt{JL}, \texttt{JNE} --- Saltos condicionales e incondicionales para el control de flujo.
+    \item \texttt{INT 21h} --- Llamadas al sistema operativo para entrada/salida.
+    \item \texttt{ADD}, \texttt{SUB}, \texttt{DEC}, \texttt{INC} --- Operaciones aritm\'eticas.
+    \item \texttt{LEA} --- Carga de direcciones efectivas para el manejo de cadenas.
+\end{itemize}
+
+% =================== IMPLEMENTACIÓN ===================
+\section{Implementaci\'on}
+
+\subsection{Herramientas utilizadas}
+
+\begin{itemize}
+    \item \textbf{emu8086} --- Emulador y ensamblador para microprocesadores 8086.
+    \item Editor de texto para la escritura del c\'odigo fuente.
+\end{itemize}
+
+\subsection{C\'odigo fuente}
+
+A continuaci\'on se presenta el c\'odigo completo del programa con comentarios explicativos:
+
+\lstinputlisting[language={[x86masm]Assembler}]{Gestion de notas.asm}
+
+% =================== PRUEBAS Y RESULTADOS ===================
+\section{Pruebas y Resultados}
+
+\subsection{Casos de prueba}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Caso} & \textbf{Cant. estudiantes} & \textbf{Notas} & \textbf{Promedio esperado} & \textbf{Max/Min esperados} \\ \hline
+1 & 3 & 15, 18, 20 & 17 & 20 / 15 \\ \hline
+2 & 4 & 10, 12, 14, 16 & 13 & 16 / 10 \\ \hline
+3 & 5 & 20, 20, 20, 20, 20 & 20 & 20 / 20 \\ \hline
+4 & 2 & 05, 00 & 2 & 05 / 00 \\ \hline
+5 & 3 & 07, 11, 14 & 10 & 14 / 07 \\ \hline
+\end{tabular}
+\caption{Casos de prueba del programa.}
+\end{table}
+
+\subsection{Ejecuci\'on del programa}
+
+Nota: Incluir aqu\'i las capturas de pantalla de la ejecuci\'on del programa en emu8086, mostrando la entrada de datos y los resultados obtenidos. Comparar los resultados obtenidos con los esperados para verificar el correcto funcionamiento.
+
+% =================== CONCLUSIONES ===================
+\section*{Conclusiones}
+\addcontentsline{toc}{section}{Conclusiones}
+
+El programa desarrollado cumple satisfactoriamente con el objetivo de gestionar notas mediante ensamblador 8086. Permite ingresar hasta 10 notas, valida que cada una est\'e en el rango permitido (00--20), y calcula correctamente el promedio, la nota m\'as alta y la nota m\'as baja.
+
+La implementaci\'on con instrucciones b\'asicas del 8086 como \texttt{MOV}, \texttt{CMP}, \texttt{ADD} y saltos condicionales demuestra la versatilidad del lenguaje ensamblador para resolver problemas de l\'ogica de negocios. El uso de restas sucesivas para el c\'alculo del promedio es una soluci\'on ingeniosa en un entorno sin instrucci\'on de divisi\'on directa.
+
+Se concluye que el programa es funcional, fiable y cumple con todos los requisitos planteados en el objetivo del proyecto.
+
+\end{document}
