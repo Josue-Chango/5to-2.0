@@ -1,0 +1,10 @@
+C:\Users\Josue\OneDrive\Documentos\GitHub\5to-2.0\Grafica\Parcial2\Trabajos_Visual\Chango_Josue_Ex2\Chango_Josue_Ex2\obj\Debug\Chango_Josue_Ex2.csproj.AssemblyReference.cache
+C:\Users\Josue\OneDrive\Documentos\GitHub\5to-2.0\Grafica\Parcial2\Trabajos_Visual\Chango_Josue_Ex2\Chango_Josue_Ex2\obj\Debug\Chango_Josue_Ex2.FrmPrincipal.resources
+C:\Users\Josue\OneDrive\Documentos\GitHub\5to-2.0\Grafica\Parcial2\Trabajos_Visual\Chango_Josue_Ex2\Chango_Josue_Ex2\obj\Debug\Chango_Josue_Ex2.Properties.Resources.resources
+C:\Users\Josue\OneDrive\Documentos\GitHub\5to-2.0\Grafica\Parcial2\Trabajos_Visual\Chango_Josue_Ex2\Chango_Josue_Ex2\obj\Debug\Chango_Josue_Ex2.csproj.GenerateResource.cache
+C:\Users\Josue\OneDrive\Documentos\GitHub\5to-2.0\Grafica\Parcial2\Trabajos_Visual\Chango_Josue_Ex2\Chango_Josue_Ex2\obj\Debug\Chango_Josue_Ex2.csproj.CoreCompileInputs.cache
+C:\Users\Josue\OneDrive\Documentos\GitHub\5to-2.0\Grafica\Parcial2\Trabajos_Visual\Chango_Josue_Ex2\Chango_Josue_Ex2\bin\Debug\Chango_Josue_Ex2.exe.config
+C:\Users\Josue\OneDrive\Documentos\GitHub\5to-2.0\Grafica\Parcial2\Trabajos_Visual\Chango_Josue_Ex2\Chango_Josue_Ex2\bin\Debug\Chango_Josue_Ex2.exe
+C:\Users\Josue\OneDrive\Documentos\GitHub\5to-2.0\Grafica\Parcial2\Trabajos_Visual\Chango_Josue_Ex2\Chango_Josue_Ex2\bin\Debug\Chango_Josue_Ex2.pdb
+C:\Users\Josue\OneDrive\Documentos\GitHub\5to-2.0\Grafica\Parcial2\Trabajos_Visual\Chango_Josue_Ex2\Chango_Josue_Ex2\obj\Debug\Chango_Josue_Ex2.exe
+C:\Users\Josue\OneDrive\Documentos\GitHub\5to-2.0\Grafica\Parcial2\Trabajos_Visual\Chango_Josue_Ex2\Chango_Josue_Ex2\obj\Debug\Chango_Josue_Ex2.pdb

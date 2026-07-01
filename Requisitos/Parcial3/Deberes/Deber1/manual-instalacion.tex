@@ -1,0 +1,462 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{graphicx}
+
+\geometry{margin=2.5cm}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    frame=single
+}
+
+\lstset{style=mystyle}
+
+\title{\textbf{Manual de Instalación y Ejecución}\\Sistema de Gestión de Citas Médicas}
+\author{Backend --- Express + PostgreSQL 17}
+\date{Junio 2026}
+
+\begin{document}
+\maketitle
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Requisitos del Sistema}
+Antes de comenzar, asegúrese de tener instalado lo siguiente:
+
+\begin{enumerate}
+    \item \textbf{Node.js} versión 18 o superior.
+          \begin{itemize}
+              \item Descargar de: \url{https://nodejs.org/}
+              \item Verificar instalación:
+                    \begin{lstlisting}[language=bash]
+node --version
+npm --version
+                    \end{lstlisting}
+          \end{itemize}
+
+    \item \textbf{PostgreSQL 17}.
+          \begin{itemize}
+              \item Descargar de: \url{https://www.postgresql.org/download/}
+              \item Durante la instalación, anote la contraseña del usuario \texttt{postgres}.
+              \item Verificar instalación:
+                    \begin{lstlisting}[language=bash]
+psql --version
+                    \end{lstlisting}
+          \end{itemize}
+
+    \item \textbf{Git} (opcional, para clonar el repositorio).
+          \begin{itemize}
+              \item Descargar de: \url{https://git-scm.com/}
+          \end{itemize}
+\end{enumerate}
+
+\section{Estructura del Proyecto}
+Al descomprimir el archivo, la estructura del proyecto es la siguiente:
+
+\begin{lstlisting}
+backend/
+  |-- prisma/
+  |     |-- schema.prisma        # Esquema de la base de datos
+  |     |-- seed.ts              # Datos iniciales (usuarios, doctores)
+  |     |-- migrate-citas.ts     # Migracion de citas.json a BD
+  |     |-- migrations/          # Migraciones SQL generadas
+  |-- src/
+  |     |-- index.ts             # Punto de entrada del servidor
+  |     |-- data/
+  |     |     |-- database.ts    # Conexion a PostgreSQL con Prisma
+  |     |-- models/              # Interfaces de TypeScript
+  |     |-- services/            # Logica de negocio
+  |     |-- controllers/         # Manejadores HTTP
+  |     |-- middleware/          # Autenticacion
+  |     |-- routes/              # Definicion de rutas Express
+  |     |-- generated/prisma/    # Cliente Prisma generado
+  |-- data/
+  |     |-- citas.json           # Respaldo de datos original (solo lectura)
+  |-- package.json
+  |-- tsconfig.json
+  |-- prisma.config.ts           # Configuracion de Prisma CLI
+  |-- .env                       # Variables de entorno (NO incluye nodemodules)
+  node_modules/                  # NO INCLUIDO, se genera con npm install
+\end{lstlisting}
+
+\textbf{Nota}: La carpeta \texttt{node\_modules} no se incluye en el archivo comprimido para reducir el tamaño. Se genera automáticamente en el paso \texttt{npm install}.
+
+\section{Guía de Instalación Paso a Paso}
+
+\subsection{Paso 1: Instalar PostgreSQL 17}
+\begin{enumerate}
+    \item Ejecute el instalador de PostgreSQL 17.
+    \item Acepte todas las opciones por defecto.
+    \item Cuando solicite una contraseña para el usuario \texttt{postgres}, ingrese una que recuerde (ej. \texttt{root}).
+    \item El puerto por defecto es \texttt{5432}.
+    \item Al finalizar, PostgreSQL se ejecutará como un servicio de Windows.
+\end{enumerate}
+
+Para verificar que el servicio está corriendo:
+\begin{lstlisting}[language=bash]
+Get-Service postgresql*
+\end{lstlisting}
+Debería mostrar estado \textbf{Running}. No es necesario tener pgAdmin abierto para que la aplicación funcione.
+
+\subsection{Paso 2: Crear la Base de Datos}
+
+\subsubsection{Opción A: Usando pgAdmin (interfaz gráfica)}
+\begin{enumerate}
+    \item Abra pgAdmin.
+    \item Conéctese al servidor local con la contraseña que configuró.
+    \item Haga clic derecho en \textbf{Databases} $\rightarrow$ \textbf{Create} $\rightarrow$ \textbf{Database}.
+    \item En el campo \textbf{Database}, escriba: \texttt{citas\_medicas}.
+    \item Haga clic en \textbf{Save}.
+\end{enumerate}
+
+\subsubsection{Opción B: Usando terminal (PowerShell)}
+\begin{lstlisting}[language=bash]
+psql -U postgres -c "CREATE DATABASE citas_medicas;"
+\end{lstlisting}
+Le pedirá la contraseña del usuario \texttt{postgres}.
+
+\subsection{Paso 3: Configurar la Conexión}
+Abra el archivo \texttt{backend/.env} y edite la línea con su contraseña real:
+
+\begin{lstlisting}
+DATABASE_URL="postgresql://postgres:SU_CONTRASENA@localhost:5432/citas_medicas"
+\end{lstlisting}
+Reemplace \texttt{SU\_CONTRASENA} por la contraseña que ingresó al instalar PostgreSQL.
+
+\subsection{Paso 4: Instalar Dependencias de Node.js}
+Abra una terminal en la carpeta \texttt{backend} y ejecute:
+
+\begin{lstlisting}[language=bash]
+npm install
+\end{lstlisting}
+Esto instalará todas las dependencias necesarias (Express, Prisma, TypeScript, etc.) y generará la carpeta \texttt{node\_modules}.
+
+\subsection{Paso 5: Ejecutar Migraciones}
+Las migraciones crean automáticamente las tablas en la base de datos:
+
+\begin{lstlisting}[language=bash]
+npx prisma migrate dev --name init
+\end{lstlisting}
+
+Este comando:
+\begin{itemize}
+    \item Lee el archivo \texttt{prisma/schema.prisma}.
+    \item Genera el SQL necesario para crear las tablas (\texttt{User}, \texttt{Doctor}, \texttt{Appointment}).
+    \item Aplica las migraciones a la base de datos \texttt{citas\_medicas}.
+\end{itemize}
+
+Si todo funciona correctamente, verá un mensaje como:
+\begin{lstlisting}
+Your database is now in sync with your schema.
+\end{lstlisting}
+
+\subsection{Paso 6: Generar el Cliente Prisma}
+\begin{lstlisting}[language=bash]
+npx prisma generate
+\end{lstlisting}
+Esto genera el cliente ORM tipado en la carpeta \texttt{src/generated/prisma/}.
+
+\subsection{Paso 7: Poblar la Base de Datos con Datos Iniciales}
+Ejecute el script de seed para insertar usuarios y doctores de ejemplo:
+
+\begin{lstlisting}[language=bash]
+npx tsx prisma/seed.ts
+\end{lstlisting}
+
+Debería ver el mensaje:
+\begin{lstlisting}
+Seed completed successfully
+\end{lstlisting}
+
+Los datos insertados son:
+
+\begin{itemize}
+    \item \textbf{Usuarios:}
+    \begin{itemize}
+        \item Juan Pérez (\texttt{juan@email.com}) --- Tiene seguro --- No penalizado
+        \item María López (\texttt{maria@email.com}) --- Sin seguro --- No penalizada
+        \item Carlos Ruiz (\texttt{carlos@email.com}) --- Tiene seguro --- Penalizado
+    \end{itemize}
+    \item \textbf{Doctores:}
+    \begin{itemize}
+        \item Cardiología: Dr. Ana García, Dr. Luis Martínez
+        \item Dermatología: Dr. Sofía Ramírez, Dr. Pedro Sánchez
+        \item Pediatría: Dr. Laura Torres, Dr. Andrés Vega
+    \end{itemize}
+\end{itemize}
+
+Todas las contraseñas son \texttt{123456}.
+
+\subsection{Paso 8: Migrar Citas de Ejemplo (Opcional)}
+Si desea cargar las citas de ejemplo del archivo \texttt{data/citas.json}:
+
+\begin{lstlisting}[language=bash]
+npx tsx prisma/migrate-citas.ts
+\end{lstlisting}
+
+Debería ver:
+\begin{lstlisting}
+Migracion completada: 4 citas importadas
+\end{lstlisting}
+
+\subsection{Paso 9: Iniciar el Servidor}
+\begin{lstlisting}[language=bash]
+npm run dev
+\end{lstlisting}
+
+Este comando usa \texttt{nodemon} para reiniciar automáticamente el servidor cuando detecta cambios en el código. Debería ver:
+\begin{lstlisting}
+Servidor corriendo en http://localhost:3000
+\end{lstlisting}
+
+\section{Probando la API}
+Una vez el servidor esté corriendo, puede probar los endpoints. Abra otra terminal (sin cerrar la del servidor).
+
+\subsection{Verificar que el servidor responde}
+\begin{lstlisting}[language=bash]
+curl http://localhost:3000/api/health
+\end{lstlisting}
+Respuesta esperada:
+\begin{lstlisting}
+{"status":"ok","service":"Sistema de Gestion de Citas Medicas"}
+\end{lstlisting}
+
+\subsection{Obtener especialidades médicas}
+\begin{lstlisting}[language=bash]
+curl http://localhost:3000/api/schedule/especialidades
+\end{lstlisting}
+Respuesta esperada:
+\begin{lstlisting}
+["Cardiologia","Dermatologia","Pediatria"]
+\end{lstlisting}
+
+\subsection{Listar médicos por especialidad}
+\begin{lstlisting}[language=bash]
+curl http://localhost:3000/api/schedule/medicos/Cardiologia
+\end{lstlisting}
+
+\subsection{Ver horarios disponibles}
+\begin{lstlisting}[language=bash]
+curl "http://localhost:3000/api/schedule/horarios?medicoId=2&fecha=2026-06-26"
+\end{lstlisting}
+
+\subsection{Iniciar sesión}
+\begin{lstlisting}[language=bash]
+curl -X POST http://localhost:3000/api/auth/login ^
+  -H "Content-Type: application/json" ^
+  -d "{\"email\":\"juan@email.com\",\"password\":\"123456\"}"
+\end{lstlisting}
+Respuesta esperada (devuelve un token y datos del usuario):
+\begin{lstlisting}
+{"token":"...","user":{"id":"1","nombre":"Juan Perez","email":"juan@email.com",...}}
+\end{lstlisting}
+
+\subsection{Reservar una cita (requiere token)}
+\begin{lstlisting}[language=bash]
+curl -X POST http://localhost:3000/api/appointments/reservar ^
+  -H "Content-Type: application/json" ^
+  -H "Authorization: Bearer TOKEN_AQUI" ^
+  -d "{\"medicoId\":\"2\",\"especialidad\":\"Cardiologia\",\"fecha\":\"2026-07-01\",\"hora\":\"10:00\"}"
+\end{lstlisting}
+
+\subsection{Listar citas del paciente}
+\begin{lstlisting}[language=bash]
+curl http://localhost:3000/api/appointments ^
+  -H "Authorization: Bearer TOKEN_AQUI"
+\end{lstlisting}
+
+\section{Resolución de Problemas Comunes}
+
+\subsection{Error: ``getaddrinfo ENOTFOUND'' al conectar a PostgreSQL}
+\begin{itemize}
+    \item Verifique que el servicio de PostgreSQL esté corriendo:
+    \begin{lstlisting}[language=bash]
+Get-Service postgresql*
+    \end{lstlisting}
+    \item Si no está corriendo, inícielo:
+    \begin{lstlisting}[language=bash]
+Start-Service postgresql-x64-17
+    \end{lstlisting}
+\end{itemize}
+
+\subsection{Error: ``authentication failed''}
+\begin{itemize}
+    \item Revise que la contraseña en \texttt{.env} coincida con la que configuró en PostgreSQL.
+\end{itemize}
+
+\subsection{Error: ``database citas\_medicas does not exist''}
+\begin{itemize}
+    \item Aún no ha creado la base de datos. Vuelva a la sección 3.2.
+\end{itemize}
+
+\subsection{Error: ``port 5432 is already in use''}
+\begin{itemize}
+    \item Otra instancia de PostgreSQL ya está usando el puerto 5432.
+    \item Puede cambiar el puerto en el archivo \texttt{.env} agregando \texttt{?port=5433} al final de la URL.
+\end{itemize}
+
+\subsection{Error: ``Cannot find module'' al ejecutar npm run dev}
+\begin{itemize}
+    \item Ejecute \texttt{npm install} nuevamente para regenerar \texttt{node\_modules}.
+\end{itemize}
+
+\section{Estructura de la Base de Datos}
+
+\subsection{Diagrama de Tablas}
+\begin{verbatim}
+  +--------+          +-------------+          +---------+
+  |  User  |          | Appointment |          | Doctor  |
+  +--------+          +-------------+          +---------+
+  | id     |--+    +--| pacienteId  |----+     | id     |--+
+  | nombre |  |    |  | medicoId    |---+ |     | nombre |  |
+  | email  |  |    |  | especialidad|   | |     | especial|  |
+  | pass   |  |    |  | fecha       |   | |     +---------+  |
+  | seguro |  |    |  | hora        |   | |                   |
+  | penali |  |    |  | estado      |   | |                   |
+  +--------+  |    |  | descuento   |   | |                   |
+              |    |  | createdAt   |   | |                   |
+              |    |  +-------------+   | |                   |
+              +----+--------------------+ +-------------------+
+\end{verbatim}
+
+\subsection{Descripción de las Tablas}
+
+\textbf{User}: Almacena los pacientes del sistema.
+\begin{itemize}
+    \item \texttt{id}: Identificador único.
+    \item \texttt{nombre}: Nombre completo del paciente.
+    \item \texttt{email}: Correo electrónico (único).
+    \item \texttt{password}: Contraseña de acceso.
+    \item \texttt{tieneSeguro}: Indica si el paciente tiene seguro médico.
+    \item \texttt{penalizado}: Indica si el paciente tiene bloqueos administrativos.
+\end{itemize}
+
+\textbf{Doctor}: Almacena los médicos disponibles.
+\begin{itemize}
+    \item \texttt{id}: Identificador único.
+    \item \texttt{nombre}: Nombre completo del médico.
+    \item \texttt{especialidad}: Especialidad médica.
+\end{itemize}
+
+\textbf{Appointment}: Almacena las citas médicas.
+\begin{itemize}
+    \item \texttt{id}: Identificador único (formato: \texttt{CITA-} + timestamp).
+    \item \texttt{pacienteId}: Referencia al paciente (relación con User).
+    \item \texttt{medicoId}: Referencia al médico (relación con Doctor).
+    \item \texttt{especialidad}: Especialidad de la cita.
+    \item \texttt{fecha}: Fecha de la cita (formato \texttt{YYYY-MM-DD}).
+    \item \texttt{hora}: Hora de la cita (formato \texttt{HH:MM}).
+    \item \texttt{estado}: Estado de la cita (\texttt{pendiente}, \texttt{confirmada}, \texttt{cancelada}, \texttt{completada}).
+    \item \texttt{descuentoAplicado}: Indica si se aplicó descuento por seguro.
+    \item \texttt{createdAt}: Fecha y hora de creación del registro.
+\end{itemize}
+
+\section{Script de Instalación Automática}
+Para facilitar la instalación en otra máquina, incluya el siguiente archivo \texttt{setup.bat} en la raíz del proyecto \texttt{backend}:
+
+\begin{lstlisting}[language=bash]
+@echo off
+echo ====================================
+echo  Configuracion del Sistema de Citas
+echo ====================================
+echo.
+
+echo [1/5] Instalando dependencias...
+call npm install
+if %errorlevel% neq 0 (
+    echo Error instalando dependencias
+    pause
+    exit /b 1
+)
+
+echo [2/5] Ejecutando migraciones...
+call npx prisma migrate dev --name init
+if %errorlevel% neq 0 (
+    echo Error ejecutando migraciones
+    pause
+    exit /b 1
+)
+
+echo [3/5] Generando cliente Prisma...
+call npx prisma generate
+if %errorlevel% neq 0 (
+    echo Error generando cliente
+    pause
+    exit /b 1
+)
+
+echo [4/5] Insertando datos iniciales...
+call npx tsx prisma/seed.ts
+if %errorlevel% neq 0 (
+    echo Error insertando datos
+    pause
+    exit /b 1
+)
+
+echo [5/5] Migrando citas de ejemplo...
+call npx tsx prisma/migrate-citas.ts
+
+echo.
+echo ====================================
+echo  Instalacion completada con exito
+echo ====================================
+echo.
+echo Ejecute 'npm run dev' para iniciar el servidor
+echo.
+pause
+\end{lstlisting}
+
+\section{Comandos Rápidos}
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Comando} & \textbf{Descripción} \\
+\hline
+\texttt{npm install} & Instalar dependencias \\
+\texttt{npm run dev} & Iniciar servidor en modo desarrollo \\
+\texttt{npx prisma studio} & Abrir interfaz gráfica de la BD \\
+\texttt{npx tsx prisma/seed.ts} & Poblar datos iniciales \\
+\texttt{npx tsx prisma/migrate-citas.ts} & Importar citas de ejemplo \\
+\texttt{npx tsc --noEmit} & Verificar errores de TypeScript \\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Notas Finales}
+\begin{itemize}
+    \item La carpeta \texttt{node\_modules} no se incluye en el archivo comprimido. Siempre ejecute \texttt{npm install} después de descomprimir.
+    \item La base de datos no viaja en el proyecto. Debe crearla localmente siguiendo los pasos de la sección 3.
+    \item El archivo \texttt{data/citas.json} se mantiene como respaldo de solo lectura. Los datos reales están en PostgreSQL.
+    \item Si usa Windows PowerShell, reemplace \texttt{\^{}} por \texttt{`} al hacer saltos de línea en los comandos \texttt{curl}.
+    \item Para apagar el servidor, presione \texttt{Ctrl + C} en la terminal donde se ejecuta.
+\end{itemize}
+
+\end{document}

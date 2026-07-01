@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "4zSq36eSWXU=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Josue\\Documents\\GitHub\\Proyecto_Paint\\paint-application-csharp-main\\PaintApplicationAssignment.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Josue\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\Josue\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
+    "C:\\Users\\Josue\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\Josue\\.nuget\\packages\\system.resources.extensions\\5.0.0\\system.resources.extensions.5.0.0.nupkg.sha512",
+    "C:\\Users\\Josue\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.3\\system.runtime.compilerservices.unsafe.4.5.3.nupkg.sha512"
+  ],
+  "logs": []
+}

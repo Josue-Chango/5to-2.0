@@ -1,0 +1,308 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\geometry{margin=2.5cm}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    frame=single
+}
+
+\lstset{style=mystyle}
+
+\title{\textbf{Migración de Base de Datos}\\Sistema de Gestión de Citas Médicas}
+\author{Backend -- Express + TypeScript + Prisma + PostgreSQL}
+\date{Junio 2026}
+
+\begin{document}
+\maketitle
+
+\section{Introducción}
+Este documento describe el proceso de migración del almacenamiento de datos del Sistema de Gestión de Citas Médicas, pasando de un archivo JSON local (\texttt{citas.json}) a una base de datos relacional PostgreSQL 17 utilizando Prisma ORM versión 7.
+
+\section{Tecnologías Utilizadas}
+\begin{itemize}
+    \item \textbf{PostgreSQL 17}: Motor de base de datos relacional.
+    \item \textbf{Prisma ORM 7.8.0}: ORM para TypeScript con tipado automático.
+    \item \textbf{Node.js 24} + \textbf{Express.js 5}: Servidor backend.
+    \item \textbf{TypeScript 6}: Lenguaje de programación.
+\end{itemize}
+
+\section{Pasos Realizados}
+
+\subsection{Instalación de PostgreSQL 17}
+Se descargó e instaló PostgreSQL 17 desde el sitio oficial. Durante la instalación se configuró una contraseña para el usuario \texttt{postgres}. El motor queda corriendo como un servicio de Windows, por lo que no es necesario tener pgAdmin abierto para que la aplicación funcione.
+
+\subsection{Creación de la Base de Datos}
+Se creó la base de datos \texttt{citas\_medicas} desde pgAdmin (también pudo haberse creado vía terminal con \texttt{CREATE DATABASE citas\_medicas}).
+
+\subsection{Instalación de Dependencias}
+Se instalaron los paquetes necesarios para conectar Prisma con PostgreSQL:
+
+\begin{lstlisting}[language=bash]
+npm install prisma @prisma/client
+npm install @prisma/adapter-pg pg dotenv
+\end{lstlisting}
+
+\begin{itemize}
+    \item \texttt{prisma}: CLI para migraciones y generación de cliente.
+    \item \texttt{@prisma/client}: Cliente ORM generado.
+    \item \texttt{@prisma/adapter-pg}: Adaptador para conectar Prisma 7 con PostgreSQL nativo.
+    \item \texttt{pg}: Driver nativo de PostgreSQL para Node.js.
+    \item \texttt{dotenv}: Carga de variables de entorno.
+\end{itemize}
+
+\subsection{Configuración de Prisma}
+Prisma v7 introdujo cambios significativos en la configuración. Se generaron automáticamente dos archivos clave:
+
+\subsubsection{Archivo \texttt{prisma.config.ts}}
+Define la URL de conexión, ruta del esquema y script de seed:
+
+\begin{lstlisting}[language=TypeScript]
+import "dotenv/config";
+import { defineConfig } from "prisma/config";
+
+export default defineConfig({
+    schema: "prisma/schema.prisma",
+    migrations: {
+        path: "prisma/migrations",
+    },
+    seed: {
+        script: "tsx prisma/seed.ts",
+    },
+    datasource: {
+        url: process.env["DATABASE_URL"],
+    },
+});
+\end{lstlisting}
+
+\subsubsection{Archivo \texttt{.env}}
+Contiene la cadena de conexión a PostgreSQL:
+
+\begin{lstlisting}
+DATABASE_URL="postgresql://postgres:contraseña@localhost:5432/citas_medicas"
+\end{lstlisting}
+
+\subsection{Definición del Esquema (\texttt{prisma/schema.prisma})}
+Se definieron tres modelos (User, Doctor, Appointment) y un enum para el estado de las citas:
+
+\begin{lstlisting}[language=Prisma]
+enum EstadoCita {
+    pendiente
+    confirmada
+    cancelada
+    completada
+}
+
+model User {
+    id          String        @id
+    nombre      String
+    email       String        @unique
+    password    String
+    tieneSeguro Boolean
+    penalizado  Boolean
+    citas       Appointment[]
+}
+
+model Doctor {
+    id          String        @id
+    nombre      String
+    especialidad String
+    citas       Appointment[]
+}
+
+model Appointment {
+    id                String      @id
+    pacienteId        String
+    medicoId          String
+    especialidad      String
+    fecha             String
+    hora              String
+    estado            EstadoCita  @default(pendiente)
+    descuentoAplicado Boolean     @default(false)
+    createdAt         DateTime    @default(now())
+    paciente          User        @relation(fields: [pacienteId], references: [id])
+    medico            Doctor      @relation(fields: [medicoId], references: [id])
+}
+\end{lstlisting}
+
+\subsection{Ejecución de Migraciones}
+Se ejecutó la migración inicial que creó las tablas en PostgreSQL:
+
+\begin{lstlisting}[language=bash]
+npx prisma migrate dev --name init
+npx prisma migrate dev --name add-enum
+\end{lstlisting}
+
+Esto generó los archivos SQL en \texttt{prisma/migrations/} y aplicó los cambios a la base de datos.
+
+\subsection{Generación del Cliente Prisma}
+\begin{lstlisting}[language=bash]
+npx prisma generate
+\end{lstlisting}
+Genera el cliente tipado en \texttt{src/generated/prisma/}.
+
+\subsection{Inserción de Datos Iniciales}
+Se creó un script de seed (\texttt{prisma/seed.ts}) con los usuarios y doctores del sistema original:
+
+\begin{lstlisting}[language=TypeScript]
+import "dotenv/config";
+import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from "../src/generated/prisma/client";
+
+const connectionString = process.env.DATABASE_URL!;
+const adapter = new PrismaPg({ connectionString });
+const prisma = new PrismaClient({ adapter });
+
+async function main() {
+    // Inserta usuarios
+    await prisma.user.createMany({
+        data: [
+            { id: '1', nombre: 'Juan Perez', email: 'juan@email.com',
+              password: '123456', tieneSeguro: true, penalizado: false },
+            { id: '2', nombre: 'Maria Lopez', email: 'maria@email.com',
+              password: '123456', tieneSeguro: false, penalizado: false },
+            { id: '3', nombre: 'Carlos Ruiz', email: 'carlos@email.com',
+              password: '123456', tieneSeguro: true, penalizado: true },
+        ],
+        skipDuplicates: true,
+    });
+    // Inserta doctores
+    await prisma.doctor.createMany({
+        data: [
+            { id: '1', nombre: 'Dr. Ana Garcia', especialidad: 'Cardiologia' },
+            { id: '2', nombre: 'Dr. Luis Martinez', especialidad: 'Cardiologia' },
+            // ...
+        ],
+        skipDuplicates: true,
+    });
+    console.log('Seed completado');
+}
+main().catch(console.error).finally(() => prisma.$disconnect());
+\end{lstlisting}
+
+\subsection{Migración de Datos Existentes}
+Se creó un script (\texttt{prisma/migrate-citas.ts}) para importar las citas del archivo \texttt{citas.json} a PostgreSQL:
+
+\begin{lstlisting}[language=TypeScript]
+import "dotenv/config";
+import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from "../src/generated/prisma/client";
+import * as fs from "fs";
+import * as path from "path";
+
+const connectionString = process.env.DATABASE_URL!;
+const adapter = new PrismaPg({ connectionString });
+const prisma = new PrismaClient({ adapter });
+
+async function migrar() {
+    const citas = JSON.parse(
+        fs.readFileSync(path.join(__dirname, "../data/citas.json"), "utf-8")
+    );
+    let count = 0;
+    for (const cita of citas) {
+        await prisma.appointment.upsert({
+            where: { id: cita.id },
+            update: {},
+            create: {
+                id: cita.id,
+                pacienteId: cita.pacienteId,
+                medicoId: cita.medicoId,
+                especialidad: cita.especialidad,
+                fecha: cita.fecha,
+                hora: cita.hora,
+                estado: cita.estado,
+                descuentoAplicado: cita.descuentoAplicado,
+                createdAt: new Date(cita.createdAt),
+            },
+        });
+        count++;
+    }
+    console.log(`Migracion completada: ${count} citas importadas`);
+    await prisma.$disconnect();
+}
+migrar().catch(console.error);
+\end{lstlisting}
+
+Se importaron exitosamente 4 citas a la base de datos.
+
+\subsection{Conexión desde la Aplicación}
+Se creó el helper de conexión en \texttt{src/data/database.ts} usando el adaptador de Prisma 7:
+
+\begin{lstlisting}[language=TypeScript]
+import "dotenv/config";
+import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from "../generated/prisma/client";
+
+const connectionString = process.env.DATABASE_URL!;
+const adapter = new PrismaPg({ connectionString });
+const prisma = new PrismaClient({ adapter });
+
+export default prisma;
+\end{lstlisting}
+
+\subsection{Actualización de Servicios}
+Todos los servicios (auth, appointments, schedule) se actualizaron para usar métodos asíncronos de Prisma en lugar de manipular arreglos en memoria y el archivo JSON.
+
+Ejemplo del servicio de citas:
+
+\begin{lstlisting}[language=TypeScript]
+export async function crearCita(pacienteId: string, data: CreateAppointmentRequest) {
+    const paciente = await prisma.user.findUnique({ where: { id: pacienteId } });
+    if (!paciente) return { error: 'Paciente no encontrado' };
+    if (paciente.penalizado) return { error: 'El paciente tiene bloqueos administrativos' };
+    // ...
+    const cita = await prisma.appointment.create({ data: { ... } });
+    return cita;
+}
+\end{lstlisting}
+
+\subsection{Actualización de Controladores y Middleware}
+Se cambiaron a funciones asíncronas y se eliminaron las dependencias directas del arreglo en memoria. El middleware de autenticación ahora consulta la base de datos con \texttt{prisma.user.findUnique()}.
+
+\section{Verificación del Funcionamiento}
+\begin{enumerate}
+    \item La compilación de TypeScript se completa sin errores (\texttt{npx tsc --noEmit}).
+    \item El servidor Express inicia correctamente en \texttt{http://localhost:3000}.
+    \item El endpoint \texttt{GET /api/health} responde con estado \texttt{ok}.
+    \item Los endpoints de schedule (\texttt{/api/schedule/especialidades}) devuelven datos desde PostgreSQL.
+    \item El login (\texttt{POST /api/auth/login}) autentica usuarios contra la base de datos.
+\end{enumerate}
+
+\section{Conclusión}
+La migración de JSON a PostgreSQL 17 se realizó con éxito. La aplicación ahora cuenta con:
+\begin{itemize}
+    \item Integridad referencial gracias a las relaciones entre tablas.
+    \item Consultas concurrentes seguras (sin riesgo de corrupción del archivo JSON).
+    \item Escalabilidad para agregar más datos sin degradación.
+    \item Tipado automático generado por Prisma.
+    \item Independencia de pgAdmin: solo requiere que el servicio de PostgreSQL esté corriendo.
+\end{itemize}
+
+\end{document}
