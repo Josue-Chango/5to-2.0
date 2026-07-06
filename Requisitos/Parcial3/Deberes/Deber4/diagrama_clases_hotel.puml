@@ -1,0 +1,188 @@
+@startuml
+!theme plain
+skinparam backgroundColor white
+skinparam class {
+    BorderColor black
+    BackgroundColor white
+}
+
+package "Modelo Hotel" {
+
+class TipoHabitacion {
+    - idTipo: int
+    - nombre: String
+    - descripcion: String
+    - capacidad: int
+    - precioBase: double
+    -- constructores --
+    + TipoHabitacion()
+    + TipoHabitacion(idTipo, nombre, descripcion, capacidad, precioBase)
+    -- getters/setters --
+    + getIdTipo(): int
+    + setIdTipo(int): void
+    + getNombre(): String
+    + setNombre(String): void
+    + getDescripcion(): String
+    + setDescripcion(String): void
+    + getCapacidad(): int
+    + setCapacidad(int): void
+    + getPrecioBase(): double
+    + setPrecioBase(double): void
+}
+
+class Habitacion {
+    - idHabitacion: int
+    - numero: String
+    - piso: int
+    - estado: String
+    - idTipo: int
+    -- constructores --
+    + Habitacion()
+    + Habitacion(idHabitacion, numero, piso, estado, idTipo)
+    -- getters/setters --
+    + getIdHabitacion(): int
+    + setIdHabitacion(int): void
+    + getNumero(): String
+    + setNumero(String): void
+    + getPiso(): int
+    + setPiso(int): void
+    + getEstado(): String
+    + setEstado(String): void
+    + getIdTipo(): int
+    + setIdTipo(int): void
+}
+
+class Cliente {
+    - idCliente: int
+    - nombre: String
+    - apellido: String
+    - dni: String
+    - telefono: String
+    - email: String
+    - direccion: String
+    -- constructores --
+    + Cliente()
+    + Cliente(idCliente, nombre, apellido, dni, telefono, email, direccion)
+    -- getters/setters --
+    + getIdCliente(): int
+    + setIdCliente(int): void
+    + getNombre(): String
+    + setNombre(String): void
+    + getApellido(): String
+    + setApellido(String): void
+    + getDni(): String
+    + setDni(String): void
+    + getTelefono(): String
+    + setTelefono(String): void
+    + getEmail(): String
+    + setEmail(String): void
+    + getDireccion(): String
+    + setDireccion(String): void
+}
+
+class Reserva {
+    - idReserva: int
+    - idCliente: int
+    - idHabitacion: int
+    - fechaEntrada: LocalDate
+    - fechaSalida: LocalDate
+    - estado: String
+    - fechaReserva: LocalDate
+    - total: double
+    - servicios: List<ReservaServicio>
+    -- constructores --
+    + Reserva()
+    + Reserva(idReserva, idCliente, idHabitacion, fechaEntrada, fechaSalida, estado)
+    -- getters/setters --
+    + getIdReserva(): int
+    + setIdReserva(int): void
+    + getIdCliente(): int
+    + setIdCliente(int): void
+    + getIdHabitacion(): int
+    + setIdHabitacion(int): void
+    + getFechaEntrada(): LocalDate
+    + setFechaEntrada(LocalDate): void
+    + getFechaSalida(): LocalDate
+    + setFechaSalida(LocalDate): void
+    + getEstado(): String
+    + setEstado(String): void
+    + getFechaReserva(): LocalDate
+    + setFechaReserva(LocalDate): void
+    + getTotal(): double
+    + setTotal(double): void
+    + getServicios(): List<ReservaServicio>
+    + setServicios(List<ReservaServicio>): void
+}
+
+class Gasto {
+    - idGasto: int
+    - idReserva: int
+    - descripcion: String
+    - monto: double
+    - fecha: LocalDate
+    -- constructores --
+    + Gasto()
+    + Gasto(idGasto, idReserva, descripcion, monto, fecha)
+    -- getters/setters --
+    + getIdGasto(): int
+    + setIdGasto(int): void
+    + getIdReserva(): int
+    + setIdReserva(int): void
+    + getDescripcion(): String
+    + setDescripcion(String): void
+    + getMonto(): double
+    + setMonto(double): void
+    + getFecha(): LocalDate
+    + setFecha(LocalDate): void
+}
+
+class Servicio {
+    - idServicio: int
+    - nombre: String
+    - descripcion: String
+    - precio: double
+    -- constructores --
+    + Servicio()
+    + Servicio(idServicio, nombre, descripcion, precio)
+    -- getters/setters --
+    + getIdServicio(): int
+    + setIdServicio(int): void
+    + getNombre(): String
+    + setNombre(String): void
+    + getDescripcion(): String
+    + setDescripcion(String): void
+    + getPrecio(): double
+    + setPrecio(double): void
+}
+
+class ReservaServicio {
+    - idReserva: int
+    - idServicio: int
+    - cantidad: int
+    - subtotal: double
+    -- constructores --
+    + ReservaServicio()
+    + ReservaServicio(idReserva, idServicio, cantidad, subtotal)
+    -- getters/setters --
+    + getIdReserva(): int
+    + setIdReserva(int): void
+    + getIdServicio(): int
+    + setIdServicio(int): void
+    + getCantidad(): int
+    + setCantidad(int): void
+    + getSubtotal(): double
+    + setSubtotal(double): void
+}
+
+}
+
+' ===== Relaciones =====
+
+TipoHabitacion "1" -- "0..*" Habitacion : tiene
+Habitacion "1" -- "0..*" Reserva : reservada en
+Cliente "1" -- "0..*" Reserva : realiza
+Reserva "1" -- "0..*" Gasto : genera
+Reserva "1" -- "0..*" ReservaServicio : incluye
+Servicio "1" -- "0..*" ReservaServicio : ofrecido en
+
+@enduml

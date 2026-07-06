@@ -1,0 +1,297 @@
+1) Paciente.java
+
+import java.util.List;
+
+public class Paciente {
+
+    private Integer idPaciente;
+    private String nombres;
+    private String email;
+    private String telefono;
+    private Integer penalidadesActivas;
+
+    public Paciente() {
+    }
+
+    public Paciente(Integer idPaciente, String nombres, String email, String telefono, Integer penalidadesActivas) {
+        this.idPaciente = idPaciente;
+        this.nombres = nombres;
+        this.email = email;
+        this.telefono = telefono;
+        this.penalidadesActivas = penalidadesActivas;
+    }
+
+    public Integer getIdPaciente() {
+        return idPaciente;
+    }
+
+    public void setIdPaciente(Integer idPaciente) {
+        this.idPaciente = idPaciente;
+    }
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public Integer getPenalidadesActivas() {
+        return penalidadesActivas;
+    }
+
+    public void setPenalidadesActivas(Integer penalidadesActivas) {
+        this.penalidadesActivas = penalidadesActivas;
+    }
+
+    // Relación: Paciente "1" -- "0..*" Cita : "agenda >"
+    public List<Cita> consultarCitas() {
+        return null;
+    }
+
+    public Boolean cancelarCita(Integer idCita) {
+        return null;
+    }
+}
+2) Medico.java
+
+import java.util.Date;
+import java.util.List;
+import java.sql.Time;
+
+public class Medico {
+
+    private Integer idMedico;
+    private String nombres;
+    private String especialidad;
+
+    public Medico() {
+    }
+
+    public Medico(Integer idMedico, String nombres, String especialidad) {
+        this.idMedico = idMedico;
+        this.nombres = nombres;
+        this.especialidad = especialidad;
+    }
+
+    public Integer getIdMedico() {
+        return idMedico;
+    }
+
+    public void setIdMedico(Integer idMedico) {
+        this.idMedico = idMedico;
+    }
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public String getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    // Método del diagrama: obtenerDisponibilidad(fecha: Date): List<BloqueHorario>
+    public List<BloqueHorario> obtenerDisponibilidad(Date fecha) {
+        return null;
+    }
+}
+3) Cita.java
+
+import java.time.LocalDateTime;
+
+public class Cita {
+
+    private Integer idCita;
+    private LocalDateTime fechaCreacion;
+    private String estado;
+
+    public Cita() {
+    }
+
+    public Cita(Integer idCita, LocalDateTime fechaCreacion, String estado) {
+        this.idCita = idCita;
+        this.fechaCreacion = fechaCreacion;
+        this.estado = estado;
+    }
+
+    public Integer getIdCita() {
+        return idCita;
+    }
+
+    public void setIdCita(Integer idCita) {
+        this.idCita = idCita;
+    }
+
+    public LocalDateTime getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(LocalDateTime fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public void confirmarCita() {
+    }
+
+    public void anularCita() {
+    }
+}
+4) BloqueHorario.java
+
+import java.sql.Time;
+import java.time.LocalDate;
+
+public class BloqueHorario {
+
+    private Integer idBloque;
+    private LocalDate fecha;
+    private Time horaInicio;
+    private Time horaFin;
+    private String estado;
+
+    public BloqueHorario() {
+    }
+
+    public BloqueHorario(Integer idBloque, LocalDate fecha, Time horaInicio, Time horaFin, String estado) {
+        this.idBloque = idBloque;
+        this.fecha = fecha;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.estado = estado;
+    }
+
+    public Integer getIdBloque() {
+        return idBloque;
+    }
+
+    public void setIdBloque(Integer idBloque) {
+        this.idBloque = idBloque;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+
+    public Time getHoraInicio() {
+        return horaInicio;
+    }
+
+    public void setHoraInicio(Time horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public Time getHoraFin() {
+        return horaFin;
+    }
+
+    public void setHoraFin(Time horaFin) {
+        this.horaFin = horaFin;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public void marcarOcupado() {
+    }
+
+    public void liberarBloque() {
+    }
+}
+5) Notificacion.java
+
+import java.time.LocalDateTime;
+
+public class Notificacion {
+
+    private Integer idNotificacion;
+    private String tipo;
+    private String mensaje;
+    private LocalDateTime fechaEnvio;
+
+    public Notificacion() {
+    }
+
+    public Notificacion(Integer idNotificacion, String tipo, String mensaje, LocalDateTime fechaEnvio) {
+        this.idNotificacion = idNotificacion;
+        this.tipo = tipo;
+        this.mensaje = mensaje;
+        this.fechaEnvio = fechaEnvio;
+    }
+
+    public Integer getIdNotificacion() {
+        return idNotificacion;
+    }
+
+    public void setIdNotificacion(Integer idNotificacion) {
+        this.idNotificacion = idNotificacion;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public LocalDateTime getFechaEnvio() {
+        return fechaEnvio;
+    }
+
+    public void setFechaEnvio(LocalDateTime fechaEnvio) {
+        this.fechaEnvio = fechaEnvio;
+    }
+
+    public void enviar(String emailDestino) {
+    }
+}
