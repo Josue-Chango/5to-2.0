@@ -1,0 +1,32 @@
+DIAGRAMA: Hotel
+Tipo: Diagrama de entidades (estilo modelo Entidad-Relación / clases), sin atributos definidos aún.
+
+ENTIDADES (6 cajas vacías, sin atributos ni relaciones dibujadas):
+
+1. HABITACION
+   - Atributos: (vacío)
+
+2. TIPO HABITACION
+   - Atributos: (vacío)
+
+3. RESERVA
+   - Atributos: (vacío)
+
+4. CLIENTE
+   - Atributos: (vacío)
+
+5. GASTOS
+   - Atributos: (vacío)
+
+6. SERVICIOS
+   - Atributos: (vacío)
+
+DISPOSICIÓN ESPACIAL (fila, columna aproximada):
+- Fila superior: HABITACION | RESERVA | CLIENTE
+- Fila inferior: TIPO HABITACION | GASTOS | SERVICIOS
+
+RELACIONES ENTRE ENTIDADES: No se muestran líneas ni cardinalidades en la imagen original.
+
+NOTA: Este archivo describe únicamente la estructura visual (nombres de entidades y su posición), ya que las cajas no contienen atributos ni relaciones. Si se requiere completar el modelo, se sugiere definir:
+- Atributos de cada entidad (incluyendo clave primaria)
+- Relaciones y cardinalidades entre: HABITACION-TIPO HABITACION, HABITACION-RESERVA, RESERVA-CLIENTE, RESERVA-GASTOS, RESERVA-SERVICIOS (u otras según el modelo de negocio del hotel)
