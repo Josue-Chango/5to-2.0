@@ -1,0 +1,25 @@
+@ Equivalente ARM para cpulator (?sys=arm)
+@ Imprime numeros desde N hacia abajo infinitamente
+.global _start
+_start:
+	LDRB R4, N           @ mov bl, N
+ciclo:
+	MOV R1, R4           @ mov dl, bl
+	ADD R1, R1, #48      @ add dl, 48 (convertir a ASCII)
+	BL put_char          @ mov ah, 2 / int 21h
+	SUBS R4, R4, #1      @ dec bl
+	B ciclo              @ jmp ciclo
+_stop:
+	B _stop
+
+@ Subrutina: imprime un caracter via semihosting SYS_WRITEC (0x03)
+put_char:
+	SUB SP, SP, #4       @ espacio para el caracter
+	STRB R1, [SP]        @ guardar caracter en pila
+	MOV R0, #0x03        @ SYS_WRITEC
+	MOV R1, SP           @ R1 = puntero al caracter
+	SVC #0x123456
+	ADD SP, SP, #4       @ restaurar pila
+	BX LR
+
+N: .byte 10

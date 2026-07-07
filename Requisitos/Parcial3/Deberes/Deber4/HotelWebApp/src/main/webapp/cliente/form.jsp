@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4 mb-3">
-                                        <label class="form-label"><i class="fas fa-id-card me-1" style="color: var(--gold);"></i>DNI</label>
+                                        <label class="form-label"><i class="fas fa-id-card me-1" style="color: var(--gold);"></i>CEDULA</label>
                                         <input type="text" name="dni" class="form-control" value="${cliente.dni}" required>
                                     </div>
                                     <div class="col-md-4 mb-3">

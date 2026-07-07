@@ -1,0 +1,182 @@
+@ Equivalente ARM para cpulator (?sys=arm)
+@ Ordenar 4 letras de 'a' a 'z' (bubble sort)
+.global _start
+_start:
+	@ --- Primer pase: comparar L1 con L2 ---
+	LDRB R0, L1
+	LDRB R1, L2
+	CMP R0, R1
+	BLS ciclo1           @ jc / jz ciclo1 (si L1 <= L2, saltar)
+	@ Intercambiar L1 y L2
+	STRB R1, L1
+	STRB R0, L2
+	@ Intercambiar P1 y P2
+	LDRB R0, P1
+	LDRB R1, P2
+	STRB R1, P1
+	STRB R0, P2
+
+ciclo1:
+	@ --- Segundo pase: comparar L2 con L3 ---
+	LDRB R0, L2
+	LDRB R1, L3
+	CMP R0, R1
+	BLS ciclo2           @ jc / jz ciclo2
+	@ Intercambiar L2 y L3
+	STRB R1, L2
+	STRB R0, L3
+	@ Intercambiar P2 y P3
+	LDRB R0, P2
+	LDRB R1, P3
+	STRB R1, P2
+	STRB R0, P3
+
+ciclo2:
+	@ --- Tercer pase: comparar L3 con L4 ---
+	LDRB R0, L3
+	LDRB R1, L4
+	CMP R0, R1
+	BLS ciclo3           @ jc / jz ciclo3
+	@ Intercambiar L3 y L4
+	STRB R1, L3
+	STRB R0, L4
+	@ Intercambiar P3 y P4
+	LDRB R0, P3
+	LDRB R1, P4
+	STRB R1, P3
+	STRB R0, P4
+
+ciclo3:
+	@ --- Cuarto pase: comparar L1 con L2 ---
+	LDRB R0, L1
+	LDRB R1, L2
+	CMP R0, R1
+	BLS ciclo4
+	@ Intercambiar L1 y L2
+	STRB R1, L1
+	STRB R0, L2
+	@ Intercambiar P1 y P2
+	LDRB R0, P1
+	LDRB R1, P2
+	STRB R1, P1
+	STRB R0, P2
+
+ciclo4:
+	@ --- Quinto pase: comparar L2 con L3 ---
+	LDRB R0, L2
+	LDRB R1, L3
+	CMP R0, R1
+	BLS ciclo5
+	@ Intercambiar L2 y L3
+	STRB R1, L2
+	STRB R0, L3
+	@ Intercambiar P2 y P3
+	LDRB R0, P2
+	LDRB R1, P3
+	STRB R1, P2
+	STRB R0, P3
+
+ciclo5:
+	@ --- Sexto pase: comparar L1 con L2 ---
+	LDRB R0, L1
+	LDRB R1, L2
+	CMP R0, R1
+	BLS mostrar
+	@ Intercambiar L1 y L2
+	STRB R1, L1
+	STRB R0, L2
+	@ Intercambiar P1 y P2
+	LDRB R0, P1
+	LDRB R1, P2
+	STRB R1, P1
+	STRB R0, P2
+
+mostrar:
+	@ Imprimir resultado ordenado
+	@ Letra 1
+	ADR R0, msg
+	BL put_string        @ lea dx, msg / int 21h
+	LDRB R1, P1
+	ADD R1, R1, #48      @ convertir a ASCII
+	BL put_char          @ mov ah, 2 / int 21h
+	MOV R1, #32          @ espacio
+	BL put_char          @ mov ah, 2 / int 21h
+	LDRB R1, L1
+	BL put_char          @ mov ah, 2 / int 21h
+	MOV R1, #10          @ LF
+	BL put_char
+	MOV R1, #13          @ CR
+	BL put_char
+
+	@ Letra 2
+	ADR R0, msg
+	BL put_string
+	LDRB R1, P2
+	ADD R1, R1, #48
+	BL put_char
+	MOV R1, #32
+	BL put_char
+	LDRB R1, L2
+	BL put_char
+	MOV R1, #10
+	BL put_char
+	MOV R1, #13
+	BL put_char
+
+	@ Letra 3
+	ADR R0, msg
+	BL put_string
+	LDRB R1, P3
+	ADD R1, R1, #48
+	BL put_char
+	MOV R1, #32
+	BL put_char
+	LDRB R1, L3
+	BL put_char
+	MOV R1, #10
+	BL put_char
+	MOV R1, #13
+	BL put_char
+
+	@ Letra 4
+	ADR R0, msg
+	BL put_string
+	LDRB R1, P4
+	ADD R1, R1, #48
+	BL put_char
+	MOV R1, #32
+	BL put_char
+	LDRB R1, L4
+	BL put_char
+
+_stop:
+	B _stop              @ ret
+
+@ Subrutinas de E/S via semihosting
+put_char:
+	SUB SP, SP, #4       @ espacio para el caracter
+	STRB R1, [SP]        @ guardar caracter en pila
+	MOV R0, #0x03        @ SYS_WRITEC
+	MOV R1, SP           @ R1 = puntero al caracter
+	SVC #0x123456
+	ADD SP, SP, #4       @ restaurar pila
+	BX LR
+
+put_string:
+	MOV R1, R0           @ R1 = puntero al string
+	MOV R0, #0x04        @ SYS_WRITE0
+	SVC #0x123456
+	BX LR
+
+@ Datos iniciales
+L1: .byte 'f'
+L2: .byte 'l'
+L3: .byte 'h'
+L4: .byte 'o'
+
+P1: .byte 1
+P2: .byte 2
+P3: .byte 3
+P4: .byte 4
+
+msg: .asciz "Letra "

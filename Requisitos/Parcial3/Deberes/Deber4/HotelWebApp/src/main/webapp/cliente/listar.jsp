@@ -56,7 +56,7 @@
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
-                                <th>DNI</th>
+                                <th>Cedula</th>
                                 <th>Teléfono</th>
                                 <th>Email</th>
                                 <th>Dirección</th>

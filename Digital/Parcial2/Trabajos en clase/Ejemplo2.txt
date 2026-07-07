@@ -1,0 +1,10 @@
+.global _start
+_start:
+	LDRB R0, datoA      @ mov al, datoA
+	LDRB R1, datoB      @ (cargar datoB)
+	ADD R0, R0, R1      @ add al, datoB
+_stop:
+	B _stop             @ fin del programa
+
+datoA: .byte 5          @ bin=00000101b
+datoB: .byte 10         @ hex=0Ah or bin=00001010b

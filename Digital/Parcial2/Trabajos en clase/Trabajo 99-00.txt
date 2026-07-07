@@ -1,0 +1,41 @@
+@ Equivalente ARM para cpulator (?sys=arm)
+@ Cuenta regresiva de 99 a 00, imprimiendo cada numero
+.global _start
+_start:
+inicio:
+	MOV R4, #9           @ mov M, 9
+ciclo2:
+	MOV R5, #9           @ mov N, 9
+ciclo1:
+	@ imprimir M (decena)
+	MOV R1, R4           @ mov dl, M
+	ADD R1, R1, #48      @ add dl, 48
+	BL put_char          @ mov ah, 2 / int 21h
+	@ imprimir N (unidad)
+	MOV R1, R5           @ mov dl, N
+	ADD R1, R1, #48      @ add dl, 48
+	BL put_char          @ mov ah, 2 / int 21h
+	@ salto de linea
+	MOV R1, #10          @ mov dl, 10 (LF)
+	BL put_char          @ mov ah, 2 / int 21h
+	MOV R1, #13          @ mov dl, 13 (CR)
+	BL put_char          @ mov ah, 2 / int 21h
+	@ decrementar N
+	SUBS R5, R5, #1      @ dec N
+	BPL ciclo1           @ jns ciclo1 (saltar si N >= 0)
+	@ decrementar M
+	SUBS R4, R4, #1      @ dec M
+	BPL ciclo2           @ jns ciclo2 (saltar si M >= 0)
+	BNE inicio           @ jnz inicio (saltar si M != 0)
+_stop:
+	B _stop              @ ret
+
+@ Subrutina: imprime un caracter via semihosting
+put_char:
+	SUB SP, SP, #4       @ espacio para el caracter
+	STRB R1, [SP]        @ guardar caracter en pila
+	MOV R0, #0x03        @ SYS_WRITEC
+	MOV R1, SP           @ R1 = puntero al caracter
+	SVC #0x123456
+	ADD SP, SP, #4       @ restaurar pila
+	BX LR

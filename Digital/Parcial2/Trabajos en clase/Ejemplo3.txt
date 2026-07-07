@@ -1,0 +1,17 @@
+@ Equivalente ARM para cpulator (?sys=arm)
+@ Usa semihosting (SVC 0x123456) para imprimir en consola
+.global _start
+_start:
+	ADR R0, msg          @ mov dx, offset msg
+	BL put_string        @ mov ah, 9 / int 21h
+_stop:
+	B _stop              @ ret
+
+@ Subrutina: imprime string null-terminated via semihosting SYS_WRITE0 (0x04)
+put_string:
+	MOV R1, R0           @ R1 = puntero al string
+	MOV R0, #0x04        @ SYS_WRITE0
+	SVC #0x123456        @ llamada semihosting
+	BX LR
+
+msg: .asciz "hello world "   @ msg db "hello world $" (ARM usa null-terminated)

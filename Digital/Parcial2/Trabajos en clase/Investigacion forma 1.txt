@@ -1,0 +1,97 @@
+@ Equivalente ARM para cpulator (?sys=arm)
+@ Ingresa numero de 2 digitos, elige paso (1 o 2), cuenta regresiva con prestamo
+@ R7 = decena original (CH), R8 = unidad original (CL)
+@ R4 = M (decena), R5 = N (unidad), R6 = paso
+.global _start
+_start:
+	@ Pedir numero de 2 digitos
+	ADR R0, mensaje
+	BL put_string        @ mov ah, 09h / int 21h
+	BL get_char          @ leer primera cifra (decena)
+	SUB R0, R0, #48      @ sub al, 48
+	MOV R7, R0           @ mov ch, al (guardar decena)
+	BL get_char          @ leer segunda cifra (unidad)
+	SUB R0, R0, #48      @ sub al, 48
+	MOV R8, R0           @ mov cl, al (guardar unidad)
+	BL put_nl            @ salto de linea
+	@ Preguntar 1 o 2
+	ADR R0, pregunta
+	BL put_string        @ lea dx, pregunta / int 21h
+	BL put_nl
+	@ Leer opcion
+	BL get_char          @ mov ah, 01h / int 21h
+	MOV R6, #2           @ default: paso = 2
+	CMP R0, #'1'         @ cmp al, '1'
+	BEQ dec_uno          @ je dec_uno
+	B inicio             @ jmp inicio
+dec_uno:
+	MOV R6, #1           @ mov paso, 1
+
+inicio:
+	BL put_nl
+	MOV R4, R7           @ mov M, ch (restaurar decena)
+	MOV R5, R8           @ mov N, cl (restaurar unidad)
+
+ciclo1:
+	@ imprimir M (decena)
+	MOV R1, R4           @ mov dl, M
+	ADD R1, R1, #48      @ add dl, 48
+	BL put_char          @ mov ah, 2 / int 21h
+	@ imprimir N (unidad)
+	MOV R1, R5           @ mov dl, N
+	ADD R1, R1, #48      @ add dl, 48
+	BL put_char          @ mov ah, 2 / int 21h
+	@ salto de linea
+	BL put_nl
+	@ decrementar N segun paso
+	MOV R0, R5           @ mov al, N
+	SUB R0, R0, R6       @ sub al, paso
+	CMP R0, #0
+	BPL guardar_N        @ jns guardar_N (si N >= 0, saltar)
+	@ N quedo negativo, sumar 10 (prestamo)
+	ADD R0, R0, #10      @ add al, 10
+	MOV R5, R0           @ mov N, al
+	@ decrementar M en 1
+	MOV R0, R4           @ mov al, M
+	SUB R0, R0, #1       @ sub al, 1
+	MOV R4, R0           @ mov M, al
+	CMP R0, #0
+	BPL ciclo1           @ jns ciclo1 (si M >= 0, seguir)
+	B inicio             @ jmp inicio (repetir desde el principio)
+
+guardar_N:
+	MOV R5, R0           @ mov N, al
+	B ciclo1             @ jmp ciclo1
+
+@ Subrutinas de E/S via semihosting
+put_nl:
+	STMFD SP!, {LR}      @ guardar direccion de retorno
+	MOV R1, #10          @ LF
+	BL put_char
+	MOV R1, #13          @ CR
+	BL put_char
+	LDMFD SP!, {LR}      @ restaurar direccion de retorno
+	BX LR
+
+put_char:
+	SUB SP, SP, #4       @ espacio para el caracter
+	STRB R1, [SP]        @ guardar caracter en pila
+	MOV R0, #0x03        @ SYS_WRITEC
+	MOV R1, SP           @ R1 = puntero al caracter
+	SVC #0x123456
+	ADD SP, SP, #4       @ restaurar pila
+	BX LR
+
+put_string:
+	MOV R1, R0           @ R1 = puntero al string
+	MOV R0, #0x04        @ SYS_WRITE0
+	SVC #0x123456
+	BX LR
+
+get_char:
+	MOV R0, #0x07        @ SYS_READC
+	SVC #0x123456
+	BX LR
+
+mensaje: .asciz "Ingrese un numero de dos digitos: "
+pregunta: .asciz "Cuanto quieres que decremente, en 1 o en 2? "

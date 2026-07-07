@@ -1,0 +1,16 @@
+@ Equivalente ARM para cpulator (?sys=arm)
+@ Bucle LOOP: decrementa N, luego decrementa contador CX
+.global _start
+_start:
+	MOV R2, #20          @ mov cl, 20 (contador externo)
+inicio:
+	LDRB R1, N           @ mov bl, N
+ciclo:
+	SUBS R1, R1, #1      @ dec bl
+	BNE ciclo            @ jnz ciclo (salta si bl != 0)
+	SUBS R2, R2, #1      @ loop inicio (decrementa CX)
+	BNE inicio           @ salta si CX != 0
+_stop:
+	B _stop              @ ret
+
+N: .byte 10
