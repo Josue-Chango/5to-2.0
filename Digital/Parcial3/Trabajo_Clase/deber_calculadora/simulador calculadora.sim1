@@ -1,0 +1,45 @@
+<circuit version="1.1.0-SR2" rev="260312" stepSize="1000000" stepsPS="1000000" NLsteps="100000" reaStep="1000000" animate="0" >
+
+<item itemtype="Subcircuit" CircId="Mega-1" mainComp="false" Show_id="true" Show_Val="false" Pos="192,-296" rotation="0" hflip="1" vflip="1" label="Mega-1" idLabPos="0,-20" labelrot="0" valLabPos="-16,20" valLabRot="0" Logic_Symbol="false">
+<mainCompProps MainCompId="mega2560-63" Frequency="16 MHz" Program="build/arduino.avr.mega/deber_calculadora.ino.hex" Auto_Load="false" saveEepr="true" MainMcu="true" SerialMon="-1" />
+</item>
+
+<item itemtype="KeyPad" CircId="KeyPad-2" mainComp="false" Show_id="false" Show_Val="false" Pos="-64,-292" rotation="0" hflip="1" vflip="1" label="KeyPad-2" idLabPos="-8,-16" labelrot="0" valLabPos="-16,20" valLabRot="0" Rows="5" Cols="4" Key_Labels="123+456-789*.0&#x3D/c" />
+
+<item itemtype="Hd44780" CircId="Hd44780-4" mainComp="false" Show_id="true" Show_Val="false" Pos="-352,-224" rotation="0" hflip="1" vflip="1" label="Hd44780-4" idLabPos="70,-82" labelrot="0" valLabPos="-16,20" valLabRot="0" Rows="2" Cols="16" />
+
+<item itemtype="Ground" CircId="Ground-5" mainComp="false" Show_id="false" Show_Val="false" Pos="-356,172" rotation="0" hflip="1" vflip="1" label="Ground-5" idLabPos="-16,8" labelrot="0" valLabPos="-16,20" valLabRot="0" />
+
+<item itemtype="Connector" uid="Connector-26" startpinid="Hd44780-4-PinRS" endpinid="Mega-1-7" pointList="-336,-216,-336,140,200,140,200,-120" />
+
+<item itemtype="Connector" uid="Connector-27" startpinid="Hd44780-4-PinEn" endpinid="Mega-1-8" pointList="-320,-216,-320,132,200,132,200,-104" />
+
+<item itemtype="Connector" uid="Connector-28" startpinid="Hd44780-4-dataPin4" endpinid="Mega-1-9" pointList="-280,-216,-280,124,200,124,200,-96" />
+
+<item itemtype="Connector" uid="Connector-29" startpinid="Hd44780-4-dataPin5" endpinid="Mega-1-10" pointList="-272,-216,-272,-88,200,-88" />
+
+<item itemtype="Connector" uid="Connector-30" startpinid="Hd44780-4-dataPin6" endpinid="Mega-1-11" pointList="-264,-216,-264,-80,200,-80" />
+
+<item itemtype="Connector" uid="Connector-31" startpinid="Hd44780-4-dataPin7" endpinid="Mega-1-12" pointList="-256,-216,-256,-72,200,-72" />
+
+<item itemtype="Connector" uid="Connector-32" startpinid="Hd44780-4-PinRW" endpinid="Ground-5-Gnd" pointList="-328,-216,-328,156,-356,156" />
+
+<item itemtype="Connector" uid="Connector-70" startpinid="KeyPad-2-Pin0" endpinid="Mega-1-22" pointList="0,-284,188,-284,188,-272,208,-272" />
+
+<item itemtype="Connector" uid="Connector-71" startpinid="Mega-1-23" endpinid="KeyPad-2-Pin1" pointList="208,-280,208,-292,12,-292,12,-268,0,-268" />
+
+<item itemtype="Connector" uid="Connector-72" startpinid="KeyPad-2-Pin2" endpinid="Mega-1-24" pointList="0,-252,20,-252,20,-268,216,-268,216,-272" />
+
+<item itemtype="Connector" uid="Connector-73" startpinid="KeyPad-2-Pin3" endpinid="Mega-1-25" pointList="0,-236,28,-236,28,-324,216,-324,216,-280" />
+
+<item itemtype="Connector" uid="Connector-74" startpinid="KeyPad-2-Pin4" endpinid="Mega-1-26" pointList="0,-220,36,-220,36,-260,224,-260,224,-272" />
+
+<item itemtype="Connector" uid="Connector-75" startpinid="KeyPad-2-Pin5" endpinid="Mega-1-27" pointList="-64,-204,-64,-196,44,-196,44,-332,224,-332,224,-280" />
+
+<item itemtype="Connector" uid="Connector-76" startpinid="KeyPad-2-Pin6" endpinid="Mega-1-28" pointList="-48,-204,-48,-188,52,-188,52,-252,232,-252,232,-272" />
+
+<item itemtype="Connector" uid="Connector-77" startpinid="KeyPad-2-Pin7" endpinid="Mega-1-29" pointList="-32,-204,-32,-180,60,-180,60,-340,232,-340,232,-280" />
+
+<item itemtype="Connector" uid="Connector-79" startpinid="KeyPad-2-Pin8" endpinid="Mega-1-30" pointList="-16,-204,-16,-172,68,-172,68,-244,240,-244,240,-272" />
+
+</circuit>

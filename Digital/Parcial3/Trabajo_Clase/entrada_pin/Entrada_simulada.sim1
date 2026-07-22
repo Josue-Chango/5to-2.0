@@ -1,0 +1,55 @@
+<circuit version="1.1.0-SR2" rev="260312" stepSize="1000000" stepsPS="1000000" NLsteps="100000" reaStep="1000000" animate="0" >
+
+<item itemtype="Subcircuit" CircId="Uno-1" mainComp="false" Show_id="true" Show_Val="false" Pos="-160,-116" rotation="0" hflip="1" vflip="1" label="Uno-1" idLabPos="0,-20" labelrot="0" valLabPos="-16,20" valLabRot="0" Logic_Symbol="false">
+<mainCompProps MainCompId="mega328-109" Frequency="16 MHz" Program="../../GitHub/5to-2.0/Digital/Parcial3/Trabajo_Clase/entrada_pin/build/arduino.avr.uno/entrada_pin.ino.hex" Auto_Load="false" saveEepr="true" MainMcu="true" SerialMon="-1" />
+</item>
+
+<item itemtype="Fixed Voltage" CircId="Fixed Voltage-2" mainComp="false" Show_id="false" Show_Val="false" Pos="-352,-128" rotation="0" hflip="1" vflip="1" label="Fixed Voltage-2" idLabPos="-64,-24" labelrot="0" valLabPos="-16,8" valLabRot="0" Voltage="5 V" Out="true" />
+
+<item itemtype="Push" CircId="Push-3" mainComp="false" Show_id="false" Show_Val="false" Pos="-276,-128" rotation="0" hflip="1" vflip="1" label="Push-3" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="false" Poles="1" />
+
+<item itemtype="Switch" CircId="Switch-5" mainComp="false" Show_id="false" Show_Val="false" Pos="-276,-68" rotation="0" hflip="1" vflip="1" label="Switch-5" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="false" DT="false" Poles="1" />
+
+<item itemtype="Push" CircId="Push-7" mainComp="false" Show_id="false" Show_Val="false" Pos="-280,36" rotation="0" hflip="1" vflip="1" label="Push-7" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="false" Poles="1" />
+
+<item itemtype="Push" CircId="Push-8" mainComp="false" Show_id="false" Show_Val="false" Pos="-280,-16" rotation="0" hflip="1" vflip="1" label="Push-8" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="false" Poles="1" />
+
+<item itemtype="LedBar" CircId="LedBar-16" mainComp="false" Show_id="false" Show_Val="false" Pos="-192,-12" rotation="180" hflip="1" vflip="1" label="LedBar-16" idLabPos="-16,-44" labelrot="0" valLabPos="-16,-56" valLabRot="0" Color="Yellow" Size="4 _Leds" Grounded="true" Threshold="2.4 V" MaxCurrent="30 mA" Resistance="0.6 Ω" />
+
+<item itemtype="Node" CircId="Node-9" mainComp="false" Pos="-312,-128" />
+
+<item itemtype="Node" CircId="Node-10" mainComp="false" Pos="-328,-128" />
+
+<item itemtype="Node" CircId="Node-11" mainComp="false" Pos="-320,-12" />
+
+<item itemtype="Connector" uid="Connector-1" startpinid="Uno-1-0" endpinid="Push-3-switch0pinN" pointList="-152,-100,-260,-100,-260,-128" />
+
+<item itemtype="Connector" uid="Connector-4" startpinid="Switch-5-pinP0" endpinid="Node-9-1" pointList="-292,-68,-312,-68,-312,-128" />
+
+<item itemtype="Connector" uid="Connector-5" startpinid="Push-3-pinP0" endpinid="Node-9-0" pointList="-292,-128,-312,-128" />
+
+<item itemtype="Connector" uid="Connector-7" startpinid="Uno-1-1" endpinid="Switch-5-switch0pinN" pointList="-152,-92,-244,-92,-244,-68,-260,-68" />
+
+<item itemtype="Connector" uid="Connector-10" startpinid="Node-9-2" endpinid="Node-10-0" pointList="-312,-128,-328,-128" />
+
+<item itemtype="Connector" uid="Connector-11" startpinid="Node-10-2" endpinid="Fixed Voltage-2-outnod" pointList="-328,-128,-336,-128" />
+
+<item itemtype="Connector" uid="Connector-12" startpinid="Node-11-1" endpinid="Push-7-pinP0" pointList="-320,-12,-320,36,-296,36" />
+
+<item itemtype="Connector" uid="Connector-13" startpinid="Push-8-pinP0" endpinid="Node-11-0" pointList="-296,-16,-296,-12,-320,-12" />
+
+<item itemtype="Connector" uid="Connector-14" startpinid="Node-11-2" endpinid="Node-10-1" pointList="-320,-12,-328,-12,-328,-128" />
+
+<item itemtype="Connector" uid="Connector-16" startpinid="Uno-1-2" endpinid="Push-8-switch0pinN" pointList="-152,-84,-236,-84,-236,-16,-264,-16" />
+
+<item itemtype="Connector" uid="Connector-17" startpinid="Push-7-switch0pinN" endpinid="Uno-1-3" pointList="-264,36,-228,36,-228,-76,-152,-76" />
+
+<item itemtype="Connector" uid="Connector-22" startpinid="Uno-1-10" endpinid="LedBar-16-led3-pinP" pointList="-152,-12,-176,-12" />
+
+<item itemtype="Connector" uid="Connector-23" startpinid="Uno-1-11" endpinid="LedBar-16-led2-pinP" pointList="-152,-4,-176,-4" />
+
+<item itemtype="Connector" uid="Connector-24" startpinid="Uno-1-12" endpinid="LedBar-16-led1-pinP" pointList="-152,4,-176,4" />
+
+<item itemtype="Connector" uid="Connector-25" startpinid="Uno-1-13" endpinid="LedBar-16-led0-pinP" pointList="-152,12,-176,12" />
+
+</circuit>
