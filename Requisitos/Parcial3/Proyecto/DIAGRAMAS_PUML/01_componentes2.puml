@@ -1,0 +1,76 @@
+@startuml
+title Diagrama de Componentes - Simulador de Inversiones en Criptomonedas
+
+package "Power Apps - Frontend" {
+  [Login/Registro] as login
+  [Dashboard (ScrInicio)] as dashboard
+  [Mercado (ScrMercado)] as mercado
+  [Detalle/Trading (ScrDetalle)] as detalle
+  [Portafolio (ScrPortafolio)] as portafolio
+  [Historial (ScrHistorial)] as historial
+  [Perfil/Config] as perfil
+  [Educación/Ayuda] as educacion
+  [compTabBar] as tabbar
+}
+
+package "Backend - Datos" {
+  [Dataverse] as dataverse
+  [API de Precios Cripto] as api
+}
+
+package "Servicios" {
+  [Power Fx - Lógica de negocio] as powerfx
+}
+
+package "Artefactos" {
+  artifact "CryptoSimulator.msapp" as appfile
+  artifact "Dataverse_Tables.cds" as dbfile
+  artifact "API_Connector.json" as apifile
+}
+
+interface "IAuth" as iauth
+interface "IResumen" as iresumen
+interface "IBuscar" as ibuscar
+interface "IOperacion" as ioperacion
+interface "IDistribucion" as idist
+interface "IHistorial" as ihist
+interface "IPerfil" as iperfil
+interface "IGuardar" as iguardar
+interface "IConsultar" as iconsul
+interface "IPrecios" as iprecios
+
+login --- iauth
+iauth --- iguardar
+
+dashboard --- iresumen
+iresumen --- iconsul
+
+mercado --- ibuscar
+ibuscar --- iprecios
+
+detalle --- ioperacion
+ioperacion --- iguardar
+ioperacion --- iprecios
+
+portafolio --- idist
+idist --- iconsul
+
+historial --- ihist
+ihist --- iconsul
+
+perfil --- iperfil
+iperfil --- iguardar
+
+powerfx --- iguardar
+powerfx --- iconsul
+
+tabbar .. dashboard
+tabbar .. mercado
+tabbar .. portafolio
+tabbar .. historial
+
+appfile .. powerfx
+dbfile .. dataverse
+apifile .. api
+
+@enduml

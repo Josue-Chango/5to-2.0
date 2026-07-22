@@ -1,0 +1,45 @@
+@startuml
+title Diagrama de Objetos - Simulador de Inversiones en Criptomonedas
+
+object "usuario1 : Usuario" as u1 {
+  id = "USR001"
+  nombre = "Josue Perez"
+  correo = "josue@uc3.com"
+  saldo_virtual = 10000.00
+  nivel_experiencia = "principiante"
+}
+
+object "btc : Moneda" as m1 {
+  id = "btc"
+  nombre = "Bitcoin"
+  simbolo = "BTC"
+  precio_actual = 62430.12
+}
+
+object "eth : Moneda" as m2 {
+  id = "eth"
+  nombre = "Ethereum"
+  simbolo = "ETH"
+  precio_actual = 3412.55
+}
+
+object "port_btc : Portafolio" as p1 {
+  id = "P001"
+  cantidad = 0.05
+  costo_adquisicion = 3121.51
+}
+
+object "tx001 : Transaccion" as t1 {
+  id = "TX001"
+  tipo = "COMPRA"
+  cantidad = 0.05
+  precio_unitario = 62430.12
+  total = 3121.51
+}
+
+u1 --> p1
+p1 --> m1
+u1 --> t1
+t1 --> m1
+
+@enduml

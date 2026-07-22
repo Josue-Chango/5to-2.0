@@ -1,0 +1,54 @@
+@startuml
+title Diagrama de Clases - Simulador de Inversiones en Criptomonedas
+
+class Usuario {
+  -id: String
+  -nombre: String
+  -correo: String
+  -contrasena: String
+  -saldo_virtual: Decimal
+  -nivel_experiencia: String
+  -moneda_base: String
+  +registrarse()
+  +iniciarSesion()
+  +cerrarSesion()
+  +editarPerfil()
+}
+
+class Moneda {
+  -id: String
+  -nombre: String
+  -simbolo: String
+  -precio_actual: Decimal
+  -variacion_porcentual: Decimal
+  -descripcion: String
+  +obtenerPrecio()
+  +obtenerHistorial()
+}
+
+class Portafolio {
+  -id: String
+  -cantidad: Decimal
+  -costo_adquisicion: Decimal
+  +obtenerValorActual()
+  +obtenerGananciaPerdida()
+  +obtenerDistribucion()
+}
+
+class Transaccion {
+  -id: String
+  -tipo: String
+  -cantidad: Decimal
+  -precio_unitario: Decimal
+  -total: Decimal
+  -fecha: DateTime
+  +registrarCompra()
+  +registrarVenta()
+}
+
+Usuario "1" --> "*" Portafolio : posee
+Usuario "1" --> "*" Transaccion : realiza
+Moneda "1" --> "*" Portafolio : incluye
+Moneda "1" --> "*" Transaccion : corresponde a
+
+@enduml

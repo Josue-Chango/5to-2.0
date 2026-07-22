@@ -1,0 +1,23 @@
+@startuml
+title Diagrama de Actividades - Flujo de Compra de Criptomoneda
+
+start
+:Usuario selecciona criptomoneda;
+:Se muestra ScrDetalle;
+:Usuario elige "Compra";
+:Usuario ingresa cantidad;
+: Sistema calcula total;
+
+if (Saldo suficiente?) then (si)
+  :Confirmar transaccion;
+  :Descontar saldo virtual;
+  :Actualizar portafolio;
+  :Registrar en historial;
+  :Mostrar notificacion exitosa;
+else (no)
+  :Mostrar error "Saldo insuficiente";
+endif
+
+stop
+
+@enduml

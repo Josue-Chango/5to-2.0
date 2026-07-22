@@ -1,0 +1,25 @@
+@startuml
+skinparam ArrowColor #298089
+skinparam shadowing false
+title Diagrama de Tiempos: Reglas de Retención y Cancelación de Citas
+
+' Definimos los dos tipos de líneas de tiempo
+robust "Estado Cita Médica" as Cita
+concise "Acción del Paciente" as Paciente
+
+' Inicio del trempo (T = @)
+@0
+Cita is Disponible
+Paciente is Inactivo
+
+' El paciente inicia la reserva en el tiempo 10
+@10
+Paciente is "Reserva en Web"
+Cita is Pendiente_Pago
+note bottom of Cita : [Regla] T <= 2 horas para pagar
+
+' El paciente realiza el pago en el tiempo 12
+@12
+Paciente is "Realiza Pago"
+Cita is Confirmada
+note bottom of Cita : Pago exitoso a tiempo
