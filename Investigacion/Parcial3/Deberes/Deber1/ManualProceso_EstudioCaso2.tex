@@ -1,0 +1,408 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-noshorthands]{babel}
+\usepackage{geometry}
+\geometry{left=2.5cm, right=2.5cm, top=3cm, bottom=2.5cm, headheight=15pt}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MANUAL DEL PROCESO}
+\fancyhead[R]{ESTUDIO DE CASO EN INGENIERÍA DE SOFTWARE}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\titleformat{\section}{\large\bfseries}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.5em}{}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{2cm}
+
+{\Large\textbf{UNIVERSIDAD NACIONAL}}
+
+\vspace{0.5cm}
+{\Large\textbf{FACULTAD DE INGENIERÍA EN SISTEMAS COMPUTACIONALES}}
+
+\vspace{3cm}
+
+{\LARGE\textbf{MANUAL DEL PROCESO}}
+
+\vspace{0.5cm}
+{\LARGE\textbf{ESTUDIO DE CASO EN INGENIERÍA DE SOFTWARE}}
+
+\vspace{2cm}
+
+{\large\textbf{PROCESO DE INVESTIGACIÓN}}
+
+\vspace{1cm}
+
+\begin{tabular}{|l|l|}
+\hline
+\textbf{MACROPROCESO:} & INVESTIGACIÓN \\
+\hline
+\textbf{PROCESO:} & ESTUDIO DE CASO EN INGENIERÍA DE SOFTWARE \\
+\hline
+\textbf{SUBPROCESO:} & --- \\
+\hline
+\textbf{RESPONSABLE:} & INVESTIGADOR PRINCIPAL \\
+\hline
+\textbf{VERSIÓN:} & 1.0 \\
+\hline
+\end{tabular}
+
+\vspace{3cm}
+
+{\large Julio 2026}
+
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{OBJETIVO}
+
+Atender los requerimientos relacionados en base a una solicitud de estudio de caso en ingeniería de software, mediante la aplicación de un proceso estructurado que permita analizar, diseñar, ejecutar y documentar un caso de investigación que proporcione soluciones y conocimientos validados al dominio de la ingeniería de software.
+
+\section{ALCANCE Y ÁMBITO DE APLICACIÓN}
+
+Comprende desde la definición del objetivo de investigación, pasando por el diseño del protocolo, la recolección y análisis de datos, hasta la publicación de los resultados del estudio de caso.
+
+El ámbito de aplicación del proceso es a nivel nacional, aplicable a proyectos de investigación en ingeniería de software que requieran un análisis profundo de casos específicos.
+
+\section{NORMAS GENERALES DE OPERACIÓN}
+
+\subsection{BASE LEGAL}
+
+\begin{longtable}{|L{4cm}|C{1.5cm}|C{2cm}|L{6cm}|}
+\hline
+\textbf{NORMA} & \textbf{AÑO} & \textbf{ARTÍCULOS} & \textbf{TEMAS} \\
+\hline
+\endhead
+Norma técnica de control interno emitida por la Contraloría General del Estado & 2014 & 410-08 & Adquisición de infraestructura tecnológica. \\
+\hline
+Resoluciones C.D. 457 & 2013 & Art. 3, num. 2.4.3 & Estructura Orgánica del IESS. (Dirección Nacional de Tecnología de la Información, funciones y responsabilidades) \\
+\hline
+Resolución CD.483 & 2015 & --- & Reformas al reglamento orgánico funcional del IESS, Resolución No. C.D.457 \\
+\hline
+\end{longtable}
+
+\subsection{POLÍTICAS DEL PROCESO}
+
+\begin{itemize}[noitemsep]
+    \item Se deberá emitir un informe por cada estudio de caso realizado.
+    \item Analizar el requerimiento conjuntamente con el área requirente.
+    \item Los hallazgos deben ser validados antes de su publicación.
+    \item Se debe mantener una cadena de evidencia que respalde los resultados.
+    \item La participación de informantes requiere consentimiento informado.
+\end{itemize}
+
+\section{DESCRIPCIÓN DEL PROCESO}
+
+\subsection{DIAGRAMA DE RELACIONAMIENTO DE LOS PROCESOS}
+
+[No se incluye según parámetros establecidos]
+
+\subsection{DIAGRAMA DE FLUJO}
+
+El diagrama de flujo del proceso de Estudio de Caso en Ingeniería de Software se presenta a continuación, organizado en 5 fases según el modelo BPMN del Bizagi:
+
+\begin{figure}[htbp]
+\centering
+\resizebox{0.95\textwidth}{!}{
+\begin{tikzpicture}[node distance=1cm and 1cm, auto, font=\small, >={Stealth[length=3mm]}]
+    % Estilos
+    \tikzset{
+        startstop/.style={rectangle, rounded corners, minimum width=2.5cm, minimum height=0.7cm, text centered, draw=black, fill=red!30},
+        process/.style={rectangle, minimum width=2.2cm, minimum height=0.7cm, text centered, draw=black, fill=blue!20},
+        decision/.style={diamond, minimum width=1.8cm, minimum height=0.7cm, text centered, draw=black, fill=green!20, aspect=2.5},
+        arrow/.style={thick, ->},
+        phase/.style={rectangle, minimum width=14cm, minimum height=0.5cm, text centered, draw=black, fill=gray!20, font=\bfseries}
+    }
+    
+    % Fase 1: Diseño
+    \node (fase1) [phase] {FASE 1: DISEÑO};
+    \node (start) [startstop, below=0.3cm of fase1] {Inicio};
+    \node (pro_pregunta) [process, below=of start] {Definir pregunta de investigación};
+    \node (pro_objetivo) [process, below=of pro_pregunta] {Definir objetivo del estudio};
+    \node (pro_seleccion) [process, below=of pro_objetivo] {Seleccionar caso(s) específico(s)};
+    \node (gw_info) [decision, below=0.3cm of pro_seleccion] {¿Info suficiente?};
+    
+    % Fase 2: Preparación
+    \node (fase2) [phase, below=1cm of gw_info] {FASE 2: PREPARACIÓN};
+    \node (pro_metodos) [process, below=0.3cm of fase2] {Definir métodos de recolección};
+    \node (pro_protocolo) [process, below=of pro_metodos] {Diseñar protocolo de investigación};
+    \node (pro_procedimientos) [process, below=of pro_protocolo] {Definir procedimientos de campo};
+    \node (pro_instrumentos) [process, below=of pro_procedimientos] {Preparar instrumentos de recolección};
+    \node (pro_consentimiento) [process, below=of pro_instrumentos] {Obtener consentimiento informado};
+    
+    % Fase 3: Recolección
+    \node (fase3) [phase, below=0.5cm of pro_consentimiento] {FASE 3: RECOLECCIÓN};
+    \node (pro_piloto) [process, below=0.3cm of fase3] {Realizar estudio piloto};
+    \node (gw_protocolo) [decision, below=0.3cm of pro_piloto] {¿Protocolo aprobado?};
+    \node (pro_entrevistas) [process, below=0.3cm of gw_protocolo] {Realizar entrevistas semiestructuradas};
+    \node (pro_observacion) [process, below=of pro_entrevistas] {Realizar observación directa con registros};
+    \node (pro_artefactos) [process, below=of pro_observacion] {Recolectar artefactos y documentos};
+    
+    % Fase 4: Análisis
+    \node (fase4) [phase, below=0.5cm of pro_artefactos] {FASE 4: ANÁLISIS};
+    \node (pro_registrar) [process, below=0.3cm of fase4] {Registrar y organizar datos recolectados};
+    \node (pro_codificar) [process, below=of pro_registrar] {Codificación de datos cualitativos};
+    \node (pro_cadena) [process, below=of pro_codificar] {Construcción de cadena de evidencia};
+    \node (pro_analisis) [process, below=of pro_cadena] {Análisis dentro/entre del caso(s)};
+    \node (gw_hallazgos) [decision, below=0.3cm of pro_analisis] {¿Hallazgos validados?};
+    
+    % Fase 5: Reporte
+    \node (fase5) [phase, below=1cm of gw_hallazgos] {FASE 5: REPORTE};
+    \node (pro_informe) [process, below=0.3cm of fase5] {Redactar informe del caso};
+    \node (pro_revision) [process, below=of pro_informe] {Revisión por pares académicos};
+    \node (pro_retro) [process, below=of pro_revision] {Incorporar retroalimentación};
+    \node (pro_publicar) [process, below=of pro_retro] {Publicar y diseminar resultados};
+    \node (stop) [startstop, below=of pro_publicar] {Fin};
+    
+    % Flechas - Fase 1
+    \draw [arrow] (start) -- (pro_pregunta);
+    \draw [arrow] (pro_pregunta) -- (pro_objetivo);
+    \draw [arrow] (pro_objetivo) -- (pro_seleccion);
+    \draw [arrow] (pro_seleccion) -- (gw_info);
+    
+    % Flechas - Fase 1 a 2
+    \draw [arrow] (gw_info.east) -- ++(1.5,0) node[anchor=south] {No} |- (pro_entrevistas.east);
+    \draw [arrow] (gw_info) -- node[anchor=east] {Sí} (pro_metodos);
+    
+    % Flechas - Fase 2
+    \draw [arrow] (pro_metodos) -- (pro_protocolo);
+    \draw [arrow] (pro_protocolo) -- (pro_procedimientos);
+    \draw [arrow] (pro_procedimientos) -- (pro_instrumentos);
+    \draw [arrow] (pro_instrumentos) -- (pro_consentimiento);
+    
+    % Flechas - Fase 2 a 3
+    \draw [arrow] (pro_consentimiento) -- (pro_piloto);
+    \draw [arrow] (pro_piloto) -- (gw_protocolo);
+    
+    % Flechas - Gateway Protocolo
+    \draw [arrow] (gw_protocolo) -- node[anchor=east] {Sí} (pro_entrevistas);
+    \draw [arrow] (gw_protocolo.west) -- ++(-1.5,0) node[anchor=south] {No} |- (pro_instrumentos.west);
+    
+    % Flechas - Fase 3
+    \draw [arrow] (pro_entrevistas) -- (pro_observacion);
+    \draw [arrow] (pro_observacion) -- (pro_artefactos);
+    
+    % Flechas - Fase 3 a 4
+    \draw [arrow] (pro_artefactos) -- (pro_registrar);
+    
+    % Flechas - Fase 4
+    \draw [arrow] (pro_registrar) -- (pro_codificar);
+    \draw [arrow] (pro_codificar) -- (pro_cadena);
+    \draw [arrow] (pro_cadena) -- (pro_analisis);
+    \draw [arrow] (pro_analisis) -- (gw_hallazgos);
+    
+    % Flechas - Gateway Hallazgos
+    \draw [arrow] (gw_hallazgos) -- node[anchor=east] {Sí} (pro_informe);
+    \draw [arrow] (gw_hallazgos.west) -- ++(-1.5,0) node[anchor=south] {No} |- (pro_entrevistas.west);
+    
+    % Flechas - Fase 5
+    \draw [arrow] (pro_informe) -- (pro_revision);
+    \draw [arrow] (pro_revision) -- (pro_retro);
+    \draw [arrow] (pro_retro) -- (pro_publicar);
+    \draw [arrow] (pro_publicar) -- (stop);
+\end{tikzpicture}
+}
+\caption{Diagrama de Flujo del Proceso de Estudio de Caso en Ingeniería de Software (5 Fases)}
+\end{figure}
+
+\subsection{DESCRIPCIÓN DE ACTIVIDADES}
+
+\begin{longtable}{|C{0.8cm}|L{3.5cm}|L{4cm}|C{2cm}|L{3.5cm}|}
+\hline
+\textbf{No.} & \textbf{ACTIVIDAD} & \textbf{DESCRIPCIÓN DE LA ACTIVIDAD} & \textbf{RESPONSABLE} & \textbf{DOCUMENTO DE REFERENCIA/SISTEMA} \\
+\hline
+\endhead
+
+\multicolumn{5}{|c|}{\textbf{FASE 1: DISEÑO}} \\
+\hline
+
+1 & Definir pregunta de investigación & Se formula la pregunta o preguntas de investigación que guiarán el estableciendo el enfoque y alcance de la investigación. & Investigador Principal & Protocolo de Investigación \\
+\hline
+
+2 & Definir objetivo del estudio & Se establece claramente el objetivo del estudio de caso, definiendo qué se busca investigar y qué se espera lograr. & Investigador Principal & Protocolo de Investigación \\
+\hline
+
+3 & Seleccionar el/los caso(s) específico(s) & Se identifica y selecciona el caso o casos que serán estudiados, considerando criterios de relevancia y viabilidad. & Investigador Principal & --- \\
+\hline
+
+4 & ¿Información suficiente para el caso? & \multirow{2}{3.5cm}{Verificación de si se cuenta con información suficiente para continuar. Si es negativo, se vuelven a realizar entrevistas.} & --- & --- \\
+\cline{1-4}
+5 & Continuar recolección & & Equipo de Investigación & --- \\
+\hline
+
+\multicolumn{5}{|c|}{\textbf{FASE 2: PREPARACIÓN}} \\
+\hline
+
+6 & Definir métodos de recolección & Se determinan los métodos y técnicas que se utilizarán para la recolección de datos (entrevistas, observación, documentos). & Equipo de Investigación & --- \\
+\hline
+
+7 & Diseñar protocolo de investigación & Se elabora el documento protocolar que establece los procedimientos, cronograma y recursos necesarios. & Equipo de Investigación & Protocolo de Investigación \\
+\hline
+
+8 & Definir procedimientos de campo & Se establecen los procedimientos operativos para la recolección de datos en el lugar del estudio. & Equipo de Investigación & --- \\
+\hline
+
+9 & Preparar instrumentos de recolección & Se diseñan y preparan los instrumentos: guías de entrevista, formatos de observación, formularios. & Equipo de Investigación & Guía de Entrevista \\
+\hline
+
+10 & Obtener consentimiento informado & Se gestiona el consentimiento informado de todos los participantes del estudio, asegurando el cumplimiento ético. & Equipo de Investigación & Formulario de Consentimiento \\
+\hline
+
+\multicolumn{5}{|c|}{\textbf{FASE 3: RECOLECCIÓN}} \\
+\hline
+
+11 & Realizar estudio piloto & Se ejecuta una prueba piloto para validar los instrumentos y procedimientos antes de la recolección principal. & Equipo de Investigación & --- \\
+\hline
+
+12 & ¿Protocolo aprobado tras piloto? & \multirow{2}{3.5cm}{Verificación de si el protocolo fue validado satisfactoriamente durante el piloto. Si es negativo, se revisan los instrumentos.} & --- & --- \\
+\cline{1-4}
+13 & Revisar instrumentos & & Equipo de Investigación & --- \\
+\hline
+
+14 & Realizar entrevistas semiestructuradas & Se realizan entrevistas con los informantes clave del caso, siguiendo las guías de entrevista previamente diseñadas. & Equipo de Investigación & --- \\
+\hline
+
+15 & Realizar observación directa con registros & Se realiza observación directa del contexto y proceso del caso, manteniendo registros detallados. & Equipo de Investigación & --- \\
+\hline
+
+16 & Recolectar artefactos y documentos & Se recopilan todos los documentos y artefactos relevantes para el caso (manuales, diagramas, especificaciones). & Equipo de Investigación & Artefactos del caso \\
+\hline
+
+\multicolumn{5}{|c|}{\textbf{FASE 4: ANÁLISIS}} \\
+\hline
+
+17 & Registrar y organizar datos recolectados & Se sistematizan y organizan todos los datos obtenidos en la fase de recolección. & Equipo de Investigación & Registro de Auditoría (Audit Trail) \\
+\hline
+
+18 & Codificación de datos cualitativos & Se aplica un proceso de codificación a los datos cualitativos para facilitar su análisis. & Equipo de Investigación & Esquema de Codificación (Codebook) \\
+\hline
+
+19 & Construcción de cadena de evidencia & Se establece la relación entre hallazgos, evidencia y conclusiones para garantizar la trazabilidad. & Equipo de Investigación & Esquema de cadena \\
+\hline
+
+20 & Análisis dentro/entre del caso(s) & Se realiza el análisis de los datos tanto al interior de cada caso como entre los casos estudiados. & Investigador Principal & --- \\
+\hline
+
+21 & ¿Hallazgos validados satisfactoriamente? & \multirow{2}{3.5cm}{Verificación de la validez de los hallazgos obtenidos. Si es negativo, se recolectan más datos.} & --- & --- \\
+\cline{1-4}
+22 & Recolectar más datos & & Equipo de Investigación & --- \\
+\hline
+
+\multicolumn{5}{|c|}{\textbf{FASE 5: REPORTE}} \\
+\hline
+
+23 & Redactar informe del caso & Se elabora el informe final del estudio de caso incluyendo todos los hallazgos, análisis y conclusiones. & Investigador Principal & Informe Final del Estudio \\
+\hline
+
+24 & Revisión por pares académicos & El informe es revisado por expertos en el dominio para validar su contenido y calidad. & Investigador Principal & --- \\
+\hline
+
+25 & Incorporar retroalimentación & Se incorporan las observaciones y sugerencias de los revisores al documento. & Investigador Principal & --- \\
+\hline
+
+26 & Publicar y diseminar resultados & Se publican los resultados del estudio para su conocimiento y aplicación. & Investigador Principal & --- \\
+\hline
+
+\end{longtable}
+
+\section{INDICADORES DE PROCESO}
+
+\begin{longtable}{|C{0.8cm}|L{3cm}|L{4cm}|C{2.5cm}|C{2.5cm}|}
+\hline
+\textbf{No.} & \textbf{INDICADOR} & \textbf{DESCRIPCIÓN} & \textbf{META} & \textbf{UNIDAD DE MEDIDA} \\
+\hline
+\endhead
+
+1 & Cumplimiento de plazos & Porcentaje de actividades ejecutadas dentro del plazo establecido & 90\% & Porcentaje \\
+\hline
+
+2 & Calidad del protocolo & Protocolo aprobado en primera revisión & 80\% & Porcentaje \\
+\hline
+
+3 & Satisfacción de informantes & Nivel de satisfacción de los participantes del estudio & 85\% & Porcentaje \\
+\hline
+
+4 & Calidad del informe final & Informe aprobado sin observaciones mayores & 90\% & Porcentaje \\
+\hline
+
+5 & Tiempo promedio de análisis & Tiempo promedio entre recolección y análisis & 15 días & Días \\
+\hline
+
+\end{longtable}
+
+\section{GLOSARIO DE TÉRMINOS Y ABREVIATURAS}
+
+\begin{longtable}{|L{4cm}|L{10cm}|}
+\hline
+\textbf{TÉRMINO/ABREVIATURA} & \textbf{DESCRIPCIÓN} \\
+\hline
+\endhead
+
+Estudio de Caso & Investigación profunda de un caso específico en su contexto real, empleando múltiples fuentes de evidencia. \\
+\hline
+
+Protocolo de Investigación & Documento que establece los procedimientos, cronograma y recursos para el desarrollo del estudio. \\
+\hline
+
+Cadena de Evidencia & Documentación que permite seguir el rastro desde la pregunta inicial hasta las conclusiones finales. \\
+\hline
+
+Codificación & Proceso de etiquetar y categorizar datos cualitativos para facilitar su análisis. \\
+\hline
+
+Consentimiento Informado & Documento que certifica que los participantes conocen y aceptan voluntariamente participar en el estudio. \\
+\hline
+
+Triangulación & Uso de múltiples fuentes de datos o métodos para validar los hallazgos de la investigación. \\
+\hline
+
+Audit Trail & Registro detallado de todas las actividades realizadas durante el proceso de investigación. \\
+\hline
+
+Codebook & Esquema de codificación que define las categorías y sus códigos para el análisis de datos. \\
+\hline
+
+BPMN & Business Process Model and Notation - Notación de Modelado de Procesos de Negocio. \\
+\hline
+
+\end{longtable}
+
+\section{ANEXOS}
+
+\textbf{Anexo 1:} Protocolo de Investigación
+
+\textbf{Anexo 2:} Guías de Entrevista
+
+\textbf{Anexo 3:} Formulario de Consentimiento Informado
+
+\textbf{Anexo 4:} Plantilla de Informe Final del Estudio
+
+\textbf{Anexo 5:} Diagrama BPMN del Proceso (Archivo Bizagi: EstudioCaso.bpmn)
+
+\end{document}

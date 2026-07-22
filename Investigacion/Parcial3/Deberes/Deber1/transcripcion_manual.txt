@@ -1,0 +1,104 @@
+MANUAL DEL PROCESO
+ELABORACIÓN DE ESPECIFICACIONES TÉCNICAS
+
+================================================================================
+
+ÍNDICE DE CONTENIDOS
+
+1. OBJETIVO
+2. ALCANCE Y ÁMBITO DE APLICACIÓN
+3. NORMAS GENERALES DE OPERACIÓN
+   3.1 BASE LEGAL
+   3.2 POLÍTICAS DEL PROCESO
+4. DESCRIPCIÓN DEL PROCESO
+   4.1 DIAGRAMA DE RELACIONAMIENTO DE LOS PROCESOS
+   4.2 DIAGRAMA DE FLUJO
+   4.3 DESCRIPCIÓN DE ACTIVIDADES
+5. INDICADORES DE PROCESO
+6. GLOSARIO DE TÉRMINOS Y ABREVIATURAS
+7. ANEXOS
+
+================================================================================
+
+IDENTIFICACIÓN DEL DOCUMENTO
+MACROPROCESO: INFRAESTRUCTURA
+PROCESO: ELABORACIÓN DE ESPECIFICACIONES TÉCNICAS DE ARQUITECTURA DE LA SOLUCIÓN
+SUBPROCESO:
+RESPONSABLE: DIRECTOR NACIONAL DE TECNOLOGÍA DE LA INFORMACIÓN
+
+================================================================================
+
+1. OBJETIVO
+
+Atender los requerimientos relacionados en base a una solicitud de elaboración de especificaciones técnicas.
+
+================================================================================
+
+2. ALCANCE Y ÁMBITO DE APLICACIÓN
+
+Comprende desde el análisis de la necesidad planteada por la unidad de negocio, hasta emitir las especificaciones de la solución si fuera el caso.
+
+El ámbito de aplicación del proceso es a nivel nacional.
+
+================================================================================
+
+3. NORMAS GENERALES DE OPERACIÓN
+
+3.1 BASE LEGAL
+
+| NORMA | AÑO | ARTÍCULOS | TEMAS |
+|---|---|---|---|
+| Norma técnica de control interno emitida por la Contraloría General del Estado | 2014 | 410-08 | Adquisición de infraestructura tecnológica. |
+| Resoluciones C.D. 457 | 2013 | Art. 3, numeral 2.4.3 | Estructura Orgánica del IESS. (Dirección Nacional de Tecnología de la Información, funciones y responsabilidades) |
+| Resolución CD.483 | 2015 | | Reformas al reglamento orgánico funcional del IESS, Resolución No. C.D.457 |
+
+3.2 DIRECTRICES DEL PROCESO
+
+- Se deberá emitir un informe el personal que le asigne el memorando.
+- Analizar requerimiento conjuntamente con el área requirente.
+
+================================================================================
+
+4. DESCRIPCIÓN DEL PROCESO
+
+4.1 DIAGRAMA DE RELACIONAMIENTO DE LOS PROCESOS
+[Diagrama no disponible en el documento]
+
+4.2 DIAGRAMA DE FLUJO
+[Diagrama no disponible en el documento]
+
+4.3 DESCRIPCIÓN DE ACTIVIDADES
+
+| No. | ACTIVIDAD | DESCRIPCIÓN DE LA ACTIVIDAD | RESPONSABLE | DOCUMENTO DE REFERENCIA/SISTEMA |
+|---|---|---|---|---|
+| 1 | Asignar el requerimiento | El proceso inicia desde el momento que llega a la DNTI el requerimiento a través de la herramienta de gestión documental. El Director asigna el memorando al coordinador de Infraestructura. | Director DNTI | Memorando de requerimiento |
+| 2 | Analizar el requerimiento | El coordinador a través de la herramienta de gestión documental recibe el requerimiento, realiza el análisis. | Coordinador de infraestructura | Memorando de requerimiento |
+| 3 | Devolver el requerimiento al Director | Luego de realizar el análisis pertinente, determina si está en su campo de acción, si no se devuelve el requerimiento a la Dirección. | Coordinador de infraestructura | |
+| 4 | Designar al responsable para atención del requerimiento | Una vez revisado el requerimiento se designa al responsable para atención de la solicitud. | Coordinador de infraestructura | |
+| 5 | Analizar e identificar el requerimiento | El técnico especialista recibe el requerimiento e inmediatamente identifica la necesidad con la unidad solicitante. Se procede a contactarse con el área requirente para asesorar su requerimiento y buscar la mejor alternativa tecnológica. | Técnico especialista nivel II | |
+| 6 | Determinar especificaciones técnicas que apliquen | Si requiere contratación del servicio o equipamiento se realiza la búsqueda de diferentes opciones que cumplan con las Especificaciones técnicas que se ajusten a la necesidad. En los casos de que se elabore las especificaciones técnicas o no, el técnico realiza el informe técnico para su comunicación. | Técnico especialista nivel II | Especificaciones técnicas, Ver anexo 1 |
+| 8 | Realizar informe técnico | Se procede a elaborar el informe técnico incluyendo las especificaciones técnicas requeridas por el negocio. | Técnico especialista nivel II | Informe técnico, Ver Anexo 2 |
+| 9 | Analizar el informe técnico | Realiza el análisis del informe técnico, de contar con el anexo de las especificaciones técnicas se verifica que se ajusten al requerimiento solicitado. | Coordinador de infraestructura | Memorando |
+| 10 | Notifica el resultado del informe técnico al negocio | Notificar resultado del informe técnico al negocio de acuerdo a su requerimiento. | Director DNTI | Informe técnico |
+
+================================================================================
+
+5. INDICADORES DE PROCESO
+[No especificado en el documento]
+
+================================================================================
+
+6. GLOSARIO DE TÉRMINOS Y ABREVIATURAS
+
+| TÉRMINO/ABREVIATURAS | DESCRIPCIÓN |
+|---|---|
+| Requerimiento | Necesidad del negocio de contratación o del servicio de mantenimiento bien tecnológico |
+| Informe técnico | Se describe el requerimiento del negocio y se adjunta especificaciones técnicas. |
+| DNTI | Director Nacional de Tecnología de la Información |
+
+================================================================================
+
+7. ANEXOS
+
+Anexo 1: Especificaciones técnicas
+Anexo 2: Informe técnico

@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             id="Definitions_EstudioCaso"
+             targetNamespace="http://bizagi.com/bpmn"
+             exporter="Bizagi Modeler"
+             exporterVersion="1.0">
+
+  <collaboration id="Collaboration_EstudioCaso">
+    <participant id="Participant_CaseStudyProcess" name="Case Study Process" processRef="Process_EstudioCaso"/>
+  </collaboration>
+
+  <process id="Process_EstudioCaso" name="Case Study Process" isExecutable="true">
+
+    <laneSet id="LaneSet_CaseStudyProcess">
+      <lane id="Lane_Fase1" name="Fase 1: Diseno">
+        <flowNodeRef>StartEvent_Inicio</flowNodeRef>
+        <flowNodeRef>Task_DefinirPregunta</flowNodeRef>
+        <flowNodeRef>Task_DefinirObjetivo</flowNodeRef>
+        <flowNodeRef>Task_SeleccionarCaso</flowNodeRef>
+        <flowNodeRef>Gateway_InfoSuficiente</flowNodeRef>
+      </lane>
+      <lane id="Lane_Fase2" name="Fase 2: Preparacion">
+        <flowNodeRef>Task_DefinirMetodosRecoleccion</flowNodeRef>
+        <flowNodeRef>Task_DisennarProtocolo</flowNodeRef>
+        <flowNodeRef>Task_DefinirProcedimientosCampo</flowNodeRef>
+        <flowNodeRef>Task_PrepararInstrumentos</flowNodeRef>
+        <flowNodeRef>Task_ObtenerConsentimiento</flowNodeRef>
+      </lane>
+      <lane id="Lane_Fase3" name="Fase 3: Recoleccion">
+        <flowNodeRef>Task_RealizarEstudioPiloto</flowNodeRef>
+        <flowNodeRef>Gateway_ProtocoloAprobado</flowNodeRef>
+        <flowNodeRef>Task_RealizarEntrevistas</flowNodeRef>
+        <flowNodeRef>Task_ObservacionDirecta</flowNodeRef>
+        <flowNodeRef>Task_RecolectarArtefactos</flowNodeRef>
+      </lane>
+      <lane id="Lane_Fase4" name="Fase 4: Analisis">
+        <flowNodeRef>Task_RegistrarDatos</flowNodeRef>
+        <flowNodeRef>Task_CodificacionCualitativos</flowNodeRef>
+        <flowNodeRef>Task_CadenaEvidencia</flowNodeRef>
+        <flowNodeRef>Task_AnalisisCaso</flowNodeRef>
+        <flowNodeRef>Gateway_HallazgosValidados</flowNodeRef>
+      </lane>
+      <lane id="Lane_Fase5" name="Fase 5: Reporte">
+        <flowNodeRef>Task_RedactarInforme</flowNodeRef>
+        <flowNodeRef>Task_RevisionPares</flowNodeRef>
+        <flowNodeRef>Task_IncorporarRetroalimentacion</flowNodeRef>
+        <flowNodeRef>Task_PublicarResultados</flowNodeRef>
+        <flowNodeRef>EndEvent_Fin</flowNodeRef>
+      </lane>
+    </laneSet>
+
+    <startEvent id="StartEvent_Inicio" name="Inicio del Estudio de Caso">
+      <outgoing>Flow_01</outgoing>
+    </startEvent>
+
+    <task id="Task_DefinirPregunta" name="Definir pregunta de investigacion">
+      <incoming>Flow_01</incoming>
+      <outgoing>Flow_02</outgoing>
+    </task>
+
+    <task id="Task_DefinirObjetivo" name="Definir objetivo del estudio">
+      <incoming>Flow_02</incoming>
+      <outgoing>Flow_03</outgoing>
+    </task>
+
+    <task id="Task_SeleccionarCaso" name="Seleccionar el/los caso(s) especifico(s)">
+      <incoming>Flow_03</incoming>
+      <outgoing>Flow_04</outgoing>
+    </task>
+
+    <exclusiveGateway id="Gateway_InfoSuficiente" name="Informacion suficiente para el caso">
+      <incoming>Flow_15</incoming>
+      <outgoing>Flow_05_Si</outgoing>
+      <outgoing>Flow_05_No</outgoing>
+    </exclusiveGateway>
+
+    <task id="Task_DefinirMetodosRecoleccion" name="Definir metodos de recoleccion">
+      <incoming>Flow_06</incoming>
+      <outgoing>Flow_07</outgoing>
+    </task>
+
+    <task id="Task_DisennarProtocolo" name="Disenar protocolo de investigacion">
+      <incoming>Flow_07</incoming>
+      <outgoing>Flow_08</outgoing>
+    </task>
+
+    <task id="Task_DefinirProcedimientosCampo" name="Definir procedimientos de campo">
+      <incoming>Flow_08</incoming>
+      <outgoing>Flow_09</outgoing>
+    </task>
+
+    <task id="Task_PrepararInstrumentos" name="Preparar instrumentos de recoleccion">
+      <incoming>Flow_09</incoming>
+      <incoming>Flow_11_No</incoming>
+      <outgoing>Flow_10</outgoing>
+    </task>
+
+    <task id="Task_ObtenerConsentimiento" name="Obtener consentimiento informado">
+      <incoming>Flow_10</incoming>
+      <outgoing>Flow_12</outgoing>
+    </task>
+
+    <task id="Task_RealizarEstudioPiloto" name="Realizar estudio piloto">
+      <incoming>Flow_12</incoming>
+      <outgoing>Flow_13</outgoing>
+    </task>
+
+    <exclusiveGateway id="Gateway_ProtocoloAprobado" name="Protocolo aprobado tras piloto?">
+      <incoming>Flow_13</incoming>
+      <outgoing>Flow_11_Si</outgoing>
+      <outgoing>Flow_11_No</outgoing>
+    </exclusiveGateway>
+
+    <task id="Task_RealizarEntrevistas" name="Realizar entrevistas semiestructuradas">
+      <incoming>Flow_11_Si</incoming>
+      <incoming>Flow_05_No</incoming>
+      <incoming>Flow_20_No</incoming>
+      <outgoing>Flow_14</outgoing>
+    </task>
+
+    <task id="Task_ObservacionDirecta" name="Realizar observacion directa con registros">
+      <incoming>Flow_14</incoming>
+      <outgoing>Flow_15b</outgoing>
+    </task>
+
+    <task id="Task_RecolectarArtefactos" name="Recolectar artefactos y documentos">
+      <incoming>Flow_15b</incoming>
+      <outgoing>Flow_15</outgoing>
+    </task>
+
+    <task id="Task_RegistrarDatos" name="Registrar y organizar datos recolectados">
+      <incoming>Flow_05_Si</incoming>
+      <outgoing>Flow_16</outgoing>
+    </task>
+
+    <task id="Task_CodificacionCualitativos" name="Codificacion de datos cualitativos">
+      <incoming>Flow_16</incoming>
+      <outgoing>Flow_17</outgoing>
+    </task>
+
+    <task id="Task_CadenaEvidencia" name="Construccion de cadena de evidencia">
+      <incoming>Flow_17</incoming>
+      <outgoing>Flow_18</outgoing>
+    </task>
+
+    <task id="Task_AnalisisCaso" name="Analisis dentro/entre del caso(s)">
+      <incoming>Flow_18</incoming>
+      <outgoing>Flow_19</outgoing>
+    </task>
+
+    <exclusiveGateway id="Gateway_HallazgosValidados" name="Hallazgos validados satisfactoriamente?">
+      <incoming>Flow_19</incoming>
+      <outgoing>Flow_20_Si</outgoing>
+      <outgoing>Flow_20_No</outgoing>
+    </exclusiveGateway>
+
+    <task id="Task_RedactarInforme" name="Redactar informe del caso">
+      <incoming>Flow_20_Si</incoming>
+      <outgoing>Flow_21</outgoing>
+    </task>
+
+    <task id="Task_RevisionPares" name="Revision por pares academicos">
+      <incoming>Flow_21</incoming>
+      <outgoing>Flow_22</outgoing>
+    </task>
+
+    <task id="Task_IncorporarRetroalimentacion" name="Incorporar retroalimentacion">
+      <incoming>Flow_22</incoming>
+      <outgoing>Flow_23</outgoing>
+    </task>
+
+    <task id="Task_PublicarResultados" name="Publicar y diseminar resultados">
+      <incoming>Flow_23</incoming>
+      <outgoing>Flow_24</outgoing>
+    </task>
+
+    <endEvent id="EndEvent_Fin" name="Fin del Estudio de Caso">
+      <incoming>Flow_24</incoming>
+    </endEvent>
+
+    <dataObject id="DataObj_Protocolo" name="Protocolo de Investigacion"/>
+    <dataObject id="DataObj_Guia" name="Guia de Entrevista"/>
+    <dataObject id="DataObj_Consentimiento" name="Formulario de Consentimiento"/>
+    <dataObject id="DataObj_AuditTrail" name="Registro de Auditoria (Audit Trail)"/>
+    <dataObject id="DataObj_Almacen" name="Almacen de datos"/>
+    <dataObject id="DataObj_Codebook" name="Esquema de Codificacion (Codebook)"/>
+    <dataObject id="DataObj_EsquemaCadena" name="Esquema de cadena"/>
+    <dataObject id="DataObj_InformeFinal" name="Informe Final del Estudio"/>
+
+    <dataStore id="DataStoreRef_Almacen" name="Almacen de datos"/>
+
+    <sequenceFlow id="Flow_01" sourceRef="StartEvent_Inicio" targetRef="Task_DefinirPregunta"/>
+    <sequenceFlow id="Flow_02" sourceRef="Task_DefinirPregunta" targetRef="Task_DefinirObjetivo"/>
+    <sequenceFlow id="Flow_03" sourceRef="Task_DefinirObjetivo" targetRef="Task_SeleccionarCaso"/>
+    <sequenceFlow id="Flow_04" sourceRef="Task_SeleccionarCaso" targetRef="Task_DefinirMetodosRecoleccion"/>
+    <sequenceFlow id="Flow_05_Si" name="Si, informacion suficiente" sourceRef="Gateway_InfoSuficiente" targetRef="Task_RegistrarDatos"/>
+    <sequenceFlow id="Flow_05_No" name="No, continuar recoleccion" sourceRef="Gateway_InfoSuficiente" targetRef="Task_RealizarEntrevistas"/>
+    <sequenceFlow id="Flow_07" sourceRef="Task_DefinirMetodosRecoleccion" targetRef="Task_DisennarProtocolo"/>
+    <sequenceFlow id="Flow_08" sourceRef="Task_DisennarProtocolo" targetRef="Task_DefinirProcedimientosCampo"/>
+    <sequenceFlow id="Flow_09" sourceRef="Task_DefinirProcedimientosCampo" targetRef="Task_PrepararInstrumentos"/>
+    <sequenceFlow id="Flow_10" sourceRef="Task_PrepararInstrumentos" targetRef="Task_ObtenerConsentimiento"/>
+    <sequenceFlow id="Flow_11_Si" name="Si, protocolo aprobado" sourceRef="Gateway_ProtocoloAprobado" targetRef="Task_RealizarEntrevistas"/>
+    <sequenceFlow id="Flow_11_No" name="No, revisar instrumentos" sourceRef="Gateway_ProtocoloAprobado" targetRef="Task_PrepararInstrumentos"/>
+    <sequenceFlow id="Flow_12" sourceRef="Task_ObtenerConsentimiento" targetRef="Task_RealizarEstudioPiloto"/>
+    <sequenceFlow id="Flow_13" sourceRef="Task_RealizarEstudioPiloto" targetRef="Gateway_ProtocoloAprobado"/>
+    <sequenceFlow id="Flow_14" sourceRef="Task_RealizarEntrevistas" targetRef="Task_ObservacionDirecta"/>
+    <sequenceFlow id="Flow_15" sourceRef="Task_RecolectarArtefactos" targetRef="Gateway_InfoSuficiente"/>
+    <sequenceFlow id="Flow_15b" sourceRef="Task_ObservacionDirecta" targetRef="Task_RecolectarArtefactos"/>
+    <sequenceFlow id="Flow_16" sourceRef="Task_RegistrarDatos" targetRef="Task_CodificacionCualitativos"/>
+    <sequenceFlow id="Flow_17" sourceRef="Task_CodificacionCualitativos" targetRef="Task_CadenaEvidencia"/>
+    <sequenceFlow id="Flow_18" sourceRef="Task_CadenaEvidencia" targetRef="Task_AnalisisCaso"/>
+    <sequenceFlow id="Flow_19" sourceRef="Task_AnalisisCaso" targetRef="Gateway_HallazgosValidados"/>
+    <sequenceFlow id="Flow_20_Si" name="Si, hallazgos validados" sourceRef="Gateway_HallazgosValidados" targetRef="Task_RedactarInforme"/>
+    <sequenceFlow id="Flow_20_No" name="No, recolectar mas datos" sourceRef="Gateway_HallazgosValidados" targetRef="Task_RealizarEntrevistas"/>
+    <sequenceFlow id="Flow_21" sourceRef="Task_RedactarInforme" targetRef="Task_RevisionPares"/>
+    <sequenceFlow id="Flow_22" sourceRef="Task_RevisionPares" targetRef="Task_IncorporarRetroalimentacion"/>
+    <sequenceFlow id="Flow_23" sourceRef="Task_IncorporarRetroalimentacion" targetRef="Task_PublicarResultados"/>
+    <sequenceFlow id="Flow_24" sourceRef="Task_PublicarResultados" targetRef="EndEvent_Fin"/>
+
+  </process>
+
+  <bpmndi:BPMNDiagram id="BPMNDiagram_EstudioCaso">
+    <bpmndi:BPMNPlane id="BPMNPlane_EstudioCaso" bpmnElement="Collaboration_EstudioCaso">
+
+      <bpmndi:BPMNShape id="Shape_Participant" bpmnElement="Participant_CaseStudyProcess" isHorizontal="true">
+        <dc:Bounds x="120" y="60" width="1800" height="1000"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_Lane_Fase1" bpmnElement="Lane_Fase1" isHorizontal="true">
+        <dc:Bounds x="150" y="60" width="1770" height="200"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_StartEvent" bpmnElement="StartEvent_Inicio">
+        <dc:Bounds x="210" y="132" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_DefinirPregunta" bpmnElement="Task_DefinirPregunta">
+        <dc:Bounds x="300" y="110" width="140" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_DefinirObjetivo" bpmnElement="Task_DefinirObjetivo">
+        <dc:Bounds x="490" y="110" width="140" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_SeleccionarCaso" bpmnElement="Task_SeleccionarCaso">
+        <dc:Bounds x="680" y="110" width="140" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_GatewayInfoSuficiente" bpmnElement="Gateway_InfoSuficiente" isMarkerVisible="true">
+        <dc:Bounds x="890" y="105" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_Lane_Fase2" bpmnElement="Lane_Fase2" isHorizontal="true">
+        <dc:Bounds x="150" y="260" width="1770" height="200"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_DefinirMetodos" bpmnElement="Task_DefinirMetodosRecoleccion">
+        <dc:Bounds x="300" y="330" width="140" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_DisennarProtocolo" bpmnElement="Task_DisennarProtocolo">
+        <dc:Bounds x="490" y="330" width="140" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_DefinirProcedimientos" bpmnElement="Task_DefinirProcedimientosCampo">
+        <dc:Bounds x="680" y="330" width="140" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_PrepararInstrumentos" bpmnElement="Task_PrepararInstrumentos">
+        <dc:Bounds x="870" y="330" width="140" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_ObtenerConsentimiento" bpmnElement="Task_ObtenerConsentimiento">
+        <dc:Bounds x="1060" y="330" width="140" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_Lane_Fase3" bpmnElement="Lane_Fase3" isHorizontal="true">
+        <dc:Bounds x="150" y="460" width="1770" height="200"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_EstudioPiloto" bpmnElement="Task_RealizarEstudioPiloto">
+        <dc:Bounds x="300" y="530" width="140" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_GatewayProtocolo" bpmnElement="Gateway_ProtocoloAprobado" isMarkerVisible="true">
+        <dc:Bounds x="490" y="525" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_RealizarEntrevistas" bpmnElement="Task_RealizarEntrevistas">
+        <dc:Bounds x="590" y="530" width="140" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_ObservacionDirecta" bpmnElement="Task_ObservacionDirecta">
+        <dc:Bounds x="780" y="530" width="140" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_RecolectarArtefactos" bpmnElement="Task_RecolectarArtefactos">
+        <dc:Bounds x="970" y="530" width="140" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_Lane_Fase4" bpmnElement="Lane_Fase4" isHorizontal="true">
+        <dc:Bounds x="150" y="660" width="1770" height="200"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_RegistrarDatos" bpmnElement="Task_RegistrarDatos">
+        <dc:Bounds x="300" y="730" width="140" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_Codificacion" bpmnElement="Task_CodificacionCualitativos">
+        <dc:Bounds x="490" y="730" width="140" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_CadenaEvidencia" bpmnElement="Task_CadenaEvidencia">
+        <dc:Bounds x="680" y="730" width="140" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_AnalisisCaso" bpmnElement="Task_AnalisisCaso">
+        <dc:Bounds x="870" y="730" width="140" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_GatewayHallazgos" bpmnElement="Gateway_HallazgosValidados" isMarkerVisible="true">
+        <dc:Bounds x="1060" y="725" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_Lane_Fase5" bpmnElement="Lane_Fase5" isHorizontal="true">
+        <dc:Bounds x="150" y="860" width="1770" height="200"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_RedactarInforme" bpmnElement="Task_RedactarInforme">
+        <dc:Bounds x="300" y="930" width="140" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_RevisionPares" bpmnElement="Task_RevisionPares">
+        <dc:Bounds x="490" y="930" width="140" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_IncorporarRetro" bpmnElement="Task_IncorporarRetroalimentacion">
+        <dc:Bounds x="680" y="930" width="140" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_Publicar" bpmnElement="Task_PublicarResultados">
+        <dc:Bounds x="870" y="930" width="140" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Shape_EndEvent" bpmnElement="EndEvent_Fin">
+        <dc:Bounds x="1072" y="952" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNEdge id="Edge_01" bpmnElement="Flow_01">
+        <di:waypoint x="246" y="150"/>
+        <di:waypoint x="300" y="150"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_02" bpmnElement="Flow_02">
+        <di:waypoint x="440" y="150"/>
+        <di:waypoint x="490" y="150"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_03" bpmnElement="Flow_03">
+        <di:waypoint x="630" y="150"/>
+        <di:waypoint x="680" y="150"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_04" bpmnElement="Flow_04">
+        <di:waypoint x="750" y="150"/>
+        <di:waypoint x="830" y="150"/>
+        <di:waypoint x="830" y="190"/>
+        <di:waypoint x="220" y="190"/>
+        <di:waypoint x="220" y="370"/>
+        <di:waypoint x="300" y="370"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_05_Si" bpmnElement="Flow_05_Si">
+        <di:waypoint x="915" y="155"/>
+        <di:waypoint x="915" y="190"/>
+        <di:waypoint x="220" y="190"/>
+        <di:waypoint x="220" y="770"/>
+        <di:waypoint x="300" y="770"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_05_No" bpmnElement="Flow_05_No">
+        <di:waypoint x="915" y="155"/>
+        <di:waypoint x="915" y="220"/>
+        <di:waypoint x="1250" y="220"/>
+        <di:waypoint x="1250" y="570"/>
+        <di:waypoint x="730" y="570"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_07" bpmnElement="Flow_07">
+        <di:waypoint x="440" y="370"/>
+        <di:waypoint x="490" y="370"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_08" bpmnElement="Flow_08">
+        <di:waypoint x="630" y="370"/>
+        <di:waypoint x="680" y="370"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_09" bpmnElement="Flow_09">
+        <di:waypoint x="820" y="370"/>
+        <di:waypoint x="870" y="370"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_10" bpmnElement="Flow_10">
+        <di:waypoint x="1010" y="370"/>
+        <di:waypoint x="1060" y="370"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_12" bpmnElement="Flow_12">
+        <di:waypoint x="1130" y="410"/>
+        <di:waypoint x="1180" y="410"/>
+        <di:waypoint x="1180" y="490"/>
+        <di:waypoint x="220" y="490"/>
+        <di:waypoint x="220" y="570"/>
+        <di:waypoint x="300" y="570"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_13" bpmnElement="Flow_13">
+        <di:waypoint x="440" y="570"/>
+        <di:waypoint x="490" y="570"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_11_Si" bpmnElement="Flow_11_Si">
+        <di:waypoint x="540" y="550"/>
+        <di:waypoint x="590" y="550"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_11_No" bpmnElement="Flow_11_No">
+        <di:waypoint x="515" y="575"/>
+        <di:waypoint x="515" y="450"/>
+        <di:waypoint x="1310" y="450"/>
+        <di:waypoint x="1310" y="370"/>
+        <di:waypoint x="1010" y="370"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_14" bpmnElement="Flow_14">
+        <di:waypoint x="730" y="570"/>
+        <di:waypoint x="780" y="570"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_15b" bpmnElement="Flow_15b">
+        <di:waypoint x="920" y="570"/>
+        <di:waypoint x="970" y="570"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_15" bpmnElement="Flow_15">
+        <di:waypoint x="1110" y="570"/>
+        <di:waypoint x="1220" y="570"/>
+        <di:waypoint x="1220" y="130"/>
+        <di:waypoint x="915" y="130"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_16" bpmnElement="Flow_16">
+        <di:waypoint x="440" y="770"/>
+        <di:waypoint x="490" y="770"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_17" bpmnElement="Flow_17">
+        <di:waypoint x="630" y="770"/>
+        <di:waypoint x="680" y="770"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_18" bpmnElement="Flow_18">
+        <di:waypoint x="820" y="770"/>
+        <di:waypoint x="870" y="770"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_19" bpmnElement="Flow_19">
+        <di:waypoint x="1010" y="770"/>
+        <di:waypoint x="1060" y="770"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_20_Si" bpmnElement="Flow_20_Si">
+        <di:waypoint x="1085" y="775"/>
+        <di:waypoint x="1085" y="970"/>
+        <di:waypoint x="300" y="970"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_20_No" bpmnElement="Flow_20_No">
+        <di:waypoint x="1085" y="725"/>
+        <di:waypoint x="1085" y="490"/>
+        <di:waypoint x="660" y="490"/>
+        <di:waypoint x="660" y="530"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_21" bpmnElement="Flow_21">
+        <di:waypoint x="440" y="970"/>
+        <di:waypoint x="490" y="970"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_22" bpmnElement="Flow_22">
+        <di:waypoint x="630" y="970"/>
+        <di:waypoint x="680" y="970"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_23" bpmnElement="Flow_23">
+        <di:waypoint x="820" y="970"/>
+        <di:waypoint x="870" y="970"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Edge_24" bpmnElement="Flow_24">
+        <di:waypoint x="1010" y="970"/>
+        <di:waypoint x="1072" y="970"/>
+      </bpmndi:BPMNEdge>
+
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</definitions>

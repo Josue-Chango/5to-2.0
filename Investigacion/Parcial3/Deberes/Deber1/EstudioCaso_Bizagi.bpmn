@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                   xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                   xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+                   xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   id="Definitions_EstudioCaso"
+                   targetNamespace="http://bizagi.com/estudiocaso">
+  <bpmn:collaboration id="Collaboration_1">
+    <bpmn:participant id="Pool_EstudioCaso" name="Estudio de Caso en Ingeniería de Software" processRef="Proceso_EstudioCaso" />
+  </bpmn:collaboration>
+<bpmn:process id="Proceso_EstudioCaso" name="Estudio de Caso en Ingeniería de Software" isExecutable="false">
+  <bpmn:laneSet id="LaneSet_1">
+    <bpmn:lane id="lane_pi" name="Investigador Principal">
+      <bpmn:flowNodeRef>start1</bpmn:flowNodeRef>
+      <bpmn:flowNodeRef>t_objetivo</bpmn:flowNodeRef>
+      <bpmn:flowNodeRef>t_pregunta</bpmn:flowNodeRef>
+      <bpmn:flowNodeRef>t_seleccaso</bpmn:flowNodeRef>
+      <bpmn:flowNodeRef>t_metodos</bpmn:flowNodeRef>
+      <bpmn:flowNodeRef>t_protocolo</bpmn:flowNodeRef>
+      <bpmn:flowNodeRef>gw_aprobado</bpmn:flowNodeRef>
+      <bpmn:flowNodeRef>t_analisis</bpmn:flowNodeRef>
+      <bpmn:flowNodeRef>gw_validado</bpmn:flowNodeRef>
+      <bpmn:flowNodeRef>t_redactar</bpmn:flowNodeRef>
+      <bpmn:flowNodeRef>t_revision</bpmn:flowNodeRef>
+      <bpmn:flowNodeRef>t_retro</bpmn:flowNodeRef>
+      <bpmn:flowNodeRef>t_publicar</bpmn:flowNodeRef>
+      <bpmn:flowNodeRef>end1</bpmn:flowNodeRef>
+    </bpmn:lane>
+    <bpmn:lane id="lane_eq" name="Equipo de Investigación">
+      <bpmn:flowNodeRef>t_procedcampo</bpmn:flowNodeRef>
+      <bpmn:flowNodeRef>t_instrumentos</bpmn:flowNodeRef>
+      <bpmn:flowNodeRef>t_consentimiento</bpmn:flowNodeRef>
+      <bpmn:flowNodeRef>t_piloto</bpmn:flowNodeRef>
+      <bpmn:flowNodeRef>t_entrevistas</bpmn:flowNodeRef>
+      <bpmn:flowNodeRef>t_observacion</bpmn:flowNodeRef>
+      <bpmn:flowNodeRef>t_artefactos</bpmn:flowNodeRef>
+      <bpmn:flowNodeRef>gw_suficiente</bpmn:flowNodeRef>
+      <bpmn:flowNodeRef>t_registrar</bpmn:flowNodeRef>
+      <bpmn:flowNodeRef>t_codificar</bpmn:flowNodeRef>
+      <bpmn:flowNodeRef>t_cadena</bpmn:flowNodeRef>
+    </bpmn:lane>
+    <bpmn:lane id="lane_in" name="Informantes / Org. del Caso">
+      <bpmn:flowNodeRef>t_informante</bpmn:flowNodeRef>
+    </bpmn:lane>
+  </bpmn:laneSet>
+  <bpmn:startEvent id="start1" name="Inicio del Estudio de Caso">
+    <bpmn:outgoing>Flow_1</bpmn:outgoing>
+  </bpmn:startEvent>
+  <bpmn:task id="t_objetivo" name="Definir objetivo del estudio">
+    <bpmn:incoming>Flow_1</bpmn:incoming>
+    <bpmn:outgoing>Flow_2</bpmn:outgoing>
+  </bpmn:task>
+  <bpmn:task id="t_pregunta" name="Definir pregunta de investigación">
+    <bpmn:incoming>Flow_2</bpmn:incoming>
+    <bpmn:outgoing>Flow_3</bpmn:outgoing>
+  </bpmn:task>
+  <bpmn:task id="t_seleccaso" name="Seleccionar el/los caso(s) específico(s)">
+    <bpmn:incoming>Flow_3</bpmn:incoming>
+    <bpmn:outgoing>Flow_4</bpmn:outgoing>
+  </bpmn:task>
+  <bpmn:task id="t_metodos" name="Definir métodos de recolección">
+    <bpmn:incoming>Flow_4</bpmn:incoming>
+    <bpmn:outgoing>Flow_5</bpmn:outgoing>
+  </bpmn:task>
+  <bpmn:task id="t_protocolo" name="Diseñar protocolo de investigación">
+    <bpmn:incoming>Flow_5</bpmn:incoming>
+    <bpmn:outgoing>Flow_6</bpmn:outgoing>
+  </bpmn:task>
+  <bpmn:task id="t_procedcampo" name="Definir procedimientos de campo">
+    <bpmn:incoming>Flow_6</bpmn:incoming>
+    <bpmn:outgoing>Flow_7</bpmn:outgoing>
+  </bpmn:task>
+  <bpmn:task id="t_instrumentos" name="Preparar instrumentos de recolección">
+    <bpmn:incoming>Flow_7</bpmn:incoming>
+    <bpmn:incoming>Flow_12</bpmn:incoming>
+    <bpmn:outgoing>Flow_8</bpmn:outgoing>
+  </bpmn:task>
+  <bpmn:task id="t_consentimiento" name="Obtener consentimiento informado">
+    <bpmn:incoming>Flow_8</bpmn:incoming>
+    <bpmn:outgoing>Flow_9</bpmn:outgoing>
+  </bpmn:task>
+  <bpmn:task id="t_piloto" name="Realizar estudio piloto">
+    <bpmn:incoming>Flow_9</bpmn:incoming>
+    <bpmn:outgoing>Flow_10</bpmn:outgoing>
+  </bpmn:task>
+  <bpmn:exclusiveGateway id="gw_aprobado" name="¿Protocolo aprobado tras piloto?">
+    <bpmn:incoming>Flow_10</bpmn:incoming>
+    <bpmn:outgoing>Flow_11</bpmn:outgoing>
+    <bpmn:outgoing>Flow_12</bpmn:outgoing>
+  </bpmn:exclusiveGateway>
+  <bpmn:task id="t_entrevistas" name="Realizar entrevistas semiestructuradas">
+    <bpmn:incoming>Flow_11</bpmn:incoming>
+    <bpmn:incoming>Flow_17</bpmn:incoming>
+    <bpmn:incoming>Flow_23</bpmn:incoming>
+    <bpmn:outgoing>Flow_13</bpmn:outgoing>
+  </bpmn:task>
+  <bpmn:task id="t_observacion" name="Realizar observación directa con registros">
+    <bpmn:incoming>Flow_13</bpmn:incoming>
+    <bpmn:outgoing>Flow_14</bpmn:outgoing>
+  </bpmn:task>
+  <bpmn:task id="t_artefactos" name="Recolectar artefactos y documentos">
+    <bpmn:incoming>Flow_14</bpmn:incoming>
+    <bpmn:outgoing>Flow_15</bpmn:outgoing>
+  </bpmn:task>
+  <bpmn:exclusiveGateway id="gw_suficiente" name="¿Información suficiente para el caso?">
+    <bpmn:incoming>Flow_15</bpmn:incoming>
+    <bpmn:outgoing>Flow_16</bpmn:outgoing>
+    <bpmn:outgoing>Flow_17</bpmn:outgoing>
+  </bpmn:exclusiveGateway>
+  <bpmn:task id="t_registrar" name="Registrar y organizar datos recolectados">
+    <bpmn:incoming>Flow_16</bpmn:incoming>
+    <bpmn:outgoing>Flow_18</bpmn:outgoing>
+  </bpmn:task>
+  <bpmn:task id="t_codificar" name="Codificación de datos cualitativos">
+    <bpmn:incoming>Flow_18</bpmn:incoming>
+    <bpmn:outgoing>Flow_19</bpmn:outgoing>
+  </bpmn:task>
+  <bpmn:task id="t_cadena" name="Construcción de cadena de evidencia">
+    <bpmn:incoming>Flow_19</bpmn:incoming>
+    <bpmn:outgoing>Flow_20</bpmn:outgoing>
+  </bpmn:task>
+  <bpmn:task id="t_analisis" name="Análisis dentro/entre del caso(s)">
+    <bpmn:incoming>Flow_20</bpmn:incoming>
+    <bpmn:outgoing>Flow_21</bpmn:outgoing>
+  </bpmn:task>
+  <bpmn:exclusiveGateway id="gw_validado" name="¿Hallazgos validados satisfactoriamente?">
+    <bpmn:incoming>Flow_21</bpmn:incoming>
+    <bpmn:outgoing>Flow_22</bpmn:outgoing>
+    <bpmn:outgoing>Flow_23</bpmn:outgoing>
+  </bpmn:exclusiveGateway>
+  <bpmn:task id="t_redactar" name="Redactar informe del caso">
+    <bpmn:incoming>Flow_22</bpmn:incoming>
+    <bpmn:outgoing>Flow_24</bpmn:outgoing>
+  </bpmn:task>
+  <bpmn:task id="t_revision" name="Revisión por pares académicos">
+    <bpmn:incoming>Flow_24</bpmn:incoming>
+    <bpmn:outgoing>Flow_25</bpmn:outgoing>
+  </bpmn:task>
+  <bpmn:task id="t_retro" name="Incorporar retroalimentación">
+    <bpmn:incoming>Flow_25</bpmn:incoming>
+    <bpmn:outgoing>Flow_26</bpmn:outgoing>
+  </bpmn:task>
+  <bpmn:task id="t_publicar" name="Publicar y diseminar resultados">
+    <bpmn:incoming>Flow_26</bpmn:incoming>
+    <bpmn:outgoing>Flow_27</bpmn:outgoing>
+  </bpmn:task>
+  <bpmn:endEvent id="end1" name="Fin del Estudio de Caso">
+    <bpmn:incoming>Flow_27</bpmn:incoming>
+  </bpmn:endEvent>
+  <bpmn:task id="t_informante" name="Participar en entrevistas/observación,
+otorgar consentimiento y aportar
+documentos/artefactos">
+
+  </bpmn:task>
+  <bpmn:dataObjectReference id="d_protocolo" name="Protocolo de Investigación" dataObjectRef="d_protocolo_do" />
+  <bpmn:dataObject id="d_protocolo_do" />
+  <bpmn:dataObjectReference id="d_guia" name="Guía de Entrevista" dataObjectRef="d_guia_do" />
+  <bpmn:dataObject id="d_guia_do" />
+  <bpmn:dataObjectReference id="d_consent" name="Formulario de Consentimiento" dataObjectRef="d_consent_do" />
+  <bpmn:dataObject id="d_consent_do" />
+  <bpmn:dataObjectReference id="d_auditoria" name="Registro de Auditoría (Audit Trail)" dataObjectRef="d_auditoria_do" />
+  <bpmn:dataObject id="d_auditoria_do" />
+  <bpmn:dataStoreReference id="d_almacen" name="Almacén de datos" />
+  <bpmn:dataObjectReference id="d_codebook" name="Esquema de Codificación (Codebook)" dataObjectRef="d_codebook_do" />
+  <bpmn:dataObject id="d_codebook_do" />
+  <bpmn:dataObjectReference id="d_cadenaesq" name="Esquema de cadena" dataObjectRef="d_cadenaesq_do" />
+  <bpmn:dataObject id="d_cadenaesq_do" />
+  <bpmn:dataObjectReference id="d_informe" name="Informe Final del Estudio" dataObjectRef="d_informe_do" />
+  <bpmn:dataObject id="d_informe_do" />
+  <bpmn:sequenceFlow id="Flow_1" sourceRef="start1" targetRef="t_objetivo" />
+  <bpmn:sequenceFlow id="Flow_2" sourceRef="t_objetivo" targetRef="t_pregunta" />
+  <bpmn:sequenceFlow id="Flow_3" sourceRef="t_pregunta" targetRef="t_seleccaso" />
+  <bpmn:sequenceFlow id="Flow_4" sourceRef="t_seleccaso" targetRef="t_metodos" />
+  <bpmn:sequenceFlow id="Flow_5" sourceRef="t_metodos" targetRef="t_protocolo" />
+  <bpmn:sequenceFlow id="Flow_6" sourceRef="t_protocolo" targetRef="t_procedcampo" />
+  <bpmn:sequenceFlow id="Flow_7" sourceRef="t_procedcampo" targetRef="t_instrumentos" />
+  <bpmn:sequenceFlow id="Flow_8" sourceRef="t_instrumentos" targetRef="t_consentimiento" />
+  <bpmn:sequenceFlow id="Flow_9" sourceRef="t_consentimiento" targetRef="t_piloto" />
+  <bpmn:sequenceFlow id="Flow_10" sourceRef="t_piloto" targetRef="gw_aprobado" />
+  <bpmn:sequenceFlow id="Flow_11" name="Sí, protocolo aprobado" sourceRef="gw_aprobado" targetRef="t_entrevistas" />
+  <bpmn:sequenceFlow id="Flow_12" name="No, revisar instrumentos" sourceRef="gw_aprobado" targetRef="t_instrumentos" />
+  <bpmn:sequenceFlow id="Flow_13" sourceRef="t_entrevistas" targetRef="t_observacion" />
+  <bpmn:sequenceFlow id="Flow_14" sourceRef="t_observacion" targetRef="t_artefactos" />
+  <bpmn:sequenceFlow id="Flow_15" sourceRef="t_artefactos" targetRef="gw_suficiente" />
+  <bpmn:sequenceFlow id="Flow_16" name="Sí, información suficiente" sourceRef="gw_suficiente" targetRef="t_registrar" />
+  <bpmn:sequenceFlow id="Flow_17" name="No, continuar recolección" sourceRef="gw_suficiente" targetRef="t_entrevistas" />
+  <bpmn:sequenceFlow id="Flow_18" sourceRef="t_registrar" targetRef="t_codificar" />
+  <bpmn:sequenceFlow id="Flow_19" sourceRef="t_codificar" targetRef="t_cadena" />
+  <bpmn:sequenceFlow id="Flow_20" sourceRef="t_cadena" targetRef="t_analisis" />
+  <bpmn:sequenceFlow id="Flow_21" sourceRef="t_analisis" targetRef="gw_validado" />
+  <bpmn:sequenceFlow id="Flow_22" name="Sí, hallazgos validados" sourceRef="gw_validado" targetRef="t_redactar" />
+  <bpmn:sequenceFlow id="Flow_23" name="No, recolectar más datos (volver a Fase 3)" sourceRef="gw_validado" targetRef="t_entrevistas" />
+  <bpmn:sequenceFlow id="Flow_24" sourceRef="t_redactar" targetRef="t_revision" />
+  <bpmn:sequenceFlow id="Flow_25" sourceRef="t_revision" targetRef="t_retro" />
+  <bpmn:sequenceFlow id="Flow_26" sourceRef="t_retro" targetRef="t_publicar" />
+  <bpmn:sequenceFlow id="Flow_27" sourceRef="t_publicar" targetRef="end1" />
+  <bpmn:association id="Assoc_1" sourceRef="t_protocolo" targetRef="d_protocolo" />
+  <bpmn:association id="Assoc_2" sourceRef="t_instrumentos" targetRef="d_guia" />
+  <bpmn:association id="Assoc_3" sourceRef="t_consentimiento" targetRef="d_consent" />
+  <bpmn:association id="Assoc_4" sourceRef="t_registrar" targetRef="d_auditoria" />
+  <bpmn:association id="Assoc_5" sourceRef="t_registrar" targetRef="d_almacen" />
+  <bpmn:association id="Assoc_6" sourceRef="t_codificar" targetRef="d_codebook" />
+  <bpmn:association id="Assoc_7" sourceRef="t_cadena" targetRef="d_cadenaesq" />
+  <bpmn:association id="Assoc_8" sourceRef="t_redactar" targetRef="d_informe" />
+  <bpmn:association id="Assoc_9" sourceRef="t_informante" targetRef="t_consentimiento" />
+  <bpmn:association id="Assoc_10" sourceRef="t_informante" targetRef="t_entrevistas" />
+  <bpmn:association id="Assoc_11" sourceRef="t_informante" targetRef="t_observacion" />
+  <bpmn:association id="Assoc_12" sourceRef="t_informante" targetRef="t_artefactos" />
+</bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Pool_EstudioCaso">
+      <bpmndi:BPMNShape id="Pool_EstudioCaso_di" bpmnElement="Pool_EstudioCaso" isHorizontal="true">
+        <dc:Bounds x="-30" y="0" width="3956" height="800" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="lane_pi_di" bpmnElement="lane_pi" isHorizontal="true">
+        <dc:Bounds x="0" y="0" width="3926" height="260" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="lane_eq_di" bpmnElement="lane_eq" isHorizontal="true">
+        <dc:Bounds x="0" y="260" width="3926" height="320" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="lane_in_di" bpmnElement="lane_in" isHorizontal="true">
+        <dc:Bounds x="0" y="580" width="3926" height="220" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="start1_di" bpmnElement="start1">
+        <dc:Bounds x="40" y="112" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t_objetivo_di" bpmnElement="t_objetivo">
+        <dc:Bounds x="140" y="90" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t_pregunta_di" bpmnElement="t_pregunta">
+        <dc:Bounds x="300" y="90" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t_seleccaso_di" bpmnElement="t_seleccaso">
+        <dc:Bounds x="460" y="90" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t_metodos_di" bpmnElement="t_metodos">
+        <dc:Bounds x="620" y="90" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t_protocolo_di" bpmnElement="t_protocolo">
+        <dc:Bounds x="780" y="90" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t_procedcampo_di" bpmnElement="t_procedcampo">
+        <dc:Bounds x="940" y="380" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t_instrumentos_di" bpmnElement="t_instrumentos">
+        <dc:Bounds x="1100" y="380" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t_consentimiento_di" bpmnElement="t_consentimiento">
+        <dc:Bounds x="1260" y="380" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t_piloto_di" bpmnElement="t_piloto">
+        <dc:Bounds x="1420" y="380" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="gw_aprobado_di" bpmnElement="gw_aprobado">
+        <dc:Bounds x="1590" y="105" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t_entrevistas_di" bpmnElement="t_entrevistas">
+        <dc:Bounds x="1730" y="380" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t_observacion_di" bpmnElement="t_observacion">
+        <dc:Bounds x="1890" y="380" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t_artefactos_di" bpmnElement="t_artefactos">
+        <dc:Bounds x="2050" y="380" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="gw_suficiente_di" bpmnElement="gw_suficiente">
+        <dc:Bounds x="2220" y="395" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t_registrar_di" bpmnElement="t_registrar">
+        <dc:Bounds x="2360" y="380" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t_codificar_di" bpmnElement="t_codificar">
+        <dc:Bounds x="2520" y="380" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t_cadena_di" bpmnElement="t_cadena">
+        <dc:Bounds x="2680" y="380" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t_analisis_di" bpmnElement="t_analisis">
+        <dc:Bounds x="2840" y="90" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="gw_validado_di" bpmnElement="gw_validado">
+        <dc:Bounds x="3010" y="105" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t_redactar_di" bpmnElement="t_redactar">
+        <dc:Bounds x="3150" y="90" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t_revision_di" bpmnElement="t_revision">
+        <dc:Bounds x="3310" y="90" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t_retro_di" bpmnElement="t_retro">
+        <dc:Bounds x="3470" y="90" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t_publicar_di" bpmnElement="t_publicar">
+        <dc:Bounds x="3630" y="90" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="end1_di" bpmnElement="end1">
+        <dc:Bounds x="3800" y="112" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t_informante_di" bpmnElement="t_informante">
+        <dc:Bounds x="1550" y="650" width="220" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d_protocolo_di" bpmnElement="d_protocolo">
+        <dc:Bounds x="800" y="4" width="36" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d_guia_di" bpmnElement="d_guia">
+        <dc:Bounds x="1120" y="264" width="36" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d_consent_di" bpmnElement="d_consent">
+        <dc:Bounds x="1280" y="264" width="36" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d_auditoria_di" bpmnElement="d_auditoria">
+        <dc:Bounds x="2380" y="264" width="36" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d_almacen_di" bpmnElement="d_almacen">
+        <dc:Bounds x="2380" y="526" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d_codebook_di" bpmnElement="d_codebook">
+        <dc:Bounds x="2540" y="264" width="36" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d_cadenaesq_di" bpmnElement="d_cadenaesq">
+        <dc:Bounds x="2700" y="264" width="36" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="d_informe_di" bpmnElement="d_informe">
+        <dc:Bounds x="3170" y="4" width="36" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="76" y="130" />
+        <di:waypoint x="140" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="260" y="130" />
+        <di:waypoint x="300" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="420" y="130" />
+        <di:waypoint x="460" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <di:waypoint x="580" y="130" />
+        <di:waypoint x="620" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5">
+        <di:waypoint x="740" y="130" />
+        <di:waypoint x="780" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_6_di" bpmnElement="Flow_6">
+        <di:waypoint x="900" y="130" />
+        <di:waypoint x="940" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_7_di" bpmnElement="Flow_7">
+        <di:waypoint x="1060" y="420" />
+        <di:waypoint x="1100" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_8_di" bpmnElement="Flow_8">
+        <di:waypoint x="1220" y="420" />
+        <di:waypoint x="1260" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_9_di" bpmnElement="Flow_9">
+        <di:waypoint x="1380" y="420" />
+        <di:waypoint x="1420" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10_di" bpmnElement="Flow_10">
+        <di:waypoint x="1540" y="420" />
+        <di:waypoint x="1590" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11_di" bpmnElement="Flow_11">
+        <di:waypoint x="1640" y="130" />
+        <di:waypoint x="1730" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12_di" bpmnElement="Flow_12">
+        <di:waypoint x="1640" y="130" />
+        <di:waypoint x="1100" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13_di" bpmnElement="Flow_13">
+        <di:waypoint x="1850" y="420" />
+        <di:waypoint x="1890" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14_di" bpmnElement="Flow_14">
+        <di:waypoint x="2010" y="420" />
+        <di:waypoint x="2050" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_15_di" bpmnElement="Flow_15">
+        <di:waypoint x="2170" y="420" />
+        <di:waypoint x="2220" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16_di" bpmnElement="Flow_16">
+        <di:waypoint x="2270" y="420" />
+        <di:waypoint x="2360" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17_di" bpmnElement="Flow_17">
+        <di:waypoint x="2270" y="420" />
+        <di:waypoint x="1730" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_18_di" bpmnElement="Flow_18">
+        <di:waypoint x="2480" y="420" />
+        <di:waypoint x="2520" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_19_di" bpmnElement="Flow_19">
+        <di:waypoint x="2640" y="420" />
+        <di:waypoint x="2680" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_20_di" bpmnElement="Flow_20">
+        <di:waypoint x="2800" y="420" />
+        <di:waypoint x="2840" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_21_di" bpmnElement="Flow_21">
+        <di:waypoint x="2960" y="130" />
+        <di:waypoint x="3010" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_22_di" bpmnElement="Flow_22">
+        <di:waypoint x="3060" y="130" />
+        <di:waypoint x="3150" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_23_di" bpmnElement="Flow_23">
+        <di:waypoint x="3060" y="130" />
+        <di:waypoint x="1730" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_24_di" bpmnElement="Flow_24">
+        <di:waypoint x="3270" y="130" />
+        <di:waypoint x="3310" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_25_di" bpmnElement="Flow_25">
+        <di:waypoint x="3430" y="130" />
+        <di:waypoint x="3470" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_26_di" bpmnElement="Flow_26">
+        <di:waypoint x="3590" y="130" />
+        <di:waypoint x="3630" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_27_di" bpmnElement="Flow_27">
+        <di:waypoint x="3750" y="130" />
+        <di:waypoint x="3800" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_1_di" bpmnElement="Assoc_1">
+        <di:waypoint x="840" y="90" />
+        <di:waypoint x="818" y="54" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_2_di" bpmnElement="Assoc_2">
+        <di:waypoint x="1160" y="380" />
+        <di:waypoint x="1138" y="314" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_3_di" bpmnElement="Assoc_3">
+        <di:waypoint x="1320" y="380" />
+        <di:waypoint x="1298" y="314" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_4_di" bpmnElement="Assoc_4">
+        <di:waypoint x="2420" y="380" />
+        <di:waypoint x="2398" y="314" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_5_di" bpmnElement="Assoc_5">
+        <di:waypoint x="2420" y="380" />
+        <di:waypoint x="2405" y="576" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_6_di" bpmnElement="Assoc_6">
+        <di:waypoint x="2580" y="380" />
+        <di:waypoint x="2558" y="314" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_7_di" bpmnElement="Assoc_7">
+        <di:waypoint x="2740" y="380" />
+        <di:waypoint x="2718" y="314" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_8_di" bpmnElement="Assoc_8">
+        <di:waypoint x="3210" y="90" />
+        <di:waypoint x="3188" y="54" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_9_di" bpmnElement="Assoc_9">
+        <di:waypoint x="1660" y="650" />
+        <di:waypoint x="1320" y="460" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_10_di" bpmnElement="Assoc_10">
+        <di:waypoint x="1660" y="650" />
+        <di:waypoint x="1790" y="460" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_11_di" bpmnElement="Assoc_11">
+        <di:waypoint x="1660" y="650" />
+        <di:waypoint x="1950" y="460" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Assoc_12_di" bpmnElement="Assoc_12">
+        <di:waypoint x="1660" y="650" />
+        <di:waypoint x="2110" y="460" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
