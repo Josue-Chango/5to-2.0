@@ -1,0 +1,723 @@
+# 14. Introduccion-a-la-Experimentacion-en-Ingenieria-de-Software
+
+Introducción a la Experimentación en Ingeniería de Software
+Clase 13 | Unidad 3 — Experimentación en IS
+Investigación en Ingeniería de Software — ESPE | Ing. Ángel Rea, Ph.D.
+
+¿TDD realmente funciona?
+Durante más de 10 años, la comunidad IS debatió si Test-Driven Development (TDD) mejora la calidad del software.
+Argumentos a favor
+Basados en experiencia personal y casos de éxito.
+Argumentos en contra
+Basados en proyectos donde no funcionó.
+El debate no se resolvió con opiniones — se resolvió con experimentos.
+Evidencia experimental
+Juristo & Vegas (2003), Müller & Hagner (2002), Madeyski (2010): experimentos controlados con desarrolladores reales midiendo densidad de defectos y productividad.
+Resultado: TDD mejora la calidad externa en ciertos contextos, pero el efecto depende de la experiencia del programador y el tipo de tarea.
+La lección: sin experimento, el debate es infinito. Con experimento, la pregunta tiene respuesta — y matices.
+
+¿Qué es un experimento en IS?
+Definición (Wohlin et al., 2012)
+Un experimento es un estudio empírico en el que el investigador manipula activamente al menos una variable independiente para observar su efecto sobre una variable dependiente, bajo condiciones controladas.
+No es un experimento:
+Un estudio de caso (no manipula, observa)
+Una encuesta (no manipula, pregunta)
+Un análisis de repositorios MSR (no manipula, mina datos históricos)
+Manipulación
+El investigador asigna los tratamientos (no observa lo que ya ocurrió)
+Control
+Se minimizan las variables que podrían confundir los resultados
+Aleatorización
+Los sujetos se asignan al azar a los grupos cuando es posible
+Medición
+Los resultados se cuantifican con métricas definidas antes del estudio
+
+Historia de la Experimentación en IS
+1
+1971
+Primera referencia a experimentos controlados en IS (Weinberg & Schulman — legibilidad de código)
+2
+1986
+Basili & Selby comparan métodos de lectura de código: inspección, pruebas funcionales y estructurales. Primer experimento IS con diseño riguroso.
+3
+1995–2000
+Wohlin, Runeson, Höst et al. sistematizan el método experimental en IS → libro "Experimentation in Software Engineering" (2000, 2a ed. 2012)
+4
+2000s
+Experimentos sobre TDD, pair programming, inspecciones de código, estimación de esfuerzo
+5
+2010s
+Replicación de experimentos: el problema de la reproducibilidad llega a IS. Shull et al. (2008): series de replicación en múltiples sitios.
+6
+2020s
+Experimentos sobre IA generativa en IS: GitHub Copilot, ChatGPT para debugging, LLMs para testing
+El experimento IS pasó de ser marginal a ser el método más valorado para evidencia causal en la disciplina.
+
+Tipos de Experimentos en IS
+Tipo
+Características
+Cuándo usarlo
+Experimento controlado
+Aleatorización, grupos separados, laboratorio o aula
+Cuando hay suficientes sujetos y se puede controlar el entorno
+Cuasi-experimento
+Sin aleatorización completa, grupos naturales existentes
+Cuando no es posible aleatorizar (equipos de empresa)
+Estudio de campo
+Entorno real, menos control, mayor validez externa
+Cuando importa más la representatividad que el control
+Experimento de simulación
+Usa modelos o sistemas artificiales como objeto de estudio
+Cuando los sujetos humanos son difíciles de conseguir
+Regla general: A mayor control → mayor validez interna (certeza causal). A mayor naturalismo → mayor validez externa (generalización).
+El balance entre control y realismo es el desafío central del diseño experimental en IS.
+
+El Experimento Controlado Clásico en IS
+Hipótesis: "El uso de revisión de código asistida por IA reduce la densidad de defectos respecto a la revisión manual tradicional."
+Variable Independiente (factor)
+Tipo de revisión: IA vs. manual
+Variable Dependiente (respuesta)
+Densidad de defectos (defectos por KLOC)
+Grupos
+Tratamiento: revisión con IA. Control: revisión manual
+Aleatorización
+Los participantes se asignan aleatoriamente a cada grupo
+Medición
+SonarQube + revisión experta post-tarea
+Análisis
+Prueba estadística de diferencia entre grupos (Mann-Whitney U, t-test)
+Este esquema básico es la columna vertebral de la experimentación IS.
+
+¿Cuándo Usar un Experimento?
+Pregunta de investigación
+Método más adecuado
+¿TDD causa menos defectos que el desarrollo tradicional?
+Experimento controlado
+¿Cómo adopta esta empresa la integración continua?
+Estudio de caso
+¿Qué porcentaje de equipos usa revisión de código?
+Encuesta
+¿Qué factores predicen los defectos en proyectos de código abierto?
+MSR (minería de repositorios)
+¿El pair programming mejora la satisfacción del desarrollador?
+Cuasi-experimento o experimento
+Usa el experimento cuando:
+Quieres establecer causalidad (X causa Y)
+Puedes manipular la variable independiente
+Tienes suficientes sujetos para formar grupos
+El fenómeno puede reproducirse en condiciones controladas
+
+NASA y la Experimentación en Software Crítico
+F Prime (NASA JPL)
+Framework de software de vuelo desarrollado para la Mars Cubesat One y luego para el helicóptero Ingenuity en Marte.
+Antes del lanzamiento, el software de F Prime fue sometido a:
+Pruebas de regresión automatizadas (más de 2,000 casos de prueba)
+Experimentos de inyección de fallos para medir la recuperación del sistema
+Comparaciones experimentales entre versiones del software bajo condiciones simuladas de vuelo
+Resultado: Ingenuity realizó 72 vuelos exitosos en Marte — sin posibilidad de intervención humana en tiempo real.
+En software crítico, el experimento no es opcional. Es la diferencia entre un sistema que falla en Marte y uno que vuela.
+Principio: la validación experimental del software es Open Science aplicada a la ingeniería.
+Fuente: NASA Open Science 101, M4 — F Prime case
+
+Retos de la Experimentación en IS
+1
+Escasez de sujetos representativos
+Los estudiantes no son desarrolladores industriales. ¿Son válidos como sujetos?
+→ Solución: estudios multi-sitio, replicación con profesionales
+2
+El problema de la validez externa
+Un experimento en una universidad con 20 estudiantes, ¿aplica a equipos de 200 personas en una empresa?
+→ Solución: series de replicación, estudios de campo complementarios
+3
+El efecto Hawthorne
+Los sujetos actúan diferente por saber que son observados
+→ Solución: cegamiento, entornos naturales, períodos de habituación
+4
+Variables de confusión difíciles de controlar
+Experiencia previa, lenguaje preferido, fatiga, motivación
+→ Solución: aleatorización, bloques, covariables, diseños within-subject
+5
+Replicación escasa
+La mayoría de experimentos IS se publican una sola vez y nunca se replican
+→ Crisis de reproducibilidad: el mismo problema que en otras ciencias, ahora en IS
+
+# 15. Diseno-y-Planificacion-del-Experimento-en-IS
+
+Diseño y Planificación del Experimento en IS
+Clase 14 | Unidad 3 — Experimentación en IS (3.2.1)
+Investigación en Ingeniería de Software — ESPE | Ing. Ángel Rea, Ph.D.
+
+El diseño es el experimento
+"Un experimento mal diseñado no puede salvarse con buen análisis estadístico."
+— Wohlin et al., Experimentation in Software Engineering (2012)
+En 2013, Hannay et al. revisaron 113 experimentos IS publicados en ICSE y FSE:
+38%
+Hipótesis ambiguas
+Tenía hipótesis ambiguas o ausentes
+27%
+Sin aleatorización
+No documentaba el procedimiento de aleatorización
+19%
+Solo p-valor
+No reportaba el tamaño del efecto — solo el p-valor
+Resultado: muchos estudios tenían datos válidos pero conclusiones no confiables — porque el diseño no lo soportaba.
+El diseño no es burocracia. Es la arquitectura que determina qué preguntas puede responder el experimento.
+
+Los 5 componentes del diseño experimental
+Wohlin et al. (2012) — Estos 5 componentes deben quedar definidos antes de ejecutar el experimento. Un componente no definido es una puerta abierta al sesgo.
+Componente
+Pregunta que responde
+1. Objetivo (GQM)
+¿Qué quiero aprender y para quién es útil?
+2. Hipótesis
+¿Qué afirmo que ocurrirá? ¿Cómo lo refuto?
+3. Variables
+¿Qué manipulo? ¿Qué mido? ¿Qué controlo?
+4. Diseño
+¿Cómo asigno sujetos y tratamientos?
+5. Instrumentos
+¿Cómo recolecto los datos y con qué herramientas?
+
+El objetivo con GQM
+¿Qué es GQM?
+GQM (Goal-Question-Metric) — Basili et al. (1994): El framework estándar para definir objetivos de medición en IS.
+Estructura del objetivo GQM
+Analizar [objeto de estudio]
+con el propósito de [intención]
+con respecto a [aspecto de calidad]
+desde el punto de vista de [perspectiva]
+en el contexto de [entorno]
+Ejemplo aplicado
+Analizar el uso de revisión de código asistida por IA (GitHub Copilot) con el propósito de evaluar su efecto con respecto a la densidad de defectos y el tiempo de revisión desde el punto de vista de los desarrolladores junior en el contexto de proyectos académicos de desarrollo web en Java
+El GQM convierte una intuición en un objetivo operacionalizable y medible.
+
+Formulación de hipótesis en IS
+Hipótesis nula y alternativa
+Hipótesis nula (H0): afirma que no hay diferencia ni efecto.
+Hipótesis alternativa (H1): afirma que hay diferencia o efecto.
+Ejemplo
+H0: "No existe diferencia significativa en la densidad de defectos entre los grupos que usan revisión con IA y los que usan revisión manual."
+H1: "El grupo que usa revisión con IA presenta menor densidad de defectos que el grupo de revisión manual."
+Tipos de hipótesis alternativa
+Reglas clave
+Regla: la hipótesis debe ser falsificable (Popper). Si no puede refutarse con datos, no es una hipótesis científica — es una creencia.
+Error frecuente: formular la hipótesis después de ver los datos → HARKing (visto en Unidad 1).
+Direccional (una cola)
+H1 afirma que A > B o A < B
+Bidireccional (dos colas)
+H1 afirma solo que A ≠ B
+
+Variables del experimento en IS
+Tipo de variable
+Definición
+Ejemplo en IS
+Independiente (VI)
+La que el investigador manipula (el tratamiento)
+TDD vs desarrollo tradicional
+Dependiente (VD)
+La que se mide como respuesta al tratamiento
+Densidad de defectos (defectos/KLOC)
+De confusión
+Afecta la VD pero no se controla
+Experiencia previa del desarrollador
+Controlada
+Se mantiene constante para todos los grupos
+Lenguaje de programación, IDE, tiempo de tarea
+Moderadora
+Modifica la relación VI→VD
+Tamaño del equipo, complejidad del sistema
+Operacionalización: cada variable debe tener una definición exacta de cómo se mide. Ejemplo: "densidad de defectos = número de defectos encontrados por 1000 líneas de código fuente entregado, medido con SonarQube versión X.Y después de 48h de uso en producción simulada."
+
+Diseños experimentales en IS
+Diseño completamente aleatorizado
+Sujetos asignados al azar a un solo grupo. Simple, pero sensible a diferencias entre sujetos.
+Diseño de bloques aleatorizados
+Se agrupan sujetos similares (por experiencia, lenguaje) y se aleatoriza dentro del bloque. Reduce el efecto de la variabilidad entre sujetos.
+Diseño factorial (2×2)
+Se estudian dos factores simultáneamente. Ejemplo: factor A = TDD vs tradicional; factor B = pair vs solo programming. Permite detectar interacciones entre factores.
+Diseño within-subject (medidas repetidas)
+El mismo sujeto realiza ambos tratamientos (en orden aleatorio). Ventaja: elimina la variabilidad entre sujetos. Riesgo: efecto de aprendizaje o fatiga (controlar con contrabalanceo).
+Diseño between-subject
+Cada sujeto solo recibe un tratamiento. Ventaja: sin efecto de aprendizaje. Desventaja: necesita más sujetos.
+
+Selección de sujetos en IS
+El dilema: ¿estudiantes o profesionales?
+Sujetos
+Ventajas
+Limitaciones
+Estudiantes
+Disponibles, homogéneos, controlables
+Poca experiencia, menor validez externa
+Profesionales
+Alta validez externa, contexto real
+Difícil acceso, heterogéneos, tiempo limitado
+Sistemas (objetos)
+No tienen fatiga ni sesgos cognitivos
+No representan el factor humano
+Estrategia recomendada
+Carver et al. (2010): Comenzar con estudiantes para validar el diseño (replicación interna), luego replicar con profesionales para validar la generalización (replicación externa).
+NASA OSDMP aplicado
+Pre-registrar el protocolo en OSF antes de reclutar sujetos. El pre-registro evita el ajuste post-hoc del diseño una vez que se conocen los datos.
+
+El plan de análisis como parte del diseño
+El plan de análisis estadístico debe definirse antes de recolectar datos.
+Prueba estadística
+¿Paramétrica o no paramétrica? Depende de la distribución esperada.
+Nivel de significancia
+α = 0.05 es el estándar en IS, pero debe justificarse.
+Tamaño del efecto
+Cohen's d, r de Pearson — no solo p-valor.
+Potencia estadística
+β = 0.80 → cuántos sujetos se necesitan para detectar el efecto.
+Cálculo de tamaño de muestra: si el experimento no tiene potencia suficiente, no detectará el efecto aunque exista (error tipo II).
+Herramientas: G*Power (cálculo de potencia), JASP (análisis), R (scripting reproducible).
+Definir el análisis antes evita el p-hacking — buscar hasta encontrar un análisis que dé p < 0.05.
+
+# 16. Ejecucion-y-Recoleccion-de-Datos-en-Experimentos-IS
+
+Ejecución y Recolección de Datos en Experimentos IS
+Clase 15 | Unidad 3 — Experimentación en IS (3.2.2)
+Investigación en Ingeniería de Software — ESPE | Ing. Ángel Rea, Ph.D.
+
+El protocolo es el experimento
+"Lo que no está en el protocolo, no pasó."
+En 2009, Kitchenham et al. analizaron la replicabilidad de 103 experimentos IS publicados. Resultado: solo el 31% describía el procedimiento con suficiente detalle como para que otro investigador pudiera replicarlo.
+El 69% restante era irreproducible — no por mala ciencia, sino por documentación deficiente.
+El protocolo de ejecución responde:
+¿Quién hace qué?
+Roles y responsabilidades claramente definidos para cada fase del experimento.
+¿Asignación de sujetos?
+Mecanismo de asignación a tratamientos documentado y reproducible.
+¿Qué pasa si alguien abandona?
+Protocolo de contingencia ante abandonos o eventos inesperados.
+¿Cómo se resguardan los datos?
+Registro y custodia de datos crudos con trazabilidad completa.
+Sin protocolo detallado, el experimento existe una sola vez — en la mente del investigador.
+
+Antes de ejecutar: piloto, consentimiento y aleatorización
+Estudio piloto (imprescindible)
+Prueba el protocolo con 2-3 sujetos antes del experimento real. Identifica ambigüedades en las instrucciones, problemas con los instrumentos y tiempos irreales. No se incluye en el análisis final.
+Consentimiento informado
+Los participantes deben conocer el propósito general del estudio (sin revelar la hipótesis si puede crear sesgo). Tienen derecho a retirarse sin penalización. Los datos se manejan con confidencialidad y anonimización.
+Aleatorización
+Asignación de sujetos a grupos mediante tabla de números aleatorios o software (R, Python random). Documenta el mecanismo de aleatorización — es parte del protocolo. En diseños within-subject: aleatoriza el orden de los tratamientos (contrabalanceo).
+
+Instrumentos de recolección de datos en IS
+Métricas automáticas (objetivas)
+Tiempo de tarea (timestamps en el IDE, Git commit time)
+Densidad de defectos (SonarQube, Checkstyle, ESLint)
+Cobertura de pruebas (JaCoCo, Istanbul)
+Complejidad ciclomática (plugin IDE o SonarQube)
+Líneas de código (LOC, NCLOC)
+Cuestionarios (subjetivos)
+Escala de usabilidad del sistema (SUS — 10 ítems, escala Likert)
+NASA-TLX (Task Load Index) — carga cognitiva percibida
+Cuestionarios de satisfacción ad hoc
+Observación directa
+Screen recording con consentimiento
+Think-aloud protocol (el participante verbaliza su proceso)
+Notas del experimentador en campo
+Regla clave: combinar al menos una métrica objetiva y una subjetiva para triangular el efecto del tratamiento.
+
+El efecto Hawthorne en experimentos IS
+Definición
+Los sujetos modifican su comportamiento al saber que están siendo observados — no por el tratamiento, sino por el hecho de la observación.
+Ejemplo en IS
+Un equipo que sabe que se está midiendo su velocidad de codificación puede acelerar artificialmente, invalidando la comparación.
+Nota: en muchos experimentos IS el cegamiento completo (doble ciego) no es posible — el sujeto sabe qué técnica está usando. Hay que documentar esta limitación.
+Estrategias de control
+01
+Período de habituación
+Dejar que los sujetos trabajen con el entorno un tiempo antes de empezar a medir.
+02
+Cegamiento parcial
+No revelar qué grupo tiene el "tratamiento" y cuál el "control" hasta después.
+03
+Entorno natural
+Ejecutar el experimento en el entorno habitual de trabajo del sujeto, no en laboratorio artificial.
+04
+Medición no intrusiva
+Usar logs automáticos en lugar de observadores humanos presentes.
+
+Amenazas a la validez durante la ejecución
+Clasificación según Wohlin et al. — amenazas que pueden comprometer los resultados si no se controlan durante la ejecución del experimento.
+Amenaza
+Descripción
+Ejemplo IS
+Control
+Efecto Hawthorne
+Sujetos se comportan diferente por ser observados
+Velocidad de codificación artificial
+Habituación, cegamiento
+Maduración
+Los sujetos mejoran con el tiempo independientemente del tratamiento
+Aprenden la tarea durante el experimento
+Diseño within-subject contrabalanceado
+Mortalidad experimental
+Participantes abandonan durante el estudio
+Estudiantes que no entregan
+Análisis de sensibilidad, reporte de abandonos
+Historia
+Evento externo afecta los resultados
+Falla del servidor durante el experimento
+Controlar el entorno, suspender y reiniciar
+Instrumentación
+El instrumento cambia entre mediciones
+Nueva versión de SonarQube a mitad del experimento
+Fijar las versiones de herramientas
+Difusión del tratamiento
+Los grupos contaminan sus técnicas
+Sujetos del grupo control aprenden del grupo tratamiento
+Separar físicamente o temporalmente los grupos
+
+Datos cuantitativos vs cualitativos en el experimento
+Datos cuantitativos (predominantes en experimentos IS)
+Se recolectan con métricas objetivas o escalas numéricas. Permiten pruebas estadísticas directas.
+Ejemplo: tiempo en segundos, número de defectos, cobertura en porcentaje.
+Datos cualitativos (complementarios)
+Se recolectan mediante observación, think-aloud, entrevistas post-experimento. Explican el por qué detrás del resultado cuantitativo.
+Ejemplo: "El grupo B tardó más porque no entendía la API del framework asignado."
+Diseño mixto
+El experimento mide el qué (cuantitativo) y una entrevista breve post-tarea explica el por qué (cualitativo). Esta triangulación fortalece tanto la interpretación como la validez de constructo.
+Fuente: Creswell (2014), Wohlin et al. (2012)
+
+Trazabilidad y reproducibilidad: NASA como modelo
+GeneLab (NASA)
+Cada experimento biológico realizado en la Estación Espacial Internacional tiene:
+Protocolo completo publicado antes del experimento
+Datos crudos disponibles en repositorio abierto (formato estándar)
+Metadatos que describen cada muestra, instrumento y condición
+Pipeline de análisis reproducible (código abierto)
+Equivalente en IS
+Protocolo pre-registrado en OSF antes de ejecutar
+Datos crudos (logs, métricas, respuestas) en repositorio (Zenodo, GitHub)
+Scripts de análisis en R o Python con comentarios explicativos
+Versiones de herramientas fijadas (requirements.txt, Docker)
+Resultado: otro investigador puede descargar los datos y el código, ejecutar el análisis y obtener los mismos resultados. Esto es lo que separa un experimento IS reproducible de uno que existe solo en el papel.
+
+Problemas comunes durante la ejecución
+1. Abandono de participantes
+Causa: tiempo insuficiente, pérdida de motivación, fallas técnicas.
+Acción: documentar los abandonos y analizar si son aleatorios o sistemáticos (mortalidad diferencial).
+2. Contaminación entre grupos
+Causa: comunicación entre sujetos de diferentes tratamientos.
+Acción: instrucción explícita de no compartir información; grupos en aulas separadas o sesiones diferentes.
+3. Datos faltantes
+Causa: errores de instrumentos, sujetos que no completan el cuestionario.
+Acción: definir en el protocolo el manejo de datos faltantes (imputación, exclusión, análisis de sensibilidad).
+4. Sesgo del experimentador
+Causa: el investigador interactúa diferente con cada grupo sin darse cuenta.
+Acción: protocolizar exactamente qué dice el experimentador a cada grupo; usar scripts de instrucción estandarizados.
+5. Problemas técnicos
+Causa: fallos de software, red, herramientas.
+Acción: prueba piloto previa, entorno respaldado, plan de contingencia documentado.
+
+# 17. Reporte-de-Resultados-en-Experimentos-IS
+
+Reporte de Resultados en Experimentos IS
+Del análisis al artículo publicable — Clase 17 | Unidad 3.2.4
+"Un experimento mal reportado es como un experimento no realizado. La transparencia en el reporte es parte del método." — Wohlin et al., 2012
+INVESTIGACIÓN EN INGENIERÍA DE SOFTWARE
+ESPE SANGOLQUÍ
+ING. ÁNGEL REA, PH.D.
+
+¿Por qué el reporte importa tanto como el experimento?
+Ioannidis (2005): "Most Published Research Findings Are False" — parte del problema es el reporte selectivo, no solo el diseño.
+Tres problemas reales en IS
+Resultados incompletos
+El 61% de artículos IS omite tamaños del efecto (Kampenes et al., 2007)
+Amenazas ausentes
+El 43% no discute amenazas a la validez (Zannier et al., 2006)
+Datos inaccesibles
+Menos del 20% comparte datos o código de análisis (Méndez et al., 2019)
+El reporte no es la parte fácil — es donde se gana o se pierde la credibilidad científica.
+
+Estructura IMRaD adaptada a experimentos IS
+IMRaD no es una receta — es una estructura que guía al lector a través del razonamiento científico.
+Sección
+Contenido clave
+Error común
+Introducción
+Motivación, pregunta, hipótesis, contribución
+Hipótesis escrita DESPUÉS de ver resultados (HARKing)
+Método
+Diseño, variables, sujetos, instrumentos, protocolo
+Omitir operacionalización de variables
+Resultados
+Estadísticas descriptivas → inferencial → efecto
+Solo reportar p-valor sin d de Cohen
+Discusión
+Interpretar, comparar literatura, amenazas, limitaciones
+Overclaiming: generalizar más allá del contexto
+Replication Package en Zenodo/OSF como sección implícita obligatoria en 2025.
+
+Reporte completo de resultados: el estándar IS 2025
+❌ MALO (incompleto)
+"Los resultados mostraron que TDD fue mejor que el método tradicional (p = 0.03)."
+✅ BUENO (completo)
+"El grupo TDD completó significativamente menos defectos (Mdn = 2.5) que el grupo control (Mdn = 6.0), Mann-Whitney U = 847, z = −2.34, p = .019 (dos colas), r = .41 (efecto mediano según Cohen, 1988). El intervalo de confianza del 95% para la diferencia de medianas fue [1.0, 5.5]."
+Herramienta recomendada: JASP genera el reporte APA automáticamente.
+Los 5 elementos obligatorios
+1
+Estadística descriptiva
+Media / mediana / DE / IQR
+2
+Estadístico inferencial
+U, t, F, χ² con grados de libertad
+3
+Valor p exacto
+No "p < 0.05" — reportar el valor preciso
+4
+Tamaño del efecto
+d, r, η² con interpretación (Cohen, 1988)
+5
+Intervalo de confianza
+IC al 95% para la diferencia
+
+Las 4 amenazas a la validez que debes reportar
+Referencia IS: Wohlin, C. et al. (2012). Experimentation in Software Engineering. Springer.
+Tipo
+Pregunta
+Ejemplo IS
+Mitigación
+Validez de constructo
+¿Medimos lo que decíamos medir?
+LOC ≠ productividad
+Múltiples métricas + operacionalización explícita
+Validez interna
+¿El efecto viene de la VI o de factores externos?
+Madurez del equipo, efecto Hawthorne
+Aleatorización, ciego, estudio piloto
+Validez externa
+¿Los resultados generalizan?
+Estudiantes ≠ profesionales
+Describir población, replicaciones
+Confiabilidad
+¿Otro investigador obtendría lo mismo?
+Protocolo ambiguo
+Protocolo público + replication package
+Cada amenaza debe ir acompañada de su mitigación. "Limitaciones" sin mitigación es señal de paper débil.
+
+Open Science en el reporte de experimentos IS
+1. Pre-registro (antes del experimento)
+Plataforma: OSF Registries (osf.io/registries)
+Qué registrar: hipótesis, diseño, variables, plan de análisis, α
+Beneficio: Distingue confirmación de exploración — evita HARKing
+Ejemplo: Pre-registro de experimento TDD, Universidad de Helsinki, 2023
+2. Replication Package (junto con el paper)
+Qué incluir: datos (anonimizados), código de análisis (R/Python), instrumentos, protocolo, README
+Plataformas: Zenodo (DOI permanente), OSF, GitHub + Zenodo badge
+Checklist mínimo ACM/IEEE 2024: datos, código, ambiente, instrucciones
+Artículos con replication package reciben 2x más citas en IS (Fernández et al., 2023)
+NASA conecta: GeneLab publica todos sus pipelines de análisis en GitHub + Zenodo desde 2016.
+
+Los 7 errores que invalidan un reporte de experimento IS
+1
+HARKing
+Formular la hipótesis después de ver los resultados y presentarla como a priori
+2
+p-hacking post-hoc
+Seguir tomando datos o cambiar pruebas hasta obtener p < 0.05
+3
+Omitir tamaño del efecto
+Reportar solo "p < 0.05" sin d de Cohen o r
+4
+Overclaiming
+"Concluimos que TDD mejora la productividad en la industria" cuando el estudio fue con 20 estudiantes
+5
+Underclaiming
+No interpretar resultados significativos por miedo a exagerarlos
+6
+Amenazas sin mitigación
+Listar problemas metodológicos sin indicar cómo se controlaron
+7
+Datos inaccesibles
+No compartir datos argumentando "confidencialidad" sin explicación
+Regla de oro: Si no puedes explicar exactamente cómo llegarías al mismo resultado desde cero, el reporte está incompleto.
+
+NASA JWST: el modelo de reporte abierto en acción
+Caso: Detección de CO₂ en la atmósfera del exoplaneta WASP-39b (2022)
+1
+Pre-registro
+Protocolo de observación registrado antes del lanzamiento
+2
+Datos crudos
+Publicados en MAST (Mikulski Archive for Space Telescopes) — DOI persistente
+3
+Análisis reproducible
+Jupyter Notebooks en GitHub (NASA STScI)
+4
+Preprint
+arXiv antes de peer review (acceso inmediato)
+5
+Paper peer-reviewed
+Nature, con DOI + Open Access
+6
+Comunicación pública
+NASA blog + redes sociales en lenguaje accesible
+Resultado: Cualquier investigador del mundo puede reproducir el hallazgo desde los datos crudos hasta la figura del paper.
+Lección IS: Un experimento sobre herramientas de desarrollo puede (y debe) seguir el mismo ciclo: datos → código → preprint → paper → comunicación.
+
+Peer review del experimento: el proceso de validación externa
+Respuesta a revisores
+Decisión
+Revisión doble ciego
+Revisión de mesa
+Envío
+Cómo responder a revisores (buenas prácticas IS)
+Citar la observación textual del revisor
+Agradecer genuinamente — los revisores son voluntarios
+Indicar qué cambio específico se hizo en el paper (página/línea)
+Si rechazas la observación: argumenta con referencias, no con opinión
+Venues IS relevantes
+ICSE, ESEM, ISSTA, JSS, EMSE, IST
+Plataformas de preprint
+arXiv (cs.SE), SSRN, OSF Preprints
+El peer review no es un obstáculo — es el mecanismo que convierte resultados en conocimiento validado.
+
+# 18. Experimentacion-en-IS-Problemas-Reales
+
+Experimentación en IS: Problemas Reales
+Aplicación de la experimentación en la resolución de problemas reales — Clase 18 | 3.3.1
+Curso: Investigación en Ingeniería de Software | ESPE Sangolquí | Ing. Ángel Rea, Ph.D.
+Unidad 3 — Experimentación en IS | Cierre de Unidad
+"La teoría sin la práctica es vacía. La práctica sin la teoría es ciega." — adaptado de Kant
+
+¿Cómo se ve un experimento IS completo en la práctica?
+El ciclo completo visto en este curso:
+1
+Clase 13
+¿Qué es un experimento? → Manipulación, control, aleatorización, medición
+2
+Clase 14
+Diseño → GQM, hipótesis, variables, diseño factorial
+3
+Clase 15
+Ejecución → instrumentos, Hawthorne, datos mixtos
+4
+Clase 16
+Análisis → pruebas estadísticas, d de Cohen, JASP
+5
+Clase 17
+Reporte → IMRaD, pre-registro, replication package
+Hoy: Tres casos completos de experimentos reales en IS que pasaron por todo ese ciclo. Pregunta de cierre del curso: ¿Qué problema de IS en tu contexto local merece un experimento?
+
+Caso real: ¿TDD produce código con menos defectos?
+CASO 1
+ERDOGMUS, MORISIO & FAVARO (2005) — IEEE TSE | REPLICADO 20+ VECES
+Diseño del experimento
+Pregunta: ¿TDD reduce defectos respecto al desarrollo tradicional?
+VI: Método de desarrollo (TDD vs ITL — Iterative Test-Last)
+VD: Número de defectos (SonarQube), tiempo de desarrollo
+Sujetos: 24 estudiantes posgrado — diseño within-subject (cada uno hace ambos tratamientos)
+Instrumento: Suite de pruebas automáticas + medición de cobertura
+Resultados principales
+Mann-Whitney U = 412, p = .031, r = .38 (efecto mediano)
+No se encontró diferencia significativa en tiempo de desarrollo.
+Lección metodológica: El diseño within-subject eliminó variabilidad inter-sujetos. Las réplicas posteriores mostraron que el efecto depende de la experiencia del desarrollador — validez externa limitada a desarrolladores novatos.
+TDD
+Mediana 3.2 defectos
+ITL
+Mediana 6.1 defectos
+
+Caso real: GitHub Copilot y productividad en IS
+CASO 2
+PENG ET AL. (2023); IMAI (2022) ICSE; SANDOVAL ET AL. (2023) ICSE
+El problema: GitHub afirmó "55% más rápido con Copilot" — pero ¿qué dice la evidencia experimental?
+Experimento Peng et al. (2023)
+Diseño: Controlado — 95 desarrolladores profesionales, aleatorización, tarea HTTP Server
+VD principal: Tiempo en completar la tarea (minutos)
+Resultado: Grupo Copilot: 71.17 min vs control: 126.5 min → 43.8% más rápido (p < .001, d = 0.89)
+PERO — contraexperimento Imai (2022)
+Hallazgo: Copilot genera código funcional más rápido, pero introduce más vulnerabilidades (CWE)
+Implicación: ¿Cuál es la VD correcta? ¿Velocidad o calidad + seguridad?
+Lección clave: La operacionalización de la variable dependiente determina el resultado. Un experimento bien diseñado debe pre-registrar qué se mide y por qué — antes de correr el código.
+
+NASA F Prime: experimentación antes de ir a Marte
+CASO 3
+MARS HELICOPTER INGENUITY (2021)
+Contexto: F Prime es el framework de software de vuelo desarrollado por JPL/NASA para misiones espaciales — usado en Mars Helicopter Ingenuity (2021).
+El problema experimental
+"¿Es F Prime más confiable que los frameworks propietarios anteriores bajo condiciones de fallo simuladas?"
+Diseño experimental NASA
+VI: Framework (F Prime open-source vs sistema propietario heredado)
+VD: Tiempo de recuperación ante fallo (segundos), tasa de reinicio exitoso (%)
+Condiciones: 10,000 horas simuladas de operación en condiciones marcianas (temperatura, radiación)
+Instrumentos: Inyección de fallos controlada (fault injection testing)
+F Prime
+99.7% recuperación exitosa
+Sistema Legado
+94.2% recuperación exitosa
+→ Decisión: adoptar F Prime para Ingenuity
+Por qué importa en IS: NASA no lanza hardware sin validación experimental del software. Lo que aplican en misiones espaciales es el mismo método que aprendiste en este curso.
+
+Cómo pasar de un problema IS a un experimento en 5 pasos
+El proceso (aplicable en Ecuador, en una empresa real):
+1
+Identificar el problema práctico
+"En mi empresa, los code reviews manuales toman 45 minutos promedio y detectan el 60% de bugs"
+2
+Formular la pregunta experimental (GQM)
+Goal: Mejorar la detección de bugs / Question: ¿Las herramientas de análisis estático (SonarQube) detectan más bugs que la revisión manual? / Metric: defectos detectados por hora de revisión
+3
+Definir hipótesis falsificable
+H0: No hay diferencia en defectos detectados por hora entre SonarQube y revisión manual (α = 0.05)
+H1: SonarQube detecta más defectos por hora que la revisión manual
+4
+Diseñar (tipo, sujetos, aleatorización, instrumentos)
+Cuasi-experimento: 12 desarrolladores (2 equipos), 3 semanas, diseño crossover
+5
+Pre-registrar en OSF antes de ejecutar
+El resultado es un paper potencial para ESEM, IST o MSR.
+
+Elige el método correcto para cada pregunta IS
+Regla de oro: El método lo determina la pregunta — no la preferencia del investigador ni lo que es más fácil de hacer.
+Pregunta IS
+Método más apropiado
+Por qué
+¿TDD reduce defectos?
+Experimento controlado
+Manipulación de VI, comparación causal
+¿Por qué los equipos ágiles abandonan TDD?
+Estudio de caso
+Fenómeno contextual, "por qué", sin control
+¿Qué tan extendido está el uso de CI/CD en Ecuador?
+Encuesta
+Prevalencia en población, no causalidad
+¿Mejora Copilot la velocidad? (industria real)
+Cuasi-experimento
+No siempre posible aleatorizar en empresas
+¿Qué métricas predicen bugs?
+MSR (Mining Software Repositories)
+Datos históricos, sin intervención
+
+Los 5 obstáculos más comunes — y cómo superarlos
+1. Escasez de sujetos
+"No consigo 30 desarrolladores"
+→ Diseño within-subject: cada sujeto actúa como su propio control. Con 12 sujetos bien diseñado es publicable.
+2. Validez externa débil
+"Mis sujetos son estudiantes, no profesionales"
+→ Reportar explícitamente la limitación. Estudiantes son válidos para fenómenos de aprendizaje (Carver, 2010). La replicación con profesionales es la siguiente investigación.
+3. Efecto Hawthorne
+"Los participantes se comportan diferente por saberse observados"
+→ Período de familiarización + tareas realistas + análisis de sesgo post-hoc.
+4. Contaminación entre grupos
+"Los del grupo A le explicaron a los del grupo B"
+→ Separación temporal o física. En diseños online: plataformas separadas.
+5. ¿Dónde publico?
+"No sé si mi experimento es suficientemente bueno"
+→ Replicaciones son bienvenidas (ESEM tiene track de réplicas). Un experimento pequeño, bien reportado, es mejor que uno grande mal documentado.
+
+Unidad 3 — Mapa completo de la experimentación IS
+Reporte
+Análisis
+Ejecución
+Diseño
+Problema IS
+El ciclo se repite: el reporte genera nuevas preguntas → nuevo experimento.
+3.1.1 Introducción ✅
+3.2.1 Diseño ✅
+3.2.2 Ejecución ✅
+3.2.3 Análisis ✅
+3.2.4 Reporte ✅
+3.3.1 Práctica ✅
