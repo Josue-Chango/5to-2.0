@@ -1,0 +1,28 @@
+@startuml
+title Diagrama de Despliegue - Simulador de Inversiones en Criptomonedas
+
+node "Dispositivo Móvil" as movil {
+  component "Power Apps Canvas App" as app {
+    [Login/Registro]
+    [Dashboard]
+    [Mercado]
+    [Detalle/Trading]
+    [Portafolio]
+    [Historial]
+    [Perfil/Config]
+  }
+}
+
+node "Microsoft Cloud" as cloud {
+  node "Power Platform" as pp {
+    [Dataverse] as dv
+  }
+  node "API Externa" as ext {
+    [Servicio de Precios Cripto] as api
+  }
+}
+
+movil --> cloud : HTTPS
+dv --> api : consulta precios
+
+@enduml

@@ -1,0 +1,46 @@
+@startuml
+title Diagrama de Casos de Uso - Simulador de Inversiones en Criptomonedas
+
+left to right direction
+actor "Usuario" as U
+
+rectangle "Simulador Cripto" {
+  usecase "Registrarse" as UC01
+  usecase "Iniciar Sesion" as UC02
+  usecase "Cerrar Sesion" as UC17
+  usecase "Ver Dashboard" as UC19
+  usecase "Ver Precios" as UC02b
+  usecase "Buscar Criptomonedas" as UC10
+  usecase "Comprar Criptomoneda" as UC03
+  usecase "Vender Criptomoneda" as UC04
+  usecase "Ver Portafolio" as UC05
+  usecase "Ver Grafico Distribucion" as UC09
+  usecase "Ver Historial" as UC06
+  usecase "Ver Grafico Precios" as UC13
+  usecase "Editar Perfil" as UC11
+  usecase "Configurar Moneda Base" as UC12
+  usecase "Ver Educación" as UC20
+  usecase "Validar Saldo" as UC07
+  usecase "Validar Cantidad" as UC08
+}
+
+U --> UC01
+U --> UC02
+U --> UC17
+U --> UC19
+U --> UC02b
+U --> UC10
+U --> UC03
+U --> UC04
+U --> UC05
+U --> UC09
+U --> UC06
+U --> UC13
+U --> UC11
+U --> UC12
+U --> UC20
+
+UC03 ..> UC07 : <<include>>
+UC04 ..> UC08 : <<include>>
+
+@enduml

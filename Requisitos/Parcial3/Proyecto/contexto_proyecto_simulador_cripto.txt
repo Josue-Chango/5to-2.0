@@ -1,0 +1,253 @@
+==================================================================
+PROYECTO: SIMULADOR DE INVERSIONES EN CRIPTOMONEDAS - POWER APPS
+==================================================================
+Contexto general: Proyecto final universitario (UC3), especificado
+en formato IEEE 830, desarrollado como Canvas App en Power Apps
+(formato teléfono/móvil), con backend de datos por definir
+(Excel/SharePoint/Dataverse/SQL).
+
+==================================================================
+1. DESCRIPCIÓN DEL PROYECTO
+==================================================================
+App móvil que simula una plataforma de trading de criptomonedas
+con dinero virtual. El usuario inicia con un saldo simulado,
+puede "comprar" y "vender" criptomonedas a precios de mercado
+(reales o simulados), ver su portafolio, y revisar su historial
+de transacciones.
+
+No maneja dinero real ni conexión a exchanges reales (es una
+simulación con fines académicos/educativos).
+
+==================================================================
+2. MÓDULOS / PANTALLAS DE LA APP
+==================================================================
+1. Login / Registro
+   - Registro e inicio de sesión
+   - Perfil de usuario (nombre, correo, nivel de riesgo/experiencia)
+   - Configuración de cuenta (moneda base, notificaciones)
+
+2. Dashboard (ScrInicio)
+   - Resumen del portafolio (valor total, ganancia/pérdida del día)
+   - Lista de criptomonedas destacadas con precio y variación %
+   - Saldo disponible en efectivo virtual
+
+3. Mercado / Explorar (ScrMercado)
+   - Lista completa de criptomonedas disponibles
+   - Buscador y filtros
+   - Vista de detalle por moneda (gráfico histórico, descripción)
+
+4. Detalle / Trading (ScrDetalle)
+   - Toggle Compra / Venta
+   - Formulario: cantidad, precio actual, total estimado
+   - Botón de confirmación de operación
+   - Validación de saldo disponible o cantidad poseída
+
+5. Portafolio / Mi cartera (ScrPortafolio)
+   - Lista de criptomonedas que posee el usuario
+   - Cantidad, valor actual, % del portafolio
+   - Gráfico circular (pie chart) de distribución de activos
+
+6. Historial de transacciones (ScrHistorial)
+   - Lista de compras/ventas (fecha, tipo, cantidad, precio, total)
+   - Filtros por fecha o tipo de operación
+
+7. (Opcional) Educación / Ayuda
+   - Glosario de términos cripto
+   - Tips de inversión responsable
+
+==================================================================
+3. REQUISITOS FUNCIONALES (BASE PARA DOCUMENTO IEEE 830)
+==================================================================
+RF01: El sistema debe permitir al usuario registrarse e iniciar sesión
+RF02: El sistema debe mostrar el precio actual de las criptomonedas
+RF03: El sistema debe permitir simular la compra de criptomonedas
+RF04: El sistema debe permitir simular la venta de criptomonedas
+RF05: El sistema debe calcular ganancias/pérdidas del portafolio
+RF06: El sistema debe mostrar el historial de transacciones
+RF07: El sistema debe validar saldo suficiente antes de una compra
+RF08: El sistema debe validar cantidad poseída antes de una venta
+RF09: El sistema debe mostrar la distribución del portafolio (gráfico)
+RF10: El sistema debe permitir buscar/filtrar criptomonedas en el mercado
+
+==================================================================
+4. ESTRUCTURA DE DATOS (TABLAS RECOMENDADAS)
+==================================================================
+Opción recomendada: Dataverse (gratis con Power Apps Community Plan)
+Alternativas: Excel Online / SharePoint (más simples) o SQL Server/
+Azure SQL (más "de ingeniería", puede tener costo en la nube)
+
+Tablas mínimas:
+- Usuarios: id, nombre, correo, saldo_virtual
+- Monedas: id, nombre, simbolo, precio_actual
+- Portafolio: id, usuario_id, moneda_id, cantidad
+- Transacciones: id, usuario_id, moneda_id, tipo(compra/venta),
+  cantidad, precio, total, fecha
+
+Relaciones: Usuario 1---N Portafolio, Usuario 1---N Transacciones,
+Moneda 1---N Portafolio, Moneda 1---N Transacciones
+
+==================================================================
+5. PALETA DE COLORES DEL DISEÑO (definida para el prototipo)
+==================================================================
+clrFondo       = #0A0E14  (fondo general, negro azulado)
+clrSuperficie  = #131A22  (tarjetas/superficies nivel 1)
+clrSuperficie2 = #1B232D  (tarjetas/superficies nivel 2)
+clrBorde       = #232C38  (bordes sutiles)
+clrAccento     = #7C5CFC  (violeta - color principal/navegación activa)
+clrPositivo    = #00E5A0  (verde menta - ganancias, compra)
+clrNegativo    = #FF5C7A  (coral - pérdidas, venta)
+clrTexto       = #E8ECF1  (texto principal)
+clrMuted       = #7A8699  (texto secundario/etiquetas)
+
+Tipografía: Segoe UI / Open Sans para texto general,
+Consolas (monoespaciada) para precios y cifras numéricas.
+
+==================================================================
+6. PROTOTIPO FUNCIONAL (REFERENCIA VISUAL)
+==================================================================
+Se generó un prototipo interactivo en React (archivo:
+crypto_investment_app.jsx) que simula el comportamiento real:
+- Dashboard con balance total y variación del día
+- Mercado con buscador y lista de monedas con mini-gráfico (sparkline)
+- Pantalla de detalle con toggle Compra/Venta funcional
+- Portafolio con gráfico circular de distribución
+- Historial de transacciones
+- Navegación inferior tipo tab bar (Inicio, Mercado, Cartera, Historial)
+- Lógica de saldo, compra/venta y validaciones funcionando en vivo
+
+Este prototipo sirve como guía exacta de diseño y lógica antes de
+construir la versión real en Power Apps Studio.
+
+==================================================================
+7. EQUIVALENCIA EN POWER APPS - ESTRUCTURA DE PANTALLAS
+==================================================================
+ScrInicio (Dashboard) -> ScrMercado -> ScrDetalle
+                       -> ScrPortafolio
+                       -> ScrHistorial
+
+Componente reutilizable: compTabBar (barra de navegación inferior),
+con propiedad de entrada "PantallaActiva" y evento de salida
+"OnTabChange" para manejar la navegación desde la pantalla padre.
+
+==================================================================
+8. VARIABLES Y COLECCIONES GLOBALES
+==================================================================
+Nota: OnStart puede estar deshabilitado por defecto en versiones
+recientes de Power Apps Studio. Alternativas:
+
+OPCIÓN A - Activar OnStart:
+Configuración (engranaje) -> Próximas funciones / Configuración
+avanzada -> activar "Explicitly start OnStart rule" / "App OnStart
+property". Para probarlo: clic en los "..." junto a App en el
+árbol -> "Run OnStart", o F5 para modo Preview.
+
+OPCIÓN B - Usar App.Formulas (recomendado actualmente por Microsoft):
+Seleccionar App -> propiedad "Formulas". Ahí se definen fórmulas
+con nombre SIN usar Set(), ejemplo:
+  clrFondo = ColorValue("#0A0E14");
+  clrAccento = ColorValue("#7C5CFC");
+  clrPositivo = ColorValue("#00E5A0");
+  clrNegativo = ColorValue("#FF5C7A");
+
+Las colecciones (ClearCollect/Collect) sí requieren OnStart (Opción
+A) o se pueden mover al OnVisible de la pantalla de inicio.
+
+Código base para OnStart (o equivalente):
+ClearCollect(colMonedas,
+  {id:"btc", Nombre:"Bitcoin", Simbolo:"BTC", Precio:62430.12, Cambio:2.34},
+  {id:"eth", Nombre:"Ethereum", Simbolo:"ETH", Precio:3412.55, Cambio:-1.12},
+  {id:"sol", Nombre:"Solana", Simbolo:"SOL", Precio:148.90, Cambio:5.67}
+);
+Set(varSaldo, 10000);
+ClearCollect(colPortafolio, Blank());
+ClearCollect(colHistorial, Blank());
+
+==================================================================
+9. FÓRMULAS POWER FX CLAVE
+==================================================================
+-- Lógica de compra (botón "Comprar"):
+Set(varTotal, Value(txtCantidad.Text) * varMonedaSeleccionada.Precio);
+If(varTotal <= varSaldo,
+    Set(varSaldo, varSaldo - varTotal);
+    Patch(colPortafolio, LookUp(colPortafolio, id = varMonedaSeleccionada.id),
+        {id: varMonedaSeleccionada.id, Cantidad: LookUp(colPortafolio, id = varMonedaSeleccionada.id).Cantidad + Value(txtCantidad.Text)});
+    Collect(colHistorial, {Tipo:"COMPRA", Simbolo: varMonedaSeleccionada.Simbolo, Cantidad: Value(txtCantidad.Text), Total: varTotal, Fecha: Now()});
+    Notify("Compra realizada", NotificationType.Success),
+    Notify("Saldo insuficiente", NotificationType.Error)
+)
+
+-- Galería de mercado (Items):
+colMonedas
+Filtrada: Filter(colMonedas, txtBuscar.Text in Nombre || txtBuscar.Text in Simbolo)
+
+-- Color condicional según variación:
+If(ThisItem.Cambio >= 0, ColorValue("#00E5A0"), ColorValue("#FF5C7A"))
+
+-- Navegación a detalle:
+Set(varMonedaSeleccionada, ThisItem); Navigate(ScrDetalle, ScreenTransition.Cover)
+
+==================================================================
+10. FUENTES DE DATOS - OPCIONES DE CONEXIÓN
+==================================================================
+1. Excel Online / OneDrive: rápido de configurar, ideal para
+   prototipo, pero débil en concurrencia y relaciones.
+2. SharePoint (Listas): fácil de conectar, más usuarios simultáneos,
+   permisos más finos.
+3. Dataverse (RECOMENDADO): tablas relacionales reales, relaciones
+   1-a-muchos, seguridad por roles, incluido gratis en el Power Apps
+   Community Plan.
+4. SQL Server / Azure SQL: más "de ingeniería", requiere gateway
+   (local) o puede tener costo (nube).
+
+Ruta de conexión en Power Apps Studio: ícono "Datos" en panel
+izquierdo (o Vista -> Datos) -> "+ Agregar datos".
+
+==================================================================
+11. UBICACIÓN DE HERRAMIENTAS EN POWER APPS STUDIO
+==================================================================
+- Barra de fórmulas: arriba, con selector de Objeto (izq) y
+  Propiedad (der), estilo similar a Excel.
+- Árbol de vistas: panel izquierdo, lista de App > Screens > Controles.
+- Tamaño de pantalla (formato teléfono): Archivo -> Configuración
+  -> Mostrar (o engranaje -> Configuración de la app).
+- Insertar controles: pestaña "Insertar" (Diseño, Íconos, Galerías,
+  Media/Gráficos, Entrada de texto).
+- Componentes reutilizables: Insertar -> Componentes -> Nuevo
+  componente (propiedades personalizadas en panel derecho).
+- Conectar datos: ícono "Datos" panel izquierdo o Vista -> Datos.
+- Tema y tipografía global: Insertar -> Temas (o Configuración de
+  la app -> Tema).
+- Panel de propiedades visuales: aparece a la derecha al
+  seleccionar cualquier control (ajustes rápidos sin fórmulas).
+
+==================================================================
+12. ACCESO GRATUITO A POWER APPS
+==================================================================
+- Portal: make.powerapps.com
+- Cuenta institucional (correo universitario) suele incluir
+  licencia educativa de Microsoft 365.
+- Alternativa: activar "Community Plan" (gratis) para crear y
+  probar apps personales, incluye acceso a Dataverse para
+  desarrollo/pruebas.
+
+==================================================================
+13. PENDIENTES / PRÓXIMOS PASOS DEL PROYECTO
+==================================================================
+- [ ] Definir y crear las tablas reales en Dataverse (o alternativa elegida)
+- [ ] Construir las 5-6 pantallas en Power Apps Studio siguiendo
+      la referencia del prototipo (crypto_investment_app.jsx)
+- [ ] Documento IEEE 830 completo con los 10 requisitos funcionales
+      (y los no funcionales pendientes de definir)
+- [ ] Diagramas UML (8 diagramas exigidos en el proyecto UC3):
+      posible diagrama de clases para Usuarios/Monedas/Portafolio/
+      Transacciones, diagrama de casos de uso, diagrama de
+      secuencia del flujo de compra/venta, diagrama entidad-relación,
+      diagrama de flujo de navegación entre pantallas, etc.
+- [ ] Definir si se usa precio real de mercado (vía API externa)
+      o precios simulados/estáticos para la demo académica
+- [ ] Pulido visual final en Power Apps (bordes, espaciado,
+      tipografía) siguiendo la paleta de colores definida
+
+==================================================================
+FIN DEL CONTEXTO
+==================================================================

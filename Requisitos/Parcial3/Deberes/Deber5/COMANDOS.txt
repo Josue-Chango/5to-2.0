@@ -1,0 +1,92 @@
+============================================================
+Comandos 
+============================================================
+
+--- EN UBUNTU VM (192.168.100.41) ---
+
+# 1. Ir a la carpeta del proyecto
+cd /home/Deber/api
+
+# 2. Levantar Prometheus + Grafana
+docker compose up -d
+
+# 3. Iniciar la API (modo initial - sin optimizar)
+MODE=initial node server.js &
+
+# 4. Verificar que la API funciona
+curl http://localhost:8080/api/citas
+
+# 5. Correr prueba de carga (500 VUs, 100 segundos)
+k6 run --summary-export=resultados_initial.json k6-test.js
+k6 run k6-test.js
+
+# 6. Matar la API y cambiar a modo optimizado
+pkill -f "node server.js"
+MODE=optimized node server.js &
+
+# 7. Correr prueba de carga optimizada
+k6 run --summary-export=resultados_optimized.json k6-test.js
+
+# 8. Verificar Datadog Agent
+sudo datadog-agent status
+
+
+--- EN WINDOWS (Navegador) ---
+
+# Grafana (metrics en tiempo real)
+http://192.168.100.41:3000
+Usuario: admin
+Password: admin123
+
+# Prometheus (verificar targets)
+http://192.168.100.41:9090
+
+# Datadog (metrics en la nube)
+https://us5.datadoghq.com
+
+
+--- EN WINDOWS (PowerShell, para verificar la API) ---
+
+# Ver API funcionando
+Invoke-RestMethod -Uri "http://192.168.100.41:8080/api/citas"
+
+# Ver metricas Prometheus de la API
+Invoke-WebRequest -Uri "http://192.168.100.41:8080/metrics" -UseBasicParsing
+
+
+--- VERIFICAR QUE PROMETHEUS SCRAPEA LA API ---
+
+# En Ubuntu:
+curl http://localhost:9090/api/v1/targets
+
+
+--- VER METRICAS DE SISTEMA EN UBUNTU ---
+
+# Verificar node_exporter
+curl -s http://localhost:9100/metrics | head -5
+
+
+--- RESULTADOS ESPERADOS ---
+
+# MODO INITIAL:
+#   T95: 731.96 ms (NO cumple SLA)
+#   Promedio: 434.03 ms
+#   Total peticiones: 74,561
+#   Tasa error: 0.16%
+
+# MODO OPTIMIZADO:
+#   T95: 751.77 ms (NO cumple SLA)
+#   Promedio: 365.37 ms
+#   Total peticiones: 85,318
+#   Tasa error: 0%
+
+# SLA REQUERIDO: T95 < 200ms
+
+Orden	
+
+1. Abrir Grafana en Windows y mostrar dashboard con metrics
+2. Abrir Datadog en Windows y mostrar Infrastructure > Hosts
+3. Correr k6 en Ubuntu (modo initial) y ver metrics subir en Grafana
+4. Cambiar a modo optimized y repetir
+5. Comparar resultados en ambas plataformas
+6. Mostrar tabla comparativa y diagrama UML

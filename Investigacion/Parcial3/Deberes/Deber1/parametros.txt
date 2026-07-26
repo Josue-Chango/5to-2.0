@@ -1,0 +1,18 @@
+PARAMETROS - PARCIAL 3
+=====================
+
+1. NO debemos realizar el gráfico de la sección 4.1
+
+2. En la tabla sección 4.3 debemos agregar los campos de entrada y salida.
+
+3. El campo de documento de referencia son todos los artefactos que se entregan,
+   no es necesario cambiar el nombre de ese campo.
+
+PROCESO DE ESTUDIOS DE CASO EN INGENIERÍA DE SOFTWARE - CONSULTA
+
+1. Diagrama de proceso
+2. Caracterización del proceso (Roles, Actividades, Entregables)
+
+INFORME DE LA CONSULTA
+
+Presentación del trabajo

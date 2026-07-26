@@ -1,0 +1,16 @@
+{
+  "name": "bella-mujer-api",
+  "version": "1.0.0",
+  "description": "API de citas médicas - Clínica Bella Mujer",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "start:initial": "MODE=initial node server.js",
+    "start:optimized": "MODE=optimized node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "prom-client": "^15.1.0",
+    "cors": "^2.8.5"
+  }
+}

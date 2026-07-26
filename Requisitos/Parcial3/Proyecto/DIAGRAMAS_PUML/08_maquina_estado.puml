@@ -1,0 +1,42 @@
+@startuml
+title Diagrama de Maquina de Estados - Estado de Sesion del Usuario
+
+[*] --> SinSesion
+
+state SinSesion {
+  SinSesion --> Registrando : pulsar Registrar
+  SinSesion --> IniciandoSesion : pulsar Iniciar Sesion
+}
+
+state Registrando {
+  Registrando --> DatosValidos : datos correctos
+  Registrando --> ErrorRegistro : datos invalidos
+  ErrorRegistro --> Registrando : reintentar
+}
+
+state IniciandoSesion {
+  IniciandoSesion --> CredencialesValidas : login correcto
+  IniciandoSesion --> ErrorLogin : credenciales invalidas
+  ErrorLogin --> IniciandoSesion : reintentar
+}
+
+state SesionActiva {
+  state Dashboard
+  state Mercado
+  state Detalle
+  state Portafolio
+  state Historial
+  state Perfil
+
+  Dashboard --> Mercado
+  Dashboard --> Portafolio
+  Mercado --> Detalle
+  Detalle --> Mercado
+  Dashboard --> Historial
+  Dashboard --> Perfil
+}
+
+CredencialesValidas --> SesionActiva
+SesionActiva --> SinSesion : Cerrar Sesion
+
+@enduml

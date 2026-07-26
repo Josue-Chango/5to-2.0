@@ -1,0 +1,24 @@
+@startuml
+title Diagrama de Secuencia - POST /api/citas
+
+actor "500 Pacientes" as Paciente
+participant "API Node.js" as API
+participant "Prometheus" as Prom
+participant "Grafana" as Graf
+
+== Solicitud Individual ==
+
+Paciente -> API: POST /api/citas
+note right of API: Validacion y latencia (0-50ms)
+API --> Paciente: 201 Created (cita JSON)
+
+== Prueba de Carga (500 concurrentes) ==
+
+Paciente -> API: 500 peticiones simultaneas
+note right of API: avg=25.6ms p95=48.1ms max=96.4ms
+
+API -> Prom: /metrics (histogramas)
+Prom --> Graf: T95=48ms < 200ms
+note right of Graf: CUMPLE SLA
+
+@enduml

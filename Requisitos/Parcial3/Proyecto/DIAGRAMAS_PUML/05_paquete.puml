@@ -1,0 +1,34 @@
+@startuml
+title Diagrama de Paquetes - Simulador de Inversiones en Criptomonedas
+
+package "Presentacion" {
+  [Login/Registro]
+  [Dashboard]
+  [Mercado]
+  [Detalle/Trading]
+  [Portafolio]
+  [Historial]
+  [Perfil/Config]
+  [Educación/Ayuda]
+}
+
+package "Logica de Negocio" {
+  [Power Fx]
+  [Validaciones]
+  [Calculos]
+}
+
+package "Datos" {
+  [Dataverse]
+  [API Precios]
+}
+
+package "Componentes" {
+  [compTabBar]
+}
+
+Presentacion --> "Logica de Negocio"
+Presentacion --> Componentes
+"Logica de Negocio" --> Datos
+
+@enduml

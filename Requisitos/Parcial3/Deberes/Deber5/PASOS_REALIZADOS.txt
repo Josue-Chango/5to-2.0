@@ -1,0 +1,52 @@
+PASOS REALIZADOS - API DE CITAS MÉDICAS "BELLA MUJER"
+(Pruebas de carga con k6 + Monitoreo con Prometheus y Grafana)
+Autor: Arias Martínez Darwin René
+
+ENTORNO:
+  - Ubuntu 24.04 VM (IP: 192.168.100.41, Adaptador puente WiFi)
+  - Windows host (IP: 192.168.100.36) - Navegador para Grafana
+
+1. Instalación de dependencias en Ubuntu
+   a. Node.js 18.x (API REST)
+   b. k6 v2.1.0 (pruebas de carga)
+   c. Docker + Docker Compose (Prometheus y Grafana)
+
+2. Estructura de archivos
+   api/
+   ├── server.js            # API Express con métricas Prometheus
+   ├── package.json         # Dependencias Node.js
+   ├── k6-test.js           # Script de prueba de carga (500 VUs)
+   ├── prometheus.yml       # Configuración de Prometheus
+   ├── docker-compose.yml   # Prometheus + Grafana en Docker
+   ├── setup_ubuntu.sh      # Script de instalación automática
+   └── run_tests.sh         # Ejecuta pruebas initial vs optimized
+
+3. Levantar la infraestructura Docker
+   docker compose up -d
+   (Levanta Prometheus en :9090 y Grafana en :3000)
+
+4. Iniciar la API
+   a. Modo inicial (sin optimizar, latencia alta):
+      MODE=initial node server.js
+   b. Modo optimizado (latencia baja):
+      MODE=optimized node server.js
+
+5. Ejecutar prueba de carga
+   a. Prueba completa (500 VUs, 60s):
+      k6 run k6-test.js
+   b. Prueba rápida (5 VUs, 15s):
+      k6 run --vus 5 --duration 15s k6-test.js
+   c. Prueba comparativa (initial + optimized):
+      bash run_tests.sh
+
+6. Configurar Grafana (desde Windows)
+   a. Abrir http://192.168.100.41:3000 en el navegador
+   b. Credenciales: admin / admin123
+   c. Connections > Data Sources > Add data source > Prometheus
+   d. URL: http://prometheus:9090
+   e. Importar dashboard ID: 1860 (Node Exporter Full)
+
+7. Verificación del SLA
+   - SLA requerido: T95 < 200ms con 500 pacientes concurrentes
+   - Los resultados se exportan a resultados/initial.json y resultados/optimized.json
+   - Las métricas se visualizan en Grafana en tiempo real

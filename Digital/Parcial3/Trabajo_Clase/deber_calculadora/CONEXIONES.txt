@@ -1,0 +1,56 @@
+=============================================================
+  CONEXIONES CALCULADORA - Simulide
+  Abrir: simulador calculadora.sim1
+=============================================================
+
+PASO 1: Agregar Display de 7 Segmentos
+---------------------------------------
+- Ir a: Outputs > Displays > "7 Segment Display"
+- Arrastrar al canvas
+- Propiedades:
+    Size: 4
+    Common Cathode: NO  (porque usamos COMMON_ANODE)
+    Color: Yellow
+
+PASO 2: Cargar el .hex en el Mega
+------------------------------------
+- Click derecho en el Mega2560 > "Load Program"
+- Seleccionar: deber_calculadora/build/arduino.avr.mega/deber_calculadora.ino.hex
+  (Compilar primero en Arduino IDE para board "Arduino Mega 2560")
+
+
+PASO 3: Conexiones Keypad -> Mega2560
+---------------------------------------
+Keypad pin 0 (Fila 0)  -->  Mega pin 21
+Keypad pin 1 (Fila 1)  -->  Mega pin 20
+Keypad pin 2 (Fila 2)  -->  Mega pin 19
+Keypad pin 3 (Fila 3)  -->  Mega pin 18
+Keypad pin 4 (Col 0)   -->  Mega pin 17
+Keypad pin 5 (Col 1)   -->  Mega pin 16
+Keypad pin 6 (Col 2)   -->  Mega pin 15
+Keypad pin 7 (Col 3)   -->  Mega pin 14
+
+
+PASO 4: Conexiones Display 7-Segment -> Mega2560
+--------------------------------------------------
+Segmentos (compartidos entre todos los digitos):
+  Display pin A  -->  Mega pin 2
+  Display pin B  -->  Mega pin 3
+  Display pin C  -->  Mega pin 4
+  Display pin D  -->  Mega pin 5
+  Display pin E  -->  Mega pin 6
+  Display pin F  -->  Mega pin 7
+  Display pin G  -->  Mega pin 8
+  Display pin DP -->  Mega pin 9
+
+Selectores de digito:
+  Display pin D1  -->  Mega pin 10
+  Display pin D2  -->  Mega pin 11
+  Display pin D3  -->  Mega pin 12
+  Display pin D4  -->  Mega pin 13
+
+
+RESUMEN DE PINES ARDUINO MEGA USADOS:
+  Pines 2-9:   Segmentos del display (A-G, DP)
+  Pines 10-13: Selectores de digito (D1-D4)
+  Pines 14-21: Keypad (Col3, Col2, Col1, Col0, Fila3, Fila2, Fila1, Fila0)

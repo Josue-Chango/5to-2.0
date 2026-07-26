@@ -1,0 +1,53 @@
+@startuml
+
+skinparam ArrowColor #298089
+skinparam shadowing false
+title Diagrama de Tiempos - API /api/citas\nClinica Bella Mujer - Prueba de Carga 500 VUs
+
+robust "Estado API" as API
+concise "Latencia (ms)" as Latencia
+concise "Usuarios (VUs)" as VUs
+
+@0
+API is "Esperando"
+Latencia is 0
+VUs is 0
+
+@10
+API is "Rampa 0-500 VUs"
+Latencia is 50
+VUs is 100
+
+@20
+API is "Rampa 0-500 VUs"
+Latencia is 150
+VUs is 300
+
+@30
+API is "Carga completa"
+Latencia is 434
+VUs is 500
+note bottom of Latencia : Promedio Initial: 434.03ms
+
+@50
+API is "Carga sostenida"
+Latencia is 732
+note bottom of Latencia : T95 Initial: 731.96ms
+
+@70
+API is "Carga sostenida"
+Latencia is 434
+note bottom of Latencia : 74,561 peticiones totales
+
+@90
+API is "Rampa baja"
+Latencia is 200
+VUs is 100
+
+@100
+API is "Detenido"
+Latencia is 0
+VUs is 0
+note bottom of Latencia : T95 < 200ms - NO CUMPLE
+
+@enduml
