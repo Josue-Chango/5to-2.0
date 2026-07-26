@@ -81,13 +81,13 @@ RF10: El sistema debe permitir al usuario buscar y filtrar
 REQUISITOS FUNCIONALES NUEVOS (RF11 - RF20)
 ==================================================================
 
-RF11: El sistema debe permitir al usuario gestionar su perfil de
-      usuario, incluyendo la edición de nombre, correo electrónico
-      y nivel de experiencia en inversión (principiante, intermedio,
-      avanzado).
+RF11: El sistema debe incluir un apartado de conversión de
+      criptomonedas que permita al usuario seleccionar una moneda
+      de origen y una moneda de destino (o viceversa), mostrando
+      el monto equivalente según el precio actual de cada una.
       - Tipo: Obligatorio
       - Prioridad: Media
-      - Pantalla: Perfil de usuario (accesible desde Dashboard)
+      - Pantalla: ScrMercado o ScrDetalle
 
 RF12: El sistema debe permitir al usuario configurar la moneda base
       de visualización (USD, EUR, etc.) para que todos los valores
@@ -96,10 +96,9 @@ RF12: El sistema debe permitir al usuario configurar la moneda base
       - Prioridad: Baja
       - Pantalla: Configuración de cuenta
 
-RF13: El sistema debe mostrar un gráfico de línea (line chart)
-      con el historial de precios de cada criptomoneda seleccionada,
-      permitiendo al usuario visualizar la tendencia de precios
-      en diferentes periodos (1D, 7D, 30D, 1A).
+RF13: El sistema debe mostrar la información de precios de cada
+      criptomoneda seleccionada, incluyendo precio actual, variación
+      porcentual y descripción, sin incluir gráfico de tendencia.
       - Tipo: Obligatorio
       - Prioridad: Media
       - Pantalla: ScrDetalle
@@ -151,13 +150,13 @@ RF19: El sistema debe mostrar en el Dashboard (ScrInicio) un
       - Prioridad: Alta
       - Pantalla: ScrInicio (Dashboard)
 
-RF20: El sistema debe incluir una sección de Educación/Ayuda con
-      un glosario de términos criptomonedas y tips de inversión
-      responsable, accesible desde el menú de navegación o desde
-      un botón de ayuda.
-      - Tipo: Deseable
-      - Prioridad: Baja
-      - Pantalla: Educación / Ayuda
+RF20: El sistema debe mantener la sesión del usuario de forma
+      persistente, de modo que al cerrar y volver a abrir la
+      aplicación, el usuario continúe autenticado sin necesidad
+      de ingresar sus credenciales nuevamente.
+      - Tipo: Obligatorio
+      - Prioridad: Media
+      - Pantalla: Login / Configuración
 
 ==================================================================
 RESUMEN DE PRIORIDADES
@@ -167,23 +166,22 @@ Alta prioridad (obligatorios críticos):
   RF01, RF02, RF03, RF04, RF05, RF06, RF07, RF08, RF15, RF17, RF18, RF19
 
 Media prioridad (obligatorios importantes):
-  RF09, RF10, RF11, RF13, RF14, RF16
+  RF09, RF10, RF11, RF13, RF14, RF16, RF20
 
 Baja prioridad (deseables):
-  RF12, RF20
+  RF12
 
 ==================================================================
 COBERTURA POR PANTALLA
 ==================================================================
 
-Login/Registro:      RF01, RF15
+Login/Registro:      RF01, RF15, RF20
 Dashboard (ScrInicio): RF02, RF05, RF19
-Mercado (ScrMercado):  RF02, RF10
-Detalle (ScrDetalle):  RF03, RF04, RF07, RF08, RF13, RF14, RF16
+Mercado (ScrMercado):  RF02, RF10, RF11
+Detalle (ScrDetalle):  RF03, RF04, RF07, RF08, RF11, RF13, RF14, RF16
 Portafolio:           RF05, RF09
 Historial:            RF06
-Perfil/Config:        RF11, RF12, RF17
+Perfil/Config:        RF12, RF17
 Backend:              RF18
-Educación/Ayuda:      RF20
 
 ==================================================================

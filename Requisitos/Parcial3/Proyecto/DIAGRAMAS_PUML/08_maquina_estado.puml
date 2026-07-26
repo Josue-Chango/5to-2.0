@@ -38,5 +38,13 @@ state SesionActiva {
 
 CredencialesValidas --> SesionActiva
 SesionActiva --> SinSesion : Cerrar Sesion
+SesionActiva --> SesionGuardada : App en segundo plano
+
+state SesionGuardada {
+  [*] --> SesionActiva
+}
+
+SesionGuardada --> SesionActiva : Reabrir App
+SesionGuardada --> SinSesion : Cerrar sesion definitiva
 
 @enduml

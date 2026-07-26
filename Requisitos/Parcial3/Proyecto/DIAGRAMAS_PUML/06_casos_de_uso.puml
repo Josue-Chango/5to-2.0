@@ -16,10 +16,10 @@ rectangle "Simulador Cripto" {
   usecase "Ver Portafolio" as UC05
   usecase "Ver Grafico Distribucion" as UC09
   usecase "Ver Historial" as UC06
-  usecase "Ver Grafico Precios" as UC13
   usecase "Editar Perfil" as UC11
   usecase "Configurar Moneda Base" as UC12
-  usecase "Ver Educación" as UC20
+  usecase "Sesion Persistente" as UC20
+  usecase "Convertir Criptomonedas" as UC11b
   usecase "Validar Saldo" as UC07
   usecase "Validar Cantidad" as UC08
 }
@@ -35,10 +35,10 @@ U --> UC04
 U --> UC05
 U --> UC09
 U --> UC06
-U --> UC13
 U --> UC11
 U --> UC12
 U --> UC20
+U --> UC11b
 
 UC03 ..> UC07 : <<include>>
 UC04 ..> UC08 : <<include>>

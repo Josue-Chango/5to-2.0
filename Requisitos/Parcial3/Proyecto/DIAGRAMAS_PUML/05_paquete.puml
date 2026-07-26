@@ -9,7 +9,7 @@ package "Presentacion" {
   [Portafolio]
   [Historial]
   [Perfil/Config]
-  [Educación/Ayuda]
+  [Conversion Cripto]
 }
 
 package "Logica de Negocio" {
