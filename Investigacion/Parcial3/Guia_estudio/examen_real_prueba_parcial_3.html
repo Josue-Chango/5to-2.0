@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Examen Real (Prueba Parcial 3) + Preguntas Adicionales — Experimentación en IS</title>
+<style>
+  :root {
+    --bg: #0f1117; --bg2: #181c27; --bg3: #1f2436; --border: #2a2f45;
+    --accent: #4f8ef7; --accent2: #7c5cfc; --red: #e05c5c; --green: #4cbb8a;
+    --amber: #d9a441; --text: #e8eaf2; --muted: #7a82a0;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; font-size: 15px; line-height: 1.6; min-height: 100vh; }
+  .site-header { background: linear-gradient(135deg, #0f1117 0%, #1a1f35 100%); border-bottom: 1px solid var(--border); padding: 2.5rem 1.5rem 2rem; text-align: center; position: sticky; top: 0; z-index: 100; }
+  .site-header h1 { font-size: clamp(1rem, 3.6vw, 1.5rem); font-weight: 700; letter-spacing: -0.02em; background: linear-gradient(90deg, var(--amber), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem; }
+  .site-header p { color: var(--muted); font-size: 13px; }
+  .stats-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; padding: 1.25rem 1.5rem 0.5rem; max-width: 980px; margin: 0 auto; }
+  .stat-chip { background: var(--bg3); border: 1px solid var(--border); border-radius: 99px; padding: 5px 12px; font-size: 11.5px; color: var(--muted); }
+  .stat-chip strong { color: var(--text); }
+  .filter-bar { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; padding: 1rem 1.5rem; max-width: 980px; margin: 0 auto; }
+  .filter-btn { background: var(--bg3); border: 1px solid var(--border); border-radius: 99px; padding: 5px 13px; font-size: 12px; color: var(--muted); cursor: pointer; transition: all 0.15s; }
+  .filter-btn:hover { border-color: var(--accent); color: var(--text); }
+  .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .counter-bar { text-align: center; padding: 0.5rem 1.5rem 0.25rem; font-size: 13px; color: var(--muted); }
+  .counter-bar span { color: var(--text); font-weight: 600; }
+  .cards-container { max-width: 980px; margin: 0 auto; padding: 1rem 1.5rem 4rem; display: flex; flex-direction: column; gap: 1.5rem; }
+  .q-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; transition: border-color 0.2s; }
+  .q-card:hover { border-color: #3a4060; }
+  .q-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-bottom: 0.875rem; }
+  .badge { font-size: 10px; font-weight: 700; letter-spacing: 0.05em; padding: 3px 9px; border-radius: 99px; text-transform: uppercase; }
+  .badge-num { background: #1e2540; color: var(--muted); }
+  .badge-exam { background: #d9a44120; color: #fbbf24; border: 1px solid #d9a44150; }
+  .badge-13 { background: #1d4ed820; color: #60a5fa; border: 1px solid #1d4ed840; }
+  .badge-14 { background: #7c3aed20; color: #a78bfa; border: 1px solid #7c3aed40; }
+  .badge-15 { background: #0f766e20; color: #34d399; border: 1px solid #0f766e40; }
+  .badge-16 { background: #b4530920; color: #fbbf24; border: 1px solid #b4530940; }
+  .badge-E13 { background: #be185d20; color: #f472b6; border: 1px solid #be185d40; }
+  .badge-E14 { background: #15803d20; color: #4ade80; border: 1px solid #15803d40; }
+  .badge-A16 { background: #0891b220; color: #22d3ee; border: 1px solid #0891b240; }
+  .badge-17 { background: #c2410c20; color: #fb923c; border: 1px solid #c2410c40; }
+  .badge-18 { background: #4338ca20; color: #818cf8; border: 1px solid #4338ca40; }
+  .badge-type { background: #2a2f45; color: var(--muted); border: 1px solid var(--border); }
+  .badge-diap { background: #1a1f35; color: var(--muted); border: 1px solid var(--border); }
+  .q-text { font-size: 15px; font-weight: 600; line-height: 1.65; margin-bottom: 1.125rem; color: var(--text); }
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .option { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.15s; font-size: 14px; line-height: 1.5; user-select: none; }
+  .option:hover { border-color: var(--accent); background: #1d2240; }
+  .option .letter { font-size: 11px; font-weight: 700; min-width: 20px; color: var(--muted); padding-top: 2px; flex-shrink: 0; }
+  .option .check { font-size: 11px; min-width: 16px; padding-top: 2px; flex-shrink: 0; color: var(--muted); }
+  .option.selected { border-color: var(--accent); background: #1d2240; }
+  .option.selected .check::before { content: "☑"; color: var(--accent); }
+  .option:not(.selected) .check::before { content: "☐"; }
+  .option.correct { background: #0f2e1f; border-color: var(--green); color: #d1fae5; cursor: default; }
+  .option.correct .letter { color: var(--green); }
+  .option.wrong { background: #2a0f0f; border-color: var(--red); color: #fee2e2; cursor: default; }
+  .option.wrong .letter { color: var(--red); }
+  .option.missed { background: #2e260f; border-color: var(--amber); color: #fde9c0; cursor: default; }
+  .option.missed .letter { color: var(--amber); }
+  .option.locked { cursor: default; pointer-events: none; }
+  .explanation { margin-top: 1rem; padding: 10px 14px; border-radius: 10px; font-size: 13px; line-height: 1.6; display: none; }
+  .explanation.correct-exp { background: #0f2e1f; color: #6ee7b7; border-left: 3px solid var(--green); }
+  .explanation.wrong-exp { background: #2a0f0f; color: #fca5a5; border-left: 3px solid var(--red); }
+  .explanation.visible { display: block; }
+  .check-btn { margin-top: 10px; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border: none; border-radius: 9px; padding: 8px 18px; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .check-btn:hover { opacity: 0.9; }
+  .check-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .progress-bar-bg { height: 4px; background: var(--bg3); border-radius: 99px; margin-bottom: 1.25rem; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--amber), var(--accent)); border-radius: 99px; transition: width 0.4s ease; width: 0%; }
+  .score-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 0.75rem; }
+  .score-text { font-size: 12px; color: var(--muted); }
+  .score-text span { color: var(--text); font-weight: 600; }
+  #result-screen { display: none; text-align: center; padding: 3rem 1.5rem; max-width: 600px; margin: 0 auto; }
+  #result-screen.visible { display: block; }
+  .result-pct { font-size: 72px; font-weight: 800; line-height: 1; margin-bottom: 0.5rem; background: linear-gradient(90deg, var(--amber), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .result-sub { color: var(--muted); font-size: 14px; margin-bottom: 1.5rem; }
+  .result-msg { font-size: 16px; color: var(--text); margin-bottom: 2rem; }
+  .btn-primary { background: linear-gradient(135deg, var(--amber), var(--accent)); color: #10131c; border: none; border-radius: 10px; padding: 10px 24px; font-size: 14px; font-weight: 700; cursor: pointer; transition: opacity 0.15s; }
+  .btn-primary:hover { opacity: 0.88; }
+  #quiz-mode { display: none; } #quiz-mode.active { display: block; }
+  #browse-mode { display: block; } #browse-mode.hidden { display: none; }
+  .quiz-wrapper { max-width: 780px; margin: 0 auto; padding: 1.25rem 1.5rem 4rem; }
+  @media (max-width: 600px) {
+    .site-header { padding: 1.5rem 1rem 1.25rem; position: static; }
+    .cards-container { padding: 1rem 1rem 4rem; }
+    .q-card { padding: 1.25rem; } .q-text { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <h1>📝 Examen Real (Prueba Parcial 3) + Preguntas Adicionales</h1>
+  <p>Las 40 preguntas exactas de la prueba parcial que tomaron, más preguntas nuevas en el mismo estilo basadas en todas las diapositivas</p>
+</header>
+
+<div id="browse-mode">
+  <div class="stats-row">
+    <div class="stat-chip">Total: <strong id="total-count">0</strong></div>
+    <div class="stat-chip">📝 Examen Real: <strong id="exam-count">0</strong></div>
+    <div class="stat-chip">Cl.13: <strong id="c13-count">0</strong></div>
+    <div class="stat-chip">Cl.14: <strong id="c14-count">0</strong></div>
+    <div class="stat-chip">Cl.15: <strong id="c15-count">0</strong></div>
+    <div class="stat-chip">Cl.16: <strong id="c16-count">0</strong></div>
+    <div class="stat-chip">Introd.Exp: <strong id="cE13-count">0</strong></div>
+    <div class="stat-chip">Diseño Exp: <strong id="cE14-count">0</strong></div>
+    <div class="stat-chip">Análisis Caso: <strong id="cA16-count">0</strong></div>
+    <div class="stat-chip">Cl.17: <strong id="c17-count">0</strong></div>
+    <div class="stat-chip">Cl.18: <strong id="c18-count">0</strong></div>
+  </div>
+
+  <div class="filter-bar" id="filter-bar">
+    <button class="filter-btn active" data-mod="Todas">Todas</button>
+    <button class="filter-btn" data-mod="EXAM">📝 Examen Real (40)</button>
+    <button class="filter-btn" data-mod="13">Cl.13 · Introd. Caso</button>
+    <button class="filter-btn" data-mod="14">Cl.14 · Diseño Caso</button>
+    <button class="filter-btn" data-mod="15">Cl.15 · Recolección Caso</button>
+    <button class="filter-btn" data-mod="A16">Cl.16 · Análisis Caso</button>
+    <button class="filter-btn" data-mod="17">Cl.17 · Casos Reales</button>
+    <button class="filter-btn" data-mod="E13">Introd. Experimentación</button>
+    <button class="filter-btn" data-mod="E14">Diseño Experimento</button>
+    <button class="filter-btn" data-mod="16">Cl.16 · Ejecución Exp.</button>
+    <button class="filter-btn" data-mod="18">Cl.18 · Exper. Reales</button>
+    <button class="filter-btn" data-mod="quiz">🎯 Modo Quiz</button>
+  </div>
+
+  <div class="counter-bar">Mostrando <span id="showing-count">0</span> preguntas</div>
+  <div class="cards-container" id="cards-container"></div>
+</div>
+
+<div id="quiz-mode">
+  <div class="quiz-wrapper">
+    <div class="score-header">
+      <button class="filter-btn" onclick="exitQuiz()">← Salir del quiz</button>
+      <span class="score-text">Pregunta <span id="q-current">1</span>/<span id="q-total">0</span> · Aciertos: <span id="q-score">0</span></span>
+    </div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="quiz-progress"></div></div>
+    <div id="quiz-card-container"></div>
+    <div id="quiz-nav" style="display:none; justify-content:flex-end; margin-top:1rem;">
+      <button class="btn-primary" id="btn-next" onclick="nextQuizQ()">Siguiente →</button>
+    </div>
+    <div id="result-screen">
+      <div class="result-pct" id="result-pct">0%</div>
+      <div class="result-sub" id="result-sub"></div>
+      <div class="result-msg" id="result-msg"></div>
+      <button class="btn-primary" onclick="restartQuiz()">Repetir quiz</button>
+      <button class="filter-btn" style="margin-left:8px;" onclick="exitQuiz()">Volver al listado</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// mod: "EXAM" (preguntas reales de la prueba) o código de módulo de diapositiva
+// type: "single" (una respuesta correcta) o "multi" (selecciona todas las que apliquen)
+// o: opciones ; a: array de índices correctos ; e: explicación
+const Q = [
+
+// ══════════════════════════ EXAMEN REAL — PRUEBA PARCIAL 3 (40 preguntas) ══════════════════════════
+{mod:"EXAM",num:1,type:"single",s:"Historia",q:"Según Weinberg & Schulman, ¿en qué año se registra la primera referencia a experimentos controlados en Ingeniería de Software (relacionada con la legibilidad de código)?",o:["1965","1971","1986","1995"],a:[1],e:"La primera referencia a experimentos controlados en IS, relacionada con legibilidad de código, se registra en 1971 (Weinberg & Schulman)."},
+{mod:"EXAM",num:2,type:"multi",s:"Historia",q:"El experimento de Basili & Selby (1986), considerado el primer experimento IS con diseño riguroso, comparó distintos métodos de detección de defectos. ¿Cuáles de los siguientes métodos formaron parte de esa comparación? (Selecciona todas las que apliquen)",o:["Inspección de código","Pruebas funcionales","Pruebas estructurales","Programación en pares (pair programming)"],a:[0,1,2],e:"Basili & Selby (1986) compararon inspección de código, pruebas funcionales y pruebas estructurales. La programación en pares no formó parte de esta comparación específica."},
+{mod:"EXAM",num:3,type:"single",s:"Historia",q:"El período 1995–2000, en el que Wohlin, Runeson, Höst y otros publican \"Experimentation in Software Engineering\", se caracteriza principalmente por:",o:["La aparición de los primeros experimentos sobre TDD","La sistematización formal del método experimental en IS","La crisis de reproducibilidad en la disciplina","El surgimiento de los experimentos con IA generativa"],a:[1],e:"Este período se caracteriza por la sistematización formal del método experimental en IS mediante el libro de referencia de Wohlin et al."},
+{mod:"EXAM",num:4,type:"multi",s:"Definición de experimento",q:"De acuerdo con la definición de Wohlin et al. (2012), ¿cuáles de los siguientes elementos son necesarios para que un estudio empírico se considere un experimento? (Selecciona todas las que apliquen)",o:["Manipulación activa de al menos una variable independiente","Observación pasiva de datos ya ocurridos","Condiciones controladas que minimicen variables de confusión","Medición de resultados con métricas definidas antes del estudio"],a:[0,2,3],e:"Un experimento requiere manipulación activa de la VI, condiciones controladas y métricas definidas de antemano. La observación pasiva de datos ya ocurridos es característica de MSR o estudios de caso, no de un experimento."},
+{mod:"EXAM",num:5,type:"single",s:"Definición de experimento",q:"Según los criterios de Wohlin et al., ¿cuál de las siguientes opciones NO constituye un experimento?",o:["Un estudio de caso sobre la adopción de integración continua en una empresa","Un experimento controlado con aleatorización de sujetos","Un diseño factorial 2×2 con dos tratamientos","Un experimento de simulación con modelos artificiales"],a:[0],e:"El estudio de caso no manipula ninguna variable, solo observa un fenómeno en su contexto real; por tanto no constituye un experimento, a diferencia de las otras tres opciones."},
+{mod:"EXAM",num:6,type:"single",s:"Elección de método",q:"Un investigador desea responder: \"¿Qué factores predicen los defectos en proyectos de código abierto?\". Según la tabla de métodos de investigación, el método más adecuado es:",o:["Experimento controlado","Encuesta","Minería de repositorios (MSR)","Cuasi-experimento"],a:[2],e:"Para analizar patrones predictivos a partir de datos históricos de proyectos de código abierto sin manipular variables, el método más adecuado es la minería de repositorios (MSR)."},
+{mod:"EXAM",num:7,type:"multi",s:"Cuándo usar experimento",q:"¿En cuáles de las siguientes condiciones es apropiado usar un experimento controlado en IS? (Selecciona todas las que apliquen)",o:["Se busca establecer causalidad (X causa Y)","No es posible manipular la variable independiente","Se dispone de suficientes sujetos para formar grupos","El fenómeno puede reproducirse en condiciones controladas"],a:[0,2,3],e:"El experimento controlado requiere justamente la posibilidad de manipular la VI; si NO es posible manipularla, esa es una razón para NO usar un experimento controlado, no para usarlo."},
+{mod:"EXAM",num:8,type:"single",s:"Tipos de experimento",q:"Un cuasi-experimento se distingue de un experimento controlado principalmente porque:",o:["No mide variables dependientes","No hay aleatorización completa y se usan grupos naturales existentes","Se ejecuta exclusivamente en laboratorio","No permite ningún tipo de control de variables"],a:[1],e:"La diferencia principal del cuasi-experimento es la ausencia de aleatorización completa, usando grupos ya existentes (naturales) en lugar de asignar sujetos aleatoriamente."},
+{mod:"EXAM",num:9,type:"multi",s:"Retos de la experimentación",q:"¿Cuáles de los siguientes son retos reconocidos de la experimentación en Ingeniería de Software? (Selecciona todas las que apliquen)",o:["Escasez de sujetos representativos de la industria","El efecto Hawthorne","Exceso de replicaciones que satura la literatura","Variables de confusión difíciles de controlar (experiencia, fatiga, motivación)"],a:[0,1,3],e:"Los retos reales son la escasez de sujetos representativos, el efecto Hawthorne y las variables de confusión difíciles de controlar. El problema real es la ESCASEZ de replicaciones, no un exceso de ellas."},
+{mod:"EXAM",num:10,type:"single",s:"Efecto Hawthorne",q:"El \"efecto Hawthorne\", mencionado como un reto de la experimentación en IS, se refiere a que:",o:["Los sujetos actúan de forma diferente por saber que están siendo observados","El investigador introduce sesgos al analizar los datos","Los resultados varían según la hora del día en que se ejecuta la tarea","Los sujetos se fatigan al repetir la misma tarea dos veces"],a:[0],e:"El efecto Hawthorne ocurre cuando los sujetos modifican su comportamiento por saber que están siendo observados, no por el efecto real del tratamiento."},
+{mod:"EXAM",num:11,type:"multi",s:"Caso F Prime NASA",q:"En el caso del software F Prime de la NASA (usado en el helicóptero Ingenuity en Marte), ¿qué técnicas experimentales se aplicaron antes del lanzamiento? (Selecciona todas las que apliquen)",o:["Pruebas de regresión automatizadas (más de 2,000 casos)","Experimentos de inyección de fallos para medir la recuperación del sistema","Encuestas de satisfacción a los ingenieros de vuelo","Comparaciones experimentales entre versiones del software en condiciones simuladas"],a:[0,1,3],e:"Se aplicaron más de 2,000 pruebas de regresión automatizadas, experimentos de inyección de fallos y comparaciones experimentales entre versiones en condiciones simuladas. No se mencionan encuestas de satisfacción a los ingenieros."},
+{mod:"EXAM",num:12,type:"single",s:"Control vs naturalismo",q:"Respecto al balance entre control y naturalismo en el diseño experimental, la regla general establece que:",o:["A mayor control del entorno, mayor validez externa","A mayor control del entorno, mayor validez interna (certeza causal)","A mayor naturalismo, mayor certeza causal","El control y el naturalismo son independientes entre sí"],a:[1],e:"La regla general establece que a mayor control corresponde mayor validez interna (certeza causal), mientras que a mayor naturalismo corresponde mayor validez externa."},
+{mod:"EXAM",num:13,type:"multi",s:"Hannay et al. 2013",q:"En la revisión de Hannay et al. (2013) sobre 113 experimentos IS publicados en ICSE y FSE, ¿cuáles de los siguientes hallazgos se reportaron? (Selecciona todas las que apliquen)",o:["38% tenía hipótesis ambiguas o ausentes","27% no documentaba el procedimiento de aleatorización","19% no reportaba el tamaño del efecto, solo el p-valor","60% no incluía ninguna variable dependiente"],a:[0,2],e:"Hannay et al. (2013) reportaron que el 38% tenía hipótesis ambiguas o ausentes y el 19% no reportaba el tamaño del efecto (solo el p-valor). Las otras dos cifras no corresponden a los hallazgos reales del estudio."},
+{mod:"EXAM",num:14,type:"single",s:"GQM",q:"Según la plantilla GQM (Goal-Question-Metric) de Basili et al. (1994), el orden correcto de la estructura del objetivo es:",o:["Métrica → Pregunta → Objetivo","Analizar [objeto] → con el propósito de [intención] → con respecto a [aspecto de calidad] → desde el punto de vista de [perspectiva] → en el contexto de [entorno]","Hipótesis → Variables → Diseño → Instrumentos","Contexto → Perspectiva → Intención → Objeto"],a:[1],e:"La estructura correcta de la plantilla GQM sigue el orden: Analizar [objeto] → con el propósito de [intención] → con respecto a [aspecto de calidad] → desde el punto de vista de [perspectiva] → en el contexto de [entorno]."},
+{mod:"EXAM",num:15,type:"multi",s:"Componentes del diseño",q:"Según Wohlin et al. (2012), ¿cuáles de los siguientes son de los 5 componentes del diseño experimental que deben quedar definidos antes de ejecutar el experimento? (Selecciona todas las que apliquen)",o:["Objetivo (GQM)","Hipótesis","Publicación anticipada de los resultados esperados","Instrumentos de recolección de datos"],a:[0,1,3],e:"Los 5 componentes son: objetivo (GQM), hipótesis, variables, diseño e instrumentos. La 'publicación anticipada de resultados esperados' no es uno de estos componentes (y de hecho sería una mala práctica, cercana al HARKing)."},
+{mod:"EXAM",num:16,type:"single",s:"Hipótesis nula",q:"La hipótesis nula (H0) en un experimento IS afirma que:",o:["Existe una diferencia significativa entre los grupos","No existe diferencia ni efecto entre los grupos comparados","El tamaño del efecto es necesariamente grande","La variable dependiente causa cambios en la variable independiente"],a:[1],e:"La hipótesis nula (H0) afirma que no existe diferencia ni efecto entre los grupos comparados."},
+{mod:"EXAM",num:17,type:"single",s:"Hipótesis direccional",q:"Una hipótesis alternativa que afirma específicamente \"el grupo A presenta menor densidad de defectos que el grupo B\" (en lugar de simplemente \"A ≠ B\") se clasifica como:",o:["Bidireccional (dos colas)","Direccional (una cola)","Nula","No falsificable"],a:[1],e:"Una hipótesis que especifica la dirección de la diferencia (A < B, no solo A ≠ B) se clasifica como direccional (de una cola)."},
+{mod:"EXAM",num:18,type:"multi",s:"Formulación de hipótesis",q:"¿Cuáles de las siguientes afirmaciones sobre la formulación de hipótesis en IS son correctas? (Selecciona todas las que apliquen)",o:["Una hipótesis científica debe ser falsificable, según el criterio de Popper","Formular la hipótesis después de observar los datos se conoce como HARKing y es un error frecuente","Las hipótesis pueden formularse libremente después del análisis, sin afectar la validez del estudio","Una hipótesis que no puede refutarse con datos es una creencia, no una hipótesis científica"],a:[0,1,3],e:"Son correctas: el criterio de falsabilidad de Popper, la definición de HARKing como error frecuente, y que una hipótesis irrefutable es una creencia. Es FALSO que formular hipótesis después del análisis no afecte la validez del estudio; de hecho, es precisamente el error del HARKing."},
+{mod:"EXAM",num:19,type:"single",s:"Variable independiente",q:"En un experimento sobre TDD vs. desarrollo tradicional, la variable que el investigador manipula deliberadamente (el tratamiento) se denomina:",o:["Variable dependiente","Variable de confusión","Variable independiente","Variable moderadora"],a:[2],e:"El tratamiento manipulado deliberadamente por el investigador (TDD vs. tradicional) es la variable independiente."},
+{mod:"EXAM",num:20,type:"multi",s:"Variables controladas",q:"En un experimento que mide la densidad de defectos comparando TDD vs. desarrollo tradicional, ¿cuáles de las siguientes serían ejemplos apropiados de variables controladas? (Selecciona todas las que apliquen)",o:["Lenguaje de programación utilizado","IDE utilizado por los sujetos","Densidad de defectos obtenida","Tiempo asignado para completar la tarea"],a:[0,1,3],e:"El lenguaje de programación, el IDE y el tiempo asignado son variables que se mantienen constantes (controladas) para todos los grupos. La densidad de defectos NO es una variable controlada: es la variable DEPENDIENTE que se mide como resultado."},
+{mod:"EXAM",num:21,type:"single",s:"Variable moderadora",q:"Una variable que \"modifica la relación entre la variable independiente y la dependiente\", como el tamaño del equipo o la complejidad del sistema, se denomina:",o:["Variable de confusión","Variable moderadora","Variable controlada","Variable dependiente"],a:[1],e:"Una variable que modifica (fortalece o debilita) la relación entre la VI y la VD se denomina variable moderadora."},
+{mod:"EXAM",num:22,type:"single",s:"Selección de sujetos",q:"Según Carver et al. (2010), la estrategia recomendada para la selección de sujetos en experimentos IS es:",o:["Usar exclusivamente profesionales desde el primer experimento","Comenzar con estudiantes para validar el diseño (replicación interna) y luego replicar con profesionales (replicación externa)","Usar exclusivamente sistemas automatizados sin sujetos humanos","Evitar cualquier tipo de replicación posterior"],a:[1],e:"Carver et al. (2010) recomiendan comenzar con estudiantes para validar el diseño (replicación interna) y luego replicar con profesionales para la generalización (replicación externa)."},
+{mod:"EXAM",num:23,type:"multi",s:"Estudiantes vs profesionales",q:"Respecto al uso de estudiantes como sujetos experimentales frente a profesionales, ¿cuáles de las siguientes afirmaciones son correctas? (Selecciona todas las que apliquen)",o:["Los estudiantes ofrecen mayor disponibilidad y homogeneidad","Los estudiantes ofrecen mayor validez externa que los profesionales","Los profesionales son más difíciles de reclutar y tienen tiempo limitado","Los sistemas (objetos) no representan el factor humano, pero no tienen fatiga ni sesgos cognitivos"],a:[0,2,3],e:"Los estudiantes ofrecen disponibilidad y homogeneidad, y los profesionales son más difíciles de reclutar. Es FALSO que los estudiantes ofrezcan mayor validez externa que los profesionales: es justo lo contrario, ya que los profesionales representan mejor a la población objetivo de la industria."},
+{mod:"EXAM",num:24,type:"multi",s:"Diseño within-subject",q:"Sobre el diseño within-subject (medidas repetidas), ¿cuáles de las siguientes afirmaciones son correctas? (Selecciona todas las que apliquen)",o:["El mismo sujeto realiza ambos tratamientos, en orden aleatorio","Elimina la variabilidad entre sujetos","Está completamente libre de riesgo de efectos de aprendizaje o fatiga","Requiere contrabalanceo para controlar el efecto del orden de los tratamientos"],a:[0,1,3],e:"El diseño within-subject usa al mismo sujeto en ambos tratamientos (aleatorizando el orden), elimina la variabilidad entre sujetos y requiere contrabalanceo. NO está libre de riesgo de aprendizaje/fatiga: ese es precisamente su principal riesgo, que el contrabalanceo busca mitigar."},
+{mod:"EXAM",num:25,type:"single",s:"Diseño factorial",q:"Un diseño factorial 2×2, en el que se estudian simultáneamente el factor \"TDD vs. tradicional\" y el factor \"pair vs. solo programming\", permite principalmente:",o:["Reducir a la mitad el número de sujetos necesarios","Detectar interacciones entre los dos factores estudiados","Eliminar por completo la necesidad de aleatorización","Evitar el uso de pruebas estadísticas posteriores"],a:[1],e:"El diseño factorial 2×2 permite estudiar dos factores simultáneamente y, sobre todo, detectar interacciones entre ellos, no solo sus efectos individuales."},
+{mod:"EXAM",num:26,type:"single",s:"Bloques aleatorizados",q:"El diseño de bloques aleatorizados, en el que se agrupan sujetos similares (por ejemplo, por nivel de experiencia) antes de aleatorizar dentro de cada bloque, tiene como propósito principal:",o:["Aumentar artificialmente el tamaño de la muestra","Reducir el efecto de la variabilidad entre sujetos","Eliminar la necesidad de un grupo control","Detectar interacciones entre múltiples factores"],a:[1],e:"El propósito principal de agrupar sujetos similares en bloques es reducir el efecto de la variabilidad entre sujetos sobre los resultados."},
+{mod:"EXAM",num:27,type:"multi",s:"Plan de análisis",q:"El plan de análisis estadístico, que debe definirse ANTES de recolectar los datos para evitar el p-hacking, debe incluir: (Selecciona todas las que apliquen)",o:["El tipo de prueba estadística (paramétrica o no paramétrica)","El nivel de significancia (α), habitualmente 0.05 en IS","El valor exacto de p que se espera obtener","El tamaño del efecto esperado y la potencia estadística necesaria"],a:[0,1,3],e:"El plan debe incluir el tipo de prueba, el nivel de significancia y el tamaño del efecto esperado con la potencia necesaria. NO tiene sentido predefinir 'el valor exacto de p que se espera obtener', ya que el p-valor es resultado del análisis, no un objetivo a fijar de antemano."},
+{mod:"EXAM",num:28,type:"single",s:"Potencia estadística",q:"La potencia estadística (comúnmente fijada en β = 0.80) se utiliza en el diseño experimental para determinar:",o:["El tamaño del efecto observado tras el análisis","Cuántos sujetos se necesitan para detectar el efecto, si este realmente existe","El nivel de significancia adecuado para el estudio","El tipo de prueba paramétrica que debe aplicarse"],a:[1],e:"La potencia estadística determina cuántos sujetos se necesitan para poder detectar el efecto estudiado, si este realmente existe."},
+{mod:"EXAM",num:29,type:"single",s:"Error tipo II",q:"Si un experimento IS no cuenta con potencia estadística suficiente, el riesgo principal es:",o:["Cometer un error tipo I (falso positivo)","Cometer un error tipo II (no detectar un efecto que realmente existe)","Sobreestimar sistemáticamente el tamaño del efecto","Generar automáticamente resultados de p-hacking"],a:[1],e:"Sin potencia estadística suficiente, el riesgo principal es cometer un error tipo II: no detectar un efecto que realmente existe."},
+{mod:"EXAM",num:30,type:"single",s:"Herramientas",q:"¿Qué herramienta se menciona específicamente para el cálculo de la potencia estadística y el tamaño de muestra necesario antes de ejecutar un experimento?",o:["JASP","SonarQube","G*Power","R"],a:[2],e:"G*Power es la herramienta mencionada específicamente para calcular la potencia estadística y el tamaño de muestra necesario antes de ejecutar el experimento."},
+{mod:"EXAM",num:31,type:"single",s:"Proceso de análisis",q:"Según el proceso de análisis de datos en experimentos IS, el primer paso a realizar es:",o:["Aplicar la prueba de hipótesis seleccionada","Verificar los supuestos estadísticos (normalidad y homogeneidad de varianzas)","Inspeccionar y limpiar los datos (outliers, datos faltantes, distribuciones)","Calcular el tamaño del efecto (d de Cohen)"],a:[2],e:"El primer paso del proceso de análisis es inspeccionar y limpiar los datos (outliers, datos faltantes, distribuciones), antes de verificar supuestos o aplicar pruebas."},
+{mod:"EXAM",num:32,type:"single",s:"Shapiro-Wilk",q:"La prueba de Shapiro-Wilk, aplicada antes de seleccionar la prueba de hipótesis, sirve para verificar:",o:["La igualdad de varianzas entre grupos","Si los datos siguen una distribución normal","El tamaño del efecto","La potencia estadística del diseño"],a:[1],e:"Shapiro-Wilk verifica si los datos siguen una distribución normal, lo cual determina si se debe usar una prueba paramétrica o no paramétrica."},
+{mod:"EXAM",num:33,type:"single",s:"Levene",q:"La prueba de Levene, complementaria a Shapiro-Wilk en el análisis de datos IS, se utiliza para verificar:",o:["La normalidad de los datos","La igualdad de varianzas entre los grupos comparados","El tamaño del efecto observado","La aleatorización de los sujetos"],a:[1],e:"La prueba de Levene verifica la igualdad (homogeneidad) de varianzas entre los grupos comparados, complementando a Shapiro-Wilk (que verifica normalidad)."},
+{mod:"EXAM",num:34,type:"single",s:"Pruebas no paramétricas",q:"Para comparar dos grupos independientes cuyos datos NO siguen una distribución normal, la prueba estadística recomendada es:",o:["t-test de Student","ANOVA de un factor","Mann-Whitney U","t-test de medidas repetidas"],a:[2],e:"Para 2 grupos independientes con datos que NO siguen distribución normal, la prueba recomendada es Mann-Whitney U (equivalente no paramétrico del t-test de Student)."},
+{mod:"EXAM",num:35,type:"single",s:"Pruebas paramétricas",q:"Para un diseño con 3 o más grupos independientes cuyos datos SÍ siguen una distribución normal, la prueba recomendada es:",o:["Kruskal-Wallis","ANOVA de un factor","Wilcoxon signed-rank","Mann-Whitney U"],a:[1],e:"Para 3 o más grupos independientes con datos que sí siguen distribución normal, la prueba recomendada es ANOVA de un factor."},
+{mod:"EXAM",num:36,type:"multi",s:"Pruebas no paramétricas",q:"¿Cuáles de las siguientes son pruebas estadísticas NO paramétricas apropiadas cuando los datos no siguen una distribución normal? (Selecciona todas las que apliquen)",o:["Mann-Whitney U (para 2 grupos independientes)","Wilcoxon signed-rank (para 2 medidas del mismo sujeto)","t-test de Student (para 2 grupos independientes)","Kruskal-Wallis (para 3+ grupos independientes)"],a:[0,1,3],e:"Mann-Whitney U, Wilcoxon signed-rank y Kruskal-Wallis son pruebas NO paramétricas. El t-test de Student es una prueba PARAMÉTRICA (requiere normalidad), por lo que no pertenece a este grupo."},
+{mod:"EXAM",num:37,type:"single",s:"Control de confusión",q:"Cuando existen variables de confusión que se desean controlar estadísticamente en un diseño con datos de distribución normal, la prueba adecuada es:",o:["ANCOVA (análisis de covarianza)","MANOVA","Prueba de Chi-cuadrado","Regresión logística"],a:[0],e:"Para controlar estadísticamente variables de confusión con datos normales, la prueba adecuada es ANCOVA (análisis de covarianza)."},
+{mod:"EXAM",num:38,type:"single",s:"Tamaño del efecto",q:"Según la clasificación del tamaño del efecto mediante la d de Cohen usada en experimentos IS, un valor de d = 0.65 corresponde a un efecto:",o:["Pequeño (d < 0.20)","Mediano (0.20 ≤ d < 0.50)","Grande (d ≥ 0.50), relevante para la práctica","No interpretable sin el p-valor"],a:[2],e:"Con d = 0.65, y usando la clasificación de la clase (Grande: d ≥ 0.50), el efecto se clasifica como Grande, relevante para la práctica."},
+{mod:"EXAM",num:39,type:"multi",s:"Limitaciones del p-valor",q:"¿Por qué el p-valor por sí solo NO es suficiente para interpretar un resultado experimental en IS? (Selecciona todas las que apliquen)",o:["Depende del tamaño de la muestra: con muestras muy grandes, diferencias mínimas pueden resultar \"significativas\"","No indica cuán grande es la diferencia en términos prácticos (tamaño del efecto)","Siempre coincide exactamente con el tamaño del efecto obtenido","Un resultado puede ser estadísticamente significativo pero prácticamente irrelevante (p. ej., p=0.03 con d=0.12)"],a:[0,1,3],e:"El p-valor depende del tamaño de muestra, no indica el tamaño práctico del efecto, y un resultado puede ser significativo pero irrelevante en la práctica. Es FALSO que el p-valor coincida siempre con el tamaño del efecto: son medidas completamente distintas."},
+{mod:"EXAM",num:40,type:"multi",s:"Errores comunes",q:"¿Cuáles de los siguientes se identifican como errores comunes en el análisis de datos de experimentos IS? (Selecciona todas las que apliquen)",o:["Reportar solo el p-valor, sin el tamaño del efecto ni el intervalo de confianza","Practicar p-hacking: ejecutar múltiples análisis hasta obtener p < 0.05","Verificar siempre los supuestos con Shapiro-Wilk antes de aplicar una prueba","Confundir significancia estadística con relevancia práctica"],a:[0,1,3],e:"Son errores comunes: reportar solo el p-valor, practicar p-hacking, y confundir significancia estadística con relevancia práctica. Verificar los supuestos con Shapiro-Wilk NO es un error: es precisamente la buena práctica recomendada antes de elegir la prueba estadística."},
+
+// ══════════════════════════ PREGUNTAS ADICIONALES — MISMO ESTILO, BASADAS EN LAS DIAPOSITIVAS ══════════════════════════
+
+// Cl.13 · Introducción a Estudios de Caso
+{mod:"13",type:"multi",s:"Características clave",q:"Según Yin (2014), ¿cuáles de las siguientes son características clave de un estudio de caso? (Selecciona todas las que apliquen)",o:["Límites difusos (el contexto forma parte del objeto de estudio)","Pregunta de tipo 'cómo' o 'por qué'","Generalización estadística sobre una población amplia","Fenómeno contemporáneo estudiado en su contexto real"],a:[0,1,3],e:"Las características clave son límites difusos, preguntas de tipo cómo/por qué, y el estudio de un fenómeno contemporáneo en contexto real. La generalización en estudios de caso es TEÓRICA, no estadística."},
+{mod:"13",type:"single",s:"Clasificación por motivación",q:"Un estudio usa el fenómeno de NASA GeneLab como medio para entender cómo funciona la ciencia abierta reproducible, sin que GeneLab en sí sea el interés central. Según Stake (1995), este caso es de tipo:",o:["Intrínseco","Instrumental","Colectivo puro, sin propósito instrumental","Explicativo"],a:[1],e:"Cuando el caso se usa como medio para entender algo más general (y no porque el caso en sí sea fascinante), se clasifica como instrumental según Stake (1995)."},
+{mod:"13",type:"single",s:"Clasificación por propósito",q:"Yin (2014) clasifica los estudios de caso por PROPÓSITO en:",o:["Intrínseco / instrumental / colectivo","Exploratorio / descriptivo / explicativo","Único / múltiple","Holístico / embebido"],a:[1],e:"La clasificación de Yin (2014) por propósito es: exploratorio, descriptivo y explicativo. Las otras clasificaciones corresponden a Stake (por motivación) y a la matriz de diseño de Yin (por número de casos y unidades de análisis)."},
+
+// Cl.14 · Diseño y Planificación (Estudios de Caso)
+{mod:"14",type:"multi",s:"Componentes del diseño",q:"¿Cuáles de los siguientes son componentes del diseño de un estudio de caso según Yin (2014)? (Selecciona todas las que apliquen)",o:["Preguntas de investigación","Proposiciones","Presupuesto detallado del proyecto de investigación","Unidad de análisis"],a:[0,1,3],e:"Los 5 componentes de Yin son: preguntas de investigación, proposiciones, unidad de análisis, lógica de vinculación y criterios de interpretación. El presupuesto no forma parte de este diseño metodológico."},
+{mod:"14",type:"single",s:"Selección del caso",q:"\"Elegí esta empresa porque el gerente me dio acceso\" es una justificación de selección de caso que la clase considera:",o:["Válida siempre que el gerente firme un acuerdo de confidencialidad","No válida, porque la selección en estudios de caso debe ser intencional y documentada metodológicamente","Válida únicamente en estudios de tipo exploratorio","Válida solo si la empresa es una multinacional reconocida"],a:[1],e:"La clase señala explícitamente que esta justificación NO es válida: la selección del caso debe ser intencional (no por mera conveniencia de acceso) y documentarse con una justificación metodológica real."},
+{mod:"14",type:"multi",s:"Protocolo",q:"¿Cuáles de los siguientes son elementos del protocolo del estudio de caso según Runeson & Höst (2009)? (Selecciona todas las que apliquen)",o:["Fuentes de evidencia planificadas","Procedimientos de campo","Presupuesto detallado en moneda local","Validez y ética"],a:[0,1,3],e:"Los 7 elementos del protocolo incluyen fuentes de evidencia, procedimientos de campo, y validez y ética, entre otros. El presupuesto detallado no forma parte de los elementos definidos por Runeson & Höst."},
+
+// Cl.15 · Recolección de Datos (Estudios de Caso)
+{mod:"15",type:"multi",s:"Fuentes de evidencia",q:"Según Yin (2014), ¿cuáles de las siguientes son fuentes de evidencia válidas en un estudio de caso? (Selecciona todas las que apliquen)",o:["Entrevistas","Observación","Encuestas estandarizadas de opinión pública","Documentos"],a:[0,1,3],e:"Las 4 fuentes de evidencia de Yin (2014) son: entrevistas, observación, documentos y artefactos/métricas. Las encuestas estandarizadas de opinión pública no forman parte de esta clasificación."},
+{mod:"15",type:"single",s:"Regla de oro",q:"La 'regla de oro' de la recolección de datos en estudios de caso, presentada en la clase, establece que:",o:["Se debe usar siempre una sola fuente para mantener la consistencia del análisis","Nunca una sola fuente; se recomienda al menos dos, idealmente tres o más, para poder triangular","Basta con analizar documentos oficiales de la organización","Las entrevistas siempre son suficientes por sí solas como única fuente"],a:[1],e:"La regla de oro establece que nunca se debe depender de una sola fuente; se recomienda al menos dos, idealmente tres o más, para poder triangular los hallazgos."},
+{mod:"15",type:"multi",s:"Triangulación",q:"¿Cuáles de los siguientes son tipos de triangulación según Denzin (1978), presentados en la clase? (Selecciona todas las que apliquen)",o:["De datos","De investigadores","Estadística (basada en p-valores)","Teórica"],a:[0,1,3],e:"Los 4 tipos de triangulación de Denzin (1978) son: de datos, de investigadores, metodológica y teórica. No existe una 'triangulación estadística basada en p-valores' entre los tipos definidos."},
+
+// Cl.16 · Análisis y Reporte (Estudios de Caso, etiquetado A16)
+{mod:"A16",type:"single",s:"Codificación axial",q:"Agrupar los códigos abiertos en categorías más amplias e identificar relaciones entre ellos corresponde, según Strauss & Corbin (1990), a la codificación:",o:["Abierta","Axial","Selectiva","Temática"],a:[1],e:"La codificación AXIAL agrupa los códigos abiertos en categorías más amplias e identifica relaciones entre ellos, siendo la segunda de las tres fases de Strauss & Corbin (1990)."},
+{mod:"A16",type:"multi",s:"Audit trail",q:"¿Cuáles de los siguientes son elementos de un buen audit trail (cadena de evidencia) según la clase? (Selecciona todas las que apliquen)",o:["Base de datos del caso","Registro de codificación","Presupuesto detallado del proyecto de investigación","Bitácora analítica"],a:[0,1,3],e:"Los elementos del audit trail incluyen: base de datos del caso, registro de codificación, bitácora analítica, registro de member checking y registro de análisis rival. El presupuesto no forma parte de estos elementos."},
+{mod:"A16",type:"single",s:"Confiabilidad entre codificadores",q:"Un valor de Cohen's Kappa (κ) ≥ 0.80 entre codificadores se considera:",o:["Insuficiente y requiere revisión inmediata","Sustancial pero mejorable","Excelente","Irrelevante para estudios de caso cualitativos"],a:[2],e:"Un valor de κ ≥ 0.80 se considera excelente; κ entre 0.60-0.79 es sustancial; κ < 0.60 necesita revisión."},
+
+// Cl.17 · Estudios de Caso: Problemas Reales
+{mod:"17",type:"multi",s:"Casos reales",q:"¿Cuáles de los siguientes son los 4 casos reales analizados en la Clase 17? (Selecciona todas las que apliquen)",o:["Ericsson — Bug Assignment Automatizado","GitHub Copilot en Equipos Ágiles","Netflix — Migración a microservicios","NASA GeneLab — Ciencia Abierta como Caso Colectivo"],a:[0,1,3],e:"Los 4 casos son: Ericsson, GitHub Copilot en equipos ágiles, NASA GeneLab, y la adopción de IA en empresas latinoamericanas. El caso de Netflix no forma parte de esta clase."},
+{mod:"17",type:"single",s:"Caso Ericsson",q:"En el caso Ericsson (Jonsson et al., 2022), a pesar de una precisión técnica superior al 80%, el modelo de ML para asignación de bugs fue rechazado por los ingenieros principalmente debido a:",o:["Fallas técnicas recurrentes del servidor de despliegue","Falta de explicabilidad y confianza en el razonamiento del modelo","El alto costo de licenciamiento del software de ML","La ausencia total de pruebas piloto antes del despliegue"],a:[1],e:"A pesar de la alta precisión técnica, factores organizacionales y de confianza —especialmente la falta de explicabilidad del modelo— fueron determinantes en el rechazo por parte de los ingenieros."},
+{mod:"17",type:"single",s:"Copilot y cycle time",q:"Según el estudio GitClear (2024) citado en la Clase 17, el uso de asistentes de IA se asoció con una reducción del cycle time de pull requests de:",o:["10%","18.5%","31.8%","50%"],a:[2],e:"El estudio GitClear 2024 encontró una reducción del 31.8% en el cycle time de los pull requests asociada al uso de IA."},
+
+// Introducción a la Experimentación en IS (E13)
+{mod:"E13",type:"single",s:"Definición de experimento",q:"Según Wohlin et al. (2012), un experimento en IS se distingue de un estudio de caso o de un análisis MSR principalmente porque:",o:["Usa siempre una muestra más grande de sujetos","Manipula activamente al menos una variable independiente bajo condiciones controladas","Se publica exclusivamente en revistas de alto impacto","Nunca requiere ningún tipo de análisis estadístico"],a:[1],e:"La diferencia definitoria, según Wohlin et al. (2012), es la manipulación activa de al menos una variable independiente bajo condiciones controladas; ni el estudio de caso ni el MSR manipulan variables."},
+{mod:"E13",type:"multi",s:"Tipos de experimento",q:"¿Cuáles de los siguientes son tipos de experimentos en IS presentados en la clase? (Selecciona todas las que apliquen)",o:["Experimento controlado","Cuasi-experimento","Estudio de caso embebido","Estudio de campo"],a:[0,1,3],e:"Los 4 tipos de experimentos presentados son: controlado, cuasi-experimento, estudio de campo y experimento de simulación. El 'estudio de caso embebido' no es un tipo de experimento, sino un diseño de la matriz de Yin para estudios de caso."},
+{mod:"E13",type:"single",s:"Caso TDD",q:"El debate de más de 10 años sobre si TDD mejora la calidad del software se resolvió principalmente mediante:",o:["Encuestas de opinión aplicadas a la comunidad de desarrolladores","Experimentos controlados que midieron densidad de defectos y productividad con desarrolladores reales","Análisis exclusivo de publicaciones en foros técnicos especializados","Nunca llegó a resolverse y sigue siendo un debate completamente abierto"],a:[1],e:"El debate se resolvió mediante experimentos controlados (Juristo & Vegas 2003, Müller & Hagner 2002, Madeyski 2010) que midieron densidad de defectos y productividad con desarrolladores reales."},
+
+// Diseño y Planificación del Experimento en IS (E14)
+{mod:"E14",type:"multi",s:"GQM",q:"Según la plantilla GQM (Basili et al., 1994), ¿cuáles de los siguientes elementos forman parte de la estructura del objetivo? (Selecciona todas las que apliquen)",o:["Analizar [objeto]","Con el propósito de [intención]","Presupuesto total asignado al estudio","Con respecto a [aspecto de calidad]"],a:[0,1,3],e:"La estructura GQM incluye: analizar [objeto], con el propósito de [intención], con respecto a [aspecto de calidad], desde el punto de vista de [perspectiva], en el contexto de [entorno]. El presupuesto no forma parte de esta estructura."},
+{mod:"E14",type:"single",s:"HARKing",q:"Formular la hipótesis de un experimento DESPUÉS de observar los datos, presentándola como si hubiera sido definida a priori, se conoce como:",o:["p-hacking","HARKing","Contrabalanceo","Triangulación teórica"],a:[1],e:"HARKing (Hypothesizing After Results are Known) es formular la hipótesis después de ver los datos, presentándola como si hubiera sido definida antes de recolectarlos."},
+{mod:"E14",type:"multi",s:"Tipos de variables",q:"En un experimento sobre TDD vs. desarrollo tradicional, ¿cuáles de las siguientes afirmaciones sobre variables son correctas? (Selecciona todas las que apliquen)",o:["'TDD vs tradicional' es la variable independiente","La densidad de defectos es la variable dependiente","El lenguaje de programación, fijo para todos los grupos, es una variable dependiente","La experiencia previa del desarrollador, no controlada, es una variable de confusión"],a:[0,1,3],e:"TDD vs tradicional es la VI; densidad de defectos es la VD; experiencia previa no controlada es variable de confusión. El lenguaje de programación fijo para todos es una variable CONTROLADA, no dependiente."},
+
+// Cl.16 · Ejecución y Recolección en Experimentos
+{mod:"16",type:"single",s:"Kitchenham et al. 2009",q:"Según Kitchenham et al. (2009), ¿qué porcentaje de 103 experimentos IS publicados describía el procedimiento con suficiente detalle para ser replicado?",o:["10%","31%","50%","69%"],a:[1],e:"Kitchenham et al. (2009) encontraron que solo el 31% de los 103 experimentos analizados describía el procedimiento con suficiente detalle para ser replicado."},
+{mod:"16",type:"multi",s:"Control del efecto Hawthorne",q:"¿Cuáles de las siguientes son estrategias de control del efecto Hawthorne mencionadas en la clase? (Selecciona todas las que apliquen)",o:["Período de habituación","Cegamiento parcial","Aumentar el número de observadores humanos presentes en la sesión","Medición no intrusiva mediante logs automáticos"],a:[0,1,3],e:"Las estrategias de control son: período de habituación, cegamiento parcial, entorno natural y medición no intrusiva. Aumentar observadores humanos presentes iría en contra del objetivo de reducir el efecto Hawthorne."},
+{mod:"16",type:"single",s:"Amenazas a la validez",q:"Que el grupo control 'aprenda' técnicas del grupo tratamiento y las aplique corresponde a la amenaza a la validez de:",o:["Instrumentación","Difusión del tratamiento","Historia","Maduración"],a:[1],e:"La contaminación entre grupos, donde el grupo control aprende del grupo tratamiento, corresponde a la amenaza de Difusión del tratamiento."},
+
+// Cl.18 · Experimentación en IS: Problemas Reales
+{mod:"18",type:"single",s:"Caso TDD (Erdogmus et al.)",q:"En el experimento de Erdogmus, Morisio & Favaro (2005) sobre TDD, la prueba estadística reportada fue Mann-Whitney U = 412 con un p-valor de:",o:[".001",".031",".10",".50"],a:[1],e:"El resultado reportado fue Mann-Whitney U = 412, p = .031, con un tamaño del efecto r = .38 (mediano)."},
+{mod:"18",type:"multi",s:"Copilot: Peng vs Imai",q:"Respecto a la aparente contradicción entre Peng et al. (2023) e Imai (2022) sobre GitHub Copilot, ¿cuáles de las siguientes afirmaciones son correctas? (Selecciona todas las que apliquen)",o:["Peng et al. (2023) encontró que el grupo Copilot completó la tarea 43.8% más rápido","Imai (2022) encontró que Copilot introduce más vulnerabilidades (CWE) en el código generado","Ambos resultados son necesariamente incompatibles, por lo que uno de los dos estudios está mal diseñado","La operacionalización de la variable dependiente determina qué aspecto del fenómeno se observa"],a:[0,1,3],e:"Ambos hallazgos son correctos y no son incompatibles: midieron variables dependientes distintas (velocidad vs. vulnerabilidades). La lección clave es que la operacionalización de la VD determina qué aspecto del fenómeno se observa, no que uno de los estudios esté mal diseñado."},
+{mod:"18",type:"single",s:"Caso F Prime",q:"En el experimento de F Prime (NASA), la tasa de recuperación exitosa ante fallos fue de 99.7% frente a 94.2% del sistema legado, tras aplicar:",o:["Encuestas de satisfacción a los ingenieros de vuelo","Inyección de fallos controlada (fault injection testing) durante 10,000 horas simuladas","Un análisis exclusivamente cualitativo del código fuente","Una sola prueba de regresión manual antes del lanzamiento"],a:[1],e:"Se aplicó inyección de fallos controlada (fault injection testing) durante 10,000 horas simuladas de operación en condiciones marcianas, obteniendo 99.7% de recuperación exitosa para F Prime frente a 94.2% del sistema legado."}
+];
+
+// ── ESTADO ──
+let filteredQ = [...Q];
+let currentFilter = "Todas";
+let quizQ = [];
+let quizIdx = 0;
+let quizScore = 0;
+let quizAnswered = false;
+let quizSelection = new Set();
+
+function badgeCls(mod){
+  return mod === "EXAM" ? "badge badge-exam" : "badge badge-"+mod;
+}
+function badgeLabel(mod){
+  return {
+    "EXAM":"📝 Examen Real",
+    "13":"Cl.13 · Introd. Caso",
+    "14":"Cl.14 · Diseño Caso",
+    "15":"Cl.15 · Recolección Caso",
+    "16":"Cl.16 · Ejecución Exp.",
+    "E13":"Introd. Experimentación",
+    "E14":"Diseño Experimento",
+    "A16":"Cl.16 · Análisis Caso",
+    "17":"Cl.17 · Casos Reales",
+    "18":"Cl.18 · Exper. Reales"
+  }[mod] || mod;
+}
+
+function renderBrowse(){
+  const container = document.getElementById("cards-container");
+  container.innerHTML = "";
+  const letters = ["A","B","C","D"];
+
+  filteredQ.forEach((q) => {
+    const globalIdx = Q.indexOf(q);
+    const card = document.createElement("div");
+    card.className = "q-card";
+    card.id = "card-" + globalIdx;
+
+    const isMulti = q.type === "multi";
+    const opts = q.o.map((opt, i) => `
+      <div class="option" id="opt-${globalIdx}-${i}" onclick="${isMulti ? `toggleMulti(${globalIdx},${i})` : `browseAnswer(${globalIdx},${i})`}">
+        ${isMulti ? `<span class="check"></span>` : `<span class="letter">${letters[i]}.</span>`}
+        <span>${isMulti ? letters[i]+'. ' : ''}${opt}</span>
+      </div>`).join("");
+
+    const checkBtn = isMulti ? `<button class="check-btn" id="checkbtn-${globalIdx}" onclick="checkMulti(${globalIdx})">Comprobar respuesta</button>` : "";
+
+    card.innerHTML = `
+      <div class="q-meta">
+        <span class="${badgeCls(q.mod)}">${badgeLabel(q.mod)}${q.num ? ' · #'+q.num : ''}</span>
+        <span class="badge badge-type">${isMulti ? 'Selección múltiple' : 'Respuesta única'}</span>
+        <span class="badge badge-diap">${q.s}</span>
+      </div>
+      <div class="q-text">${q.q}</div>
+      <div class="options">${opts}</div>
+      ${checkBtn}
+      <div class="explanation" id="exp-${globalIdx}"></div>
+    `;
+    container.appendChild(card);
+  });
+
+  document.getElementById("showing-count").textContent = filteredQ.length;
+}
+
+function browseAnswer(qi, selected){
+  const q = Q[qi];
+  const isCorrect = q.a.includes(selected) && q.a.length===1;
+  for(let i=0;i<q.o.length;i++){
+    const el = document.getElementById(`opt-${qi}-${i}`);
+    if(!el) continue;
+    el.classList.add("locked");
+    if(q.a.includes(i)) el.classList.add("correct");
+    else if(i === selected) el.classList.add("wrong");
+  }
+  const expEl = document.getElementById(`exp-${qi}`);
+  expEl.classList.add("visible", isCorrect ? "correct-exp" : "wrong-exp");
+  expEl.innerHTML = `<strong>${isCorrect ? "✓ Correcto" : "✗ Incorrecto"}</strong> — ${q.e}`;
+}
+
+function toggleMulti(qi, idx){
+  const el = document.getElementById(`opt-${qi}-${idx}`);
+  if(el.classList.contains("locked")) return;
+  el.classList.toggle("selected");
+}
+
+function checkMulti(qi){
+  const q = Q[qi];
+  const selected = [];
+  for(let i=0;i<q.o.length;i++){
+    const el = document.getElementById(`opt-${qi}-${i}`);
+    if(el.classList.contains("selected")) selected.push(i);
+    el.classList.add("locked");
+  }
+  const correctSet = new Set(q.a);
+  const selectedSet = new Set(selected);
+  const isCorrect = correctSet.size===selectedSet.size && [...correctSet].every(v=>selectedSet.has(v));
+
+  for(let i=0;i<q.o.length;i++){
+    const el = document.getElementById(`opt-${qi}-${i}`);
+    el.classList.remove("selected");
+    if(correctSet.has(i) && selectedSet.has(i)) el.classList.add("correct");
+    else if(correctSet.has(i) && !selectedSet.has(i)) el.classList.add("missed");
+    else if(!correctSet.has(i) && selectedSet.has(i)) el.classList.add("wrong");
+  }
+  const btn = document.getElementById(`checkbtn-${qi}`);
+  if(btn) btn.style.display = "none";
+  const expEl = document.getElementById(`exp-${qi}`);
+  expEl.classList.add("visible", isCorrect ? "correct-exp" : "wrong-exp");
+  expEl.innerHTML = `<strong>${isCorrect ? "✓ Correcto" : "✗ Incorrecto"}</strong> — ${q.e}`;
+}
+
+function setFilter(mod){
+  currentFilter = mod;
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.toggle("active", b.dataset.mod === mod));
+  if(mod === "quiz"){ startQuiz("Todas"); return; }
+  filteredQ = mod === "Todas" ? [...Q] : Q.filter(q=>q.mod===mod);
+  renderBrowse();
+}
+
+function updateCounts(){
+  document.getElementById("total-count").textContent = Q.length;
+  document.getElementById("exam-count").textContent = Q.filter(q=>q.mod==="EXAM").length;
+  const ids = {"13":"c13-count","14":"c14-count","15":"c15-count","16":"c16-count","E13":"cE13-count","E14":"cE14-count","A16":"cA16-count","17":"c17-count","18":"c18-count"};
+  Object.keys(ids).forEach(code=>{
+    document.getElementById(ids[code]).textContent = Q.filter(q=>q.mod===code).length;
+  });
+}
+
+function startQuiz(mod){
+  quizQ = shuffle(mod === "Todas" ? [...Q] : Q.filter(q=>q.mod===mod));
+  quizIdx = 0; quizScore = 0; quizAnswered = false; quizSelection = new Set();
+  document.getElementById("browse-mode").classList.add("hidden");
+  document.getElementById("quiz-mode").classList.add("active");
+  document.getElementById("result-screen").classList.remove("visible");
+  document.getElementById("q-total").textContent = quizQ.length;
+  renderQuizCard();
+}
+
+function renderQuizCard(){
+  if(quizIdx >= quizQ.length){ showResult(); return; }
+  const q = quizQ[quizIdx];
+  quizAnswered = false; quizSelection = new Set();
+  const letters = ["A","B","C","D"];
+  const isMulti = q.type === "multi";
+
+  document.getElementById("q-current").textContent = quizIdx+1;
+  document.getElementById("q-score").textContent = quizScore;
+  const pct = quizQ.length > 0 ? Math.round((quizIdx/quizQ.length)*100) : 0;
+  document.getElementById("quiz-progress").style.width = pct+"%";
+
+  const opts = q.o.map((opt,i)=>`
+    <div class="option" id="qopt-${i}" onclick="${isMulti ? `quizToggleMulti(${i})` : `quizAnswer(${i})`}">
+      ${isMulti ? `<span class="check"></span>` : `<span class="letter">${letters[i]}.</span>`}
+      <span>${isMulti ? letters[i]+'. ' : ''}${opt}</span>
+    </div>`).join("");
+
+  const checkBtn = isMulti ? `<button class="check-btn" id="quiz-checkbtn" onclick="quizCheckMulti()">Comprobar respuesta</button>` : "";
+
+  document.getElementById("quiz-card-container").innerHTML = `
+    <div class="q-card">
+      <div class="q-meta">
+        <span class="${badgeCls(q.mod)}">${badgeLabel(q.mod)}${q.num ? ' · #'+q.num : ''}</span>
+        <span class="badge badge-type">${isMulti ? 'Selección múltiple' : 'Respuesta única'}</span>
+        <span class="badge badge-diap">${q.s}</span>
+      </div>
+      <div class="q-text">${q.q}</div>
+      <div class="options">${opts}</div>
+      ${checkBtn}
+      <div class="explanation" id="quiz-exp"></div>
+    </div>`;
+
+  document.getElementById("quiz-nav").style.display = "none";
+}
+
+function quizAnswer(selected){
+  if(quizAnswered) return;
+  quizAnswered = true;
+  const q = quizQ[quizIdx];
+  const isCorrect = q.a.includes(selected) && q.a.length===1;
+  if(isCorrect) quizScore++;
+  for(let i=0;i<q.o.length;i++){
+    const el = document.getElementById(`qopt-${i}`);
+    el.classList.add("locked");
+    if(q.a.includes(i)) el.classList.add("correct");
+    else if(i === selected) el.classList.add("wrong");
+  }
+  finishQuizFeedback(q, isCorrect);
+}
+
+function quizToggleMulti(idx){
+  const el = document.getElementById(`qopt-${idx}`);
+  if(el.classList.contains("locked")) return;
+  el.classList.toggle("selected");
+}
+
+function quizCheckMulti(){
+  if(quizAnswered) return;
+  quizAnswered = true;
+  const q = quizQ[quizIdx];
+  const selected = [];
+  for(let i=0;i<q.o.length;i++){
+    const el = document.getElementById(`qopt-${i}`);
+    if(el.classList.contains("selected")) selected.push(i);
+    el.classList.add("locked");
+  }
+  const correctSet = new Set(q.a);
+  const selectedSet = new Set(selected);
+  const isCorrect = correctSet.size===selectedSet.size && [...correctSet].every(v=>selectedSet.has(v));
+  if(isCorrect) quizScore++;
+  for(let i=0;i<q.o.length;i++){
+    const el = document.getElementById(`qopt-${i}`);
+    el.classList.remove("selected");
+    if(correctSet.has(i) && selectedSet.has(i)) el.classList.add("correct");
+    else if(correctSet.has(i) && !selectedSet.has(i)) el.classList.add("missed");
+    else if(!correctSet.has(i) && selectedSet.has(i)) el.classList.add("wrong");
+  }
+  const btn = document.getElementById("quiz-checkbtn");
+  if(btn) btn.style.display = "none";
+  finishQuizFeedback(q, isCorrect);
+}
+
+function finishQuizFeedback(q, isCorrect){
+  document.getElementById("q-score").textContent = quizScore;
+  const expEl = document.getElementById("quiz-exp");
+  expEl.classList.add("visible", isCorrect ? "correct-exp" : "wrong-exp");
+  expEl.innerHTML = `<strong>${isCorrect ? "✓ Correcto" : "✗ Incorrecto"}</strong> — ${q.e}`;
+  const nav = document.getElementById("quiz-nav");
+  nav.style.display = "flex";
+  document.getElementById("btn-next").textContent = quizIdx+1 < quizQ.length ? "Siguiente →" : "Ver resultados →";
+}
+
+function nextQuizQ(){
+  quizIdx++;
+  if(quizIdx >= quizQ.length){ showResult(); return; }
+  renderQuizCard();
+}
+
+function showResult(){
+  const pct = quizQ.length > 0 ? Math.round((quizScore/quizQ.length)*100) : 0;
+  document.getElementById("quiz-card-container").innerHTML = "";
+  document.getElementById("quiz-nav").style.display = "none";
+  document.getElementById("quiz-progress").style.width = "100%";
+  document.getElementById("result-pct").textContent = pct+"%";
+  document.getElementById("result-sub").textContent = `${quizScore} de ${quizQ.length} preguntas correctas`;
+  const msgs = ["Sigue practicando. Repasa bien las preguntas de selección múltiple, son las más exigentes.","Vas por buen camino. Repasa los temas donde fallaste.","Muy bien. Dominas bastante bien el estilo de examen real.","¡Excelente! Estás muy bien preparado para el parcial."];
+  document.getElementById("result-msg").textContent = msgs[pct>=90?3:pct>=70?2:pct>=50?1:0];
+  document.getElementById("result-screen").classList.add("visible");
+}
+
+function restartQuiz(){
+  document.getElementById("result-screen").classList.remove("visible");
+  startQuiz(currentFilter === "quiz" ? "Todas" : currentFilter);
+}
+
+function exitQuiz(){
+  document.getElementById("quiz-mode").classList.remove("active");
+  document.getElementById("browse-mode").classList.remove("hidden");
+  document.querySelectorAll(".filter-btn").forEach(b=>b.classList.toggle("active", b.dataset.mod === "Todas"));
+  currentFilter = "Todas";
+  filteredQ = [...Q];
+  renderBrowse();
+}
+
+function shuffle(arr){
+  let a=[...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+document.getElementById("filter-bar").addEventListener("click", e => {
+  const btn = e.target.closest(".filter-btn");
+  if(btn) setFilter(btn.dataset.mod);
+});
+
+updateCounts();
+renderBrowse();
+</script>
+</body>
+</html>

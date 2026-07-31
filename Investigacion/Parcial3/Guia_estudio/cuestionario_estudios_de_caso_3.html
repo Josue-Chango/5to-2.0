@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cuestionario: Estudios de Caso en IS</title>
+<style>
+  :root{
+    --navy:#1E2761;
+    --ice:#CADCFC;
+    --white:#FFFFFF;
+    --green:#1F9D55;
+    --red:#D64550;
+    --gray:#6B7280;
+    --bg:#F7F8FC;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    background:var(--bg);
+    color:#1a1a2e;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:24px 16px 60px;}
+  header{
+    background:var(--navy);
+    color:white;
+    padding:28px 20px;
+    border-radius:14px;
+    margin-bottom:20px;
+  }
+  header h1{margin:0 0 6px;font-size:22px;}
+  header p{margin:0;color:var(--ice);font-size:14px;}
+
+  .panel{
+    background:white;
+    border-radius:14px;
+    padding:20px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.08);
+    margin-bottom:16px;
+  }
+
+  .deck-choice{display:flex;flex-direction:column;gap:10px;}
+  .deck-btn{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:16px;border-radius:10px;border:2px solid #e5e7eb;
+    background:white;cursor:pointer;font-size:15px;font-weight:600;
+    transition:.15s;text-align:left;
+  }
+  .deck-btn:hover{border-color:var(--navy);}
+  .deck-btn span.count{font-weight:400;color:var(--gray);font-size:13px;}
+
+  .progress-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:13px;color:var(--gray);}
+  .progress-bar{height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden;margin-bottom:18px;}
+  .progress-fill{height:100%;background:var(--navy);transition:width .25s;}
+
+  .qtext{font-size:17px;font-weight:600;margin-bottom:16px;line-height:1.4;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt{
+    text-align:left;
+    padding:13px 14px;
+    border-radius:10px;
+    border:2px solid #e5e7eb;
+    background:white;
+    cursor:pointer;
+    font-size:14.5px;
+    line-height:1.4;
+    transition:.15s;
+  }
+  .opt:hover:not(.disabled){border-color:var(--navy);background:#f5f6ff;}
+  .opt.correct{border-color:var(--green);background:#eafaf0;color:#0f5e2e;font-weight:600;}
+  .opt.incorrect{border-color:var(--red);background:#fdecee;color:#8c1f29;font-weight:600;}
+  .opt.disabled{cursor:default;}
+
+  .explain{
+    margin-top:14px;
+    padding:12px 14px;
+    background:#f1f3fb;
+    border-radius:10px;
+    font-size:13.5px;
+    color:#33344a;
+    display:none;
+    line-height:1.5;
+  }
+  .source-tag{
+    display:inline-block;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.03em;
+    color:var(--navy);
+    background:var(--ice);
+    padding:3px 8px;
+    border-radius:6px;
+    margin-bottom:10px;
+  }
+
+  .nav-row{display:flex;justify-content:flex-end;margin-top:18px;}
+  .btn{
+    padding:11px 22px;
+    border-radius:9px;
+    border:none;
+    background:var(--navy);
+    color:white;
+    font-size:14.5px;
+    font-weight:600;
+    cursor:pointer;
+  }
+  .btn:disabled{background:#c7cbe0;cursor:not-allowed;}
+  .btn.secondary{background:white;color:var(--navy);border:2px solid var(--navy);}
+
+  .result-score{
+    text-align:center;
+    padding:10px 0 6px;
+  }
+  .result-score .big{font-size:48px;font-weight:800;color:var(--navy);}
+  .result-score .label{font-size:14px;color:var(--gray);}
+
+  .review-item{
+    border-bottom:1px solid #eee;
+    padding:14px 0;
+  }
+  .review-item:last-child{border-bottom:none;}
+  .review-q{font-weight:600;font-size:14px;margin-bottom:6px;}
+  .review-a{font-size:13.5px;margin:2px 0;}
+  .review-a.ok{color:#0f5e2e;}
+  .review-a.bad{color:#8c1f29;}
+  .review-exp{font-size:12.5px;color:var(--gray);margin-top:4px;}
+  .badge-icon{display:inline-block;width:18px;}
+
+  .top-controls{display:flex;gap:8px;margin-bottom:14px;}
+  .small-link{
+    font-size:13px;color:var(--gray);cursor:pointer;text-decoration:underline;
+    background:none;border:none;padding:0;
+  }
+  .hidden{display:none;}
+  footer-note{font-size:12px;color:var(--gray);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>📚 Cuestionario: Estudios de Caso en IS</h1>
+    <p id="headerSub">Unidad 3 · Estudios de Caso y Experimentación en Ingeniería de Software</p>
+  </header>
+
+  <!-- SELECTION SCREEN -->
+  <div class="panel" id="selectionScreen">
+    <h3 style="margin-top:0;">Elige qué quieres estudiar</h3>
+    <div class="deck-choice">
+      <button class="deck-btn" onclick="startQuiz('13')">
+        Clase 13 · Introducción a Estudios de Caso <span class="count" id="count13"></span>
+      </button>
+      <button class="deck-btn" onclick="startQuiz('14')">
+        Clase 14 · Diseño y Planificación del Estudio de Caso <span class="count" id="count14"></span>
+      </button>
+      <button class="deck-btn" onclick="startQuiz('15')">
+        Clase 15 · Recolección de Datos en Estudios de Caso <span class="count" id="count15"></span>
+      </button>
+      <button class="deck-btn" onclick="startQuiz('16')">
+        Clase 16 · Ejecución y Recolección en Experimentos IS <span class="count" id="count16"></span>
+      </button>
+      <button class="deck-btn" onclick="startQuiz('E13')">
+        Introducción a la Experimentación en IS <span class="count" id="countE13"></span>
+      </button>
+      <button class="deck-btn" onclick="startQuiz('E14')">
+        Diseño y Planificación del Experimento en IS <span class="count" id="countE14"></span>
+      </button>
+      <button class="deck-btn" onclick="startQuiz('A16')">
+        Clase 16 · Análisis y Reporte de Estudios de Caso IS <span class="count" id="countA16"></span>
+      </button>
+      <button class="deck-btn" onclick="startQuiz('17')">
+        Clase 17 · Estudios de Caso en IS: Problemas Reales <span class="count" id="count17"></span>
+      </button>
+      <button class="deck-btn" onclick="startQuiz('18')">
+        Clase 18 · Experimentación en IS: Problemas Reales <span class="count" id="count18"></span>
+      </button>
+      <button class="deck-btn" onclick="startQuiz('all')">
+        Las 9 clases mezcladas (repaso completo) <span class="count" id="countAll"></span>
+      </button>
+    </div>
+    <p style="font-size:12.5px;color:var(--gray);margin-top:14px;">
+      Las preguntas se presentan en orden aleatorio cada vez que inicias. Recibirás retroalimentación inmediata con explicación tras cada respuesta.
+    </p>
+  </div>
+
+  <!-- QUIZ SCREEN -->
+  <div class="panel hidden" id="quizScreen">
+    <div class="top-controls">
+      <button class="small-link" onclick="backToMenu()">← Volver al menú</button>
+    </div>
+    <div class="progress-row">
+      <span id="progressText">Pregunta 1 de 20</span>
+      <span id="scoreText">Aciertos: 0</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+
+    <div class="source-tag" id="sourceTag">CLASE 13</div>
+    <div class="qtext" id="qtext"></div>
+    <div class="options" id="options"></div>
+    <div class="explain" id="explain"></div>
+
+    <div class="nav-row">
+      <button class="btn" id="nextBtn" disabled onclick="nextQuestion()">Siguiente →</button>
+    </div>
+  </div>
+
+  <!-- RESULT SCREEN -->
+  <div class="panel hidden" id="resultScreen">
+    <div class="result-score">
+      <div class="big" id="finalScore">0/0</div>
+      <div class="label" id="finalLabel">¡Cuestionario completado!</div>
+    </div>
+    <div class="nav-row" style="justify-content:center;gap:10px;margin-bottom:10px;">
+      <button class="btn secondary" onclick="backToMenu()">Volver al menú</button>
+      <button class="btn" onclick="restartSame()">Repetir este set</button>
+    </div>
+  </div>
+
+  <div class="panel hidden" id="reviewScreen">
+    <h3 style="margin-top:0;">Repaso de preguntas falladas</h3>
+    <div id="reviewList"></div>
+  </div>
+</div>
+
+<script>
+// ============ QUESTION BANKS ============
+const Q13 = [
+{q:"Según Yin (2014), ¿cuándo es el estudio de caso la estrategia de investigación idónea?",
+ o:["Cuando el investigador tiene poco control sobre los eventos y el foco está en fenómenos contemporáneos en contexto real","Cuando se necesita generalización estadística sobre una población grande","Cuando se pueden aleatorizar equipos y aislar variables fácilmente","Cuando el fenómeno ocurrió en el pasado y ya no existen rastros"],
+ c:0, e:"Yin (2014, p.2) define el estudio de caso como idóneo cuando hay poco control sobre los eventos y el foco está en fenómenos contemporáneos en su contexto real."},
+{q:"En el escenario inicial de la clase (empresa ecuatoriana que adopta metodologías ágiles), ¿por qué no se puede responder la pregunta con un experimento controlado?",
+ o:["Porque los experimentos son ilegales en investigación de software","Porque no se puede aleatorizar equipos reales, aislar variables en producción ni reproducir el contexto organizacional exacto","Porque los experimentos solo aplican a las ciencias naturales","Porque las empresas ecuatorianas no permiten ningún tipo de investigación"],
+ c:1, e:"El escenario plantea tres limitaciones clave del experimento controlado en este contexto: no se pueden aleatorizar equipos reales, no se pueden aislar variables en producción, y no se puede reproducir el contexto organizacional exacto."},
+{q:"¿Cuál es la definición canónica de estudio de caso en IS según Runeson & Höst (2009)?",
+ o:["Una encuesta aplicada a una muestra representativa de desarrolladores","Una investigación empírica que examina un fenómeno IS contemporáneo dentro de su contexto real, especialmente cuando los límites entre fenómeno y contexto no son claramente evidentes","Un experimento de laboratorio replicado en condiciones controladas","Un caso de uso documentado en notación UML"],
+ c:1, e:"Runeson & Höst (2009) definen el estudio de caso como una investigación empírica de un fenómeno IS contemporáneo en su contexto real, donde los límites entre fenómeno y contexto no son claramente evidentes."},
+{q:"¿Cuál es la distinción importante señalada en la clase respecto a 'caso de uso'?",
+ o:["Un caso de uso en UML es un sinónimo exacto de un estudio de caso de investigación","Un caso de uso en UML NO es un estudio de caso de investigación; el estudio de caso es una metodología empírica completa","Un caso de uso siempre debe preceder a un estudio de caso en cualquier proyecto","Los casos de uso reemplazan a los estudios de caso en proyectos ágiles"],
+ c:1, e:"La clase aclara explícitamente que un caso de uso en UML no equivale a un estudio de caso de investigación, ya que este último es una metodología empírica completa."},
+{q:"Entre las características clave de un estudio de caso, ¿qué significa 'límites difusos'?",
+ o:["Que el investigador no puede definir el alcance del proyecto","Que el contexto forma parte del objeto de estudio","Que las preguntas de investigación cambian constantemente","Que los datos recolectados son poco confiables"],
+ c:1, e:"La característica de 'límites difusos' se refiere a que el contexto forma parte del objeto de estudio, es decir, no se puede separar claramente el fenómeno de su entorno."},
+{q:"¿Qué tipo de preguntas responde típicamente un estudio de caso, según la característica 'Pregunta cómo o por qué'?",
+ o:["Preguntas de tipo '¿cuántos?' para cuantificar variables","Preguntas de 'de qué manera' y 'por qué razón', no 'cuántos'","Preguntas binarias de sí/no exclusivamente","Preguntas que requieren validación estadística previa"],
+ c:1, e:"El estudio de caso se enfoca en 'de qué manera' y 'por qué razón' ocurre un fenómeno, no en cuantificarlo con preguntas tipo '¿cuántos?'."},
+{q:"Según la clasificación de Yin (2014) por propósito, ¿qué objetivo persigue un estudio de caso EXPLORATORIO?",
+ o:["Establecer relaciones causales o mecanismos precisos","Retratar el fenómeno en detalle exhaustivo","Generar hipótesis para futura investigación","Confirmar una teoría ya consolidada estadísticamente"],
+ c:2, e:"El estudio de caso exploratorio busca generar hipótesis para investigación futura, respondiendo a la pregunta '¿qué está pasando aquí?'."},
+{q:"Un estudio de caso que busca responder '¿Por qué falló la adopción de Scrum en ese proyecto?' corresponde al tipo:",
+ o:["Descriptivo","Exploratorio","Explicativo","Intrínseco"],
+ c:2, e:"Este ejemplo corresponde al tipo explicativo, que busca establecer relaciones causales o mecanismos respondiendo 'por qué/cómo ocurrió X'."},
+{q:"Según la clasificación de Stake (1995) por motivación, un caso 'intrínseco' se caracteriza porque:",
+ o:["Sirve para entender algo más general, como DevOps en la industria","El caso es interesante en sí mismo, como un proyecto NASA específico","Se usan múltiples casos para comparar y generalizar","Se basa exclusivamente en datos cuantitativos"],
+ c:1, e:"El caso intrínseco es interesante en sí mismo (ejemplo: un proyecto NASA específico), a diferencia del instrumental (entender algo más general) o el colectivo (múltiples casos)."},
+{q:"Según Stake (1995), ¿cómo se denomina el tipo de caso que usa DevOps en la industria como medio para entender algo más general?",
+ o:["Intrínseco","Instrumental","Colectivo","Explicativo"],
+ c:1, e:"El caso instrumental usa el fenómeno estudiado (DevOps) como medio para entender algo más amplio, no porque el caso en sí sea el interés central."},
+{q:"Si tu pregunta de investigación empieza con 'cuánto' o 'qué porcentaje', ¿qué método recomienda la regla práctica de la clase?",
+ o:["Estudio de caso explicativo","Encuesta o experimento","Estudio de caso exploratorio","Investigación histórica"],
+ c:1, e:"La regla práctica indica que si la pregunta empieza con 'cuánto' o 'qué porcentaje' se debe usar encuesta o experimento; si empieza con 'cómo' o 'por qué', estudio de caso."},
+{q:"En la matriz de diseños de Yin (2014), un diseño 'holístico' se refiere a:",
+ o:["Una unidad de análisis (el caso se analiza globalmente)","Múltiples unidades de análisis dentro del mismo caso","Múltiples casos analizados simultáneamente","Un caso estudiado solo a través de encuestas"],
+ c:0, e:"El diseño holístico implica una sola unidad de análisis, es decir, el caso se analiza de manera global, sin subdividirlo en subunidades."},
+{q:"Un estudio que analiza 'un proyecto, con subunidades (equipos, módulos)' corresponde, en la matriz de Yin, a un diseño:",
+ o:["Caso único holístico","Caso único embebido","Casos múltiples holístico","Casos múltiples embebido"],
+ c:1, e:"Cuando se analiza un solo caso pero con múltiples unidades de análisis (subunidades como equipos o módulos), se trata de un caso único embebido."},
+{q:"¿Cuál de las siguientes NO es una razón válida, según la clase, para elegir un diseño de caso único?",
+ o:["El caso es extremo, único o revelador","Es un caso crítico que puede confirmar o refutar una teoría","Es un caso longitudinal que se estudia en el tiempo","Se busca representatividad estadística de una población amplia"],
+ c:3, e:"La representatividad estadística no es un criterio del estudio de caso (que usa muestreo intencional, no estadístico); las razones válidas para caso único son: extremo/único/revelador, crítico, o longitudinal."},
+{q:"El estudio de Lwakatare et al. (2016) sobre adopción de DevOps en 5 empresas finlandesas es un ejemplo de:",
+ o:["Caso único holístico","Caso múltiple embebido","Caso múltiple holístico con comparación cruzada","Estudio experimental controlado"],
+ c:2, e:"Lwakatare et al. (2016) usaron un diseño de caso múltiple holístico, comparando cinco empresas finlandesas de forma cruzada para identificar patrones comunes."},
+{q:"¿Cuál es la primera de las 5 fases del proceso de Runeson & Höst (2009) para estudios de caso en IS?",
+ o:["Recolección","Preparación","Diseño","Análisis"],
+ c:2, e:"La primera fase es Diseño, donde se define el objetivo, la pregunta de investigación, se selecciona el caso y se establecen proposiciones."},
+{q:"¿En cuál fase del proceso de Runeson & Höst se realiza la 'triangulación desde el primer día' y se registran grabaciones y notas de campo?",
+ o:["Preparación","Recolección","Análisis","Reporte"],
+ c:1, e:"La fase de Recolección incluye el uso de múltiples fuentes, el registro de evidencia (grabaciones, notas de campo, bitácoras) y la triangulación desde el inicio."},
+{q:"La construcción de una 'cadena de evidencia' (audit trail) y la codificación de datos cualitativos ocurre en la fase de:",
+ o:["Diseño","Preparación","Análisis","Reporte"],
+ c:2, e:"En la fase de Análisis se codifican los datos cualitativos, se construye la cadena de evidencia (audit trail) y se realiza el análisis dentro del caso y entre casos."},
+{q:"¿Qué se recomienda discutir explícitamente en la fase de Reporte de un estudio de caso?",
+ o:["Únicamente los resultados positivos del estudio","Las amenazas a la validez y la generalización","El presupuesto total del proyecto de investigación","Los datos personales de todos los participantes sin anonimizar"],
+ c:1, e:"En la fase de Reporte se debe discutir explícitamente las amenazas a la validez y la generalización de los hallazgos."},
+{q:"Según la 'tabla de decisión rápida' de la clase, ¿qué método se recomienda para responder '¿TDD mejora la calidad?'?",
+ o:["Estudio de caso explicativo","Experimento controlado","Encuesta","Estudio de caso exploratorio"],
+ c:1, e:"Para una pregunta que busca establecer una relación causal medible como '¿TDD mejora la calidad?', se recomienda un experimento controlado."},
+{q:"En el ejemplo NASA GeneLab, ¿qué tipo de diseño de estudio de caso representa?",
+ o:["Caso múltiple holístico","Caso único embebido, con experimentos en microgravedad como unidad principal y múltiples organismos como subunidades","Encuesta longitudinal a astronautas","Caso intrínseco sin proposiciones"],
+ c:1, e:"GeneLab se presenta como un caso único embebido: los experimentos en microgravedad (ISS) son la unidad principal, mientras múltiples organismos y condiciones funcionan como subunidades."},
+{q:"¿Cuántas publicaciones se generaron reutilizando los datos abiertos de GeneLab hasta 2024, según la clase?",
+ o:["8 publicaciones","92 publicaciones","800 publicaciones","250 publicaciones"],
+ c:1, e:"Según la clase, se generaron 92 publicaciones reutilizando datos abiertos de GeneLab al 2024 (Nucleic Acids Research, 2025)."},
+{q:"El proyecto JunoCam de la NASA se presenta como un ejemplo de:",
+ o:["Caso único embebido","Caso múltiple (citizen science), con miles de ciudadanos como unidades de análisis","Experimento controlado de laboratorio","Investigación puramente histórica"],
+ c:1, e:"JunoCam se describe como un caso múltiple de ciencia ciudadana, donde miles de ciudadanos actúan como unidades de análisis bajo un protocolo de recolección compartido globalmente."},
+{q:"El caso de Hurricane Ida en la NASA ilustra principalmente un estudio de caso de tipo:",
+ o:["Transversal (un solo punto en el tiempo)","Longitudinal, con seguimiento antes/durante/después del evento","Experimental con grupo de control","Exclusivamente cuantitativo sin fuentes cualitativas"],
+ c:1, e:"Hurricane Ida es un caso longitudinal, ya que se realiza seguimiento antes, durante y después del huracán usando múltiples fuentes de datos."},
+{q:"Según Rico (2024), ¿cuál es una de las 4 fallas críticas comunes al diseñar y reportar estudios de caso en IS?",
+ o:["Usar demasiadas fuentes de evidencia en simultáneo","No clasificar el caso como exploratorio, descriptivo o explicativo","Incluir demasiadas citas bibliográficas","Realizar el estudio en más de una empresa"],
+ c:1, e:"Una de las fallas identificadas por Rico (2024) es no clasificar el caso (exploratorio, descriptivo o explicativo), lo que hace imposible evaluar si el diseño es adecuado para la pregunta."},
+{q:"¿Cuál es la consecuencia de 'ignorar las amenazas a la validez' al reportar un estudio de caso, según Rico (2024)?",
+ o:["El lector no puede calibrar la confiabilidad de los hallazgos","El estudio se vuelve automáticamente más generalizable","Se reduce el tiempo de revisión por pares","No tiene ninguna consecuencia relevante"],
+ c:0, e:"Si no se reportan sesgos del investigador, subjetividad o acceso limitado, el lector no puede calibrar qué tan confiables son los hallazgos del estudio."},
+{q:"¿Cuál es la 'regla de oro' mencionada al cierre de la clase 13 sobre un buen estudio de caso?",
+ o:["Debe ser revisado únicamente por el propio investigador","Debe permitir al lector entender el caso tan bien como el investigador y juzgar si las conclusiones son transferibles a su contexto","Debe evitar mencionar el contexto organizacional por confidencialidad","Debe basarse exclusivamente en datos cuantitativos para ser válido"],
+ c:1, e:"La regla de oro establece que un buen estudio de caso permite al lector comprender el caso tan bien como el investigador y evaluar la transferibilidad de las conclusiones a su propio contexto."}
+];
+
+const Q14 = [
+{q:"Según Yin (2014, p.27), ¿qué es el 'diseño de la investigación' en un estudio de caso?",
+ o:["Un trámite burocrático opcional antes de iniciar el trabajo de campo","La lógica que conecta los datos que serán recolectados y las conclusiones extraídas con las preguntas iniciales del estudio","Un documento que solo se necesita al final del estudio para el reporte","La selección aleatoria de participantes para garantizar representatividad"],
+ c:1, e:"Yin (2014, p.27) define el diseño de investigación como la lógica que conecta los datos recolectados y las conclusiones extraídas con las preguntas iniciales del estudio."},
+{q:"En el escenario de apertura de la clase 14 (investigador sin diseño), ¿cuál es el diagnóstico principal de sus problemas?",
+ o:["Falta de presupuesto para el estudio","Ausencia de diseño","Exceso de entrevistas realizadas","Falta de acceso a la empresa"],
+ c:1, e:"El diagnóstico es 'ausencia de diseño': sin un mapa metodológico claro, el investigador no sabe qué evidencia es relevante ni cómo conectar los datos con la pregunta de investigación."},
+{q:"¿Cuántos componentes del diseño de un estudio de caso propone Yin (2014) según la clase?",
+ o:["3","5","7","10"],
+ c:1, e:"Yin (2014) propone 5 componentes del diseño: preguntas de investigación, proposiciones, unidad de análisis, lógica de vinculación y criterios de interpretación."},
+{q:"¿Cuál de los 5 componentes del diseño de Yin responde a la pregunta '¿Qué es mi caso?'?",
+ o:["Proposiciones","Unidad de análisis","Lógica de vinculación","Criterios de interpretación"],
+ c:1, e:"La unidad de análisis es el componente que responde '¿Qué es mi caso?' (por ejemplo, un equipo de desarrollo de una empresa mediana)."},
+{q:"¿Qué componente del diseño responde a la pregunta '¿Cómo sé si mis hallazgos son válidos?'?",
+ o:["Preguntas de investigación","Proposiciones","Lógica de vinculación","Criterios de interpretación"],
+ c:3, e:"Los criterios de interpretación responden a cómo se sabe si los hallazgos son válidos, por ejemplo mediante triangulación de fuentes o member checking."},
+{q:"Según Rico (ICSE 2024), ¿qué componentes del diseño de Yin son los más frecuentemente omitidos en estudios de caso IS publicados?",
+ o:["Componentes 1 y 2 (preguntas y proposiciones)","Componentes 2 a 5 (proposiciones, unidad de análisis, lógica de vinculación y criterios de interpretación)","Únicamente el componente 5 (criterios de interpretación)","Ninguno; todos se reportan adecuadamente"],
+ c:1, e:"Rico (ICSE 2024) señala que los componentes 2 al 5 son los más frecuentemente omitidos, y que un diseño sin proposiciones tiende a convertirse en descripción sin explicación."},
+{q:"¿Qué NO es una proposición en un estudio de caso, según la clase?",
+ o:["Una afirmación orientadora derivada de la teoría o la práctica","Una hipótesis estadística del tipo H₀/H₁","Una guía sobre qué observar e interpretar","Una herramienta para evitar recolectar 'todo' sin criterio"],
+ c:1, e:"La clase aclara explícitamente que una proposición NO es una hipótesis estadística (H₀/H₁), sino una afirmación orientadora derivada de teoría o práctica."},
+{q:"'Los equipos que usan CI/CD reportan menos conflictos de integración' es un ejemplo de proposición:",
+ o:["Basada en teoría","Basada en práctica","Exploratoria (sin proposición)","Estadística formal"],
+ c:1, e:"Este es un ejemplo de proposición basada en práctica, derivada de la observación empírica del comportamiento de los equipos, no de una teoría formal."},
+{q:"Según la regla de Runeson & Höst (2009) mencionada en la clase, ¿cuándo puede un estudio operar sin proposición?",
+ o:["Nunca, toda investigación debe tener al menos una proposición","Solo si el estudio es descriptivo","Si el estudio es exploratorio, pero debe justificarlo explícitamente","Solo si el investigador tiene más de 10 años de experiencia"],
+ c:2, e:"Si el estudio es descriptivo o explicativo, debe tener al menos una proposición; si es exploratorio, puede operar sin ella pero debe justificarlo explícitamente."},
+{q:"En la selección del caso, ¿por qué NO es válida la justificación 'elegí esta empresa porque el gerente me dio acceso'?",
+ o:["Porque en estudios de caso se muestrea estadísticamente, no intencionalmente","Porque no constituye una justificación metodológica; la selección debe ser intencional y documentada","Porque está prohibido trabajar con gerentes en estudios de caso","Porque siempre se debe seleccionar más de una empresa"],
+ c:1, e:"En estudios de caso la selección es intencional, no estadística, y debe documentarse con una justificación metodológica real, no por mera conveniencia de acceso."},
+{q:"Lwakatare et al. (2016) seleccionaron 5 empresas finlandesas de diferentes tamaños para obtener:",
+ o:["Representatividad estadística de la población de empresas de software","Variación intencional en el contexto, no representatividad estadística","El menor costo posible de investigación","Acceso exclusivo a empresas grandes únicamente"],
+ c:1, e:"La selección buscó variación intencional en el contexto (diferentes tamaños de empresa), no representatividad estadística, alineado con el principio de muestreo intencional."},
+{q:"Según Runeson & Höst (2009), ¿qué es el protocolo del estudio de caso?",
+ o:["Un resumen ejecutivo opcional para el patrocinador del estudio","El documento central de la fase de planificación","Un formulario que se llena solo si el caso es múltiple","El informe final que se entrega al concluir el estudio"],
+ c:1, e:"El protocolo es definido como el documento central de la fase de planificación, según Runeson & Höst (2009)."},
+{q:"¿Cuál de los siguientes NO es uno de los 7 elementos del protocolo del estudio de caso mencionados en la clase?",
+ o:["Fuentes de evidencia planificadas","Procedimientos de campo","Validez y ética","Presupuesto detallado en moneda local"],
+ c:3, e:"Los 7 elementos del protocolo son: contexto y objetivos, preguntas/proposiciones, unidades de análisis, fuentes de evidencia, procedimientos de campo, estrategia de análisis, y validez y ética. El presupuesto no forma parte de esta lista."},
+{q:"En el protocolo del estudio de caso, ¿qué se define en el elemento 'Unidad(es) de análisis'?",
+ o:["Qué documentos éticos se firmarán","Qué se estudia y a qué nivel (equipo / proyecto / organización)","Cómo se codificarán los datos cualitativos","El cronograma exacto de visitas"],
+ c:1, e:"El elemento de unidad(es) de análisis define qué se estudia y a qué nivel: equipo, proyecto u organización."},
+{q:"¿Qué describe el principio ético de 'Beneficencia' según Runeson et al. (2012)?",
+ o:["Que ningún participante es obligado a participar","Que el estudio no debe causar daño al caso","Que los participantes saben qué se hará con los datos","Que pueden retirarse del estudio en cualquier momento"],
+ c:1, e:"La Beneficencia establece que el estudio no debe causar daño al caso (la organización o los participantes)."},
+{q:"El principio ético de 'Reversibilidad' en estudios de caso IS se refiere a que:",
+ o:["Los datos pueden eliminarse y volver a recolectarse sin problema","Los participantes pueden retirarse del estudio en cualquier momento","El investigador puede cambiar de caso si el primero no funciona","Los resultados pueden revertirse si no son favorables a la empresa"],
+ c:1, e:"La Reversibilidad significa que los participantes pueden retirarse del estudio en cualquier momento, sin consecuencias negativas."},
+{q:"¿Cuál de estos documentos protege los datos sensibles de la empresa en un estudio de caso?",
+ o:["Carta de autorización","Consentimiento informado","Acuerdo de confidencialidad (NDA)","Protocolo de anonimización"],
+ c:2, e:"El acuerdo de confidencialidad (NDA) es el documento ético que protege específicamente los datos sensibles de la empresa."},
+{q:"¿Qué documento ético define cómo se protegerá la identidad de los participantes?",
+ o:["Carta de autorización","Protocolo de anonimización","Consentimiento informado","Acuerdo de confidencialidad"],
+ c:1, e:"El protocolo de anonimización es el documento que define específicamente cómo se protegerá la identidad de los participantes."},
+{q:"Según la clase, ¿qué riesgo real corre un investigador que omite los pasos éticos del acceso al caso?",
+ o:["Ninguno, la ética es solo un requisito formal sin consecuencias prácticas","Puede perder el acceso al caso a mitad del estudio o invalidar sus datos éticamente","Recibirá automáticamente una sanción económica del comité institucional","Solo afecta la publicación final, no el desarrollo del estudio"],
+ c:1, e:"La clase advierte que omitir estos pasos puede hacer que el investigador pierda el acceso al caso a mitad del estudio o invalide sus datos desde el punto de vista ético."},
+{q:"¿Qué es el OSDMP de la NASA, según se presenta en la clase?",
+ o:["Un software exclusivo para análisis estadístico de big data","El equivalente NASA al protocolo de un estudio de caso, que documenta objetivos, datos y métodos antes de iniciar la investigación","Un tipo de telescopio usado en misiones espaciales","Una metodología de desarrollo ágil de software"],
+ c:1, e:"El OSDMP (Open Science and Data Management Plan) es presentado como el equivalente NASA al protocolo de un estudio de caso en IS, documentando objetivos, datos y métodos antes de iniciar."},
+{q:"¿Qué busca prevenir el pre-registro del diseño del estudio antes de recolectar datos (NASA / Open Science M5)?",
+ o:["El HARKing (Hypothesizing After Results are Known)","El uso de fuentes múltiples de evidencia","La triangulación de datos cualitativos","El acceso a la organización estudiada"],
+ c:0, e:"El pre-registro busca prevenir el HARKing (formular hipótesis después de conocer los resultados), aumentando la credibilidad y reduciendo el sesgo."},
+{q:"¿Cuál sería el equivalente IS al pre-registro del diseño en OSF (Open Science Framework), según la clase?",
+ o:["Firmar el NDA antes de cualquier entrevista","Registrar el protocolo del estudio antes del trabajo de campo","Publicar los resultados finales en una revista indexada","Realizar una encuesta piloto a los participantes"],
+ c:1, e:"El equivalente IS propuesto es registrar el protocolo del estudio de caso en una plataforma como OSF antes de iniciar el trabajo de campo."},
+{q:"¿Cuántos investigadores tuvieron acceso a los mismos datos originales en el ejemplo de GeneLab presentado en la clase 14?",
+ o:["Más de 50","Más de 200","Más de 800","Más de 5000"],
+ c:2, e:"Según la clase, más de 800 investigadores tuvieron acceso a los mismos datos originales de GeneLab, lo que derivó en 92 publicaciones independientes."},
+{q:"¿Cuál de los siguientes tipos de validez en estudios de caso (Yin, 2014) responde a la pregunta '¿Mido lo que digo que mido?'?",
+ o:["Validez de constructo","Validez interna","Validez externa","Confiabilidad"],
+ c:0, e:"La validez de constructo responde a si efectivamente se está midiendo lo que se dice medir, y se planifica mediante múltiples fuentes de evidencia y member checking."},
+{q:"La validez interna en un estudio de caso se planifica desde el diseño principalmente mediante:",
+ o:["Descripción densa del contexto y casos múltiples","Análisis rival de explicaciones alternativas y lógica de vinculación explícita","Protocolo documentado y base de datos del caso","Consentimiento informado de los participantes"],
+ c:1, e:"La validez interna (¿mis explicaciones son correctas?) se planifica mediante el análisis de explicaciones rivales alternativas y una lógica de vinculación explícita."},
+{q:"¿Qué tipo de validez responde a la pregunta '¿Mis hallazgos son transferibles?'?",
+ o:["Validez de constructo","Validez interna","Validez externa","Confiabilidad"],
+ c:2, e:"La validez externa se refiere a la transferibilidad de los hallazgos, y se planifica mediante descripción densa del contexto y casos múltiples para replicación."},
+{q:"La confiabilidad en un estudio de caso responde a la pregunta:",
+ o:["¿Mido lo que digo que mido?","¿Mis explicaciones son correctas?","¿Mis hallazgos son transferibles?","¿Otro investigador llegaría al mismo lugar?"],
+ c:3, e:"La confiabilidad responde si otro investigador, siguiendo el mismo protocolo, llegaría a conclusiones similares; se planifica con protocolo documentado, base de datos del caso y audit trail."},
+{q:"Según Rico (ICSE 2024), ¿cuál es un error común sobre la 'validez' en los estudios de caso publicados?",
+ o:["Discutir la validez con demasiado detalle en el cuerpo del paper","Mencionar 'validez' en el abstract pero no discutirla en el cuerpo del paper","Incluir tablas de amenazas anticipadas en el protocolo","Comparar las cuatro validez entre sí de forma exhaustiva"],
+ c:1, e:"Rico (ICSE 2024) identifica como error común mencionar la validez en el abstract sin discutirla realmente en el cuerpo del artículo, tratándola como un apéndice decorativo en vez de parte del proceso."}
+];
+
+const Q15 = [
+{q:"Según Yin (2014, p.119), ¿cuál es la fortaleza distintiva de los estudios de caso respecto a la evidencia?",
+ o:["La posibilidad de usar múltiples fuentes de evidencia","La capacidad de aleatorizar variables como en un experimento","La rapidez con la que se pueden completar comparado con una encuesta","El bajo costo de recolección frente a otros métodos"],
+ c:0, e:"Yin (2014, p.119) señala que la fortaleza distintiva de los estudios de caso es la posibilidad de usar múltiples fuentes de evidencia."},
+{q:"En el escenario del 'Problema de la Fuente Única', ¿qué puede fallar si el investigador solo entrevista al líder técnico?",
+ o:["El líder técnico nunca tiene información relevante que aportar","El líder puede contar la versión oficial, no ver la práctica diaria del equipo, y los documentos o datos de deployment podrían contradecirlo","Las entrevistas a líderes técnicos están prohibidas en estudios de caso IS","No hay ningún riesgo si el líder es honesto"],
+ c:1, e:"Usar una sola fuente (el líder técnico) implica el riesgo de recibir solo la versión oficial, no ver la práctica diaria del equipo, y que documentos o métricas de deployment contradigan lo afirmado."},
+{q:"¿Cuál es la 'regla de oro' de la recolección de datos en estudios de caso, según la clase 15?",
+ o:["Usar siempre una sola fuente para mantener consistencia","Nunca una sola fuente; siempre al menos dos, idealmente tres o más, para poder triangular","Limitarse exclusivamente a entrevistas estructuradas","Recolectar datos únicamente al final del estudio"],
+ c:1, e:"La regla de oro establece que nunca se debe usar una sola fuente; se recomienda al menos dos, e idealmente tres o más, para poder triangular."},
+{q:"¿Cuáles son las 4 fuentes de evidencia de Yin (2014) presentadas en la clase?",
+ o:["Encuestas, experimentos, entrevistas y observación","Entrevistas, observación, documentos y artefactos/métricas","Documentos, encuestas, métricas y member checking","Observación, triangulación, saturación y entrevistas"],
+ c:1, e:"Las 4 fuentes de evidencia de Yin (2014) son: entrevistas, observación, documentos y artefactos/métricas."},
+{q:"¿Cuál es la principal limitación señalada de las entrevistas como fuente de evidencia?",
+ o:["Son costosas en tiempo y presencia del investigador","Están sesgadas por la memoria y el rol del entrevistado, aunque ofrecen riqueza cualitativa","Requieren interpretación técnica avanzada","Pueden ser incompletas o demasiado formales"],
+ c:1, e:"Las entrevistas ofrecen riqueza cualitativa, pero están sesgadas por la memoria y el rol de quien responde."},
+{q:"Según la clase, ¿cuál es la fortaleza principal de la observación como fuente de evidencia?",
+ o:["Es la fuente más económica y rápida de aplicar","Brinda autenticidad, mostrando lo que el equipo hace y no solo lo que dice","Es siempre más objetiva que los artefactos del sistema","No requiere consentimiento de los participantes"],
+ c:1, e:"La observación aporta autenticidad porque muestra el comportamiento real en contexto (lo que hacen, no solo lo que dicen), aunque es costosa en tiempo y presencia."},
+{q:"¿Qué principio establece Runeson & Höst (2009) respecto a la elección de fuentes de evidencia?",
+ o:["Las fuentes se eligen en el protocolo, no se improvisan durante el trabajo de campo","Las fuentes deben elegirse exclusivamente durante el trabajo de campo según la conveniencia","Solo se puede usar una fuente por fase del estudio","Las fuentes deben cambiar cada semana para evitar sesgos"],
+ c:0, e:"Runeson & Höst (2009) establecen que las fuentes de evidencia se eligen y planifican en el protocolo, no se improvisan durante el trabajo de campo."},
+{q:"¿Por qué se recomienda la entrevista SEMIESTRUCTURADA como instrumento central en estudios de caso IS?",
+ o:["Porque es totalmente rígida y facilita la comparación estadística","Porque combina un guión orientador con libertad de explorar, logrando un balance ideal entre profundidad y comparabilidad","Porque elimina la necesidad de transcribir las entrevistas","Porque solo requiere preguntas de sí/no"],
+ c:1, e:"La entrevista semiestructurada combina un guión orientador con libertad para explorar temas inesperados, logrando un balance ideal frente a la estructurada (rígida) y la no estructurada (difícil de comparar)."},
+{q:"Según las reglas prácticas de entrevistas de la clase, ¿qué se debe evitar como pregunta principal?",
+ o:["Preguntas abiertas que inviten a describir procesos","Preguntas de sí/no como preguntas principales","Preguntas de profundización con ejemplos concretos","Preguntas de contraste entre el antes y el ahora"],
+ c:1, e:"Una de las reglas prácticas es nunca hacer preguntas de sí/no como preguntas principales, ya que limitan la riqueza de la respuesta."},
+{q:"¿Dentro de cuánto tiempo se recomienda transcribir una entrevista, según la clase, para preservar el contexto?",
+ o:["Dentro de la primera semana","Dentro de las 24 horas","Dentro del primer mes","No hay un plazo recomendado"],
+ c:1, e:"La clase recomienda transcribir dentro de las 24 horas posteriores a la entrevista para preservar el contexto."},
+{q:"¿Cuál es la duración máxima recomendada por sesión de entrevista según la clase?",
+ o:["15-20 minutos","30-45 minutos","60-90 minutos","Más de 2 horas"],
+ c:2, e:"La clase recomienda un máximo de 60-90 minutos por sesión de entrevista."},
+{q:"En la 'anatomía de una guía de entrevista IS', ¿qué se hace en el Bloque 2 (Preguntas principales)?",
+ o:["Se establece el rol del participante en el equipo","Se formulan preguntas directamente vinculadas a las preguntas de investigación y proposiciones del protocolo","Se agradece al participante y se cierra la sesión","Se presenta el consentimiento informado"],
+ c:1, e:"El Bloque 2 (30-40 min) contiene las preguntas principales, directamente vinculadas a las preguntas de investigación y proposiciones del protocolo."},
+{q:"¿Qué tipo de observación implica que el investigador se integra al equipo, como en investigación-acción o etnografía?",
+ o:["Observación no participante","Observación participante","Observación estructurada","Observación documental"],
+ c:1, e:"La observación participante implica que el investigador se integra al equipo, propia de la investigación-acción o la etnografía."},
+{q:"¿Cuándo es más apropiado usar observación NO participante, según la tabla de la clase?",
+ o:["En reuniones de equipo, demos y stand-ups, donde el investigador observa sin intervenir","Únicamente en entrevistas individuales","En procesos de codificación de datos cualitativos","En la fase de member checking"],
+ c:0, e:"La observación no participante (el investigador observa sin intervenir) es apropiada en reuniones de equipo, demos y stand-ups."},
+{q:"¿Qué se entiende por 'incidentes críticos' en una sesión de observación?",
+ o:["Errores cometidos por el investigador durante la observación","Momentos donde algo fue diferente a lo esperado","Fallas técnicas en la grabación de la sesión","Conflictos legales con la organización estudiada"],
+ c:1, e:"Los incidentes críticos son momentos registrados durante la observación donde algo resultó diferente a lo esperado."},
+{q:"¿Qué revelan típicamente los 'tickets/issues' (Jira, GitHub Issues) como documentos en un estudio de caso IS?",
+ o:["Conocimiento formalizado vs. conocimiento real","Prioridades reales, deuda técnica y conflictos","Cultura de calidad y dinámica de revisión","Cómo el equipo procesa los fallos"],
+ c:1, e:"Según la tabla de análisis documental, los tickets/issues revelan prioridades reales, deuda técnica y conflictos dentro del equipo."},
+{q:"¿Por qué se recomienda triangular los documentos oficiales con observación o entrevistas?",
+ o:["Porque los documentos oficiales siempre son falsos","Porque los documentos oficiales pueden diferir de la práctica real","Porque los documentos no tienen ningún valor como evidencia","Porque la ley exige verificar todo documento con una entrevista"],
+ c:1, e:"Los documentos oficiales pueden diferir de la práctica real (lo que 'se dice' que se hace vs. lo que realmente ocurre), por eso se recomienda triangular con observación o entrevistas."},
+{q:"Según Denzin (1978, revisión 2024), ¿qué es la triangulación en investigación?",
+ o:["Usar exclusivamente datos cuantitativos para validar hallazgos","Usar múltiples perspectivas para confirmar, enriquecer o cuestionar los hallazgos","Repetir la misma entrevista tres veces al mismo participante","Triplicar el tamaño de la muestra estadística"],
+ c:1, e:"La triangulación, según Denzin (1978, revisión 2024), consiste en usar múltiples perspectivas para confirmar, enriquecer o cuestionar los hallazgos de la investigación."},
+{q:"El ejemplo 'Entrevistas + commits + observación' corresponde al tipo de triangulación:",
+ o:["De datos","Metodológica","De investigadores","Teórica"],
+ c:0, e:"Combinar entrevistas, commits y observación es un ejemplo de triangulación de datos, que consiste en recolectar desde múltiples fuentes."},
+{q:"Cuando dos investigadores codifican las mismas transcripciones de forma independiente y luego comparan resultados, se trata de triangulación:",
+ o:["De datos","Metodológica","De investigadores","Teórica"],
+ c:2, e:"La triangulación de investigadores implica que múltiples investigadores codifican los mismos datos para luego comparar resultados, como en el ejemplo de 2 investigadores codificando transcripciones."},
+{q:"Interpretar los datos desde la teoría de difusión de innovaciones y la teoría de equipos simultáneamente es un ejemplo de triangulación:",
+ o:["De datos","Metodológica","De investigadores","Teórica"],
+ c:3, e:"La triangulación teórica consiste en interpretar los datos desde múltiples marcos teóricos, como en el ejemplo de combinar la teoría de difusión de innovaciones con la teoría de equipos."},
+{q:"Según la evidencia de Schlunegger et al. (2024) citada en la clase, ¿cuál es el enfoque más sólido para aumentar la credibilidad de los hallazgos en estudios de caso?",
+ o:["Usar únicamente fuentes cualitativas","La triangulación metodológica, combinando fuentes cualitativas y cuantitativas","Aumentar el número de participantes sin diversificar fuentes","Reducir el número de fuentes para simplificar el análisis"],
+ c:1, e:"Schlunegger et al. (2024) concluyen que la triangulación metodológica —combinar fuentes cualitativas y cuantitativas— es el enfoque más sólido para aumentar la credibilidad de los hallazgos."},
+{q:"Según Glaser & Strauss (1967), aplicado en IS por Runeson et al. (2012), ¿cuándo se alcanza la saturación de datos?",
+ o:["Cuando se completa un número fijo predeterminado de entrevistas","Cuando las nuevas fuentes de datos ya no aportan información nueva que cambie o enriquezca el análisis","Cuando el investigador decide arbitrariamente detener la recolección","Cuando se alcanza el presupuesto máximo asignado al estudio"],
+ c:1, e:"La saturación se alcanza cuando las nuevas fuentes de datos ya no aportan información nueva que cambie o enriquezca el análisis (Glaser & Strauss, 1967; aplicado en IS por Runeson et al., 2012)."},
+{q:"¿Cuántas entrevistas se consideran un mínimo razonable para un caso único con múltiples roles, según Runeson et al. (2012)?",
+ o:["1-3 entrevistas","6-12 entrevistas","20-30 entrevistas","No existe ningún mínimo razonable"],
+ c:1, e:"Runeson et al. (2012) sugieren un mínimo razonable de 6-12 entrevistas para un caso único con múltiples roles."},
+{q:"En un estudio de caso IS con acceso limitado, ¿qué se recomienda hacer respecto a la saturación, según la clase?",
+ o:["Ignorar el concepto de saturación por completo","Documentar explícitamente cuántos datos se recolectaron y por qué se detuvo la recolección","Detener la recolección únicamente cuando se agote el presupuesto","Continuar recolectando datos indefinidamente sin importar el acceso"],
+ c:1, e:"Cuando el acceso al caso es limitado, la saturación es un ideal; lo importante es documentar explícitamente cuántos datos se recolectaron y por qué se detuvo la recolección."},
+{q:"¿Qué es el 'member checking' según la clase 15?",
+ o:["Un proceso de revisión de currículums de los participantes","Devolver los hallazgos preliminares a los participantes para que validen, corrijan o complementen la interpretación del investigador","Un método para seleccionar al líder del equipo a entrevistar","Una técnica exclusiva para validar datos cuantitativos"],
+ c:1, e:"El member checking consiste en devolver los hallazgos preliminares a los participantes del caso para que validen, corrijan o complementen la interpretación del investigador."},
+{q:"¿Cuál es el límite ético importante del member checking, según la clase?",
+ o:["El investigador cede completamente el control del análisis al participante","El member checking valida la interpretación, pero el investigador mantiene la autonomía analítica; el participante confirma o cuestiona los hechos, no las conclusiones teóricas","Solo se puede aplicar a participantes con cargos directivos","Debe realizarse antes de iniciar la recolección de datos"],
+ c:1, e:"El límite ético es que el member checking valida la interpretación sin ceder el control del análisis: el investigador mantiene la autonomía analítica, mientras el participante confirma o cuestiona los hechos, no las conclusiones teóricas."},
+{q:"En el ejemplo NASA GeneLab/OSDR de la clase 15, ¿qué representan los '800 investigadores' que analizan los mismos datos?",
+ o:["Un riesgo de duplicación de esfuerzos sin valor científico","Un ejemplo de triangulación masiva, donde cada publicación es un 'punto de triangulación' adicional","Una limitación presupuestaria del proyecto GeneLab","Una fuente única de evidencia poco confiable"],
+ c:1, e:"Los 800 investigadores que analizan los mismos datos desde ángulos distintos representan una triangulación masiva; cada una de las 92 publicaciones resultantes es un 'punto de triangulación' adicional."},
+{q:"En el ejemplo de Hurricane Ida (clase 15), ¿qué tipo de observación representan los satélites MODIS y GOES?",
+ o:["Observación participante a escala continental","Observación no participante a escala continental","Entrevistas semiestructuradas remotas","Documentos gubernamentales post-evento"],
+ c:1, e:"Los satélites MODIS y GOES representan observación no participante a escala continental dentro del ejemplo de recolección multi-instrumento de Hurricane Ida."},
+{q:"Según la lección extraída del caso NASA al cierre de la clase 15, ¿de dónde viene realmente la robustez de los datos?",
+ o:["De recolectar más datos de la misma fuente","De usar exclusivamente fuentes cuantitativas","De más fuentes diferentes que convergen en el mismo hallazgo","De reducir el número de fuentes para simplificar el análisis"],
+ c:2, e:"La lección de la clase es que la robustez no viene de más datos de la misma fuente, sino de más fuentes diferentes que convergen en el mismo hallazgo."}
+];
+
+const Q16 = [
+{q:"Según Kitchenham et al. (2009) citado en la clase, ¿qué porcentaje de 103 experimentos IS publicados describía el procedimiento con suficiente detalle para ser replicado?",
+ o:["10%","31%","69%","95%"],
+ c:1, e:"Kitchenham et al. (2009) encontraron que solo el 31% de los 103 experimentos IS analizados describía el procedimiento con suficiente detalle como para ser replicado por otro investigador."},
+{q:"Según la clase, ¿por qué el 69% de experimentos IS analizados por Kitchenham et al. era irreproducible?",
+ o:["Por mala ciencia y datos fraudulentos","Por documentación deficiente del protocolo, no por mala ciencia","Porque los experimentos usaban metodologías no válidas","Porque los revisores rechazaban los detalles técnicos"],
+ c:1, e:"La clase aclara explícitamente que la irreproducibilidad del 69% se debía a documentación deficiente, no a mala ciencia."},
+{q:"¿Cuál de las siguientes NO es una de las preguntas que responde el protocolo de ejecución según la clase 16?",
+ o:["¿Quién hace qué?","¿Cómo se resguardan los datos?","¿Qué pasa si alguien abandona?","¿Cuánto cuesta el software utilizado?"],
+ c:3, e:"El protocolo de ejecución responde: quién hace qué, cómo se asignan los sujetos, qué pasa si alguien abandona, y cómo se resguardan los datos. El costo del software no forma parte de estas preguntas."},
+{q:"¿Cuál es el propósito principal de un estudio piloto antes de ejecutar el experimento real?",
+ o:["Generar datos adicionales para el análisis final","Identificar ambigüedades en las instrucciones, problemas con instrumentos y tiempos irreales","Reemplazar la necesidad de consentimiento informado","Aumentar artificialmente el tamaño de la muestra"],
+ c:1, e:"El estudio piloto (con 2-3 sujetos) sirve para identificar ambigüedades en las instrucciones, problemas con los instrumentos y tiempos irreales antes del experimento real; no se incluye en el análisis final."},
+{q:"Según la clase, ¿se debe revelar la hipótesis exacta del estudio a los participantes durante el consentimiento informado?",
+ o:["Sí, siempre es obligatorio revelarla en detalle","No necesariamente, si revelarla puede crear sesgo, aunque sí deben conocer el propósito general del estudio","Solo si el participante lo solicita por escrito","Es obligatorio revelarla únicamente al finalizar el experimento"],
+ c:1, e:"Los participantes deben conocer el propósito general del estudio, pero la hipótesis específica puede omitirse si revelarla podría generar sesgo en su comportamiento."},
+{q:"En un diseño within-subject, ¿qué se recomienda hacer con el orden de los tratamientos durante la aleatorización?",
+ o:["Aplicar siempre los tratamientos en el mismo orden para todos los sujetos","Aleatorizar el orden de los tratamientos mediante contrabalanceo","Eliminar la aleatorización, ya que no aplica a este diseño","Asignar el orden según la preferencia del participante"],
+ c:1, e:"En diseños within-subject se recomienda aleatorizar el orden de los tratamientos (contrabalanceo) para controlar efectos de orden o aprendizaje."},
+{q:"¿Cuál de las siguientes es un ejemplo de métrica automática OBJETIVA en experimentos IS, según la clase?",
+ o:["NASA-TLX (carga cognitiva percibida)","Cobertura de pruebas medida con JaCoCo o Istanbul","Cuestionario de satisfacción ad hoc","Escala de usabilidad del sistema (SUS)"],
+ c:1, e:"La cobertura de pruebas (medida con herramientas como JaCoCo o Istanbul) es un ejemplo de métrica automática objetiva, a diferencia de NASA-TLX o SUS que son instrumentos subjetivos."},
+{q:"¿Qué mide el instrumento SUS (System Usability Scale) mencionado en la clase?",
+ o:["La complejidad ciclomática del código","La usabilidad del sistema mediante 10 ítems en escala Likert","El tiempo de ejecución de las tareas","La cobertura de pruebas automatizadas"],
+ c:1, e:"El SUS es un cuestionario subjetivo de 10 ítems en escala Likert que mide la usabilidad percibida del sistema."},
+{q:"¿Qué es el 'think-aloud protocol' mencionado como técnica de observación directa?",
+ o:["Un cuestionario de satisfacción aplicado después del experimento","Una técnica donde el participante verbaliza su proceso de pensamiento mientras realiza la tarea","Un algoritmo de análisis estadístico de datos cualitativos","Un método de aleatorización de sujetos a grupos"],
+ c:1, e:"El think-aloud protocol es una técnica de observación directa en la que el participante verbaliza su proceso mientras ejecuta la tarea."},
+{q:"Según la 'regla clave' de instrumentos de recolección de la clase, ¿qué se debe combinar para triangular el efecto del tratamiento?",
+ o:["Dos métricas objetivas diferentes únicamente","Al menos una métrica objetiva y una subjetiva","Solo instrumentos de observación directa","Exclusivamente cuestionarios estandarizados"],
+ c:1, e:"La regla clave establece combinar al menos una métrica objetiva y una subjetiva para poder triangular el efecto del tratamiento."},
+{q:"¿Qué es el efecto Hawthorne en experimentos IS?",
+ o:["La mejora natural del desempeño por la práctica repetida de una tarea","Que los sujetos modifican su comportamiento al saber que están siendo observados, no por el tratamiento en sí","La contaminación de datos entre grupos experimentales","El abandono sistemático de participantes durante el estudio"],
+ c:1, e:"El efecto Hawthorne ocurre cuando los sujetos modifican su comportamiento por el hecho de saber que están siendo observados, no por el efecto del tratamiento aplicado."},
+{q:"¿Por qué el cegamiento completo (doble ciego) suele ser difícil de lograr en experimentos IS, según la clase?",
+ o:["Porque está prohibido éticamente en investigación con humanos","Porque el sujeto normalmente sabe qué técnica o herramienta está usando","Porque los experimentos IS no requieren ningún tipo de control","Porque los desarrolladores se niegan a participar en estudios ciegos"],
+ c:1, e:"En muchos experimentos IS el doble ciego no es posible porque el sujeto sabe qué técnica está usando (por ejemplo, si usa un checklist o no); esta limitación debe documentarse."},
+{q:"¿Cuál de las siguientes NO es una estrategia de control del efecto Hawthorne mencionada en la clase?",
+ o:["Período de habituación","Cegamiento parcial","Medición no intrusiva mediante logs automáticos","Aumentar el número de observadores humanos presentes"],
+ c:3, e:"Las estrategias de control mencionadas son: período de habituación, cegamiento parcial, entorno natural y medición no intrusiva (logs automáticos); aumentar observadores humanos presentes iría en contra del control del efecto Hawthorne."},
+{q:"Según la clasificación de Wohlin et al., ¿qué amenaza a la validez ocurre cuando 'nueva versión de SonarQube' se instala a mitad del experimento?",
+ o:["Maduración","Instrumentación","Historia","Mortalidad experimental"],
+ c:1, e:"El cambio del instrumento de medición entre mediciones (por ejemplo, una nueva versión de SonarQube) corresponde a la amenaza de Instrumentación."},
+{q:"¿Qué amenaza a la validez describe el hecho de que 'los sujetos mejoran con el tiempo independientemente del tratamiento'?",
+ o:["Efecto Hawthorne","Maduración","Difusión del tratamiento","Historia"],
+ c:1, e:"La Maduración se refiere a que los sujetos mejoran con el tiempo por aprendizaje natural de la tarea, independientemente del tratamiento aplicado."},
+{q:"Cuando sujetos del grupo control aprenden técnicas del grupo tratamiento y las aplican, ¿qué amenaza a la validez ocurre?",
+ o:["Instrumentación","Difusión del tratamiento","Mortalidad experimental","Historia"],
+ c:1, e:"La Difusión del tratamiento ocurre cuando los grupos contaminan sus técnicas, por ejemplo cuando el grupo control aprende del grupo tratamiento."},
+{q:"Una falla del servidor durante el experimento, que afecta los resultados, corresponde a la amenaza de:",
+ o:["Historia","Maduración","Instrumentación","Efecto Hawthorne"],
+ c:0, e:"La amenaza de Historia se refiere a un evento externo que afecta los resultados, como la falla de un servidor durante el experimento."},
+{q:"¿Cuál es el control recomendado en la clase para la amenaza de 'Mortalidad experimental'?",
+ o:["Fijar las versiones de las herramientas utilizadas","Análisis de sensibilidad y reporte de abandonos","Separar física o temporalmente los grupos","Diseño within-subject contrabalanceado"],
+ c:1, e:"Para la Mortalidad experimental (abandono de participantes) se recomienda hacer análisis de sensibilidad y reportar explícitamente los abandonos."},
+{q:"Según la clase, ¿qué tipo de datos permiten pruebas estadísticas directas y predominan en experimentos IS?",
+ o:["Datos cualitativos","Datos cuantitativos","Datos exclusivamente documentales","Datos de member checking"],
+ c:1, e:"Los datos cuantitativos, recolectados con métricas objetivas o escalas numéricas, predominan en experimentos IS y permiten pruebas estadísticas directas."},
+{q:"En el diseño mixto descrito en la clase (Creswell 2014; Wohlin et al. 2012), ¿qué combina el experimento?",
+ o:["Dos métricas cuantitativas distintas sin ningún dato cualitativo","El qué (cuantitativo) mediante el experimento y el por qué (cualitativo) mediante una entrevista breve post-tarea","Únicamente observación directa sin métricas","Solo cuestionarios subjetivos estandarizados"],
+ c:1, e:"El diseño mixto combina el qué (medido cuantitativamente en el experimento) con el por qué (explicado cualitativamente mediante una entrevista breve post-tarea), fortaleciendo la interpretación y la validez de constructo."},
+{q:"En el ejemplo de NASA GeneLab presentado en la clase 16, ¿qué elemento se publica ANTES de ejecutar el experimento biológico en la ISS?",
+ o:["Los resultados finales del experimento","El protocolo completo","El pipeline de análisis ya ejecutado","Las publicaciones derivadas del estudio"],
+ c:1, e:"En GeneLab, el protocolo completo se publica antes del experimento, siguiendo el mismo principio de pre-registro recomendado para experimentos IS."},
+{q:"¿Cuál es el equivalente IS al 'protocolo pre-registrado' de NASA GeneLab, según la clase 16?",
+ o:["Publicar el protocolo pre-registrado en OSF antes de ejecutar el experimento","Compartir los resultados únicamente con el comité de ética","Enviar el protocolo directamente a una revista científica","Guardar el protocolo en un documento privado del investigador"],
+ c:0, e:"El equivalente IS es pre-registrar el protocolo en una plataforma como OSF antes de ejecutar el experimento, replicando el modelo de NASA GeneLab."},
+{q:"Según la clase, ¿qué resultado separa a un experimento IS reproducible de uno que 'existe solo en el papel'?",
+ o:["Que tenga muchas citas bibliográficas en el artículo publicado","Que otro investigador pueda descargar los datos y el código, ejecutar el análisis y obtener los mismos resultados","Que el experimento se haya realizado en una universidad prestigiosa","Que el experimento use inteligencia artificial en su análisis"],
+ c:1, e:"La clase señala que lo que separa un experimento reproducible de uno que existe solo en el papel es que otro investigador pueda descargar datos y código, ejecutar el análisis y obtener los mismos resultados."},
+{q:"Ante el problema común de 'contaminación entre grupos' durante la ejecución, ¿qué acción recomienda la clase?",
+ o:["Fusionar los grupos control y tratamiento en uno solo","Instrucción explícita de no compartir información, y grupos en aulas separadas o sesiones diferentes","Ignorar el problema si el tamaño de muestra es grande","Eliminar el grupo control del diseño experimental"],
+ c:1, e:"Para prevenir la contaminación entre grupos se recomienda dar instrucciones explícitas de no compartir información y ubicar a los grupos en aulas separadas o sesiones diferentes."},
+{q:"¿Qué acción recomienda la clase para prevenir el 'sesgo del experimentador' durante la ejecución?",
+ o:["Permitir que el investigador improvise las instrucciones según el grupo","Protocolizar exactamente qué dice el experimentador a cada grupo, usando scripts de instrucción estandarizados","Eliminar la interacción del investigador con los participantes por completo","Asignar un experimentador distinto por cada sujeto individual"],
+ c:1, e:"Para prevenir el sesgo del experimentador se recomienda protocolizar exactamente qué dice el experimentador a cada grupo, usando scripts de instrucción estandarizados."},
+{q:"En la actividad práctica INVB12 (PRACT-EXP) de la clase, ¿qué compara el mini-experimento propuesto?",
+ o:["El tiempo de despliegue entre dos frameworks distintos","El tiempo de detección de defectos entre revisión de código manual y revisión asistida por checklist estructurado","La cobertura de pruebas entre dos lenguajes de programación","La satisfacción de usuario entre dos interfaces gráficas"],
+ c:1, e:"El mini-experimento en aula compara el tiempo de detección de defectos entre la revisión de código manual (grupo A) y la revisión asistida por checklist estructurado (grupo B)."},
+{q:"En el mini-experimento INVB12, ¿qué medida de tamaño del efecto se pide calcular en el análisis?",
+ o:["Coeficiente de correlación de Pearson","d de Cohen","Chi-cuadrado de Pearson","Coeficiente alfa de Cronbach"],
+ c:1, e:"El análisis del mini-experimento pide calcular el tamaño del efecto mediante la d de Cohen, además de comparar las medias de los dos grupos."}
+];
+
+const QE13 = [
+{q:"En el caso de apertura sobre TDD, ¿cómo se resolvió finalmente el debate de más de 10 años sobre si TDD mejora la calidad del software?",
+ o:["Mediante votación de la comunidad de desarrolladores","Con experimentos controlados que midieron densidad de defectos y productividad","Analizando exclusivamente opiniones de expertos en foros","Nunca se resolvió y sigue siendo un debate abierto"],
+ c:1, e:"El debate se resolvió mediante experimentos controlados (Juristo & Vegas 2003, Müller & Hagner 2002, Madeyski 2010) que midieron densidad de defectos y productividad con desarrolladores reales."},
+{q:"Según la evidencia experimental citada (Juristo & Vegas 2003; Müller & Hagner 2002; Madeyski 2010), ¿cuál fue el resultado sobre TDD?",
+ o:["TDD no tiene ningún efecto medible en la calidad del software","TDD mejora la calidad externa en ciertos contextos, dependiendo de la experiencia del programador y el tipo de tarea","TDD siempre reduce la productividad sin excepción","TDD solo funciona en proyectos de código abierto"],
+ c:1, e:"Los experimentos mostraron que TDD mejora la calidad externa en ciertos contextos, pero el efecto depende de la experiencia del programador y el tipo de tarea."},
+{q:"Según Wohlin et al. (2012), ¿qué es un experimento en Ingeniería de Software?",
+ o:["Un estudio empírico donde el investigador observa pasivamente un fenómeno sin intervenir","Un estudio empírico donde el investigador manipula activamente al menos una variable independiente para observar su efecto sobre una variable dependiente, bajo condiciones controladas","Una encuesta aplicada a una muestra representativa de desarrolladores","Un análisis histórico de repositorios de código sin intervención del investigador"],
+ c:1, e:"Wohlin et al. (2012) definen el experimento como un estudio empírico donde el investigador manipula activamente al menos una variable independiente para observar su efecto sobre una variable dependiente, bajo condiciones controladas."},
+{q:"¿Cuál de las siguientes opciones NO se considera un experimento, según la clase?",
+ o:["Un estudio de caso, porque no manipula, solo observa","Un análisis de repositorios (MSR), porque no manipula, mina datos históricos","Un experimento controlado con asignación aleatoria de sujetos a tratamientos","Una encuesta, porque no manipula, solo pregunta"],
+ c:2, e:"Un experimento controlado con asignación aleatoria de sujetos SÍ es un experimento; en cambio, el estudio de caso, la encuesta y el análisis MSR no manipulan variables, por lo que no califican como experimentos."},
+{q:"¿Cuál de los siguientes es uno de los 4 elementos clave de un experimento según la clase (manipulación, control, aleatorización, medición)?",
+ o:["Generalización estadística obligatoria de toda la población","Control: se minimizan las variables que podrían confundir los resultados","Triangulación de al menos 3 fuentes de evidencia","Muestreo intencional no probabilístico"],
+ c:1, e:"El Control es uno de los 4 elementos clave de un experimento: consiste en minimizar las variables que podrían confundir los resultados."},
+{q:"¿Qué estudio se considera la primera referencia a experimentos controlados en IS, según la línea de tiempo de la clase (1971)?",
+ o:["Basili & Selby sobre métodos de lectura de código","Weinberg & Schulman sobre legibilidad de código","Wohlin, Runeson y Höst sobre sistematización del método experimental","Shull et al. sobre replicación en múltiples sitios"],
+ c:1, e:"La primera referencia a experimentos controlados en IS, en 1971, es el estudio de Weinberg & Schulman sobre legibilidad de código."},
+{q:"¿Qué hito de 1986 se describe como 'el primer experimento IS con diseño riguroso'?",
+ o:["Basili & Selby comparando métodos de lectura de código: inspección, pruebas funcionales y estructurales","La publicación del libro 'Experimentation in Software Engineering'","Los primeros experimentos sobre TDD y pair programming","Las series de replicación de Shull et al."],
+ c:0, e:"En 1986, Basili & Selby compararon métodos de lectura de código (inspección, pruebas funcionales y estructurales), considerado el primer experimento IS con diseño riguroso."},
+{q:"El libro 'Experimentation in Software Engineering' (2000, 2ª ed. 2012), que sistematiza el método experimental en IS, fue escrito por:",
+ o:["Basili & Selby","Weinberg & Schulman","Wohlin, Runeson, Höst et al.","Juristo & Vegas"],
+ c:2, e:"El libro que sistematiza el método experimental en IS fue escrito por Wohlin, Runeson, Höst et al. entre 1995-2000."},
+{q:"Según la línea de tiempo de la clase, ¿qué caracteriza a la década de los 2010s en la experimentación IS?",
+ o:["La primera referencia a experimentos controlados en la disciplina","La sistematización del método experimental en un libro de referencia","La llegada del problema de la reproducibilidad, con series de replicación en múltiples sitios (Shull et al., 2008)","Los primeros experimentos sobre IA generativa como GitHub Copilot"],
+ c:2, e:"En los 2010s la replicación de experimentos y el problema de la reproducibilidad llegan a IS, con series de replicación en múltiples sitios estudiadas por Shull et al. (2008)."},
+{q:"¿Sobre qué temas se enfocan los experimentos IS de la década de 2020s, según la clase?",
+ o:["Legibilidad de código y métodos de lectura","IA generativa en IS: GitHub Copilot, ChatGPT para debugging, LLMs para testing","Sistematización inicial del método experimental","Pair programming exclusivamente"],
+ c:1, e:"En los 2020s los experimentos IS se enfocan en IA generativa: GitHub Copilot, ChatGPT para debugging y LLMs para testing."},
+{q:"¿Qué caracteriza a un experimento CONTROLADO según la tabla de tipos de experimentos en IS?",
+ o:["Sin aleatorización completa, usando grupos naturales existentes","Aleatorización, grupos separados, en laboratorio o aula","Entorno real con menos control pero mayor validez externa","Uso de modelos o sistemas artificiales como objeto de estudio"],
+ c:1, e:"El experimento controlado se caracteriza por aleatorización y grupos separados, ejecutado en laboratorio o aula, cuando hay suficientes sujetos y se puede controlar el entorno."},
+{q:"¿Cuándo se recomienda usar un CUASI-experimento en lugar de un experimento controlado, según la clase?",
+ o:["Cuando hay suficientes sujetos para aleatorizar completamente","Cuando no es posible aleatorizar, por ejemplo con equipos ya existentes de una empresa","Cuando se prioriza la representatividad sobre el control","Cuando los sujetos humanos son difíciles de conseguir"],
+ c:1, e:"El cuasi-experimento se usa cuando no es posible aleatorizar completamente, como en el caso de equipos naturales ya existentes en una empresa."},
+{q:"¿Qué tipo de experimento se recomienda cuando 'importa más la representatividad que el control', según la clase?",
+ o:["Experimento controlado","Cuasi-experimento","Estudio de campo","Experimento de simulación"],
+ c:2, e:"El estudio de campo se ejecuta en un entorno real con menos control, y se recomienda cuando la representatividad (validez externa) importa más que el control estricto."},
+{q:"Según la 'regla general' de la clase sobre el balance control-naturalismo, ¿qué ocurre a mayor control experimental?",
+ o:["Mayor validez externa (generalización)","Mayor validez interna (certeza causal)","Menor confiabilidad de los resultados","Mayor riesgo del efecto Hawthorne"],
+ c:1, e:"La regla general establece que a mayor control corresponde mayor validez interna (certeza causal), mientras que a mayor naturalismo corresponde mayor validez externa (generalización)."},
+{q:"En el ejemplo del experimento controlado clásico sobre revisión de código con IA, ¿cuál es la variable INDEPENDIENTE?",
+ o:["Densidad de defectos por KLOC","Tipo de revisión: IA vs. manual","La prueba estadística Mann-Whitney U","El framework SonarQube utilizado"],
+ c:1, e:"La variable independiente (el factor manipulado) en este ejemplo es el tipo de revisión: revisión asistida por IA vs. revisión manual."},
+{q:"En ese mismo ejemplo, ¿cuál es la variable DEPENDIENTE (respuesta)?",
+ o:["Tipo de revisión: IA vs. manual","Densidad de defectos (defectos por KLOC)","La asignación aleatoria de participantes","El uso de SonarQube como herramienta"],
+ c:1, e:"La variable dependiente, es decir, lo que se mide como resultado, es la densidad de defectos (defectos por KLOC)."},
+{q:"Según la tabla '¿Cuándo usar un experimento?', ¿qué método es más adecuado para responder '¿Qué porcentaje de equipos usa revisión de código?'?",
+ o:["Experimento controlado","Estudio de caso","Encuesta","MSR (minería de repositorios)"],
+ c:2, e:"La pregunta '¿qué porcentaje...?' es cuantitativa descriptiva sobre una población, por lo que el método más adecuado es la encuesta."},
+{q:"¿Cuál de las siguientes condiciones NO es necesaria para justificar el uso de un experimento, según la clase?",
+ o:["Quieres establecer causalidad (X causa Y)","Puedes manipular la variable independiente","Tienes suficientes sujetos para formar grupos","Necesitas describir un fenómeno sin intervenir en él"],
+ c:3, e:"Describir un fenómeno sin intervenir no es una condición para usar un experimento; por el contrario, el experimento requiere manipulación activa de la variable independiente."},
+{q:"En el caso NASA de F Prime (JPL) presentado en la clase, ¿a qué proyecto se aplicó este framework de software de vuelo?",
+ o:["Al rover Curiosity en Marte","A la Mars Cubesat One y luego al helicóptero Ingenuity en Marte","Al telescopio espacial James Webb","A la misión Voyager"],
+ c:1, e:"F Prime es un framework de software de vuelo desarrollado para la Mars Cubesat One y luego usado en el helicóptero Ingenuity en Marte."},
+{q:"¿Cuántos vuelos exitosos realizó Ingenuity en Marte tras la validación experimental de su software, según la clase?",
+ o:["10 vuelos","30 vuelos","72 vuelos","150 vuelos"],
+ c:2, e:"Según la clase, Ingenuity realizó 72 vuelos exitosos en Marte, sin posibilidad de intervención humana en tiempo real."},
+{q:"¿Qué tipo de experimentos se aplicaron al software de F Prime antes del lanzamiento, además de pruebas de regresión automatizadas?",
+ o:["Encuestas de satisfacción a los ingenieros de la NASA","Experimentos de inyección de fallos para medir la recuperación del sistema","Estudios de caso sobre la cultura organizacional de JPL","Entrevistas semiestructuradas a los astronautas"],
+ c:1, e:"Además de más de 2,000 pruebas de regresión automatizadas, se aplicaron experimentos de inyección de fallos para medir la recuperación del sistema."},
+{q:"Según la clase, ¿por qué es problemático usar estudiantes como sujetos en experimentos IS?",
+ o:["Porque los estudiantes nunca deben participar en investigación científica","Porque los estudiantes no son desarrolladores industriales, lo que plantea dudas sobre la validez de los resultados","Porque los estudiantes siempre producen mejores resultados que los profesionales","Porque está legalmente prohibido en Ecuador"],
+ c:1, e:"El reto de la escasez de sujetos representativos señala que los estudiantes no son desarrolladores industriales, lo que genera dudas sobre si son válidos como sujetos de investigación."},
+{q:"¿Qué solución propone la clase frente al problema de validez externa en experimentos IS con pocos sujetos universitarios?",
+ o:["Reducir aún más el tamaño de la muestra","Series de replicación y estudios de campo complementarios","Eliminar por completo el uso de estudiantes en cualquier estudio","Usar exclusivamente simulaciones por computadora"],
+ c:1, e:"La solución propuesta frente al problema de validez externa es realizar series de replicación y estudios de campo complementarios."},
+{q:"¿Qué reto de la experimentación IS se refiere a que 'la mayoría de experimentos se publican una sola vez y nunca se replican'?",
+ o:["Efecto Hawthorne","Variables de confusión","Replicación escasa","Escasez de sujetos representativos"],
+ c:2, e:"La replicación escasa se refiere a que la mayoría de experimentos IS se publican una sola vez y nunca se replican, generando una crisis de reproducibilidad similar a la de otras ciencias."},
+{q:"¿Cuáles son ejemplos de variables de confusión difíciles de controlar en experimentos IS, según la clase?",
+ o:["Densidad de defectos y cobertura de pruebas","Experiencia previa, lenguaje preferido, fatiga y motivación","Tipo de revisión de código y herramienta utilizada","Validez interna y validez externa"],
+ c:1, e:"La clase menciona la experiencia previa, el lenguaje preferido, la fatiga y la motivación como ejemplos de variables de confusión difíciles de controlar."},
+{q:"En la actividad INVB10, ¿qué se debe identificar respecto a las hipótesis del artículo experimental analizado?",
+ o:["Solo la hipótesis alternativa (H1), ya que la nula no es relevante","La hipótesis nula (H0) y la alternativa (H1)","El número de citas bibliográficas del artículo","El presupuesto reportado en el estudio"],
+ c:1, e:"La actividad INVB10 pide identificar tanto la hipótesis nula (H0) como la alternativa (H1) del artículo experimental analizado."}
+];
+
+const QE14 = [
+{q:"Según Wohlin et al. (2012), citado al inicio de la clase, ¿qué ocurre con un experimento mal diseñado?",
+ o:["Puede salvarse siempre con un buen análisis estadístico","No puede salvarse con buen análisis estadístico","Solo afecta la presentación de resultados, no las conclusiones","Se corrige automáticamente aumentando el tamaño de muestra"],
+ c:1, e:"Wohlin et al. (2012) afirman que un experimento mal diseñado no puede salvarse con buen análisis estadístico."},
+{q:"Según Hannay et al. (2013), al revisar 113 experimentos IS publicados en ICSE y FSE, ¿qué porcentaje tenía hipótesis ambiguas o ausentes?",
+ o:["19%","27%","38%","50%"],
+ c:2, e:"Hannay et al. (2013) encontraron que el 38% de los experimentos revisados tenía hipótesis ambiguas o ausentes."},
+{q:"En la misma revisión de Hannay et al. (2013), ¿qué porcentaje no reportaba el tamaño del efecto, solo el p-valor?",
+ o:["19%","27%","38%","45%"],
+ c:0, e:"El 19% de los experimentos revisados no reportaba el tamaño del efecto, únicamente el p-valor."},
+{q:"¿Cuál es la conclusión principal que la clase extrae de los hallazgos de Hannay et al. (2013)?",
+ o:["Que los experimentos IS no necesitan hipótesis formales","Que muchos estudios tenían datos válidos pero conclusiones no confiables porque el diseño no lo soportaba","Que el análisis estadístico es más importante que el diseño","Que el 100% de los experimentos revisados eran completamente inválidos"],
+ c:1, e:"La clase concluye que muchos estudios tenían datos válidos pero conclusiones no confiables, precisamente porque el diseño experimental no soportaba esas conclusiones."},
+{q:"¿Cuáles son los 5 componentes del diseño experimental según Wohlin et al. (2012) presentados en la clase?",
+ o:["Objetivo, hipótesis, variables, diseño, instrumentos","Protocolo, piloto, consentimiento, aleatorización, ejecución","Entrevistas, observación, documentos, artefactos, triangulación","Validez de constructo, interna, externa, confiabilidad, ética"],
+ c:0, e:"Los 5 componentes del diseño experimental son: objetivo (GQM), hipótesis, variables, diseño y instrumentos."},
+{q:"¿Qué pregunta responde el componente 'Objetivo (GQM)' del diseño experimental?",
+ o:["¿Cómo asigno sujetos y tratamientos?","¿Qué quiero aprender y para quién es útil?","¿Qué manipulo, qué mido y qué controlo?","¿Cómo recolecto los datos y con qué herramientas?"],
+ c:1, e:"El componente Objetivo (GQM) responde a la pregunta '¿qué quiero aprender y para quién es útil?'."},
+{q:"¿Qué es el framework GQM (Goal-Question-Metric) mencionado en la clase?",
+ o:["Un método estadístico para calcular tamaño del efecto","El framework estándar de Basili et al. (1994) para definir objetivos de medición en IS","Una técnica de aleatorización de sujetos a grupos","Un tipo de diseño experimental factorial"],
+ c:1, e:"GQM (Goal-Question-Metric), propuesto por Basili et al. (1994), es el framework estándar para definir objetivos de medición en Ingeniería de Software."},
+{q:"En la estructura del objetivo GQM, ¿qué elemento describe 'con respecto a'?",
+ o:["El objeto de estudio","El aspecto de calidad evaluado","La perspectiva del análisis","El contexto o entorno del estudio"],
+ c:1, e:"En la plantilla GQM, 'con respecto a' corresponde al aspecto de calidad que se evalúa (por ejemplo, densidad de defectos)."},
+{q:"¿Qué afirma la hipótesis NULA (H0) en un experimento IS?",
+ o:["Que existe una diferencia o efecto significativo entre los grupos","Que no hay diferencia ni efecto entre los grupos comparados","Que el tamaño de muestra es insuficiente para el análisis","Que la variable independiente no fue manipulada correctamente"],
+ c:1, e:"La hipótesis nula (H0) afirma que no hay diferencia ni efecto entre los grupos comparados."},
+{q:"Según el criterio de Popper mencionado en la clase, ¿qué requisito debe cumplir una hipótesis científica?",
+ o:["Debe ser formulada después de observar los datos recolectados","Debe ser falsificable; si no puede refutarse con datos, es una creencia, no una hipótesis científica","Debe confirmarse siempre con un p-valor menor a 0.05","Debe basarse exclusivamente en la experiencia personal del investigador"],
+ c:1, e:"Según el criterio de falsabilidad de Popper, una hipótesis debe poder refutarse con datos; si no puede refutarse, es una creencia y no una hipótesis científica."},
+{q:"¿Qué es el 'HARKing' mencionado como error frecuente en la formulación de hipótesis?",
+ o:["Formular la hipótesis antes de diseñar el experimento","Formular la hipótesis después de ver los datos, presentándola como si hubiera sido definida a priori","Usar hipótesis bidireccionales en lugar de direccionales","Reportar el tamaño del efecto en lugar del p-valor"],
+ c:1, e:"El HARKing (Hypothesizing After Results are Known) consiste en formular la hipótesis después de ver los datos, un error frecuente que compromete la validez del estudio."},
+{q:"¿Cuál es la diferencia entre una hipótesis alternativa DIRECCIONAL y una BIDIRECCIONAL?",
+ o:["La direccional afirma A > B o A < B; la bidireccional afirma solo que A ≠ B","La direccional no requiere prueba estadística; la bidireccional sí","La direccional se usa solo en diseños within-subject","No existe ninguna diferencia relevante entre ambas"],
+ c:0, e:"La hipótesis direccional (una cola) afirma que A > B o A < B; la bidireccional (dos colas) afirma únicamente que A ≠ B, sin especificar dirección."},
+{q:"¿Qué tipo de variable es 'TDD vs desarrollo tradicional' en un experimento IS, según la tabla de la clase?",
+ o:["Variable dependiente","Variable independiente","Variable de confusión","Variable moderadora"],
+ c:1, e:"'TDD vs desarrollo tradicional' es la variable independiente (VI), es decir, el tratamiento que el investigador manipula."},
+{q:"¿Qué tipo de variable 'afecta la variable dependiente pero no se controla', según la tabla de variables?",
+ o:["Variable independiente","Variable controlada","Variable de confusión","Variable moderadora"],
+ c:2, e:"La variable de confusión afecta la variable dependiente pero no se controla, como el ejemplo de la experiencia previa del desarrollador."},
+{q:"El lenguaje de programación y el IDE, que se mantienen constantes para todos los grupos, corresponden a una variable:",
+ o:["Independiente","Dependiente","Controlada","Moderadora"],
+ c:2, e:"Las variables controladas se mantienen constantes para todos los grupos, como el lenguaje de programación, el IDE o el tiempo de tarea."},
+{q:"¿Qué es una variable MODERADORA, según el ejemplo de 'tamaño del equipo' o 'complejidad del sistema'?",
+ o:["La que el investigador manipula directamente","La que modifica la relación entre la variable independiente y la dependiente","La que se mide como respuesta al tratamiento","La que se mantiene constante en todos los grupos"],
+ c:1, e:"La variable moderadora modifica la relación entre la variable independiente y la dependiente, como el tamaño del equipo o la complejidad del sistema."},
+{q:"¿Qué significa 'operacionalizar' una variable en un experimento IS?",
+ o:["Asignarla aleatoriamente a un grupo experimental","Definir exactamente cómo se mide, con una definición precisa y reproducible","Eliminarla del diseño si genera confusión","Convertirla automáticamente en variable dependiente"],
+ c:1, e:"Operacionalizar una variable significa darle una definición exacta de cómo se mide, por ejemplo especificando la fórmula, la herramienta y el momento de medición."},
+{q:"En el diseño 'completamente aleatorizado', ¿cómo se asignan los sujetos?",
+ o:["Se agrupan por experiencia y luego se aleatoriza dentro de cada grupo","Se asignan al azar a un solo grupo, siendo simple pero sensible a diferencias entre sujetos","Cada sujeto recibe ambos tratamientos en orden aleatorio","Se asignan según dos factores simultáneos"],
+ c:1, e:"En el diseño completamente aleatorizado los sujetos se asignan al azar a un solo grupo; es simple pero sensible a diferencias individuales entre sujetos."},
+{q:"¿Qué característica tiene el diseño de BLOQUES ALEATORIZADOS?",
+ o:["Cada sujeto recibe ambos tratamientos en orden aleatorio","Se agrupan sujetos similares (por experiencia o lenguaje) y se aleatoriza dentro del bloque, reduciendo la variabilidad entre sujetos","Se estudian dos factores simultáneamente para detectar interacciones","Cada sujeto solo recibe un tratamiento, requiriendo más sujetos"],
+ c:1, e:"El diseño de bloques aleatorizados agrupa sujetos similares y aleatoriza dentro de cada bloque, reduciendo el efecto de la variabilidad entre sujetos."},
+{q:"En un diseño FACTORIAL 2×2 con factor A = TDD vs tradicional y factor B = pair vs solo programming, ¿qué permite detectar este diseño?",
+ o:["Únicamente el efecto principal de un solo factor","Interacciones entre los dos factores estudiados simultáneamente","Exclusivamente diferencias entre estudiantes y profesionales","El efecto Hawthorne de manera directa"],
+ c:1, e:"El diseño factorial 2×2 permite estudiar dos factores simultáneamente y detectar interacciones entre ellos, no solo sus efectos individuales."},
+{q:"¿Cuál es la ventaja principal del diseño WITHIN-SUBJECT (medidas repetidas)?",
+ o:["Elimina por completo el riesgo de efecto de aprendizaje","Elimina la variabilidad entre sujetos, ya que el mismo sujeto realiza ambos tratamientos","Requiere muchos más sujetos que el diseño between-subject","No requiere aleatorización del orden de los tratamientos"],
+ c:1, e:"El diseño within-subject elimina la variabilidad entre sujetos porque el mismo sujeto realiza ambos tratamientos; su riesgo es el efecto de aprendizaje o fatiga, controlado con contrabalanceo."},
+{q:"Según la estrategia recomendada por Carver et al. (2010), ¿cómo se sugiere combinar estudiantes y profesionales como sujetos?",
+ o:["Usar solo profesionales para garantizar validez externa desde el inicio","Comenzar con estudiantes para validar el diseño (replicación interna), y luego replicar con profesionales para validar la generalización (replicación externa)","Usar exclusivamente estudiantes, ya que los profesionales no aportan valor experimental","Alternar aleatoriamente entre estudiantes y profesionales en cada sesión"],
+ c:1, e:"Carver et al. (2010) recomiendan comenzar con estudiantes para validar el diseño (replicación interna) y luego replicar con profesionales para validar la generalización (replicación externa)."},
+{q:"¿Qué busca prevenir el pre-registro del protocolo en OSF, según el 'NASA OSDMP aplicado' de la clase?",
+ o:["El ajuste post-hoc del diseño una vez que se conocen los datos","La necesidad de reclutar sujetos profesionales","El uso de estudiantes como sujetos experimentales","La contaminación entre grupos de tratamiento"],
+ c:0, e:"El pre-registro del protocolo en OSF antes de reclutar sujetos busca evitar el ajuste post-hoc del diseño una vez que ya se conocen los datos."},
+{q:"Según la clase, ¿cuándo debe definirse el plan de análisis estadístico de un experimento IS?",
+ o:["Después de recolectar y explorar los datos","Antes de recolectar los datos","Solo si los resultados iniciales no son significativos","Únicamente al momento de publicar el artículo"],
+ c:1, e:"El plan de análisis estadístico debe definirse antes de recolectar los datos, como parte integral del diseño experimental."},
+{q:"¿Qué representa la 'potencia estadística' (β = 0.80) en el plan de análisis de un experimento?",
+ o:["El nivel de significancia estándar utilizado en IS","Cuántos sujetos se necesitan para detectar el efecto si este realmente existe","El tamaño del efecto medido con la d de Cohen","La proporción de hipótesis nulas rechazadas incorrectamente"],
+ c:1, e:"La potencia estadística (β = 0.80) indica cuántos sujetos se necesitan para poder detectar el efecto, si este realmente existe."},
+{q:"¿Qué consecuencia tiene un experimento sin potencia estadística suficiente, según la clase?",
+ o:["Generará automáticamente resultados falsos positivos","No detectará el efecto aunque exista, incurriendo en error tipo II","Aumentará artificialmente el tamaño del efecto reportado","No tiene ninguna consecuencia relevante para el análisis"],
+ c:1, e:"Si el experimento no tiene potencia estadística suficiente, no detectará el efecto aunque exista realmente, lo que constituye un error tipo II."},
+{q:"¿Qué es el 'p-hacking' que la clase advierte evitar al definir el plan de análisis con anticipación?",
+ o:["Calcular correctamente el tamaño de muestra necesario","Buscar entre distintos análisis hasta encontrar uno que dé p < 0.05","Reportar tanto el p-valor como el tamaño del efecto","Usar herramientas como G*Power para calcular la potencia"],
+ c:1, e:"El p-hacking consiste en probar distintos análisis hasta encontrar uno que arroje un resultado estadísticamente significativo (p < 0.05), lo cual se evita definiendo el plan de análisis antes de recolectar datos."},
+{q:"¿Cuál de las siguientes NO es una herramienta mencionada en la clase para el análisis estadístico o cálculo de potencia?",
+ o:["G*Power","JASP","R","SonarQube"],
+ c:3, e:"Las herramientas mencionadas para el plan de análisis son G*Power (cálculo de potencia), JASP (análisis) y R (scripting reproducible); SonarQube es una herramienta de métricas de código, no de análisis estadístico."}
+];
+
+const QA16 = [
+{q:"Según Rico (ICSE 2024), ¿cuál es 'la brecha más peligrosa' en los estudios de caso IS?",
+ o:["Que los investigadores no recolectan suficientes datos","Que muchos investigadores describen lo que encontraron, pero no explican cómo llegaron de los datos a esa conclusión","Que los estudios de caso nunca incluyen entrevistas","Que los revisores académicos rechazan automáticamente los estudios de caso"],
+ c:1, e:"Rico (ICSE 2024) señala que la brecha más peligrosa es que muchos investigadores describen sus hallazgos sin explicar cómo llegaron de los datos a esa conclusión."},
+{q:"Sin un proceso de análisis estructurado ante un gran volumen de datos, ¿qué problemas señala la clase que pueden surgir?",
+ o:["Los datos se vuelven automáticamente más confiables","El volumen paraliza, las interpretaciones se vuelven anecdóticas y los hallazgos no son defendibles ante revisores","El investigador termina el análisis más rápido de lo esperado","Los datos cualitativos se convierten automáticamente en cuantitativos"],
+ c:1, e:"Sin un proceso estructurado, el volumen de datos paraliza, las interpretaciones se vuelven anecdóticas ('me pareció que...') y los hallazgos no son defendibles ante revisores académicos."},
+{q:"¿Cuáles son las 3 estrategias de análisis en estudios de caso IS propuestas por Runeson & Höst (2009)?",
+ o:["Codificación abierta, axial y selectiva","Basada en proposiciones, descripción del caso y análisis rival","Familiarización, codificación y producción del reporte","Within-case, cross-case y replicación teórica"],
+ c:1, e:"Runeson & Höst (2009) proponen 3 estrategias de análisis: basada en proposiciones, descripción del caso y análisis rival."},
+{q:"¿Para qué tipo de estudios se recomienda la estrategia 'basada en proposiciones', según la clase?",
+ o:["Estudios exploratorios sin proposiciones definidas","Estudios explicativos, ya que es la más estructurada","Estudios donde el fenómeno es completamente nuevo","Estudios que buscan describir un caso de forma narrativa"],
+ c:1, e:"La estrategia basada en proposiciones es más estructurada y se recomienda para estudios explicativos, donde cada proposición se confirma, refuta o matiza con evidencia."},
+{q:"¿Cuál es el propósito de la estrategia de 'análisis rival' en el análisis de estudios de caso?",
+ o:["Organizar el análisis como una narrativa accesible del caso","Buscar explicaciones alternativas que podrían explicar los datos igual de bien, fortaleciendo la validez interna","Calcular el acuerdo entre codificadores con Cohen's Kappa","Comparar múltiples casos mediante replicación literal"],
+ c:1, e:"El análisis rival busca explicaciones alternativas que podrían explicar los datos igual de bien, siendo esencial para fortalecer la validez interna del estudio."},
+{q:"Según Strauss & Corbin (1990), ¿cuáles son las tres fases de la codificación cualitativa?",
+ o:["Familiarización, revisión y producción del reporte","Abierta, axial y selectiva","Preparación, validación e interpretación","Within-case, cross-case y comparación"],
+ c:1, e:"Strauss & Corbin (1990) proponen tres fases de codificación cualitativa: abierta, axial y selectiva."},
+{q:"En la codificación ABIERTA, ¿qué se hace con los datos?",
+ o:["Se identifica la categoría central que integra todos los temas","Se leen línea por línea y se asignan etiquetas descriptivas a cada segmento relevante, sin jerarquía todavía","Se agrupan los códigos previos en categorías más amplias","Se construye la narrativa analítica final del caso"],
+ c:1, e:"En la codificación abierta se leen los datos línea por línea, asignando etiquetas descriptivas a cada segmento relevante, sin establecer jerarquías todavía."},
+{q:"Agrupar los códigos 'resistencia del equipo' y 'falta de capacitación' en la categoría 'barreras organizacionales' corresponde a la codificación:",
+ o:["Abierta","Axial","Selectiva","Temática"],
+ c:1, e:"La codificación axial agrupa los códigos abiertos en categorías más amplias e identifica relaciones entre ellas, como en este ejemplo de 'barreras organizacionales'."},
+{q:"Identificar la categoría central que integra todos los temas y construir la narrativa analítica del caso corresponde a la codificación:",
+ o:["Abierta","Axial","Selectiva","Temática"],
+ c:2, e:"La codificación selectiva identifica la categoría central que integra todos los temas y construye la narrativa analítica final del caso."},
+{q:"Según la clase, ¿qué valor de Cohen's Kappa (κ) se considera 'excelente' en la confiabilidad entre codificadores?",
+ o:["κ < 0.60","κ entre 0.60 y 0.79","κ ≥ 0.80","κ = 0"],
+ c:2, e:"Un valor de κ ≥ 0.80 se considera excelente; κ entre 0.60-0.79 es sustancial, y κ < 0.60 necesita revisión."},
+{q:"¿Cuál es el método de análisis cualitativo más usado en IS, según Braun & Clarke (2006)?",
+ o:["La codificación abierta-axial-selectiva de Strauss & Corbin","El análisis temático","El análisis rival exclusivamente","El análisis cross-case"],
+ c:1, e:"El análisis temático (Braun & Clarke, 2006) es señalado en la clase como el método más usado en investigación cualitativa IS."},
+{q:"Según la 'regla de oro' del análisis temático mencionada en la clase, ¿cuántas instancias de evidencia debe tener al menos cada tema?",
+ o:["1 instancia de cualquier fuente","2 instancias de la misma fuente","Al menos 3 instancias de evidencia de fuentes diferentes","10 instancias de evidencia de una sola fuente"],
+ c:2, e:"La regla de oro del análisis temático establece que cada tema debe tener al menos 3 instancias de evidencia provenientes de fuentes diferentes."},
+{q:"Según la tendencia 2025 mencionada en la clase, ¿qué rol pueden cumplir los LLMs como Claude o GPT en el análisis cualitativo?",
+ o:["Reemplazar completamente al investigador humano en la interpretación de los datos","Asistir en la codificación inicial identificando patrones, aunque la interpretación y el juicio analítico requieren al investigador humano","Sustituir por completo la necesidad de un audit trail","Eliminar la necesidad de codificación abierta"],
+ c:1, e:"Los LLMs pueden asistir en la codificación inicial identificando patrones en grandes volúmenes de datos, pero la interpretación, selección de temas y juicio analítico siguen requiriendo al investigador humano; además, cada interacción con la IA debe registrarse en el audit trail."},
+{q:"Según Yin (2014, p.243), ¿qué función cumple la cadena de evidencia (audit trail)?",
+ o:["Reemplazar la necesidad de triangulación de fuentes","Aumentar la confiabilidad del estudio de caso, permitiendo a un revisor externo seguir el análisis paso a paso","Sustituir el consentimiento informado de los participantes","Eliminar la necesidad de reportar amenazas a la validez"],
+ c:1, e:"Yin (2014, p.243) señala que la cadena de evidencia aumenta la confiabilidad del estudio, permitiendo que un revisor externo siga el análisis paso a paso, desde los datos originales hasta las conclusiones."},
+{q:"¿Cuál de los siguientes NO es uno de los elementos de un buen audit trail mencionados en la clase?",
+ o:["Base de datos del caso","Registro de codificación","Presupuesto detallado del proyecto de investigación","Bitácora analítica"],
+ c:2, e:"Los elementos del audit trail son: base de datos del caso, registro de codificación, bitácora analítica, registro de member checking y registro de análisis rival; el presupuesto no forma parte de esta lista."},
+{q:"¿Qué busca el análisis WITHIN-CASE (dentro del caso)?",
+ o:["Comparar múltiples casos mediante replicación literal o teórica","Analizar un solo caso en profundidad, produciendo una narrativa densa que responde las preguntas de investigación para ese caso específico","Calcular el acuerdo entre codificadores con Cohen's Kappa","Construir una tabla comparativa de casos múltiples"],
+ c:1, e:"El análisis within-case analiza un solo caso en profundidad, produciendo un 'retrato' completo del fenómeno en ese contexto específico."},
+{q:"En el análisis CROSS-CASE, ¿qué busca el modo de 'replicación literal'?",
+ o:["Hallazgos opuestos en contextos predichos como diferentes","Los mismos hallazgos en contextos similares","Un solo caso analizado en profundidad sin comparación","Descartar explicaciones alternativas mediante análisis rival"],
+ c:1, e:"La replicación literal busca los mismos hallazgos en contextos similares, como DevOps adoptado de forma similar en varias empresas fintech."},
+{q:"¿Qué busca el modo de 'replicación teórica' en el análisis cross-case?",
+ o:["Los mismos hallazgos en contextos similares","Hallazgos opuestos en contextos que se predijeron como diferentes","Eliminar la necesidad de comparar los casos entre sí","Fusionar los datos de todos los casos antes de analizarlos"],
+ c:1, e:"La replicación teórica busca hallazgos opuestos en contextos que se predijeron como diferentes, como DevOps exitoso en una startup frente a un fracaso en una empresa tradicional."},
+{q:"¿Qué advertencia da la clase respecto al análisis cross-case?",
+ o:["Se deben mezclar los datos de todos los casos desde el inicio para simplificar el análisis","No mezclar los datos de los casos antes de analizarlos individualmente, para no perder la riqueza contextual de cada uno","El análisis cross-case solo aplica a estudios de caso único","La replicación literal y teórica deben aplicarse simultáneamente en todos los casos"],
+ c:1, e:"La clase advierte no mezclar los datos de los casos antes de analizarlos individualmente, ya que se perdería la riqueza contextual propia de cada caso."},
+{q:"Según Runeson & Höst (2009), ¿cuáles son los dos formatos principales para reportar un estudio de caso IS?",
+ o:["Codificación abierta y codificación axial","Formato IMRaD adaptado y formato narrativo","Within-case y cross-case","Análisis temático y análisis rival"],
+ c:1, e:"Runeson & Höst (2009) proponen dos formatos principales de reporte: el formato IMRaD adaptado (para journals académicos) y el formato narrativo (para reportes industriales o casos exploratorios)."},
+{q:"En el formato IMRaD adaptado, ¿qué sección incluye la interpretación, comparación con literatura y amenazas a la validez?",
+ o:["Introducción","Método","Resultados","Discusión"],
+ c:3, e:"La sección de Discusión incluye la interpretación de los hallazgos, la comparación con la literatura existente y la discusión de las amenazas a la validez."},
+{q:"¿Para qué tipo de audiencia es más apropiado el formato narrativo de reporte, según la clase?",
+ o:["Exclusivamente para revistas académicas indexadas","Para reportes industriales o casos exploratorios, siendo más accesible para audiencia práctica como empresas y equipos","Únicamente para publicaciones en journals de alto impacto","Solo para estudios de caso múltiple con replicación teórica"],
+ c:1, e:"El formato narrativo es más apropiado para reportes industriales o casos exploratorios, siendo más accesible para audiencias prácticas como empresas y equipos, aunque requiere el mismo rigor metodológico."},
+{q:"Según las 5 reglas esenciales del reporte de Rico (ICSE 2024), ¿qué se debe hacer respecto al tipo de estudio?",
+ o:["Evitar mencionarlo para no limitar la interpretación del lector","Nombrarlo explícitamente (exploratorio/descriptivo/explicativo)","Cambiarlo según la sección del reporte","Dejarlo implícito en el título del artículo"],
+ c:1, e:"Una de las 5 reglas esenciales de Rico (2024) es nombrar explícitamente el tipo de estudio: exploratorio, descriptivo o explicativo."},
+{q:"¿Qué elemento del reporte permite al lector 'juzgar la transferibilidad' de los hallazgos, según Rico (2024)?",
+ o:["El número de referencias bibliográficas citadas","Describir el contexto del caso con suficiente detalle","El formato de la portada del documento","El uso exclusivo de datos cuantitativos"],
+ c:1, e:"Describir el contexto del caso con suficiente detalle permite al lector juzgar si los hallazgos son transferibles a su propio contexto."},
+{q:"En el caso NASA GeneLab (Fase 1 — Análisis) descrito en la clase, ¿qué hace que cada decisión analítica sea auditable?",
+ o:["Que se publique únicamente el resultado final sin el proceso","Que cada decisión se documente en notebooks ejecutables, funcionando como un audit trail científico","Que el análisis se realice exclusivamente en privado sin acceso externo","Que los datos nunca se compartan con la comunidad científica"],
+ c:1, e:"Cada decisión analítica se documenta en notebooks ejecutables (Jupyter, R, Python), lo cual funciona como un audit trail científico auditable."},
+{q:"¿Qué representa la 'Fase 2 — Pre-print' del ciclo de vida NASA M5 descrito en la clase?",
+ o:["La publicación final con DOI permanente después de la revisión por pares","Compartir los resultados antes de la revisión por pares, acelerando la diseminación sin esperar 12-18 meses","El depósito de datos y código en repositorios abiertos como Zenodo","El análisis estadístico inicial con herramientas abiertas"],
+ c:1, e:"La Fase 2 (Pre-print) consiste en compartir los resultados antes de la revisión por pares (arXiv/bioRxiv), lo que acelera la diseminación sin esperar 12-18 meses de revisión."},
+{q:"En el caso JWST CO₂ (M5) presentado en la clase, ¿qué ilustra el hecho de comunicar el mismo hallazgo en 4 formatos distintos (paper, preprint, dataset, blog/Twitter)?",
+ o:["Que un mismo hallazgo debe publicarse varias veces para aumentar las citas","Que un buen reporte debe ser auditable, reproducible y comunicado a la audiencia correcta en el formato correcto","Que los estudios de caso no necesitan un formato de reporte definido","Que el análisis cuantitativo siempre debe preceder al cualitativo"],
+ c:1, e:"El caso JWST CO₂ ilustra el principio de que un buen reporte —como una publicación NASA— debe ser auditable, reproducible y comunicado a la audiencia correcta en el formato correcto, principio transferible a IS."}
+];
+
+const Q17 = [
+{q:"¿Cuál de los siguientes NO es uno de los 4 casos reales analizados en la clase 17?",
+ o:["Ericsson — Bug Assignment Automatizado","GitHub Copilot en Equipos Ágiles","NASA GeneLab — Ciencia Abierta como Caso Colectivo","Netflix — Migración a microservicios"],
+ c:3, e:"Los 4 casos analizados en la clase son: Ericsson, GitHub Copilot en equipos ágiles, NASA GeneLab, y la adopción de IA en empresas latinoamericanas de software. El caso de Netflix no forma parte de esta clase."},
+{q:"En el Caso 1 (Ericsson, Jonsson et al. 2022), ¿qué problema buscaba resolver el modelo de ML implementado?",
+ o:["Optimizar el consumo eléctrico de los servidores","Automatizar la asignación de bugs al desarrollador correcto","Predecir la satisfacción del cliente en encuestas","Generar código automáticamente para nuevas funcionalidades"],
+ c:1, e:"El caso Ericsson buscaba automatizar la asignación de bugs al desarrollador correcto, un proceso que tomaba tiempo y generaba cuellos de botella."},
+{q:"¿Qué tipo de diseño de estudio de caso corresponde al caso Ericsson, según la clasificación de Yin?",
+ o:["Caso múltiple holístico","Caso único embebido, con la organización como unidad principal y equipos de desarrollo como subunidades","Caso intrínseco sin proposiciones","Encuesta longitudinal a gerentes"],
+ c:1, e:"El caso Ericsson es un caso único embebido: Ericsson como organización es la unidad principal, mientras los equipos de desarrollo específicos son las subunidades."},
+{q:"¿Cuál fue el hallazgo principal del caso Ericsson respecto a la adopción del modelo de ML, a pesar de su alta precisión técnica (>80%)?",
+ o:["La precisión técnica fue suficiente por sí sola para garantizar la adopción","Factores organizacionales y de confianza fueron determinantes; los ingenieros rechazaban sugerencias correctas si no entendían el razonamiento del modelo","El modelo fue rechazado únicamente por fallas técnicas de implementación","La adopción fue inmediata y sin resistencia por parte de los ingenieros"],
+ c:1, e:"A pesar de la alta precisión técnica del modelo, factores organizacionales y de confianza fueron determinantes: los ingenieros rechazaban sugerencias correctas si no entendían el razonamiento del modelo (explicabilidad)."},
+{q:"Según el checklist de Rico (2024) aplicado al caso Ericsson, ¿cuál fue su principal debilidad identificada?",
+ o:["Falta de contexto detallado sobre la empresa","Generalización limitada, ya que el estudio se realizó solo en Ericsson","Ausencia total de discusión sobre validez","No declarar el tipo de estudio"],
+ c:1, e:"La debilidad señalada para el caso Ericsson en el checklist de Rico (2024) fue la generalización limitada, ya que el estudio se realizó únicamente en Ericsson."},
+{q:"Según el Stack Overflow Survey citado en el Caso 2, ¿qué porcentaje de desarrolladores usan o planean usar IA en 2025?",
+ o:["45%","60%","84%","95%"],
+ c:2, e:"Según el Stack Overflow Survey citado en la clase, el 84% de los desarrolladores usan o planean usar IA en 2025."},
+{q:"Según el estudio GitClear 2024 mencionado en el Caso 2, ¿qué efecto tuvo el uso de IA en el cycle time de los pull requests?",
+ o:["Aumento del 31.8% en el cycle time","Reducción del 31.8% en el cycle time","No hubo ningún cambio medible","Reducción del 12% en documentación"],
+ c:1, e:"El estudio GitClear 2024, con un diseño de caso observacional sobre miles de repositorios de GitHub, encontró una reducción del 31.8% en el cycle time de los pull requests."},
+{q:"¿Qué concepto introduce el reporte DORA 2025 respecto al uso de asistentes de IA en desarrollo de software?",
+ o:["Aumento garantizado de la calidad del código sin excepciones","La 'deuda técnica inducida por IA' (AI-induced tech debt), que compromete la mantenibilidad a largo plazo","La eliminación completa de la necesidad de revisión de código","La reducción a cero de los defectos de software"],
+ c:1, e:"El reporte DORA 2025 introduce el concepto de 'deuda técnica inducida por IA', señalando que los asistentes añaden código rápidamente pero pueden comprometer la mantenibilidad a largo plazo."},
+{q:"¿Por qué el fenómeno de GitHub Copilot en equipos ágiles es considerado un estudio de caso relevante según la definición de Yin (2014)?",
+ o:["Porque puede replicarse fácilmente con un experimento controlado","Porque es un fenómeno contemporáneo, en contexto real, con límites difusos","Porque solo requiere una única fuente de evidencia cuantitativa","Porque no involucra ningún tipo de triangulación de datos"],
+ c:1, e:"El fenómeno de Copilot en equipos ágiles cumple con la definición de Yin (2014) de ser contemporáneo, en contexto real y con límites difusos, además de ser imposible de estudiar con un experimento controlado en su complejidad real."},
+{q:"Según la clasificación de Stake (1995), ¿qué tipo de caso es NASA GeneLab, según la clase 17?",
+ o:["Caso intrínseco","Caso único holístico","Caso múltiple colectivo, de tipo instrumental","Encuesta transversal"],
+ c:2, e:"NASA GeneLab se clasifica como un caso múltiple colectivo (Stake, 1995), de tipo instrumental, ya que busca entender cómo funciona la ciencia abierta reproducible."},
+{q:"En el caso GeneLab, ¿cuáles son las unidades de análisis, según la clase 17?",
+ o:["Cada astronauta individual en la ISS","Cada grupo de trabajo de investigadores, con más de 800 voluntarios en grupos temáticos","Cada satélite utilizado en las misiones","Cada país participante en el proyecto"],
+ c:1, e:"Las unidades de análisis en GeneLab son cada grupo de trabajo de investigadores, conformados por más de 800 voluntarios organizados en grupos temáticos."},
+{q:"Según el checklist de Rico (2024) aplicado a GeneLab, ¿qué amenaza a la validez se menciona explícitamente?",
+ o:["Falta total de contexto sobre las condiciones de microgravedad","Sesgo de selección de investigadores voluntarios","Ausencia de métricas cuantitativas de uso del repositorio","Falta de protocolos documentados de los grupos de trabajo"],
+ c:1, e:"El checklist de Rico (2024) aplicado a GeneLab señala como amenaza mencionada el sesgo de selección de los investigadores voluntarios."},
+{q:"Según la clase, ¿qué principio hace que los datos de GeneLab (bajo estándares FAIR) multipliquen su valor?",
+ o:["Que los datos se mantengan cerrados y solo accesibles al equipo original","Que la apertura de datos permita que un experimento genere 92 estudios independientes","Que los datos se eliminen automáticamente después de su primer uso","Que solo un investigador pueda analizar cada conjunto de datos"],
+ c:1, e:"La apertura de datos bajo principios FAIR multiplica el valor de cada experimento: un solo experimento generó 92 estudios independientes."},
+{q:"¿Cuál es la referencia del Caso 4 sobre adopción de IA en empresas latinoamericanas de software?",
+ o:["Jonsson et al. (2022), ICSE-SEIP","Springer 2024 — 'Challenges in Adoption and Scaling of AI: A Case Study at a High-Tech Firm and Research Roadmap'","DORA Report 2025","GitClear 2024"],
+ c:1, e:"El Caso 4 se basa en la referencia de Springer 2024 sobre los desafíos en la adopción y escalamiento de IA en una empresa de alta tecnología."},
+{q:"¿Qué tipo de estudio es el Caso 4 (adopción de IA en empresas latinoamericanas), según su pregunta de investigación '¿por qué la adopción de IA a escala es difícil?'?",
+ o:["Exploratorio","Descriptivo","Explicativo","Intrínseco sin proposiciones"],
+ c:2, e:"El Caso 4 es de tipo explicativo, ya que busca responder 'por qué' la adopción de IA a escala es difícil."},
+{q:"¿Qué lección metodológica ilustra el uso de un NDA en el Caso 4, vinculada a la Clase 14 (ética en estudios de caso)?",
+ o:["Que los NDA siempre deben evitarse por completo en investigación IS","La tensión entre el acceso ético profundo y la transparencia académica del reporte","Que los NDA garantizan automáticamente mayor rigor metodológico","Que sin NDA es imposible realizar cualquier estudio de caso"],
+ c:1, e:"El NDA en el Caso 4 permitió acceso profundo a la empresa, pero limitó la especificidad del reporte, ilustrando la tensión entre el acceso ético y la transparencia académica."},
+{q:"Según la tabla de hallazgos del Caso 4, ¿qué barrera tuvo frecuencia 'Alta' y se identificó mediante observación de reuniones?",
+ o:["Brecha de competencias","Resistencia organizacional","Falta de datos de calidad","Expectativas irreales de velocidad"],
+ c:1, e:"La resistencia organizacional se identificó con frecuencia alta en las entrevistas, y su fuente complementaria fue la observación de reuniones."},
+{q:"Según la aplicación del checklist de Rico (2024) a los 4 casos, ¿qué patrón general emerge respecto a los estudios industriales vs. académicos?",
+ o:["Los estudios industriales cumplen mejor todos los criterios que los estudios académicos","Los estudios industriales (Copilot, IA Latinoamérica) son más débiles en clasificación y amenazas a la validez, mientras los académicos formales cumplen mejor por pasar revisión por pares","No existe ninguna diferencia entre estudios industriales y académicos","Los estudios académicos nunca discuten amenazas a la validez"],
+ c:1, e:"El patrón que emerge es que los estudios industriales son más débiles en clasificación del tipo de estudio y en discusión de amenazas a la validez, mientras los estudios académicos formales (Ericsson, GeneLab) cumplen mejor por haber pasado por revisión por pares rigurosa."},
+{q:"¿Cuál es la 'lección para tu proyecto' que se extrae del patrón anterior, según la clase 17?",
+ o:["Evitar por completo la revisión por pares en cualquier proyecto de clase","Escribir para revisión por pares desde el principio, aunque el destino final sea un informe de clase","Nunca declarar el tipo de estudio para mantener flexibilidad","Reducir al mínimo las fuentes de evidencia utilizadas"],
+ c:1, e:"La lección es escribir para revisión por pares desde el principio, aunque el destino final del trabajo sea un informe de clase, para asegurar mayor rigor."},
+{q:"Según la 'guía práctica' para elegir un caso propio, ¿cuál de las siguientes NO es una fuente de casos accesibles sugerida para estudiantes en Ecuador?",
+ o:["Empresas de software locales: startups, consultoras tecnológicas","Departamentos de TI de instituciones públicas o privadas","Proyectos de software libre con comunidades activas en GitHub o GitLab","Empresas multinacionales que exigen acceso exclusivo mediante pago"],
+ c:3, e:"Las fuentes sugeridas son empresas locales, departamentos de TI, proyectos de software libre, y la propia ESPE; no se menciona el pago por acceso exclusivo a multinacionales como fuente recomendada."},
+{q:"En la 'tabla de viabilidad rápida' para elegir un caso, ¿qué pregunta corresponde al factor 'Ética'?",
+ o:["¿Tienes un contacto en la empresa?","¿Puedes completar recolección y análisis en el semestre?","¿Puedes proteger la confidencialidad sin perder la riqueza del caso?","¿El fenómeno conecta con literatura IS existente?"],
+ c:2, e:"El factor Ética en la tabla de viabilidad rápida pregunta si es posible proteger la confidencialidad sin perder la riqueza del caso."},
+{q:"Según la síntesis de mitos desmontados en la clase, ¿cómo se generaliza realmente un estudio de caso, según Yin (2014)?",
+ o:["Estadísticamente, mediante representatividad de una muestra amplia","Teóricamente, no estadísticamente","No es posible generalizar de ningún modo un estudio de caso","Solo mediante la replicación exacta de las condiciones del caso original"],
+ c:1, e:"Según Yin (2014), citado en la clase, un estudio de caso se generaliza teóricamente, no estadísticamente, contrario al mito de que 'no se puede generalizar de un caso'."},
+{q:"Frente al mito de que 'con pocas entrevistas no hay evidencia suficiente', ¿cuál es la realidad presentada en la clase?",
+ o:["Siempre se necesita un mínimo de 50 entrevistas para tener validez","La calidad y la triangulación importan más que la cantidad","Las entrevistas nunca son una fuente de evidencia suficiente por sí solas","Solo los datos cuantitativos pueden considerarse evidencia válida"],
+ c:1, e:"La clase desmonta este mito señalando que la calidad y la triangulación de las fuentes importan más que la cantidad absoluta de entrevistas realizadas."},
+{q:"Según el 'espectro del rigor en estudios de caso IS' presentado en la clase, ¿qué hito corresponde al año 2022?",
+ o:["Runeson & Höst establecen el estándar metodológico","Publicación del libro de Runeson et al. con guías prácticas","Estudio Ericsson con registro previo: pre-registro de casos industriales","Rico (ICSE) diagnostica fallas en reportes actuales"],
+ c:2, e:"En 2022 se ubica el estudio Ericsson con registro previo, marcando el inicio del pre-registro de casos industriales en la línea de tiempo del rigor metodológico."},
+{q:"En el Proyecto Final de la Unidad 3 (presentación oral integradora de INVB10 a INVB13), ¿qué porcentaje de la evaluación corresponde al 'Rigor metodológico'?",
+ o:["10%","20%","30%","40%"],
+ c:3, e:"Según los criterios de evaluación del proyecto final, el Rigor metodológico (basado en Runeson & Höst, 2009) corresponde al 40% de la calificación, siendo el criterio de mayor peso."},
+{q:"Según la cita final de la clase (adaptada de Yin, 2014), ¿de dónde viene realmente el rigor de la investigación de estudios de caso?",
+ o:["De la estadística inferencial aplicada a los datos","De la transparencia, la triangulación y la honestidad sobre las limitaciones","Del tamaño de la muestra utilizada en el estudio","De la cantidad de software especializado empleado en el análisis"],
+ c:1, e:"La cita final adaptada de Yin (2014) afirma que el rigor del estudio de caso no viene de la estadística, sino de la transparencia, la triangulación y la honestidad sobre las limitaciones."}
+];
+
+const Q18 = [
+{q:"¿Cuál es la frase de apertura de la clase 18, adaptada de Kant?",
+ o:["'La ciencia sin datos es solo opinión'","'La teoría sin la práctica es vacía. La práctica sin la teoría es ciega'","'Todo experimento debe ser replicable o no es ciencia'","'El rigor metodológico es más importante que la creatividad'"],
+ c:1, e:"La clase abre con la frase adaptada de Kant: 'La teoría sin la práctica es vacía. La práctica sin la teoría es ciega'."},
+{q:"En el Caso 1 (Erdogmus, Morisio & Favaro, 2005), ¿cuántas veces ha sido replicado este experimento sobre TDD, según la clase?",
+ o:["5 veces","10 veces","Más de 20 veces","Nunca ha sido replicado"],
+ c:2, e:"El experimento de Erdogmus, Morisio & Favaro (2005), publicado en IEEE TSE, ha sido replicado más de 20 veces según la clase."},
+{q:"En el experimento de TDD (Caso 1), ¿cuál fue la variable independiente (VI)?",
+ o:["Número de defectos detectados por SonarQube","Método de desarrollo: TDD vs ITL (Iterative Test-Last)","El tiempo total de desarrollo","La cobertura de pruebas automatizadas"],
+ c:1, e:"La variable independiente del experimento fue el método de desarrollo: TDD frente a ITL (Iterative Test-Last)."},
+{q:"¿Qué diseño experimental se usó en el estudio de Erdogmus et al. (2005) con los 24 estudiantes de posgrado?",
+ o:["Diseño between-subject con dos grupos separados","Diseño within-subject, donde cada sujeto realiza ambos tratamientos","Diseño factorial 2x2","Cuasi-experimento sin aleatorización"],
+ c:1, e:"Se usó un diseño within-subject, en el cual cada uno de los 24 estudiantes de posgrado realizó ambos tratamientos (TDD e ITL)."},
+{q:"Según los resultados del Caso 1, ¿cuál fue la mediana de defectos con TDD frente a ITL?",
+ o:["TDD: 6.1 defectos vs ITL: 3.2 defectos","TDD: 3.2 defectos vs ITL: 6.1 defectos","Ambos grupos obtuvieron la misma mediana de defectos","No se reportó ninguna mediana de defectos"],
+ c:1, e:"Los resultados mostraron una mediana de 3.2 defectos con TDD frente a 6.1 defectos con ITL."},
+{q:"¿Qué prueba estadística y resultado se reportaron en el Caso 1 sobre la diferencia en defectos?",
+ o:["Prueba t de Student, p = .05","Mann-Whitney U = 412, p = .031, r = .38 (efecto mediano)","Chi-cuadrado, p = .10","ANOVA de un factor, p < .001"],
+ c:1, e:"Se reportó una prueba Mann-Whitney U = 412, p = .031, con un tamaño del efecto r = .38, considerado mediano."},
+{q:"¿Cuál fue la lección metodológica sobre la validez externa señalada en el Caso 1 tras las réplicas posteriores?",
+ o:["El efecto de TDD es idéntico sin importar la experiencia del desarrollador","El efecto depende de la experiencia del desarrollador, con validez externa limitada a desarrolladores novatos","La validez externa del estudio es completamente generalizable a cualquier contexto","Las réplicas posteriores no aportaron ninguna información nueva"],
+ c:1, e:"Las réplicas posteriores mostraron que el efecto de TDD depende de la experiencia del desarrollador, con una validez externa limitada principalmente a desarrolladores novatos."},
+{q:"¿Qué afirmación de GitHub sobre Copilot es cuestionada en la apertura del Caso 2?",
+ o:["Que Copilot reduce vulnerabilidades de seguridad en el código","Que los desarrolladores son '55% más rápido con Copilot'","Que Copilot mejora la documentación del código en un 80%","Que Copilot elimina por completo la necesidad de revisión de código"],
+ c:1, e:"El Caso 2 cuestiona la afirmación de GitHub de que los desarrolladores son '55% más rápido con Copilot', contrastándola con evidencia experimental."},
+{q:"En el experimento de Peng et al. (2023) sobre Copilot, ¿cuál fue el resultado en tiempo de tarea entre el grupo Copilot y el grupo control?",
+ o:["Grupo Copilot: 126.5 min vs control: 71.17 min","Grupo Copilot: 71.17 min vs control: 126.5 min → 43.8% más rápido (p < .001, d = 0.89)","Ambos grupos completaron la tarea en el mismo tiempo","El grupo Copilot fue un 10% más lento que el control"],
+ c:1, e:"El grupo Copilot completó la tarea en 71.17 minutos frente a 126.5 minutos del grupo control, un 43.8% más rápido, con p < .001 y d = 0.89."},
+{q:"¿Qué diseño experimental usó Peng et al. (2023) con los 95 desarrolladores profesionales?",
+ o:["Diseño observacional sin aleatorización","Diseño controlado con aleatorización, en la tarea HTTP Server","Estudio de caso longitudinal","Encuesta transversal"],
+ c:1, e:"Peng et al. (2023) usaron un diseño controlado con aleatorización de 95 desarrolladores profesionales en la tarea HTTP Server."},
+{q:"¿Qué contradicción introduce el 'contraexperimento' de Imai (2022) respecto a Copilot?",
+ o:["Que Copilot no genera código funcional en absoluto","Que Copilot genera código funcional más rápido, pero introduce más vulnerabilidades (CWE)","Que Copilot reduce la velocidad de desarrollo significativamente","Que Copilot solo funciona en lenguajes de programación específicos"],
+ c:1, e:"Imai (2022) encontró que Copilot genera código funcional más rápido, pero introduce más vulnerabilidades (CWE), cuestionando si la velocidad es la métrica correcta a priorizar."},
+{q:"¿Cuál es la lección clave del Caso 2 sobre la operacionalización de la variable dependiente?",
+ o:["La operacionalización de la VD no afecta el resultado del experimento","La operacionalización de la VD determina el resultado; se debe pre-registrar qué se mide y por qué antes de correr el código","Solo se debe medir la velocidad, ignorando la calidad del código","La VD siempre debe medirse después de conocer los resultados preliminares"],
+ c:1, e:"La lección clave es que la operacionalización de la variable dependiente determina el resultado del experimento, por lo que se debe pre-registrar qué se mide y por qué antes de ejecutar el experimento."},
+{q:"¿Cuál era la pregunta experimental central del Caso 3 (NASA F Prime / Mars Helicopter Ingenuity)?",
+ o:["¿Es F Prime más rápido de programar que otros frameworks?","¿Es F Prime más confiable que los frameworks propietarios anteriores bajo condiciones de fallo simuladas?","¿Cuánto cuesta desarrollar con F Prime en comparación con software propietario?","¿Puede F Prime ejecutarse en cualquier sistema operativo?"],
+ c:1, e:"La pregunta experimental central era si F Prime era más confiable que los frameworks propietarios anteriores bajo condiciones de fallo simuladas."},
+{q:"En el diseño experimental de NASA (Caso 3), ¿cuáles fueron las variables dependientes (VD) medidas?",
+ o:["El costo total del proyecto y el número de líneas de código","Tiempo de recuperación ante fallo (segundos) y tasa de reinicio exitoso (%)","La satisfacción de los ingenieros con el framework","El número de commits realizados por el equipo"],
+ c:1, e:"Las variables dependientes fueron el tiempo de recuperación ante fallo (en segundos) y la tasa de reinicio exitoso (%)."},
+{q:"¿Cuántas horas simuladas de operación en condiciones marcianas se aplicaron en el experimento de F Prime?",
+ o:["100 horas","1,000 horas","10,000 horas","100,000 horas"],
+ c:2, e:"Se aplicaron 10,000 horas simuladas de operación en condiciones marcianas (temperatura, radiación) como parte del diseño experimental."},
+{q:"¿Qué instrumento se usó para evaluar la recuperación ante fallos en el experimento de F Prime?",
+ o:["Encuestas de satisfacción a los ingenieros","Inyección de fallos controlada (fault injection testing)","Entrevistas semiestructuradas al equipo de JPL","Análisis de repositorios de código (MSR)"],
+ c:1, e:"Se usó la técnica de inyección de fallos controlada (fault injection testing) para evaluar la recuperación del sistema ante fallos."},
+{q:"¿Cuál fue la tasa de recuperación exitosa de F Prime frente al sistema legado, y qué decisión se tomó?",
+ o:["F Prime: 94.2% vs Legado: 99.7% → se mantuvo el sistema legado","F Prime: 99.7% vs Legado: 94.2% → se decidió adoptar F Prime para Ingenuity","Ambos sistemas obtuvieron el mismo porcentaje de recuperación","No se tomó ninguna decisión basada en los resultados"],
+ c:1, e:"F Prime logró un 99.7% de recuperación exitosa frente al 94.2% del sistema legado, lo que llevó a la decisión de adoptar F Prime para Ingenuity."},
+{q:"Según el 'proceso de 5 pasos' para pasar de un problema IS a un experimento, ¿cuál es el paso 3?",
+ o:["Identificar el problema práctico","Formular la pregunta experimental (GQM)","Definir hipótesis falsificable","Pre-registrar en OSF antes de ejecutar"],
+ c:2, e:"El paso 3 del proceso es definir la hipótesis falsificable (H0 y H1), después de formular la pregunta experimental con GQM."},
+{q:"En el ejemplo del proceso de 5 pasos sobre code reviews y SonarQube, ¿qué diseño se propone en el paso 4?",
+ o:["Experimento controlado con 100 sujetos aleatorizados","Cuasi-experimento: 12 desarrolladores (2 equipos), 3 semanas, diseño crossover","Encuesta transversal a 500 desarrolladores","Estudio de caso único sin comparación"],
+ c:1, e:"El paso 4 propone un cuasi-experimento con 12 desarrolladores organizados en 2 equipos, durante 3 semanas, con un diseño crossover."},
+{q:"Según la 'regla de oro' de la clase para elegir el método correcto, ¿qué determina el método a usar?",
+ o:["La preferencia personal del investigador","Lo que resulte más fácil de ejecutar en el tiempo disponible","La pregunta de investigación, no la preferencia del investigador ni la facilidad","El presupuesto disponible para el estudio"],
+ c:2, e:"La regla de oro establece que el método lo determina la pregunta de investigación, no la preferencia del investigador ni lo que resulte más fácil de hacer."},
+{q:"Según la tabla de métodos de la clase, ¿qué método es más apropiado para responder '¿qué tan extendido está el uso de CI/CD en Ecuador?'?",
+ o:["Experimento controlado","Estudio de caso","Encuesta, porque mide prevalencia en la población, no causalidad","MSR (Mining Software Repositories)"],
+ c:2, e:"Para preguntas sobre prevalencia en una población, como el uso de CI/CD en Ecuador, el método más apropiado es la encuesta, no el experimento."},
+{q:"Frente al obstáculo de 'escasez de sujetos' ('no consigo 30 desarrolladores'), ¿qué solución propone la clase?",
+ o:["Cancelar el experimento y cambiar de método de investigación","Diseño within-subject, donde cada sujeto actúa como su propio control; con 12 sujetos bien diseñado es publicable","Aumentar artificialmente el tamaño de muestra con datos simulados","Ignorar el problema y proceder con el análisis igualmente"],
+ c:1, e:"La solución propuesta es usar un diseño within-subject, donde cada sujeto actúa como su propio control, lo cual permite que un estudio con 12 sujetos bien diseñado sea publicable."},
+{q:"Frente al obstáculo de 'validez externa débil' por usar estudiantes en vez de profesionales, ¿qué recomienda la clase citando a Carver (2010)?",
+ o:["Nunca usar estudiantes bajo ninguna circunstancia","Reportar explícitamente la limitación; los estudiantes son válidos para fenómenos de aprendizaje, y la replicación con profesionales es la siguiente investigación","Ocultar en el reporte que los sujetos eran estudiantes","Sustituir automáticamente a los estudiantes por datos simulados"],
+ c:1, e:"La clase recomienda reportar explícitamente la limitación, señalando que los estudiantes son válidos para fenómenos de aprendizaje (Carver, 2010), y que la replicación con profesionales es el siguiente paso de investigación."},
+{q:"Frente al obstáculo de 'contaminación entre grupos' ('los del grupo A le explicaron a los del grupo B'), ¿qué solución se propone?",
+ o:["Fusionar ambos grupos en un solo tratamiento","Separación temporal o física; en diseños online, usar plataformas separadas","Eliminar el grupo control del diseño","Aumentar el tamaño de ambos grupos para diluir el efecto"],
+ c:1, e:"La solución propuesta es la separación temporal o física de los grupos; en diseños online, se recomienda usar plataformas separadas."},
+{q:"Frente a la duda de '¿dónde publico mi experimento?', ¿qué mensaje transmite la clase sobre el tamaño del estudio?",
+ o:["Solo los experimentos grandes y con muchos sujetos son publicables","Un experimento pequeño, bien reportado, es mejor que uno grande mal documentado; las replicaciones son bienvenidas (ESEM tiene track de réplicas)","Las replicaciones nunca son aceptadas en conferencias de IS","Es obligatorio tener más de 100 sujetos para poder publicar"],
+ c:1, e:"La clase transmite que un experimento pequeño pero bien reportado es mejor que uno grande mal documentado, y que las replicaciones son bienvenidas, como en el track de réplicas de ESEM."},
+{q:"Según la estructura del entregable del Proyecto Final (mini-experimento IS), ¿qué formato debe seguir el reporte final?",
+ o:["Formato narrativo libre sin estructura definida","Reporte IMRaD (4-6 páginas, formato IEEE), siguiendo el checklist de la Clase 17","Únicamente una presentación de diapositivas sin documento escrito","Un video documental de la ejecución del experimento"],
+ c:1, e:"El reporte final debe seguir el formato IMRaD (4-6 páginas, formato IEEE), siguiendo el checklist presentado en la Clase 17 (Reporte)."},
+{q:"Según la cita de cierre del curso, ¿qué convierte la experimentación 'una intuición de desarrollador' según la clase?",
+ o:["En un privilegio exclusivo de la NASA o el MIT","En conocimiento que cambia la industria","En una opinión personal sin valor científico","En un proceso que solo aplica a proyectos espaciales"],
+ c:1, e:"La cita de cierre afirma que la experimentación es el método que convierte una intuición de desarrollador en conocimiento que cambia la industria, y que no es un privilegio exclusivo de la NASA o el MIT."}
+];
+
+const ALL = Q13.map(q=>({...q, src:'13'})).concat(Q14.map(q=>({...q, src:'14'}))).concat(Q15.map(q=>({...q, src:'15'}))).concat(Q16.map(q=>({...q, src:'16'}))).concat(QE13.map(q=>({...q, src:'E13'}))).concat(QE14.map(q=>({...q, src:'E14'}))).concat(QA16.map(q=>({...q, src:'A16'}))).concat(Q17.map(q=>({...q, src:'17'}))).concat(Q18.map(q=>({...q, src:'18'})));
+const SRC_LABEL = {'13':'CLASE 13 · INTRODUCCIÓN A ESTUDIOS DE CASO', '14':'CLASE 14 · DISEÑO Y PLANIFICACIÓN (ESTUDIOS DE CASO)', '15':'CLASE 15 · RECOLECCIÓN DE DATOS (ESTUDIOS DE CASO)', '16':'CLASE 16 · EJECUCIÓN Y RECOLECCIÓN EN EXPERIMENTOS', 'E13':'INTRODUCCIÓN A LA EXPERIMENTACIÓN EN IS', 'E14':'DISEÑO Y PLANIFICACIÓN DEL EXPERIMENTO EN IS', 'A16':'CLASE 16 · ANÁLISIS Y REPORTE DE ESTUDIOS DE CASO', '17':'CLASE 17 · ESTUDIOS DE CASO: PROBLEMAS REALES', '18':'CLASE 18 · EXPERIMENTACIÓN EN IS: PROBLEMAS REALES'};
+
+// ============ APP STATE ============
+let activeSet = [];
+let currentIndex = 0;
+let score = 0;
+let answered = false;
+let wrongAnswers = [];
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function shuffleOptions(question){
+  // Build array of {text, isCorrect} then shuffle
+  const opts = question.o.map((text,i)=>({text, isCorrect: i===question.c}));
+  return shuffle(opts);
+}
+
+window.onload = function(){
+  document.getElementById('count13').textContent = `(${Q13.length} preguntas)`;
+  document.getElementById('count14').textContent = `(${Q14.length} preguntas)`;
+  document.getElementById('count15').textContent = `(${Q15.length} preguntas)`;
+  document.getElementById('count16').textContent = `(${Q16.length} preguntas)`;
+  document.getElementById('countE13').textContent = `(${QE13.length} preguntas)`;
+  document.getElementById('countE14').textContent = `(${QE14.length} preguntas)`;
+  document.getElementById('countA16').textContent = `(${QA16.length} preguntas)`;
+  document.getElementById('count17').textContent = `(${Q17.length} preguntas)`;
+  document.getElementById('count18').textContent = `(${Q18.length} preguntas)`;
+  document.getElementById('countAll').textContent = `(${ALL.length} preguntas)`;
+};
+
+let lastDeck = 'all';
+
+function startQuiz(deck){
+  lastDeck = deck;
+  let pool;
+  if(deck==='13') pool = Q13.map(q=>({...q, src:'13'}));
+  else if(deck==='14') pool = Q14.map(q=>({...q, src:'14'}));
+  else if(deck==='15') pool = Q15.map(q=>({...q, src:'15'}));
+  else if(deck==='16') pool = Q16.map(q=>({...q, src:'16'}));
+  else if(deck==='E13') pool = QE13.map(q=>({...q, src:'E13'}));
+  else if(deck==='E14') pool = QE14.map(q=>({...q, src:'E14'}));
+  else if(deck==='A16') pool = QA16.map(q=>({...q, src:'A16'}));
+  else if(deck==='17') pool = Q17.map(q=>({...q, src:'17'}));
+  else if(deck==='18') pool = Q18.map(q=>({...q, src:'18'}));
+  else pool = ALL;
+
+  activeSet = shuffle(pool).map(q => ({...q, shuffledOpts: shuffleOptions(q)}));
+  currentIndex = 0;
+  score = 0;
+  wrongAnswers = [];
+
+  document.getElementById('selectionScreen').classList.add('hidden');
+  document.getElementById('resultScreen').classList.add('hidden');
+  document.getElementById('reviewScreen').classList.add('hidden');
+  document.getElementById('quizScreen').classList.remove('hidden');
+
+  renderQuestion();
+}
+
+function restartSame(){
+  startQuiz(lastDeck);
+}
+
+function backToMenu(){
+  document.getElementById('quizScreen').classList.add('hidden');
+  document.getElementById('resultScreen').classList.add('hidden');
+  document.getElementById('reviewScreen').classList.add('hidden');
+  document.getElementById('selectionScreen').classList.remove('hidden');
+}
+
+function renderQuestion(){
+  answered = false;
+  const q = activeSet[currentIndex];
+  document.getElementById('progressText').textContent = `Pregunta ${currentIndex+1} de ${activeSet.length}`;
+  document.getElementById('scoreText').textContent = `Aciertos: ${score}`;
+  document.getElementById('progressFill').style.width = `${(currentIndex/activeSet.length)*100}%`;
+  document.getElementById('sourceTag').textContent = SRC_LABEL[q.src];
+  document.getElementById('qtext').textContent = q.q;
+
+  const optsDiv = document.getElementById('options');
+  optsDiv.innerHTML = '';
+  q.shuffledOpts.forEach((opt) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.textContent = opt.text;
+    btn.onclick = () => selectAnswer(opt, btn);
+    optsDiv.appendChild(btn);
+  });
+
+  document.getElementById('explain').style.display = 'none';
+  document.getElementById('nextBtn').disabled = true;
+  document.getElementById('nextBtn').textContent = (currentIndex === activeSet.length-1) ? 'Ver resultados →' : 'Siguiente →';
+}
+
+function selectAnswer(opt, btnEl){
+  if(answered) return;
+  answered = true;
+  const q = activeSet[currentIndex];
+  const allBtns = document.querySelectorAll('#options .opt');
+
+  allBtns.forEach(b => b.classList.add('disabled'));
+
+  allBtns.forEach(b => {
+    const matchedOpt = q.shuffledOpts.find(o => o.text === b.textContent);
+    if(matchedOpt && matchedOpt.isCorrect){
+      b.classList.add('correct');
+    }
+  });
+
+  if(opt.isCorrect){
+    score++;
+  } else {
+    btnEl.classList.add('incorrect');
+    wrongAnswers.push({
+      q: q.q,
+      correct: q.shuffledOpts.find(o=>o.isCorrect).text,
+      chosen: opt.text,
+      explain: q.e,
+      src: q.src
+    });
+  }
+
+  const explainDiv = document.getElementById('explain');
+  explainDiv.innerHTML = `<strong>${opt.isCorrect ? '✅ ¡Correcto!' : '❌ No es correcta.'}</strong> ${q.e}`;
+  explainDiv.style.display = 'block';
+
+  document.getElementById('scoreText').textContent = `Aciertos: ${score}`;
+  document.getElementById('nextBtn').disabled = false;
+}
+
+function nextQuestion(){
+  if(currentIndex < activeSet.length - 1){
+    currentIndex++;
+    renderQuestion();
+  } else {
+    showResults();
+  }
+}
+
+function showResults(){
+  document.getElementById('quizScreen').classList.add('hidden');
+  document.getElementById('resultScreen').classList.remove('hidden');
+
+  const pct = Math.round((score/activeSet.length)*100);
+  document.getElementById('finalScore').textContent = `${score}/${activeSet.length}`;
+  let label = '';
+  if(pct >= 90) label = '🏆 Excelente dominio del tema';
+  else if(pct >= 75) label = '👏 Muy buen desempeño';
+  else if(pct >= 60) label = '📖 Bien, pero conviene repasar algunos puntos';
+  else label = '🔁 Te recomiendo repasar el material antes de seguir';
+  document.getElementById('finalLabel').textContent = `${label} (${pct}%)`;
+
+  if(wrongAnswers.length > 0){
+    document.getElementById('reviewScreen').classList.remove('hidden');
+    const list = document.getElementById('reviewList');
+    list.innerHTML = '';
+    wrongAnswers.forEach(w => {
+      const div = document.createElement('div');
+      div.className = 'review-item';
+      div.innerHTML = `
+        <div class="review-q">[${SRC_LABEL[w.src]}] ${w.q}</div>
+        <div class="review-a bad">Tu respuesta: ${w.chosen}</div>
+        <div class="review-a ok">Correcta: ${w.correct}</div>
+        <div class="review-exp">${w.explain}</div>
+      `;
+      list.appendChild(div);
+    });
+  } else {
+    document.getElementById('reviewScreen').classList.add('hidden');
+  }
+}
+</script>
+</body>
+</html>
